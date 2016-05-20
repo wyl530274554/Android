@@ -1,6 +1,7 @@
 package com.melon.myapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
-	public static Handler mHandler = new Handler();
+	static Handler mHandler = new Handler();
+	Context mContext = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
