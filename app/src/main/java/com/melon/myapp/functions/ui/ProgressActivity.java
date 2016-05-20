@@ -1,15 +1,24 @@
 package com.melon.myapp.functions.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.View;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 
-public class ProgressActivity extends AppCompatActivity {
+public class ProgressActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_progress);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
