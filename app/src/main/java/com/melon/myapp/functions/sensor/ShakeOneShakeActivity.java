@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.util.ToastUtil;
+import com.melon.mylibrary.util.ToastUtil;
 
 //摇一摇
 public class ShakeOneShakeActivity extends BaseActivity implements SensorEventListener {

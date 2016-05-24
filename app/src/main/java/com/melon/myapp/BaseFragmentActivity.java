@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.View.OnClickListener;
 
-import com.melon.myapp.util.SpUtil;
+import com.melon.mylibrary.util.SpUtil;
 
 public abstract class BaseFragmentActivity extends FragmentActivity implements OnClickListener {
 	protected SharedPreferences mConfigSp;

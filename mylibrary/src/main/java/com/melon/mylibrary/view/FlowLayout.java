@@ -1,4 +1,4 @@
-package com.melon.myapp.view;
+package com.melon.mylibrary.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

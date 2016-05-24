@@ -1,4 +1,4 @@
-package com.melon.myapp.util;
+package com.melon.mylibrary.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.melon.myapp.R;
+import com.melon.mylibrary.R;
 
 public class ToastUtil {
 

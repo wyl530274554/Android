@@ -1,4 +1,4 @@
-package com.melon.myapp.util;
+package com.melon.mylibrary.util;
 
 import android.util.SparseArray;
 import android.view.View;

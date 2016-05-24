@@ -1,13 +1,11 @@
 package com.melon.myapp.functions.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.view.FlowLayout;
+import com.melon.mylibrary.view.FlowLayout;
 
 public class FlowLayoutActivity extends BaseActivity {
 

@@ -1,7 +1,5 @@
 package com.melon.myapp;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +15,20 @@ import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
-import com.melon.myapp.util.ToastUtil;
-import com.melon.myapp.util.ViewHolder;
-import com.melon.mylibrary.CommonUtil;
+import com.melon.mylibrary.util.ToastUtil;
+import com.melon.mylibrary.util.ViewHolder;
+import com.melon.mylibrary.util.CommonUtil;
 
 public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率", "进度条", "导航", "侧滑", "自动换行"};
-    private SwipeRefreshLayout srl_main;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
-        srl_main = (SwipeRefreshLayout) findViewById(R.id.srl_main);
-        srl_main.setOnRefreshListener(this);
-        srl_main.setColorSchemeResources(android.R.color.holo_blue_light,
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_main);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_green_light,
                 android.R.color.holo_red_light);
@@ -75,6 +73,16 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
+//        int end = (int) (32 * (getResources().getDisplayMetrics().density));
+//        swipeRefreshLayout.setProgressViewOffset(false, 0, end);
+//        swipeRefreshLayout.setRefreshing(true);
+//
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 2000);
     }
 
     @Override
@@ -87,7 +95,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                srl_main.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
                 ToastUtil.showShortToast(getApplicationContext(), "刷新完毕");
             }
         }, 2000);

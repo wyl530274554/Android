@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.util.NetUtil;
+import com.melon.mylibrary.util.NetUtil;
 
 //wifi信息列表
 public class ShowWifiInfoActivity extends BaseActivity {
