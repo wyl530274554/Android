@@ -20,7 +20,7 @@ import com.melon.mylibrary.util.ViewHolder;
 import com.melon.mylibrary.util.CommonUtil;
 
 public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率", "进度条", "导航", "侧滑", "自动换行"};
+    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率", "进度条", "导航", "侧滑", "自动换行", "ActionBar","沉浸式状态栏"};
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
