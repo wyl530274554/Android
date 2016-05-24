@@ -1,5 +1,6 @@
 package com.melon.myapp;
 
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,6 +148,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             TextView tvName = ViewHolder.get(convertView, R.id.tv_item_main_name);
             tvName.setText(items[position]);
+            if(position==5 || position==9)
+                tvName.setTextColor(Color.RED);
             return convertView;
         }
     }
