@@ -73,16 +73,19 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
-//        int end = (int) (32 * (getResources().getDisplayMetrics().density));
-//        swipeRefreshLayout.setProgressViewOffset(false, 0, end);
-//        swipeRefreshLayout.setRefreshing(true);
-//
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        }, 2000);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        },200);
     }
 
     @Override
