@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
@@ -72,6 +73,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     case 7:
                         //自动换行
                         CommonUtil.enterActivity(mContext, FlowLayoutActivity.class);
+                        break;
+                    case 8:
+                        //ActionBar
+                        CommonUtil.enterActivity(mContext, AppActionBarActivity.class);
                         break;
                 }
             }
