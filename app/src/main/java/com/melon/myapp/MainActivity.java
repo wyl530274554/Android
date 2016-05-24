@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.myapp.util.ToastUtil;
@@ -21,8 +22,9 @@ import com.melon.myapp.util.ViewHolder;
 import com.melon.mylibrary.CommonUtil;
 
 public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率","进度条", "导航","侧滑","自动换行"};
+    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率", "进度条", "导航", "侧滑", "自动换行"};
     private SwipeRefreshLayout srl_main;
+
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
@@ -43,23 +45,27 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 switch (position) {
                     case 0:
                         // wifi列表
-                        CommonUtil.enterActivity(mContext,ShowWifiInfoActivity.class);
+                        CommonUtil.enterActivity(mContext, ShowWifiInfoActivity.class);
                         break;
                     case 1:
                         // 摇一摇
-                        CommonUtil.enterActivity(mContext,ShakeOneShakeActivity.class);
+                        CommonUtil.enterActivity(mContext, ShakeOneShakeActivity.class);
                         break;
                     case 2:
                         //beacon
-                        CommonUtil.enterActivity(mContext,ShowBeaconsActivity.class);
+                        CommonUtil.enterActivity(mContext, ShowBeaconsActivity.class);
                         break;
                     case 3:
                         //屏幕分辨率
-                        CommonUtil.enterActivity(mContext,PhoneDensityActivity.class);
+                        CommonUtil.enterActivity(mContext, PhoneDensityActivity.class);
                         break;
                     case 4:
                         //屏幕分辨率
-                        CommonUtil.enterActivity(mContext,ProgressActivity.class);
+                        CommonUtil.enterActivity(mContext, ProgressActivity.class);
+                        break;
+                    case 7:
+                        //自动换行
+                        CommonUtil.enterActivity(mContext, FlowLayoutActivity.class);
                         break;
                 }
             }
@@ -82,7 +88,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void run() {
                 srl_main.setRefreshing(false);
-                ToastUtil.showShortToast(getApplicationContext(),"刷新完毕");
+                ToastUtil.showShortToast(getApplicationContext(), "刷新完毕");
             }
         }, 2000);
     }
