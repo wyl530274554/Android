@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
@@ -20,7 +21,10 @@ import com.melon.mylibrary.util.ViewHolder;
 import com.melon.mylibrary.util.CommonUtil;
 
 public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率", "进度条", "导航", "侧滑", "自动换行", "ActionBar","沉浸式状态栏"};
+    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon",
+            "屏幕分辨率", "进度条", "导航",
+            "侧滑", "自动换行", "ActionBar",
+            "沉浸式状态栏"};
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -61,6 +65,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                         //屏幕分辨率
                         CommonUtil.enterActivity(mContext, ProgressActivity.class);
                         break;
+                    case 6:
+                        //侧滑
+                        CommonUtil.enterActivity(mContext, DrawerLayoutActivity.class);
+                        break;
                     case 7:
                         //自动换行
                         CommonUtil.enterActivity(mContext, FlowLayoutActivity.class);
@@ -73,6 +81,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
+        showRefresh();
+    }
+
+    private void showRefresh() {
         //第一次显示下拉刷新
         mHandler.postDelayed(new Runnable() {
             @Override

@@ -27,7 +27,8 @@
         <activity android:name=".functions.beacon.ShowBeaconsActivity" />
         <activity android:name=".functions.screen.PhoneDensityActivity" />
         <activity android:name=".functions.ui.ProgressActivity" />
-        <activity android:name=".functions.ui.FlowLayoutActivity"></activity>
+        <activity android:name=".functions.ui.FlowLayoutActivity" />
+        <activity android:name=".functions.ui.DrawerLayoutActivity"></activity>
     </application>
 
 </manifest>
