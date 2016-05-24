@@ -10,11 +10,12 @@ import android.view.WindowManager;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
 	static Handler mHandler = new Handler();
-	Context mContext = this;
+	Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏
+		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏
+		mContext = getApplicationContext();
 		initView();
 		initData();
 	}

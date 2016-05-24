@@ -1,5 +1,6 @@
 package com.melon.mylibrary;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,6 +15,9 @@ public class CommonUtil {
      */
     public static void enterActivity(Context ctx, Class<?> clazz) {
         Intent intent = new Intent(ctx, clazz);
+        if(ctx instanceof Application){
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         ctx.startActivity(intent);
     }
 }

@@ -21,12 +21,11 @@ import com.melon.myapp.util.ViewHolder;
 import com.melon.mylibrary.CommonUtil;
 
 public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率","进度条"};
+    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon", "屏幕分辨率","进度条", "导航","侧滑","自动换行"};
     private SwipeRefreshLayout srl_main;
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
-
         srl_main = (SwipeRefreshLayout) findViewById(R.id.srl_main);
         srl_main.setOnRefreshListener(this);
         srl_main.setColorSchemeResources(android.R.color.holo_blue_light,
