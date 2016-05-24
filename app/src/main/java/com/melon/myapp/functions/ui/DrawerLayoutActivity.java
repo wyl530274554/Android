@@ -1,8 +1,6 @@
 package com.melon.myapp.functions.ui;
 
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,24 +9,26 @@ import android.widget.TextView;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
+import com.melon.mylibrary.util.ToastUtil;
 
 import java.util.ArrayList;
 
-public class DrawerLayoutActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+public class DrawerLayoutActivity extends BaseActivity implements AdapterView.OnItemClickListener, DrawerLayout.DrawerListener {
 
     private ListView mDrawerList;
     private TextView tv_content;
     private ArrayList<String> myArrayList;
-    private DrawerLayout drawerLayout;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         tv_content = (TextView) findViewById(R.id.tv_content);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerList.setOnItemClickListener(this);
+        mDrawerLayout.addDrawerListener(this);
     }
 
     @Override
@@ -52,6 +52,26 @@ public class DrawerLayoutActivity extends BaseActivity implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String title = myArrayList.get(position);
         tv_content.setText(title);
-        drawerLayout.closeDrawer(mDrawerList);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+        ToastUtil.showShortToast(this,"打开...");
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+        ToastUtil.showShortToast(this,"关闭...");
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
     }
 }
