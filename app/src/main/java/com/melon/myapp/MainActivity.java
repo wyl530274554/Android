@@ -73,6 +73,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
+        //第一次显示下拉刷新
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
