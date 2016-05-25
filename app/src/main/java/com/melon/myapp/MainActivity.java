@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             TextView tvName = ViewHolder.get(convertView, R.id.tv_item_main_name);
             tvName.setText(items[position]);
-            if(position==5 || position==9)
+            if(position==5)
                 tvName.setTextColor(Color.RED);
             return convertView;
         }
