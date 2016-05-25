@@ -13,7 +13,7 @@ public class NavigationActivity extends BaseActivity implements AdapterView.OnIt
 
     private ListView listView;
     private String[] items = {"标准FragmentTabHost","自定义标题FragmentTabHost","TabLayout + ViewPager","TabLayout + ViewPager + Fragment"};
-    private Class[] clazz = {FragmentTabhostActivity.class,FragmentTabHostCustomTitleActivity.class,TabLayoutActivity.class};
+    private Class[] clazz = {FragmentTabhostActivity.class,FragmentTabHostCustomTitleActivity.class,TabLayoutActivity.class, TabLayoutFragmentActivity.class};
     @Override
     protected void initView() {
         setContentView(R.layout.activity_navigation);
