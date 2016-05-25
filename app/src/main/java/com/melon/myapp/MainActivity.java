@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 CommonUtil.enterActivity(mContext, ProgressActivity.class);
                 break;
             case 5:
-                //底部导航
+                //导航
                 CommonUtil.enterActivity(mContext, NavigationActivity.class);
                 break;
             case 6:
