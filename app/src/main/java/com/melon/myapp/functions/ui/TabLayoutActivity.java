@@ -1,13 +1,7 @@
 package com.melon.myapp.functions.ui;
 
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -15,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.melon.myapp.BaseActivity;
-import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.functions.fragment.CommonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
