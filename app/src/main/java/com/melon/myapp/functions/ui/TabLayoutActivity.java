@@ -1,22 +1,33 @@
 package com.melon.myapp.functions.ui;
 
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
 import com.melon.myapp.functions.fragment.CommonFragment;
 
-public class TabLayoutActivity extends BaseFragmentActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TabLayoutActivity extends BaseActivity {
     private String[] titles = {"热门推荐", "热门收藏", "本月热榜"};
-    private Fragment[] fragments = new Fragment[titles.length];
+    //    private Fragment[] fragments = new Fragment[titles.length];
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private List<View> mViewList = new ArrayList<>();//页卡视图集合
 
     @Override
     protected void initView() {
@@ -25,7 +36,7 @@ public class TabLayoutActivity extends BaseFragmentActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        MyAdapter mAdapter = new MyAdapter(getSupportFragmentManager());
+        MyAdapter mAdapter = new MyAdapter();
         viewPager.setAdapter(mAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -33,11 +44,16 @@ public class TabLayoutActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-            CommonFragment commonFragment = new CommonFragment();
-            Bundle bunlde = new Bundle();
-            bunlde.putString("content", titles[i]);
-            commonFragment.setArguments(bunlde);
-            fragments[i] = commonFragment;
+//            CommonFragment commonFragment = new CommonFragment();
+//            Bundle bunlde = new Bundle();
+//            bunlde.putString("content", titles[i]);
+//            commonFragment.setArguments(bunlde);
+//            fragments[i] = commonFragment;
+            View view = getLayoutInflater().inflate(R.layout.fragment_common, null);
+            view.setBackgroundColor(Color.TRANSPARENT);
+            TextView tv_common_fragment = (TextView) view.findViewById(R.id.tv_common_fragment);
+            tv_common_fragment.setText(titles[i]);
+            mViewList.add(view);
         }
     }
 
@@ -46,10 +62,7 @@ public class TabLayoutActivity extends BaseFragmentActivity {
 
     }
 
-    private class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
+    private class MyAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
@@ -62,9 +75,14 @@ public class TabLayoutActivity extends BaseFragmentActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(mViewList.get(position));//添加页卡
+            return mViewList.get(position);
+        }
 
-            return fragments[position];
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView(mViewList.get(position));//删除页卡
         }
 
         @Override
