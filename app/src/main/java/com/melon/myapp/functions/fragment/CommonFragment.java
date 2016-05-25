@@ -13,7 +13,7 @@ public class CommonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_common, null);
-        String content = getArguments().getString("content","");
+        String content = getArguments().getString("content", "");
         TextView tv_common_fragment = (TextView) view.findViewById(R.id.tv_common_fragment);
         tv_common_fragment.setText(content);
         return view;

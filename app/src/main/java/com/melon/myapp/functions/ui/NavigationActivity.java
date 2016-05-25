@@ -12,8 +12,8 @@ import com.melon.mylibrary.util.CommonUtil;
 public class NavigationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
-    private String[] items = {"标准FragmentTabHost","自定义标题FragmentTabHost"};
-    private Class[] clazz = {FragmentTabhostActivity.class,FragmentTabHostCustomTitleActivity.class};
+    private String[] items = {"标准FragmentTabHost","自定义标题FragmentTabHost","TabLayout"};
+    private Class[] clazz = {FragmentTabhostActivity.class,FragmentTabHostCustomTitleActivity.class,TabLayoutActivity.class};
     @Override
     protected void initView() {
         setContentView(R.layout.activity_navigation);
