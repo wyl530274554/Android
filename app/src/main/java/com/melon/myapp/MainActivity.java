@@ -1,7 +1,6 @@
 package com.melon.myapp;
 
 import android.graphics.Color;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,28 +16,22 @@ import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
+import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
-import com.melon.mylibrary.util.ToastUtil;
-import com.melon.mylibrary.util.ViewHolder;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.ViewHolder;
 
-public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity {
     private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon",
             "屏幕分辨率", "进度条", "导航",
             "侧滑", "自动换行", "ActionBar",
-            "沉浸式状态栏"};
-    private SwipeRefreshLayout swipeRefreshLayout;
+            "沉浸式状态栏", "下拉刷新"};
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.srl_main);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_red_light);
+
 
         GridView gridView = (GridView) findViewById(R.id.gv_main);
         MyAdapter mAdapter = new MyAdapter();
@@ -84,6 +77,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                         //沉浸式状态栏
                         CommonUtil.enterActivity(mContext, StatusBarActivity.class);
                         break;
+                    case 10:
+                        //下拉刷新
+                        CommonUtil.enterActivity(mContext, PullRefreshActivity.class);
+                        break;
                 }
             }
 
@@ -92,41 +89,14 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
-        showRefresh();
     }
 
-    private void showRefresh() {
-        //第一次显示下拉刷新
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);
-            }
-        },200);
-    }
 
     @Override
     public void onClick(View v) {
 
     }
 
-    @Override
-    public void onRefresh() {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-                ToastUtil.showShortToast(getApplicationContext(), "刷新完毕");
-            }
-        }, 2000);
-    }
 
     class MyAdapter extends BaseAdapter {
 
@@ -153,7 +123,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             TextView tvName = ViewHolder.get(convertView, R.id.tv_item_main_name);
             tvName.setText(items[position]);
-            if(position==5)
+            if (position == 5)
                 tvName.setTextColor(Color.RED);
             return convertView;
         }

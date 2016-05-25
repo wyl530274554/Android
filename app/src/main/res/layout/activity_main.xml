@@ -2,20 +2,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C0C0C0">
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_main"
+    <GridView
+        android:id="@+id/gv_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="1px"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:verticalSpacing="1px"></GridView>
 
-        <GridView
-            android:id="@+id/gv_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="@android:color/transparent"
-            android:horizontalSpacing="1px"
-            android:listSelector="@android:color/transparent"
-            android:numColumns="3"
-            android:verticalSpacing="1px"></GridView>
-    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

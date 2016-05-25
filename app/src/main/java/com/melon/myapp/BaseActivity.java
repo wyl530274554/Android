@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
-	static Handler mHandler = new Handler();
+	public static Handler mHandler = new Handler();
 	Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
