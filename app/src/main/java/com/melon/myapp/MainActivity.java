@@ -17,6 +17,7 @@ import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
+import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
@@ -78,6 +79,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     case 8:
                         //ActionBar
                         CommonUtil.enterActivity(mContext, AppActionBarActivity.class);
+                        break;
+                    case 9:
+                        //沉浸式状态栏
+                        CommonUtil.enterActivity(mContext, StatusBarActivity.class);
                         break;
                 }
             }
