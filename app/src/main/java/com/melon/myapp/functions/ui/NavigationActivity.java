@@ -3,20 +3,17 @@ package com.melon.myapp.functions.ui;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 
-import java.util.List;
-
 public class NavigationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
-    private String[] items = {"标准FragmentTabHost"};
-    private Class[] clazz = {FragmenttabhostActivity.class};
+    private String[] items = {"标准FragmentTabHost","自定义标题FragmentTabHost"};
+    private Class[] clazz = {FragmentTabhostActivity.class,FragmentTabHostCustomTitleActivity.class};
     @Override
     protected void initView() {
         setContentView(R.layout.activity_navigation);

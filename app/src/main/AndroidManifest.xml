@@ -33,7 +33,8 @@
         <activity android:name=".functions.ui.StatusBarActivity" />
         <activity android:name=".functions.ui.PullRefreshActivity" />
         <activity android:name=".functions.ui.NavigationActivity" />
-        <activity android:name=".functions.ui.FragmenttabhostActivity"></activity>
+        <activity android:name=".functions.ui.FragmentTabhostActivity" />
+        <activity android:name=".functions.ui.FragmentTabHostCustomTitleActivity"></activity>
     </application>
 
 </manifest>
