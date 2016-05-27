@@ -19,6 +19,7 @@ import com.melon.myapp.functions.ui.NavigationActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
+import com.melon.myapp.functions.ui.ToolbarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ViewHolder;
@@ -27,7 +28,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
     private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon",
             "屏幕分辨率", "进度条", "导航",
             "侧滑", "自动换行", "ActionBar",
-            "沉浸式状态栏", "下拉刷新"};
+            "沉浸式状态栏", "下拉刷新","Toolbar",
+            "RecycleView","动画","NavigationView","CardView","Snackbar",
+            "FloatingActionButton","AppBarLayout"
+    };
 
     @Override
     protected void initView() {
@@ -94,6 +98,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 10:
                 //下拉刷新
                 CommonUtil.enterActivity(mContext, PullRefreshActivity.class);
+                break;
+            case 11:
+                //Toolbar
+                CommonUtil.enterActivity(mContext, ToolbarActivity.class);
                 break;
         }
     }
