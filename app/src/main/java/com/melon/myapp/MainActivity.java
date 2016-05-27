@@ -30,7 +30,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
             "RecycleView","动画","NavigationView","CardView","Snackbar",
-            "FloatingActionButton","AppBarLayout"
+            "FloatingActionButton","AppBarLayout", "ViewFlipper",
+            "ViewFlipperScrollView"
     };
 
     @Override

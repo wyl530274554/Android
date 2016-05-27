@@ -12,16 +12,18 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyTheme.Application">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MyTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".functions.wifi.ShowWifiInfoActivity" />
         <activity android:name=".functions.sensor.ShakeOneShakeActivity" />
         <activity android:name=".functions.beacon.ShowBeaconsActivity" />
@@ -37,7 +39,7 @@
         <activity android:name=".functions.ui.FragmentTabHostCustomTitleActivity" />
         <activity android:name=".functions.ui.TabLayoutActivity" />
         <activity android:name=".functions.ui.TabLayoutFragmentActivity" />
-        <activity android:name=".functions.ui.ToolbarActivity"></activity>
+        <activity android:name=".functions.ui.ToolbarActivity" />
     </application>
 
 </manifest>
