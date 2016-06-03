@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.thirdLogin.TwitterLoginActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
@@ -22,6 +23,7 @@ import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 
 public class MainActivity extends BaseActivity implements OnItemClickListener {
@@ -29,9 +31,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "屏幕分辨率", "进度条", "导航",
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
-            "RecycleView","动画","NavigationView","CardView","Snackbar",
-            "FloatingActionButton","AppBarLayout", "ViewFlipper",
-            "ViewFlipperScrollView"
+            "RecycleView","动画","NavigationView",
+            "CardView","Snackbar","FloatingActionButton",
+            "AppBarLayout","ViewFlipper","ViewFlipperScrollView",
+            "Twitter登录"
     };
 
     @Override
@@ -103,6 +106,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 11:
                 //Toolbar
                 CommonUtil.enterActivity(mContext, ToolbarActivity.class);
+                break;
+            case 21:
+                //Twitter登录
+                CommonUtil.enterActivity(mContext, TwitterLoginActivity.class);
                 break;
         }
     }

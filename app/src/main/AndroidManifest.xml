@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -40,6 +41,11 @@
         <activity android:name=".functions.ui.TabLayoutActivity" />
         <activity android:name=".functions.ui.TabLayoutFragmentActivity" />
         <activity android:name=".functions.ui.ToolbarActivity" />
-    </application>
+        <activity android:name=".functions.thirdLogin.TwitterLoginActivity"></activity>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="j4Gtw1WpVp80BKz74Kq0nJbkc"
+            />
+    </application>
 </manifest>
