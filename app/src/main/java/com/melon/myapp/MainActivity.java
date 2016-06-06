@@ -16,6 +16,7 @@ import com.melon.myapp.functions.thirdLogin.TwitterLoginActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
+import com.melon.myapp.functions.ui.LikeActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "RecycleView","动画","NavigationView",
             "CardView","Snackbar","FloatingActionButton",
             "AppBarLayout","ViewFlipper","ViewFlipperScrollView",
-            "Twitter登录"
+            "Twitter登录","Like"
     };
 
     @Override
@@ -110,6 +111,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 21:
                 //Twitter登录
                 CommonUtil.enterActivity(mContext, TwitterLoginActivity.class);
+                break;
+            case 22:
+                //Like
+                CommonUtil.enterActivity(mContext, LikeActivity.class);
                 break;
         }
     }

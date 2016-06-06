@@ -41,11 +41,13 @@
         <activity android:name=".functions.ui.TabLayoutActivity" />
         <activity android:name=".functions.ui.TabLayoutFragmentActivity" />
         <activity android:name=".functions.ui.ToolbarActivity" />
-        <activity android:name=".functions.thirdLogin.TwitterLoginActivity"></activity>
+        <activity android:name=".functions.thirdLogin.TwitterLoginActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="j4Gtw1WpVp80BKz74Kq0nJbkc"
-            />
+            android:value="j4Gtw1WpVp80BKz74Kq0nJbkc" />
+
+        <activity android:name=".functions.ui.LikeActivity"></activity>
     </application>
+
 </manifest>
