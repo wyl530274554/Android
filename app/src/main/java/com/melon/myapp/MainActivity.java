@@ -14,6 +14,7 @@ import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.thirdLogin.TwitterLoginActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
+import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
@@ -116,6 +117,9 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 14:
                 //NavigationView
                 CommonUtil.enterActivity(mContext, NavigationViewActivity.class);
+            case 15:
+                //CardView
+                CommonUtil.enterActivity(mContext, CardViewActivity.class);
                 break;
             case 21:
                 //Twitter登录
