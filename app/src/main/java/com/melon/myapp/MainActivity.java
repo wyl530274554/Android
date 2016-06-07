@@ -18,6 +18,7 @@ import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
+import com.melon.myapp.functions.ui.NavigationViewActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.RecycleViewActivity;
@@ -112,6 +113,9 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 12:
                 //RecycleView
                 CommonUtil.enterActivity(mContext, RecycleViewActivity.class);
+            case 14:
+                //NavigationView
+                CommonUtil.enterActivity(mContext, NavigationViewActivity.class);
                 break;
             case 21:
                 //Twitter登录
