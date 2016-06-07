@@ -136,11 +136,11 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 //CoordinatorLayout
                 ToastUtil.showShortToast(this,"体验不好，算了吧");
                 break;
-            case 21:
+            case 19:
                 //Twitter登录
                 CommonUtil.enterActivity(mContext, TwitterLoginActivity.class);
                 break;
-            case 22:
+            case 20:
                 //Like
                 CommonUtil.enterActivity(mContext, LikeActivity.class);
                 break;
