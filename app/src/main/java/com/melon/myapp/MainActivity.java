@@ -38,9 +38,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
             "RecycleView","动画","NavigationView",
-            "CardView","Snackbar FloatingActionButton","CoordinatorLayout AppBarLayout",
-            "ViewFlipper","ViewFlipperScrollView", "Twitter登录",
-            "Like"
+            "CardView","Snackbar FloatingActionButton","CoordinatorLayout AppBarLayout", //6
+            "ViewFlipper", "Twitter登录", "Like"//7
     };
 
     @Override
@@ -132,6 +131,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 17:
                 //CoordinatorLayout
                 CommonUtil.enterActivity(mContext, CoordinatorLayoutActivity.class);
+                break;
+            case 18:
+                //CoordinatorLayout
+                ToastUtil.showShortToast(this,"体验不好，算了吧");
                 break;
             case 21:
                 //Twitter登录
