@@ -15,6 +15,7 @@ import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.thirdLogin.TwitterLoginActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
+import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
@@ -23,6 +24,7 @@ import com.melon.myapp.functions.ui.NavigationViewActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.RecycleViewActivity;
+import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
@@ -36,9 +38,9 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
             "RecycleView","动画","NavigationView",
-            "CardView","Snackbar","FloatingActionButton",
-            "AppBarLayout","ViewFlipper","ViewFlipperScrollView",
-            "Twitter登录","Like"
+            "CardView","Snackbar FloatingActionButton","CoordinatorLayout AppBarLayout",
+            "ViewFlipper","ViewFlipperScrollView", "Twitter登录",
+            "Like"
     };
 
     @Override
@@ -122,6 +124,14 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 15:
                 //CardView
                 CommonUtil.enterActivity(mContext, CardViewActivity.class);
+                break;
+            case 16:
+                //Snackbar
+                CommonUtil.enterActivity(mContext, SnackbarActivity.class);
+                break;
+            case 17:
+                //CoordinatorLayout
+                CommonUtil.enterActivity(mContext, CoordinatorLayoutActivity.class);
                 break;
             case 21:
                 //Twitter登录

@@ -3,7 +3,10 @@
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light" tools:ignore="NewApi">
         <!-- Customize your theme here. -->
     </style>
-
+    <!-- Base application theme. -->
+    <style name="CoordinatorLayoutTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
     <!-- 整个应用的基本主题 -->
     <style name="MyTheme.Application" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>

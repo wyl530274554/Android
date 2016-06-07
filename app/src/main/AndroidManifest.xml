@@ -53,9 +53,6 @@
             android:value="j4Gtw1WpVp80BKz74Kq0nJbkc" />
 
         <activity android:name=".functions.ui.LikeActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".functions.ui.RecycleViewActivity" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -66,7 +63,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".functions.ui.NavigationViewActivity" />
-        <activity android:name=".functions.ui.CardViewActivity"></activity>
+        <activity android:name=".functions.ui.CardViewActivity" />
+        <activity android:name=".functions.ui.SnackbarActivity" />
+        <activity android:name=".functions.ui.CoordinatorLayoutActivity" android:theme="@style/CoordinatorLayoutTheme"> </activity>
     </application>
 
 </manifest>
