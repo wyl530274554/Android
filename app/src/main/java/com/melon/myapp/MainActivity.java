@@ -20,6 +20,7 @@ import com.melon.myapp.functions.ui.LikeActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
+import com.melon.myapp.functions.ui.RecycleViewActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
@@ -107,6 +108,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 11:
                 //Toolbar
                 CommonUtil.enterActivity(mContext, ToolbarActivity.class);
+                break;
+            case 12:
+                //RecycleView
+                CommonUtil.enterActivity(mContext, RecycleViewActivity.class);
                 break;
             case 21:
                 //Twitter登录
