@@ -114,9 +114,11 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 12:
                 //RecycleView
                 CommonUtil.enterActivity(mContext, RecycleViewActivity.class);
+                break;
             case 14:
                 //NavigationView
                 CommonUtil.enterActivity(mContext, NavigationViewActivity.class);
+                break;
             case 15:
                 //CardView
                 CommonUtil.enterActivity(mContext, CardViewActivity.class);
