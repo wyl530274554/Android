@@ -1,24 +1,4 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-
-        // The Fabric Gradle plugin uses an open ended version to
-        // react quickly to Android tooling updates
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
-
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric' //这个加上会报错
-
-repositories {
-    jcenter()
-    maven { url 'https://maven.fabric.io/public' }
-}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -44,9 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:design:23.2.1'
-    compile('com.twitter.sdk.android:twitter:1.13.2@aar') {
-        transitive = true;
-    }
     compile 'me.yifeiyuan.periscopelayout:library:1.0.0'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
