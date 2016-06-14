@@ -54,11 +54,13 @@
 
         <activity android:name=".functions.ui.LikeActivity" />
         <activity android:name=".functions.ui.RecycleViewActivity" />
-
         <activity android:name=".functions.ui.NavigationViewActivity" />
         <activity android:name=".functions.ui.CardViewActivity" />
         <activity android:name=".functions.ui.SnackbarActivity" />
-        <activity android:name=".functions.ui.CoordinatorLayoutActivity" android:theme="@style/CoordinatorLayoutTheme"/>
+        <activity
+            android:name=".functions.ui.CoordinatorLayoutActivity"
+            android:theme="@style/CoordinatorLayoutTheme" />
+        <activity android:name=".functions.ui.ScrollListViewActivity"></activity>
     </application>
 
 </manifest>
