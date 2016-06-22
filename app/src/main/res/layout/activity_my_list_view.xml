@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".functions.ui.ScrollListViewActivity">
-<com.melon.mylibrary.view.MyListView
-    android:id="@+id/my_list_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    />
+    <com.melon.mylibrary.view.MyListView
+        android:id="@+id/my_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 </RelativeLayout>
