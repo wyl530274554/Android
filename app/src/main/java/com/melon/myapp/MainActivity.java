@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
-import com.melon.myapp.functions.thirdLogin.TwitterLoginActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
@@ -140,7 +139,6 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 break;
             case 19:
                 //Twitter登录
-                CommonUtil.enterActivity(mContext, TwitterLoginActivity.class);
                 break;
             case 20:
                 //Like
