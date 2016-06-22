@@ -1,8 +1,12 @@
 package com.melon.mylibrary.util;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 /**
  * Created by admin on 2016/5/17.
@@ -31,5 +35,12 @@ public class CommonUtil {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static int getScreenHeight(Context ctx){
+        DisplayMetrics metrics = new DisplayMetrics();
+        Display display =((WindowManager)ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        display.getMetrics(metrics);
+        return metrics.heightPixels;
     }
 }

@@ -23,6 +23,7 @@ import com.melon.myapp.functions.ui.NavigationViewActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.RecycleViewActivity;
+import com.melon.myapp.functions.ui.ScrollListViewActivity;
 import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "RecycleView","动画","NavigationView",
             "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
             "ViewFlipper", "Twitter登录", "Like",//7
-            "微信进度"
+            "自定义下拉刷新","微信进度"
     };
 
     @Override
@@ -146,6 +147,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 CommonUtil.enterActivity(mContext, LikeActivity.class);
                 break;
             case 21:
+                //自定义下拉刷新
+                CommonUtil.enterActivity(mContext, ScrollListViewActivity.class);
+                break;
+            case 22:
                 //微信进度
                 CommonUtil.enterActivity(mContext, WxProgressBarActivity.class);
                 break;
