@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ListView;
+import android.widget.Scroller;
 
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
@@ -12,40 +13,63 @@ import com.melon.mylibrary.util.LogUtils;
 /**
  * Created by mleon on 2016/6/14.
  */
-public class MyListView extends ListView{
+public class MyListView extends ListView {
     private int screenHeight;
     private GestureDetector mDetector;
+    private Scroller mScroller;
+
     public MyListView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if(screenHeight==0)
+        if (screenHeight == 0)
             screenHeight = CommonUtil.getScreenHeight(getContext());
 
-        mDetector = new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
+        mScroller = new Scroller(context);
+        mDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                scrollBy(0, (int) distanceY);
-                return super.onScroll(e1,e2,distanceX,distanceX);
+//                scrollTo(0, (int) distanceY);
+                return super.onScroll(e1, e2, distanceX, distanceX);
             }
 
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                return super.onFling(e1, e2, velocityX, velocityY);
-            }
         });
     }
 
     @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(0, mScroller.getCurrY());
+            postInvalidate();
+        }
+    }
+
+    private int startY;
+    private int dy; //移动总距离
+
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()){
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                startY = (int) ev.getY();
                 break;
             case MotionEvent.ACTION_UP:
-                scrollTo(0,0);
+                if (dy > 0) {
+                    mScroller.startScroll(0, dy, 0, -dy, 1000);
+                    invalidate();
+                } else {
+                    scrollTo(0, 0);
+                }
+                dy = 0;
                 break;
             case MotionEvent.ACTION_MOVE:
+                int tempY = (int) ev.getY();
+                int tempDy = tempY - startY;
+                dy += tempDy;
+                scrollBy(0, -tempDy);
+
+                startY = (int) ev.getY();
                 break;
         }
-        mDetector.onTouchEvent(ev);
+//        mDetector.onTouchEvent(ev);
         return true;
     }
 }
