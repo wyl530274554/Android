@@ -8,10 +8,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- miui的扫描wifi需要 -->
-
-
+    <!-- miui的扫描wifi需要 -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,11 +53,12 @@
         <activity android:name=".functions.ui.NavigationViewActivity" />
         <activity android:name=".functions.ui.CardViewActivity" />
         <activity android:name=".functions.ui.SnackbarActivity" />
-        <activity android:name=".functions.ui.ScrollListViewActivity"></activity>
+        <activity android:name=".functions.ui.ScrollListViewActivity" />
         <activity
             android:name=".functions.ui.CoordinatorLayoutActivity"
             android:theme="@style/CoordinatorLayoutTheme" />
-        <activity android:name=".functions.ui.WxProgressBarActivity"></activity>
+        <activity android:name=".functions.ui.WxProgressBarActivity" />
+        <activity android:name=".functions.ui.TextSwitcherActivity"></activity>
     </application>
 
 </manifest>
