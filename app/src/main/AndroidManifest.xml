@@ -58,7 +58,8 @@
             android:name=".functions.ui.CoordinatorLayoutActivity"
             android:theme="@style/CoordinatorLayoutTheme" />
         <activity android:name=".functions.ui.WxProgressBarActivity" />
-        <activity android:name=".functions.ui.TextSwitcherActivity"></activity>
+        <activity android:name=".functions.ui.TextSwitcherActivity" />
+        <activity android:name=".functions.ui.ViewFlipperActivity"></activity>
     </application>
 
 </manifest>

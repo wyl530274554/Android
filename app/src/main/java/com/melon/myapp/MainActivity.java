@@ -27,6 +27,7 @@ import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.TextSwitcherActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
+import com.melon.myapp.functions.ui.ViewFlipperActivity;
 import com.melon.myapp.functions.ui.WxProgressBarActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.mylibrary.util.CommonUtil;
@@ -135,8 +136,9 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 CommonUtil.enterActivity(mContext, CoordinatorLayoutActivity.class);
                 break;
             case 18:
-                //CoordinatorLayout
-                ToastUtil.showShortToast(this,"体验不好，算了吧");
+                //ViewFlipper
+                //TODO
+                CommonUtil.enterActivity(mContext, ViewFlipperActivity.class);
                 break;
             case 19:
                 //Twitter登录
