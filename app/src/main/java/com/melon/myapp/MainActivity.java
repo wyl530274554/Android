@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.system.MaxMemoryActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
@@ -35,14 +36,16 @@ import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 
 public class MainActivity extends BaseActivity implements OnItemClickListener {
-    private String[] items = new String[]{"查看Wifi列表", "摇一摇", "Beacon",
+    private String[] items = new String[]{
+            "查看Wifi列表", "摇一摇", "Beacon",
             "屏幕分辨率", "进度条", "导航",
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
             "RecycleView","动画","NavigationView",
             "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
             "ViewFlipper", "Twitter登录", "Like",//7
-            "自定义下拉刷新","微信进度","TextSwither"
+            "自定义下拉刷新","微信进度","TextSwither",//8
+            "最大内存"
     };
 
     @Override
@@ -158,6 +161,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 23:
                 //微信进度
                 CommonUtil.enterActivity(mContext, TextSwitcherActivity.class);
+                break;
+            case 24:
+                //最大内存
+                CommonUtil.enterActivity(mContext, MaxMemoryActivity.class);
                 break;
         }
     }
