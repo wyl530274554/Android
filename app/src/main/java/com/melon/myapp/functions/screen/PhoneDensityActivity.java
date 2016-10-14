@@ -24,12 +24,35 @@ public class PhoneDensityActivity extends BaseActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getMetrics(metrics);
 
+        String densitySize = "未知分辨率";
+        switch (metrics.densityDpi){
+            case 120:
+                densitySize = "Ldpi";
+                break;
+            case 160:
+                densitySize = "Mdpi";
+                break;
+            case 240:
+                densitySize = "Hdpi";
+                break;
+            case 320:
+                densitySize = "Xhdpi";
+                break;
+            case 480:
+                densitySize = "XXhdpi";
+                break;
+            case 640:
+                densitySize = "XXXhdpi";
+                break;
+        }
+
         tvContent.setText("density: " + metrics.density + "\ndensityDpi: " + metrics.densityDpi
                         + "\nheightPixels: " + metrics.heightPixels
                         + "\nwidthPixels: " + metrics.widthPixels
                         + "\nscaledDensity: " + metrics.scaledDensity
                         + "\nxdpi: " + metrics.xdpi
                         + "\nydpi: " + metrics.ydpi
+                        + "\n\n分辨率类型："+densitySize
         );
     }
 
