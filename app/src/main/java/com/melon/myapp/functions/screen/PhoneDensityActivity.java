@@ -45,7 +45,6 @@ public class PhoneDensityActivity extends BaseActivity {
                 densityType = "XXXhdpi";
                 break;
         }
-
         tvContent.setText("density: " + metrics.density + "\ndensityDpi: " + metrics.densityDpi
                         + "\nheightPixels: " + metrics.heightPixels
                         + "\nwidthPixels: " + metrics.widthPixels
