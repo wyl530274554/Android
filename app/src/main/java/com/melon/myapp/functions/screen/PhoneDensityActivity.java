@@ -24,25 +24,25 @@ public class PhoneDensityActivity extends BaseActivity {
         Display display = getWindowManager().getDefaultDisplay();
         display.getMetrics(metrics);
 
-        String densitySize = "未知分辨率";
+        String densityType = "未知分辨率";
         switch (metrics.densityDpi){
             case 120:
-                densitySize = "Ldpi";
+                densityType = "Ldpi";
                 break;
             case 160:
-                densitySize = "Mdpi";
+                densityType = "Mdpi";
                 break;
             case 240:
-                densitySize = "Hdpi";
+                densityType = "Hdpi";
                 break;
             case 320:
-                densitySize = "Xhdpi";
+                densityType = "Xhdpi";
                 break;
             case 480:
-                densitySize = "XXhdpi";
+                densityType = "XXhdpi";
                 break;
             case 640:
-                densitySize = "XXXhdpi";
+                densityType = "XXXhdpi";
                 break;
         }
 
@@ -52,7 +52,7 @@ public class PhoneDensityActivity extends BaseActivity {
                         + "\nscaledDensity: " + metrics.scaledDensity
                         + "\nxdpi: " + metrics.xdpi
                         + "\nydpi: " + metrics.ydpi
-                        + "\n\n分辨率类型："+densitySize
+                        + "\n\n分辨率类型："+densityType
         );
     }
 
