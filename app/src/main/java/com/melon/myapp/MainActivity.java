@@ -12,6 +12,7 @@ import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.system.MaxMemoryActivity;
+import com.melon.myapp.functions.ui.AdvBannerActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新","微信进度","TextSwither",//8
-            "最大内存"
+            "最大内存","广告轮播"
     };
 
     @Override
@@ -165,6 +166,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 24:
                 //最大内存
                 CommonUtil.enterActivity(mContext, MaxMemoryActivity.class);
+                break;
+            case 25:
+                //广告Banner
+                CommonUtil.enterActivity(mContext, AdvBannerActivity.class);
                 break;
         }
     }
