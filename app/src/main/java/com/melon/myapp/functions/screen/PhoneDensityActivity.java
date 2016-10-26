@@ -25,34 +25,27 @@ public class PhoneDensityActivity extends BaseActivity {
         display.getMetrics(metrics);
 
         String densityType = "未知分辨率";
-        switch (metrics.densityDpi){
-            case 120:
-                densityType = "Ldpi";
-                break;
-            case 160:
-                densityType = "Mdpi";
-                break;
-            case 240:
-                densityType = "Hdpi";
-                break;
-            case 320:
-                densityType = "Xhdpi";
-                break;
-            case 480:
-                densityType = "XXhdpi";
-                break;
-            case 640:
-                densityType = "XXXhdpi";
-                break;
-        }
+
+        if (metrics.densityDpi <= 120)
+            densityType = "Ldpi";
+        else if (metrics.densityDpi <= 160)
+            densityType = "Mdpi";
+        else if (metrics.densityDpi <= 240)
+            densityType = "Hdpi";
+        else if (metrics.densityDpi <= 320)
+            densityType = "Xhdpi";
+        else if (metrics.densityDpi <= 480)
+            densityType = "XXhdpi";
+        else if (metrics.densityDpi <= 640)
+            densityType = "XXXhdpi";
 
         tvContent.setText("density: " + metrics.density + "\ndensityDpi: " + metrics.densityDpi
-                        + "\nheightPixels: " + metrics.heightPixels
-                        + "\nwidthPixels: " + metrics.widthPixels
-                        + "\nscaledDensity: " + metrics.scaledDensity
-                        + "\nxdpi: " + metrics.xdpi
-                        + "\nydpi: " + metrics.ydpi
-                        + "\n\n分辨率类型："+densityType
+                + "\nheightPixels: " + metrics.heightPixels
+                + "\nwidthPixels: " + metrics.widthPixels
+                + "\nscaledDensity: " + metrics.scaledDensity
+                + "\nxdpi: " + metrics.xdpi
+                + "\nydpi: " + metrics.ydpi
+                + "\n\n分辨率类型：" + densityType
         );
     }
 
