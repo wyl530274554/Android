@@ -58,6 +58,5 @@ public class PhoneDensityActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
     }
 }
