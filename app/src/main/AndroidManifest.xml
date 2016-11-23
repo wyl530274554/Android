@@ -61,7 +61,7 @@
         <activity android:name=".functions.ui.TextSwitcherActivity" />
         <activity android:name=".functions.ui.ViewFlipperActivity" />
         <activity android:name=".functions.system.MaxMemoryActivity" />
-        <activity android:name=".functions.ui.AdvBannerActivity"></activity>
+        <activity android:name=".functions.ui.AdvBannerActivity" />
     </application>
 
 </manifest>

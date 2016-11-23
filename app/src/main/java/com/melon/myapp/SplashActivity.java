@@ -1,6 +1,7 @@
 package com.melon.myapp;
 
 import android.view.View;
+import android.view.WindowManager;
 
 import com.melon.mylibrary.util.CommonUtil;
 
@@ -19,7 +20,7 @@ public class SplashActivity extends BaseActivity {
                 CommonUtil.enterActivity(getApplicationContext(),MainActivity.class);
                 finish();
             }
-        },3000);
+        },2000);
     }
 
     @Override

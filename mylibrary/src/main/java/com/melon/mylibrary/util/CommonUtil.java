@@ -14,12 +14,13 @@ import android.view.WindowManager;
 public class CommonUtil {
     /**
      * 启动Activity
+     *
      * @param ctx   上下文
      * @param clazz 要跳转页面
      */
     public static void enterActivity(Context ctx, Class<?> clazz) {
         Intent intent = new Intent(ctx, clazz);
-        if(ctx instanceof Application){
+        if (ctx instanceof Application) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         ctx.startActivity(intent);
@@ -32,15 +33,21 @@ public class CommonUtil {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-    public static int getScreenHeight(Context ctx){
+    public static int getScreenHeight(Context ctx) {
         DisplayMetrics metrics = new DisplayMetrics();
-        Display display =((WindowManager)ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Display display = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         display.getMetrics(metrics);
         return metrics.heightPixels;
+    }
+
+    //全屏
+    public static void fullScreen(Activity act) {
+        act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }

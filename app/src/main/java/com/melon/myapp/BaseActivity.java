@@ -1,20 +1,22 @@
 package com.melon.myapp;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
-public abstract class BaseActivity extends Activity implements OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
 	public static Handler mHandler = new Handler();
 	Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		//透明状态栏
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		//透明导航栏
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		super.onCreate(savedInstanceState);
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏
 		mContext = getApplicationContext();
 		initView();
 		initData();
