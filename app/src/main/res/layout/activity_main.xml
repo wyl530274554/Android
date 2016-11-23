@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="#C0C0C0">
+    android:background="@color/color_app_primary"
+    android:fitsSystemWindows="true">
+
     <GridView
         android:id="@+id/gv_main"
         android:layout_width="match_parent"
@@ -11,6 +12,6 @@
         android:horizontalSpacing="1px"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
-        android:verticalSpacing="1px"></GridView>
+        android:verticalSpacing="1px" />
 
 </RelativeLayout>
