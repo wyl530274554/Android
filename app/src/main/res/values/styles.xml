@@ -6,6 +6,12 @@
         <item name="colorPrimaryDark">#FF0288D1</item>
         <item name="colorAccent">#FF4081</item>-->
     </style>
+    <style name="ActionBarTheme" parent="Theme.AppCompat.Light" tools:ignore="NewApi">
+        <!-- Customize your theme here. -->
+        <!--<item name="colorPrimary">#FF03A9F4</item>
+        <item name="colorPrimaryDark">#FF0288D1</item>
+        <item name="colorAccent">#FF4081</item>-->
+    </style>
     <!-- 整个应用的基本主题 -->
     <style name="MyTheme.Application" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>

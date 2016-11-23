@@ -65,6 +65,7 @@
         <activity android:name=".functions.system.MaxMemoryActivity" />
         <activity android:name=".functions.ui.AdvBannerActivity" />
         <activity
+            android:theme="@style/ActionBarTheme"
             android:name=".functions.h5.HtmlActivity"
             android:parentActivityName=".functions.ui.CoordinatorLayoutActivity"></activity>
     </application>
