@@ -1,12 +1,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="NewApi">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light" tools:ignore="NewApi">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">#FF03A9F4</item>
         <item name="colorPrimaryDark">#FF0288D1</item>
         <item name="colorAccent">#FF4081</item>-->
     </style>
-    <style name="ActionBarTheme" parent="Theme.AppCompat.Light" tools:ignore="NewApi">
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="NewApi">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">#FF03A9F4</item>
         <item name="colorPrimaryDark">#FF0288D1</item>
@@ -20,7 +20,7 @@
     </style>
 
     <!-- 启动页样式 -->
-    <style name="MyTheme.Splash" parent="@style/AppBaseTheme">
+    <style name="MyTheme.Splash" parent="@style/NoActionBarTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>

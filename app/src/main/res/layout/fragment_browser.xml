@@ -22,7 +22,7 @@
             android:id="@+id/et_browser_search"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:maxLines="1" />
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/bt_browser_search"
