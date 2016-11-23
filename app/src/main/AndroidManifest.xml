@@ -59,6 +59,7 @@
         <activity android:name=".functions.ui.SnackbarActivity" />
         <activity android:name=".functions.ui.ScrollListViewActivity" />
         <activity
+            android:launchMode="singleTop"
             android:name=".functions.ui.CoordinatorLayoutActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity android:name=".functions.ui.WxProgressBarActivity" />
