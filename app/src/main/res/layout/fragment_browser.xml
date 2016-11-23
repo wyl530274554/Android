@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_browser_logo"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_baidu" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_browser_logo"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_browser_search"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1" />
+
+        <Button
+            android:id="@+id/bt_browser_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="百度一下" />
+    </LinearLayout>
+
+
+</RelativeLayout>

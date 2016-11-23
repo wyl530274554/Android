@@ -2,30 +2,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinator_layout"
+    android:background="@color/color_app_primary"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#30469b"
+            android:background="@color/color_app_primary"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#30469b"
+            android:background="@color/color_app_primary"
             app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="#ff0000"
-            app:tabTextColor="#ffffff" />
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_red"
+            app:tabTextColor="@color/color_white" />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -36,6 +38,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
+            android:background="@color/color_white"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

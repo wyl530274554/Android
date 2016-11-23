@@ -2,11 +2,10 @@
     <!-- Base application theme. -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="NewApi">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FF03A9F4</item>
+        <!--<item name="colorPrimary">#FF03A9F4</item>
         <item name="colorPrimaryDark">#FF0288D1</item>
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorAccent">#FF4081</item>-->
     </style>
-    <style name="CoordinatorLayoutTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
     <!-- 整个应用的基本主题 -->
     <style name="MyTheme.Application" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>

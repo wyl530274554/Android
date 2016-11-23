@@ -3,6 +3,7 @@ package com.melon.myapp;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.mylibrary.util.CommonUtil;
 
 public class SplashActivity extends BaseActivity {
@@ -17,7 +18,7 @@ public class SplashActivity extends BaseActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CommonUtil.enterActivity(getApplicationContext(),MainActivity.class);
+                CommonUtil.enterActivity(getApplicationContext(),CoordinatorLayoutActivity.class);
                 finish();
             }
         },2000);

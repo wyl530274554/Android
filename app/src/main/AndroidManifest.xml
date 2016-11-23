@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="21" />
+
     <!-- miui的扫描wifi需要 -->
     <application
         android:allowBackup="true"
@@ -54,14 +58,15 @@
         <activity android:name=".functions.ui.CardViewActivity" />
         <activity android:name=".functions.ui.SnackbarActivity" />
         <activity android:name=".functions.ui.ScrollListViewActivity" />
-        <activity
-            android:name=".functions.ui.CoordinatorLayoutActivity"
-            android:theme="@style/CoordinatorLayoutTheme" />
+        <activity android:name=".functions.ui.CoordinatorLayoutActivity" />
         <activity android:name=".functions.ui.WxProgressBarActivity" />
         <activity android:name=".functions.ui.TextSwitcherActivity" />
         <activity android:name=".functions.ui.ViewFlipperActivity" />
         <activity android:name=".functions.system.MaxMemoryActivity" />
         <activity android:name=".functions.ui.AdvBannerActivity" />
+        <activity
+            android:name=".functions.h5.HtmlActivity"
+            android:parentActivityName=".functions.ui.CoordinatorLayoutActivity"></activity>
     </application>
 
 </manifest>

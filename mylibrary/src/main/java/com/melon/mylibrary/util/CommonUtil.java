@@ -50,4 +50,14 @@ public class CommonUtil {
     public static void fullScreen(Activity act) {
         act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+    /**
+     * 空判断
+     */
+    public static boolean isEmpty(CharSequence str) {
+        if (str == null || str.length() == 0 || "null".equalsIgnoreCase(str.toString()))
+            return true;
+        else
+            return false;
+    }
 }
