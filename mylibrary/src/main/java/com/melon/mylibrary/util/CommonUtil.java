@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -24,14 +26,6 @@ public class CommonUtil {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         ctx.startActivity(intent);
-    }
-
-    /**
-     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
-     */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
     }
 
     public static int dip2px(Context context, float dpValue) {
@@ -59,5 +53,16 @@ public class CommonUtil {
             return true;
         else
             return false;
+    }
+
+    /**
+     * 计算图片高度
+     */
+    public static int getPicHeight(Context ctx, int img) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 1;
+        options.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeResource(ctx.getResources(), img, options);
+        return options.outHeight;
     }
 }

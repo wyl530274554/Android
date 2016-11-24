@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_below="@id/iv_browser_logo"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
@@ -22,6 +23,7 @@
             android:id="@+id/et_browser_search"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
             android:singleLine="true" />
 
         <Button

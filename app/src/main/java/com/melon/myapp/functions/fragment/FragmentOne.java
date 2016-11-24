@@ -1,6 +1,7 @@
 package com.melon.myapp.functions.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,15 +10,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.melon.myapp.R;
+import com.melon.myapp.bean.Website;
+import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class FragmentOne extends Fragment {
     private static FragmentOne instance = null;
+    private List<Website> mWebsites = new ArrayList<>();
 
     public static FragmentOne newInstance() {
         if (instance == null) {
@@ -25,6 +32,7 @@ public class FragmentOne extends Fragment {
         }
         return instance;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,33 +40,26 @@ public class FragmentOne extends Fragment {
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        List<Integer> datas = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            datas.add(i);
-        }
-        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas));
+        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), mWebsites));
+
+        initData();
         return view;
     }
 
-
+    private void initData() {
+        mWebsites.add(new Website("http://m.news.baidu.com/news", R.drawable.ic_baidu_news));
+        mWebsites.add(new Website("https://m.taobao.com", R.drawable.ic_taobao));
+        mWebsites.add(new Website("https://www.jd.com", R.drawable.ic_jd));
+    }
 
 
     public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
-        private List<Integer> datas;
         private Context context;
-        private List<Integer> lists;
+        private List<Website> websites;
 
-        public MyRecyclerViewAdapter(Context context, List<Integer> datas) {
-            this.datas = datas;
+        public MyRecyclerViewAdapter(Context context, List<Website> websites) {
             this.context = context;
-            getRandomHeights(datas);
-        }
-
-        private void getRandomHeights(List<Integer> datas) {
-            lists = new ArrayList<>();
-            for (int i = 0; i < datas.size(); i++) {
-                lists.add((int) (200 + Math.random() * 400));
-            }
+            this.websites = websites;
         }
 
         @Override
@@ -70,23 +71,36 @@ public class FragmentOne extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
+            final Website website = mWebsites.get(position);
+
             ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            params.height = lists.get(position);//把随机的高度赋予item布局
+            params.height = CommonUtil.getPicHeight(context, website.getImg()) + CommonUtil.dip2px(context, new Random().nextInt(50) + 100);
             holder.itemView.setLayoutParams(params);
-            holder.mTextView.setText(position+"");
+            LogUtils.e("params.height: " + params.height);
+            holder.mImageView.setImageResource(website.getImg());
+
+            holder.mImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), HtmlActivity.class);
+                    intent.putExtra("url",website.getUrl());
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
-            return datas.size();
+            return websites.size();
         }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView mTextView;
+        ImageButton mImageView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.item_tv);
+            mImageView = (ImageButton) itemView.findViewById(R.id.iv_item_fragment_one_img);
         }
     }
 }

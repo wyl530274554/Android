@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.melon.myapp">
+    package="com.melon.myapp"
+    >
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -9,10 +10,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="21" />
 
     <!-- miui的扫描wifi需要 -->
     <application
@@ -59,8 +56,8 @@
         <activity android:name=".functions.ui.SnackbarActivity" />
         <activity android:name=".functions.ui.ScrollListViewActivity" />
         <activity
-            android:launchMode="singleTop"
             android:name=".functions.ui.CoordinatorLayoutActivity"
+            android:launchMode="singleTop"
             android:theme="@style/NoActionBarTheme" />
         <activity android:name=".functions.ui.WxProgressBarActivity" />
         <activity android:name=".functions.ui.TextSwitcherActivity" />
@@ -69,7 +66,7 @@
         <activity android:name=".functions.ui.AdvBannerActivity" />
         <activity
             android:name=".functions.h5.HtmlActivity"
-            android:parentActivityName=".functions.ui.CoordinatorLayoutActivity"></activity>
+            android:parentActivityName=".functions.ui.CoordinatorLayoutActivity"/>
     </application>
 
 </manifest>

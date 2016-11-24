@@ -34,24 +34,14 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
-        viewPagerAdapter.addFragment(FragmentOne.newInstance(), "TabOne");//添加Fragment
-        viewPagerAdapter.addFragment(new CommonFragment(), "TabTwo");
-        viewPagerAdapter.addFragment(new CommonFragment(), "TabThree");
-        viewPagerAdapter.addFragment(new CommonFragment(), "Tab4");
-        viewPagerAdapter.addFragment(new CommonFragment(), "Tab5");
-        viewPagerAdapter.addFragment(new CommonFragment(), "Tab6");
-        viewPagerAdapter.addFragment(new CommonFragment(), "Tab7");
+        viewPagerAdapter.addFragment(FragmentOne.newInstance(), "网址导航");//添加Fragment
+        viewPagerAdapter.addFragment(new CommonFragment(), "学习记录");
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabOne"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabTwo"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabThree"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("Tab4"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("Tab5"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("Tab6"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("Tab7"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }
 
