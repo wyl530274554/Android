@@ -47,6 +47,7 @@ public class FragmentOne extends Fragment {
     }
 
     private void initData() {
+        if (mWebsites.size() > 0) return;
         mWebsites.add(new Website("http://m.news.baidu.com/news", R.drawable.ic_baidu_news));
         mWebsites.add(new Website("https://m.taobao.com", R.drawable.ic_taobao));
         mWebsites.add(new Website("https://www.jd.com", R.drawable.ic_jd));
@@ -76,14 +77,14 @@ public class FragmentOne extends Fragment {
             ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
             params.height = CommonUtil.getPicHeight(context, website.getImg()) + CommonUtil.dip2px(context, new Random().nextInt(50) + 100);
             holder.itemView.setLayoutParams(params);
-            LogUtils.e("params.height: " + params.height);
+//            LogUtils.e("params.height: " + params.height);
             holder.mImageView.setImageResource(website.getImg());
 
             holder.mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), HtmlActivity.class);
-                    intent.putExtra("url",website.getUrl());
+                    intent.putExtra("url", website.getUrl());
                     startActivity(intent);
                 }
             });

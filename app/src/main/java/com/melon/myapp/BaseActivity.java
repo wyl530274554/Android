@@ -12,14 +12,15 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
 	Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//透明状态栏
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-		//透明导航栏
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		super.onCreate(savedInstanceState);
 		mContext = getApplicationContext();
 		initView();
 		initData();
+
+		//透明状态栏
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		//透明导航栏
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 	}
 
 	protected abstract void initView();

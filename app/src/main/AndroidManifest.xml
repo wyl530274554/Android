@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.melon.myapp"
-    >
+    package="com.melon.myapp">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -58,7 +57,8 @@
         <activity
             android:name=".functions.ui.CoordinatorLayoutActivity"
             android:launchMode="singleTop"
-            android:theme="@style/NoActionBarTheme" />
+            android:theme="@style/NoActionBarTheme"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".functions.ui.WxProgressBarActivity" />
         <activity android:name=".functions.ui.TextSwitcherActivity" />
         <activity android:name=".functions.ui.ViewFlipperActivity" />
@@ -66,7 +66,7 @@
         <activity android:name=".functions.ui.AdvBannerActivity" />
         <activity
             android:name=".functions.h5.HtmlActivity"
-            android:parentActivityName=".functions.ui.CoordinatorLayoutActivity"/>
+            android:theme="@style/MyTheme.Html" />
     </application>
 
 </manifest>

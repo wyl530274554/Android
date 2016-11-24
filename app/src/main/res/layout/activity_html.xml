@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:fitsSystemWindows="true"
+    android:background="@color/color_app_primary"
     tools:context="com.melon.myapp.functions.h5.HtmlActivity">
 
     <WebView

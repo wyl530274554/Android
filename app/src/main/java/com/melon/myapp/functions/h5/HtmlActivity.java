@@ -1,12 +1,15 @@
 package com.melon.myapp.functions.h5;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
@@ -17,7 +20,7 @@ public class HtmlActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        CommonUtil.fullScreen(this);
+//        CommonUtil.fullScreen(this);
         setContentView(R.layout.activity_html);
         mWebView = (WebView) findViewById(R.id.wv_html);
         WebSettings settings = mWebView.getSettings();
@@ -29,6 +32,21 @@ public class HtmlActivity extends BaseActivity {
                 return true;
             }
         });
+
+        SwipeBackHelper.onCreate(this);
+        SwipeBackHelper.getCurrentPage(this).setSwipeEdge(200);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SwipeBackHelper.onDestroy(this);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
     }
 
     @Override
