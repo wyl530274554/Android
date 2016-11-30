@@ -1,46 +1,40 @@
 package com.melon.myapp.functions.h5;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.view.ProgressWebView;
 
 public class HtmlActivity extends BaseActivity {
 
-    private WebView mWebView;
+    private static final java.lang.String TAG = "HtmlActivity";
+    private ProgressWebView mWebView;
 
     @Override
     protected void initView() {
-//        CommonUtil.fullScreen(this);
+        CommonUtil.fullScreen(this);
         setContentView(R.layout.activity_html);
-        mWebView = (WebView) findViewById(R.id.wv_html);
-        WebSettings settings = mWebView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+        mWebView = (ProgressWebView) findViewById(R.id.wv_html);
+        setWebViewParam();
 
         SwipeBackHelper.onCreate(this);
         SwipeBackHelper.getCurrentPage(this).setSwipeEdge(200);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SwipeBackHelper.onDestroy(this);
+    private void setWebViewParam() {
+        mWebView.setWebViewClient(new WebViewClient());
+        WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);//解决百度新闻，第二次打不开的问题。
     }
 
     @Override
@@ -52,6 +46,7 @@ public class HtmlActivity extends BaseActivity {
     @Override
     protected void initData() {
         String url = getIntent().getStringExtra("url");
+        LogUtils.e(TAG, "URL: " + url);
         mWebView.loadUrl(url);
     }
 

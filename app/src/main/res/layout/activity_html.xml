@@ -12,7 +12,7 @@
     android:background="@color/color_app_primary"
     tools:context="com.melon.myapp.functions.h5.HtmlActivity">
 
-    <WebView
+    <com.melon.mylibrary.view.ProgressWebView
         android:id="@+id/wv_html"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
