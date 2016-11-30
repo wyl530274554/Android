@@ -19,6 +19,7 @@ public class HtmlActivity extends BaseActivity {
     private static final java.lang.String TAG = "HtmlActivity";
     private ProgressWebView mWebView;
 
+
     @Override
     protected void initView() {
         CommonUtil.fullScreen(this);
