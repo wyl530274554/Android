@@ -18,6 +18,7 @@ public class WxProgressBarActivity extends BaseActivity {
 
         etUrl = (EditText) findViewById(R.id.et_wx_progress_bar);
         findViewById(R.id.bt_wx_progress_bar).setOnClickListener(this);
+        getSupportActionBar().hide();
     }
 
     @Override

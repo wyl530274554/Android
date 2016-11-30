@@ -15,9 +15,9 @@ public class CommonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_common,container, false);
-        String content ="Content";
+        String content ="Android UI";
         try{
-            content = getArguments().getString("content", "Content");
+            content = getArguments().getString("content", "Android UI");
         }catch (Exception e){}
         TextView tv_common_fragment = (TextView) view.findViewById(R.id.tv_common_fragment);
         tv_common_fragment.setText(content);
@@ -30,6 +30,4 @@ public class CommonFragment extends Fragment {
         });
         return view;
     }
-
-
 }
