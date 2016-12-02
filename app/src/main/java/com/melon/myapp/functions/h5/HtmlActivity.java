@@ -36,6 +36,12 @@ public class HtmlActivity extends BaseActivity {
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);//解决百度新闻，第二次打不开的问题。
+        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;//解决三星手机 长按弹出复制、粘贴，滑出界面时，闪退问题。
+            }
+        });
     }
 
     @Override
