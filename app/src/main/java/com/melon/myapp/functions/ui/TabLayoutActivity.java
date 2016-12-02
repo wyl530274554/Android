@@ -36,7 +36,7 @@ public class TabLayoutActivity extends BaseActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-//            CommonFragment commonFragment = new CommonFragment();
+//            StudyFragment commonFragment = new StudyFragment();
 //            Bundle bunlde = new Bundle();
 //            bunlde.putString("content", titles[i]);
 //            commonFragment.setArguments(bunlde);

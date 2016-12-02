@@ -1,20 +1,17 @@
 package com.melon.myapp.functions.ui;
 
 import android.content.Context;
-import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.melon.myapp.BaseActivity;
 import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.functions.fragment.CommonFragment;
+import com.melon.myapp.functions.fragment.StudyFragment;
 
 public class TabLayoutFragmentActivity extends BaseFragmentActivity {
     TabLayout tabLayout;
@@ -63,7 +60,7 @@ public class TabLayoutFragmentActivity extends BaseFragmentActivity {
     }
 
     private Fragment createFragment(int position) {
-        CommonFragment fragment = new CommonFragment();
+        StudyFragment fragment = new StudyFragment();
         Bundle args = new Bundle();
         args.putString("content",titles[position]);
         fragment.setArguments(args);

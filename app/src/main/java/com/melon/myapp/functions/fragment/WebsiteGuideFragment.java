@@ -16,19 +16,18 @@ import com.melon.myapp.R;
 import com.melon.myapp.bean.Website;
 import com.melon.myapp.functions.h5.HtmlActivity;
 import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FragmentOne extends Fragment {
-    private static FragmentOne instance = null;
+public class WebsiteGuideFragment extends Fragment {
+    private static WebsiteGuideFragment instance = null;
     private List<Website> mWebsites = new ArrayList<>();
 
-    public static FragmentOne newInstance() {
+    public static WebsiteGuideFragment newInstance() {
         if (instance == null) {
-            instance = new FragmentOne();
+            instance = new WebsiteGuideFragment();
         }
         return instance;
     }

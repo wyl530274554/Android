@@ -6,17 +6,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.myapp.functions.fragment.BrowserFragment;
-import com.melon.myapp.functions.fragment.CommonFragment;
-import com.melon.myapp.functions.fragment.FragmentOne;
+import com.melon.myapp.functions.fragment.StudyFragment;
+import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,8 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
-        viewPagerAdapter.addFragment(FragmentOne.newInstance(), "网址导航");//添加Fragment
-        viewPagerAdapter.addFragment(new CommonFragment(), "学习记录");
+        viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
+        viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);

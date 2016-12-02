@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00ff00"
-    tools:context=".functions.fragment.CommonFragment">
+    tools:context=".functions.fragment.StudyFragment">
 
     <TextView
         android:id="@+id/tv_common_fragment"

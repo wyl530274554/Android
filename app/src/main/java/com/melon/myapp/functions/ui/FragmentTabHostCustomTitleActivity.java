@@ -1,16 +1,14 @@
 package com.melon.myapp.functions.ui;
 
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.functions.fragment.CommonFragment;
+import com.melon.myapp.functions.fragment.StudyFragment;
 
 public class FragmentTabHostCustomTitleActivity extends BaseFragmentActivity {
     private String[] titles = {"新闻", "音乐", "人生"};
@@ -27,7 +25,7 @@ public class FragmentTabHostCustomTitleActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(getTabTitleView(i)), CommonFragment.class, putContent(titles[i]));
+            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(getTabTitleView(i)), StudyFragment.class, putContent(titles[i]));
             //设置Tab按钮的背景
             mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.selector_tab_item_title_bg);
         }
