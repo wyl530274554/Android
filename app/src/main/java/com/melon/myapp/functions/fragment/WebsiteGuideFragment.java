@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 网址导航
+ */
 public class WebsiteGuideFragment extends Fragment {
     private static WebsiteGuideFragment instance = null;
     private List<Website> mWebsites = new ArrayList<>();
