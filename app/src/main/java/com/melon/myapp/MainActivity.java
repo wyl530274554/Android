@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
         MyAdapter mAdapter = new MyAdapter();
         gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(this);
+
     }
 
     @Override

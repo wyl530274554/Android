@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ff00"
     tools:context=".functions.fragment.StudyFragment">
 
-    <TextView
-        android:id="@+id/tv_common_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+    <Button
+        android:layout_centerInParent="true"
+        android:id="@+id/bt_study_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="News" />
 
 </RelativeLayout>

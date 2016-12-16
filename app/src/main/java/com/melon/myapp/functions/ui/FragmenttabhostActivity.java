@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.functions.fragment.CommonFragment;
+import com.melon.myapp.functions.fragment.StudyFragment;
 
 public class FragmentTabhostActivity extends BaseFragmentActivity {
     private String[] titles = {"新闻", "音乐", "人生"};
@@ -22,7 +22,7 @@ public class FragmentTabhostActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(titles[i]), CommonFragment.class, putContent(titles[i]));
+            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(titles[i]), StudyFragment.class, putContent(titles[i]));
         }
     }
 

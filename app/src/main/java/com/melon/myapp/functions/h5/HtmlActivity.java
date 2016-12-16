@@ -28,7 +28,7 @@ public class HtmlActivity extends BaseActivity {
         setWebViewParam();
 
         SwipeBackHelper.onCreate(this);
-        SwipeBackHelper.getCurrentPage(this).setSwipeEdge(200);
+        SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
     }
 
     private void setWebViewParam() {
