@@ -1,5 +1,8 @@
 package com.melon.myapp.functions.ui;
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,7 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import com.melon.myapp.BaseActivity;
@@ -22,12 +29,14 @@ import java.util.List;
 
 public class CoordinatorLayoutActivity extends BaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_coordinator_layout);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolBar);
         mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色
+
+        //Toolbar高度+状态栏高度(不设置，图标会变形)
+        mToolbar.getLayoutParams().height = getAppBarHeight() + 50;
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -44,9 +53,27 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }
 
-    @Override
-    protected void initView() {
+    private int getAppBarHeight() {
+        int actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
 
+        return actionBarHeight;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu_coordinator, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+
+        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
+        searchView.setSearchableInfo(searchableInfo);
+        return true;
     }
 
     @Override
@@ -58,6 +85,7 @@ public class CoordinatorLayoutActivity extends BaseActivity {
     public void onClick(View v) {
 
     }
+
 }
 
 
@@ -95,4 +123,5 @@ class MyViewPagerAdapter extends FragmentPagerAdapter {
         //得到对应position的Fragment的title
         return mFragmentsTitles.get(position);
     }
+
 }

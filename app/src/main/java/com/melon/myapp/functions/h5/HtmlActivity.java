@@ -1,6 +1,8 @@
 package com.melon.myapp.functions.h5;
 
+import android.app.SearchManager;
 import android.os.Bundle;
+import android.renderscript.Script;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.webkit.WebViewClient;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.myapp.BaseActivity;
+import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
@@ -52,8 +55,21 @@ public class HtmlActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        //百度一下
         String url = getIntent().getStringExtra("url");
+
+        //搜索按钮
+        String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
+        if(!CommonUtil.isEmpty(searchContent)){
+            if(searchContent.startsWith("http")){
+                url = searchContent;
+            }else{
+                url = "http://" + searchContent;
+            }
+        }
+
         LogUtils.e(TAG, "URL: " + url);
+
         mWebView.loadUrl(url);
     }
 
