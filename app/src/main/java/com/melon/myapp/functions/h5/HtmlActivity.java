@@ -66,6 +66,11 @@ public class HtmlActivity extends BaseActivity {
             }else{
                 url = "http://" + searchContent;
             }
+
+            //自动加.com
+            if(!url.contains(".")){
+                url+=".com";
+            }
         }
 
         LogUtils.e(TAG, "URL: " + url);

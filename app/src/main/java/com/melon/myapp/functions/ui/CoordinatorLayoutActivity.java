@@ -2,6 +2,7 @@ package com.melon.myapp.functions.ui;
 
 import android.app.SearchManager;
 import android.app.SearchableInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import com.melon.myapp.R;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
+import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +74,10 @@ public class CoordinatorLayoutActivity extends BaseActivity {
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSubmitButtonEnabled(true);
 
-        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
+//        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
+        SearchableInfo searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
         searchView.setSearchableInfo(searchableInfo);
         return true;
     }

@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">#FF0288D1</item>
         <item name="colorAccent">#FF4081</item>-->
     </style>
-    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="NewApi">
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.NoActionBar" tools:ignore="NewApi">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">#FF03A9F4</item>
         <item name="colorPrimaryDark">#FF0288D1</item>

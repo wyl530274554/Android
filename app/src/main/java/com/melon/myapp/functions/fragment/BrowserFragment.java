@@ -1,8 +1,10 @@
 package com.melon.myapp.functions.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,11 @@ import com.melon.mylibrary.util.CommonUtil;
 public class BrowserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_browser, container, false);
+        Context context = new ContextThemeWrapper(getActivity(), R.style.AppBaseTheme);
+        // clone the inflater using the ContextThemeWrapper
+        LayoutInflater localInflater = inflater.cloneInContext(context);
+
+        View view = localInflater.inflate(R.layout.fragment_browser, container, false);
         init(view);
         return view;
     }

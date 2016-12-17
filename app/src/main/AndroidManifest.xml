@@ -69,18 +69,15 @@
         <activity android:name=".functions.ui.AdvBannerActivity" />
         <activity
             android:name=".functions.h5.HtmlActivity"
-            android:theme="@style/MyTheme.Html">
-            android:parentActivityName=".activity.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".functions.ui.CoordinatorLayoutActivity" />
-            <!-- meta tag and intent filter go into results activity -->
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            android:theme="@style/MyTheme.Html"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
         </activity>
     </application>
 
