@@ -79,7 +79,7 @@ public class WebsiteGuideFragment extends Fragment {
             final Website website = mWebsites.get(position);
 
             ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            params.height = CommonUtil.getPicHeight(context, website.getImg()) + CommonUtil.dip2px(context, new Random().nextInt(50) + 100);
+            params.height = CommonUtil.getPicHeight(context, website.getImg()) + CommonUtil.dip2px(context, new Random().nextInt(50) + 70);
             holder.itemView.setLayoutParams(params);
 //            LogUtils.e("params.height: " + params.height);
             holder.mImageView.setImageResource(website.getImg());
