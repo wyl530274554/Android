@@ -79,7 +79,7 @@ public class CoordinatorLayoutActivity extends BaseActivity {
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
                 LogUtils.e("slideOffset: "+slideOffset);
-//                silde(drawerView, slideOffset);
+                silde(drawerView, slideOffset);
             }
 
             @Override

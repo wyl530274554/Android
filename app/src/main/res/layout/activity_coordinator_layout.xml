@@ -53,7 +53,7 @@
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
