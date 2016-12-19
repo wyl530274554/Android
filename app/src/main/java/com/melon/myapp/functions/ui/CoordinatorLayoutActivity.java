@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
+import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
@@ -44,7 +45,7 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
+        MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
         viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
         viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
@@ -90,44 +91,6 @@ public class CoordinatorLayoutActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
-    }
-
-}
-
-
-class MyViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> mFragments = new ArrayList<>();//添加的Fragment的集合
-    private final List<String> mFragmentsTitles = new ArrayList<>();//每个Fragment对应的title的集合
-
-    public MyViewPagerAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
-    /**
-     * @param fragment      添加Fragment
-     * @param fragmentTitle Fragment的标题，即TabLayout中对应Tab的标题
-     */
-    public void addFragment(Fragment fragment, String fragmentTitle) {
-        mFragments.add(fragment);
-        mFragmentsTitles.add(fragmentTitle);
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        //得到对应position的Fragment
-        return mFragments.get(position);
-    }
-
-    @Override
-    public int getCount() {
-        //返回Fragment的数量
-        return mFragments.size();
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        //得到对应position的Fragment的title
-        return mFragmentsTitles.get(position);
     }
 
 }
