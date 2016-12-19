@@ -20,4 +20,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."
     </string>
     <string name="enter_url">请输入网址...</string>
+    <string name="text_open">open</string>
+    <string name="text_close">close</string>
 </resources>
