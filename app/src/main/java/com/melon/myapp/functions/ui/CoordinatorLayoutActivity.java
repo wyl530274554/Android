@@ -73,11 +73,12 @@ public class CoordinatorLayoutActivity extends BaseActivity {
     private void initDrawLayout() {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setScrimColor(Color.TRANSPARENT);
+//        mDrawerLayout.setScrimColor(Color.parseColor("#66111111"));
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
+
                 LogUtils.e("slideOffset: "+slideOffset);
                 silde(drawerView, slideOffset);
             }
