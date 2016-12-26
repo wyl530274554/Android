@@ -1,5 +1,7 @@
 package com.melon.myapp.functions.ui;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
@@ -19,6 +21,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -99,6 +102,35 @@ public class CoordinatorLayoutActivity extends BaseActivity {
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(CoordinatorLayoutActivity.this, mDrawerLayout, mToolbar, R.string.text_open, R.string.text_close);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showAboutDialog();
+                            }
+                        }, 300);
+                        break;
+                }
+
+                mDrawerLayout.closeDrawers();
+            }
+        });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CoordinatorLayoutActivity.this);
+        builder.setTitle("提示");
+        builder.setMessage("一切解释权归本人所有...\n电话: 18321152272");
+        builder.setPositiveButton("确定",null);
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     private void silde(View drawerView, float slideOffset) {
@@ -182,8 +214,6 @@ public class CoordinatorLayoutActivity extends BaseActivity {
     protected void initData() {
         List<String> myArrayList = new ArrayList<>();
         myArrayList.add("首页");
-        myArrayList.add("发现");
-        myArrayList.add("购物车");
         myArrayList.add("关于");
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArrayList);
         mDrawerList.setAdapter(myArrayAdapter);

@@ -15,6 +15,7 @@ import com.melon.myapp.functions.system.MaxMemoryActivity;
 import com.melon.myapp.functions.ui.AdvBannerActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
+import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新","微信进度","TextSwither",//8
-            "最大内存","广告轮播"
+            "最大内存","广告轮播", "CollapsingToolbarLayout"//9
     };
 
     @Override
@@ -142,7 +143,6 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
                 break;
             case 18:
                 //ViewFlipper
-                //TODO
                 CommonUtil.enterActivity(mContext, ViewFlipperActivity.class);
                 break;
             case 19:
@@ -171,6 +171,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener {
             case 25:
                 //广告Banner
                 CommonUtil.enterActivity(mContext, AdvBannerActivity.class);
+                break;
+            case 26:
+                //CollapsingToolbarLayout标题折叠
+                CommonUtil.enterActivity(mContext, CollapsingToolbarLayoutActivity.class);
                 break;
         }
     }
