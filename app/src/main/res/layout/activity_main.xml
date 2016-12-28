@@ -5,11 +5,12 @@
     android:layout_height="match_parent">
     <!-- The main content view -->
     <LinearLayout
+        android:fitsSystemWindows="true"
+        android:background="@color/color_app_primary"
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/color_app_primary"
-                android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
             <android.support.design.widget.TabLayout

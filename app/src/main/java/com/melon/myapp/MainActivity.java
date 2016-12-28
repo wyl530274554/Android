@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
 //        mToolbar.setNavigationIcon(R.drawable.ic_menu_selectall_holo_light);//设置导航栏图标
 
         //Toolbar高度+状态栏高度(不设置，图标会变形)
-        mToolbar.getLayoutParams().height = getAppBarHeight() + 50;
+//        mToolbar.getLayoutParams().height = getAppBarHeight() + 50;
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
