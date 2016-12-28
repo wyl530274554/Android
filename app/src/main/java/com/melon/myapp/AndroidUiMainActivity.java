@@ -50,7 +50,7 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_ui);
         GridView gridView = (GridView) findViewById(R.id.gv_main);
         MyAdapter mAdapter = new MyAdapter();
         gridView.setAdapter(mAdapter);
