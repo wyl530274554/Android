@@ -6,7 +6,7 @@
     android:background="#009959"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".AndroidUiMainActivity">
 
     <TextView
         android:layout_width="match_parent"

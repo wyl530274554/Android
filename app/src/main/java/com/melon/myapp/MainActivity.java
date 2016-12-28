@@ -1,213 +1,222 @@
 package com.melon.myapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
-import com.melon.myapp.functions.screen.PhoneDensityActivity;
-import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
-import com.melon.myapp.functions.system.MaxMemoryActivity;
-import com.melon.myapp.functions.ui.AdvBannerActivity;
-import com.melon.myapp.functions.ui.AppActionBarActivity;
-import com.melon.myapp.functions.ui.CardViewActivity;
-import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
-import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
-import com.melon.myapp.functions.ui.DrawerLayoutActivity;
-import com.melon.myapp.functions.ui.FlowLayoutActivity;
-import com.melon.myapp.functions.ui.LikeActivity;
-import com.melon.myapp.functions.ui.NavigationActivity;
-import com.melon.myapp.functions.ui.NavigationViewActivity;
-import com.melon.myapp.functions.ui.ProgressActivity;
-import com.melon.myapp.functions.ui.PullRefreshActivity;
-import com.melon.myapp.functions.ui.RecycleViewActivity;
-import com.melon.myapp.functions.ui.ScrollListViewActivity;
-import com.melon.myapp.functions.ui.SnackbarActivity;
-import com.melon.myapp.functions.ui.StatusBarActivity;
-import com.melon.myapp.functions.ui.TextSwitcherActivity;
-import com.melon.myapp.functions.ui.ToolbarActivity;
-import com.melon.myapp.functions.ui.ViewFlipperActivity;
-import com.melon.myapp.functions.ui.WxProgressBarActivity;
-import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
-import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.ToastUtil;
-import com.melon.mylibrary.util.ViewHolder;
+import com.melon.myapp.adapter.MainViewPagerAdapter;
+import com.melon.myapp.functions.fragment.BrowserFragment;
+import com.melon.myapp.functions.fragment.StudyFragment;
+import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
+import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.mylibrary.util.LogUtils;
+import com.nineoldandroids.view.ViewHelper;
 
-public class MainActivity extends BaseActivity implements OnItemClickListener {
-    private String[] items = new String[]{
-            "查看Wifi列表", "摇一摇", "Beacon",
-            "屏幕分辨率", "进度条", "导航",
-            "侧滑", "自动换行", "ActionBar",
-            "沉浸式状态栏", "下拉刷新","Toolbar",
-            "RecycleView","动画","NavigationView",
-            "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
-            "ViewFlipper", "Twitter登录", "Like",//7
-            "自定义下拉刷新","微信进度","TextSwither",//8
-            "最大内存","广告轮播", "CollapsingToolbarLayout"//9
-    };
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MainActivity extends BaseActivity {
+    ActionBarDrawerToggle mDrawerToggle;
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private Toolbar mToolbar;
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_main);
-        GridView gridView = (GridView) findViewById(R.id.gv_main);
-        MyAdapter mAdapter = new MyAdapter();
-        gridView.setAdapter(mAdapter);
-        gridView.setOnItemClickListener(this);
+        setContentView(R.layout.activity_coordinator_layout);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolBar);
+        mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色
+//        mToolbar.setNavigationIcon(R.drawable.ic_menu_selectall_holo_light);//设置导航栏图标
+
+        //Toolbar高度+状态栏高度(不设置，图标会变形)
+        mToolbar.getLayoutParams().height = getAppBarHeight() + 50;
+        setSupportActionBar(mToolbar);
+
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
+        viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
+        viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
+        mViewPager.setAdapter(viewPagerAdapter);//设置适配器
+
+        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
+        mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
+
+        initDrawLayout();
+    }
+
+    private void initDrawLayout() {
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerLayout.setScrimColor(Color.parseColor("#66111111"));
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
+
+                LogUtils.e("slideOffset: "+slideOffset);
+                silde(drawerView, slideOffset);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                mDrawerToggle.onDrawerOpened(drawerView);//开关状态改为opened
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                mDrawerToggle.onDrawerClosed(drawerView);//开关状态改为closed
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                mDrawerToggle.onDrawerStateChanged(newState);
+            }
+        });
+        mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, mToolbar, R.string.text_open, R.string.text_close);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showAboutDialog();
+                            }
+                        }, 300);
+                        break;
+                }
+
+                mDrawerLayout.closeDrawers();
+            }
+        });
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("提示");
+        builder.setMessage("一切解释权归本人所有...\n电话: 18321152272");
+        builder.setPositiveButton("确定",null);
+        Dialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void silde(View drawerView, float slideOffset) {
+        View mContent = mDrawerLayout.getChildAt(0);
+        View mMenu = drawerView;
+        float scale = 1 - slideOffset;
+        float rightScale = 0.8f + scale * 0.2f;
+
+        if (drawerView.getTag().equals("LEFT")) {
+            ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * (1 - scale));
+            mContent.invalidate();
+        } else {
+            ViewHelper.setTranslationX(mContent,  -mMenu.getMeasuredWidth() * slideOffset);
+            ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
+            ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
+            mContent.invalidate();
+            ViewHelper.setScaleX(mContent, rightScale);
+            ViewHelper.setScaleY(mContent, rightScale);
+        }
+
+//                if (drawerView.getTag().equals("LEFT")) {
+//                    float leftScale = 1 - 0.3f * scale;
+//                    ViewHelper.setScaleX(mMenu, leftScale);
+//                    ViewHelper.setScaleY(mMenu, leftScale);
+//                    ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
+//                    ViewHelper.setTranslationX(mContent,
+//                            mMenu.getMeasuredWidth() * (1 - scale));
+//                    ViewHelper.setPivotX(mContent, 0);
+//                    ViewHelper.setPivotY(mContent,
+//                            mContent.getMeasuredHeight() / 2);
+//                    mContent.invalidate();
+//                    ViewHelper.setScaleX(mContent, rightScale);
+//                    ViewHelper.setScaleY(mContent, rightScale);
+//                } else {
+//                    ViewHelper.setTranslationX(mContent,
+//                            -mMenu.getMeasuredWidth() * slideOffset);
+//                    ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
+//                    ViewHelper.setPivotY(mContent,
+//                            mContent.getMeasuredHeight() / 2);
+//                    mContent.invalidate();
+//                    ViewHelper.setScaleX(mContent, rightScale);
+//                    ViewHelper.setScaleY(mContent, rightScale);
+//                }
+    }
+
+    /**
+     * activity创建完成后
+     */
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();//该方法会自动和actionBar关联, 将开关的图片显示在了action上，如果不设置，也可以有抽屉的效果，不过是默认的图标
+    }
+
+    private int getAppBarHeight() {
+        int actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+
+        return actionBarHeight;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu_coordinator, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSubmitButtonEnabled(true);
+
+//        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
+        SearchableInfo searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
+        searchView.setSearchableInfo(searchableInfo);
+        return true;
     }
 
     @Override
     protected void initData() {
+        List<String> myArrayList = new ArrayList<>();
+        myArrayList.add("首页");
+        myArrayList.add("关于");
+        ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArrayList);
+        mDrawerList.setAdapter(myArrayAdapter);
     }
-
 
     @Override
     public void onClick(View v) {
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 0:
-                // wifi列表
-                CommonUtil.enterActivity(mContext, ShowWifiInfoActivity.class);
-                break;
-            case 1:
-                // 摇一摇
-                CommonUtil.enterActivity(mContext, ShakeOneShakeActivity.class);
-                break;
-            case 2:
-                //beacon
-                CommonUtil.enterActivity(mContext, ShowBeaconsActivity.class);
-                break;
-            case 3:
-                //屏幕分辨率
-                CommonUtil.enterActivity(mContext, PhoneDensityActivity.class);
-                break;
-            case 4:
-                //屏幕分辨率
-                CommonUtil.enterActivity(mContext, ProgressActivity.class);
-                break;
-            case 5:
-                //导航
-                CommonUtil.enterActivity(mContext, NavigationActivity.class);
-                break;
-            case 6:
-                //侧滑
-                CommonUtil.enterActivity(mContext, DrawerLayoutActivity.class);
-                break;
-            case 7:
-                //自动换行
-                CommonUtil.enterActivity(mContext, FlowLayoutActivity.class);
-                break;
-            case 8:
-                //ActionBar
-                CommonUtil.enterActivity(mContext, AppActionBarActivity.class);
-                break;
-            case 9:
-                //沉浸式状态栏
-                CommonUtil.enterActivity(mContext, StatusBarActivity.class);
-                break;
-            case 10:
-                //下拉刷新
-                CommonUtil.enterActivity(mContext, PullRefreshActivity.class);
-                break;
-            case 11:
-                //Toolbar
-                CommonUtil.enterActivity(mContext, ToolbarActivity.class);
-                break;
-            case 12:
-                //RecycleView
-                CommonUtil.enterActivity(mContext, RecycleViewActivity.class);
-                break;
-            case 14:
-                //NavigationView
-                CommonUtil.enterActivity(mContext, NavigationViewActivity.class);
-                break;
-            case 15:
-                //CardView
-                CommonUtil.enterActivity(mContext, CardViewActivity.class);
-                break;
-            case 16:
-                //Snackbar
-                CommonUtil.enterActivity(mContext, SnackbarActivity.class);
-                break;
-            case 17:
-                //CoordinatorLayout
-                CommonUtil.enterActivity(mContext, CoordinatorLayoutActivity.class);
-                break;
-            case 18:
-                //ViewFlipper
-                CommonUtil.enterActivity(mContext, ViewFlipperActivity.class);
-                break;
-            case 19:
-                //Twitter登录
-                break;
-            case 20:
-                //Like
-                CommonUtil.enterActivity(mContext, LikeActivity.class);
-                break;
-            case 21:
-                //自定义下拉刷新
-                CommonUtil.enterActivity(mContext, ScrollListViewActivity.class);
-                break;
-            case 22:
-                //微信进度
-                CommonUtil.enterActivity(mContext, WxProgressBarActivity.class);
-                break;
-            case 23:
-                //微信进度
-                CommonUtil.enterActivity(mContext, TextSwitcherActivity.class);
-                break;
-            case 24:
-                //最大内存
-                CommonUtil.enterActivity(mContext, MaxMemoryActivity.class);
-                break;
-            case 25:
-                //广告Banner
-                CommonUtil.enterActivity(mContext, AdvBannerActivity.class);
-                break;
-            case 26:
-                //CollapsingToolbarLayout标题折叠
-                CommonUtil.enterActivity(mContext, CollapsingToolbarLayoutActivity.class);
-                break;
-        }
-    }
-
-
-    class MyAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return items.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return position;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_main, parent, false);
-            }
-
-            TextView tvName = ViewHolder.get(convertView, R.id.tv_item_main_name);
-            tvName.setText(items[position]);
-//            if (position == 5)
-//                tvName.setTextColor(Color.RED);
-            return convertView;
-        }
-    }
 }

@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.melon.myapp.MainActivity;
+import com.melon.myapp.AndroidUiMainActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 
@@ -29,7 +28,7 @@ public class StudyFragment extends Fragment {
         btAndroid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUtil.enterActivity(getContext(), MainActivity.class);
+                CommonUtil.enterActivity(getContext(), AndroidUiMainActivity.class);
             }
         });
         return view;
