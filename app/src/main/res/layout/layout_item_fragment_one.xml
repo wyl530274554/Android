@@ -5,6 +5,7 @@
     android:layout_margin="10dp">
 
     <ImageButton
+        android:scaleType="centerInside"
         android:id="@+id/iv_item_fragment_one_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
