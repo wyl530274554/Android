@@ -30,7 +30,7 @@
                 android:background="@color/color_app_primary"
                 app:tabGravity="fill"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/color_red"
+                app:tabSelectedTextColor="@color/color_yellow"
                 app:tabTextColor="@color/color_white" />
         </android.support.design.widget.AppBarLayout>
 
