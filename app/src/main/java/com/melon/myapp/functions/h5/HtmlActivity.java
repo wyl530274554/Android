@@ -29,9 +29,6 @@ public class HtmlActivity extends BaseActivity {
         setContentView(R.layout.activity_html);
         mWebView = (ProgressWebView) findViewById(R.id.wv_html);
         setWebViewParam();
-
-        SwipeBackHelper.onCreate(this);
-        SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
     }
 
     private void setWebViewParam() {
@@ -45,12 +42,6 @@ public class HtmlActivity extends BaseActivity {
                 return true;//解决三星手机 长按弹出复制、粘贴，滑出界面时，闪退问题。
             }
         });
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        SwipeBackHelper.onPostCreate(this);
     }
 
     @Override

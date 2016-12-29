@@ -212,6 +212,8 @@ public class MainActivity extends BaseActivity {
         myArrayList.add("关于");
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArrayList);
         mDrawerList.setAdapter(myArrayAdapter);
+
+        setSlideRight(false);
     }
 
     @Override

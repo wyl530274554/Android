@@ -6,42 +6,12 @@
         <item name="colorPrimaryDark">#FF0288D1</item>
         <item name="colorAccent">#FF4081</item>-->
     </style>
-    <style name="NoActionBarTheme" parent="Theme.AppCompat.NoActionBar" tools:ignore="NewApi">
-        <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">#FF03A9F4</item>
-        <item name="colorPrimaryDark">#FF0288D1</item>
-        <item name="colorAccent">#FF4081</item>-->
-    </style>
+
     <!-- 整个应用的基本主题 -->
     <style name="MyTheme.Application" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
-    </style>
-
-    <!-- 启动页样式 -->
-    <style name="MyTheme.Splash" parent="@style/NoActionBarTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@null</item>
-    </style>
-    <style name="MyTheme.Html" parent="@style/NoActionBarTheme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
-    </style>
-
-    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-    </style>
-
-    <style name="Animation.Activity.Splash" parent="@android:style/Animation.Translucent">
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 </resources>

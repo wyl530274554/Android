@@ -10,16 +10,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- miui的扫描wifi需要 -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyTheme.Application">
-        <activity
-            android:name=".SplashActivity"
-            android:label="@string/app_name"
-            android:theme="@style/MyTheme.Splash" />
+        <activity android:name=".SplashActivity" />
         <activity android:name=".AndroidUiMainActivity" />
         <activity android:name=".functions.wifi.ShowWifiInfoActivity" />
         <activity android:name=".functions.sensor.ShakeOneShakeActivity" />
@@ -37,11 +33,9 @@
         <activity android:name=".functions.ui.TabLayoutActivity" />
         <activity android:name=".functions.ui.TabLayoutFragmentActivity" />
         <activity android:name=".functions.ui.ToolbarActivity" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="j4Gtw1WpVp80BKz74Kq0nJbkc" />
-
         <activity android:name=".functions.ui.LikeActivity" />
         <activity android:name=".functions.ui.RecycleViewActivity" />
         <activity android:name=".functions.ui.NavigationViewActivity" />
@@ -51,7 +45,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
-            android:theme="@style/NoActionBarTheme"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,20 +62,17 @@
         <activity android:name=".functions.ui.ViewFlipperActivity" />
         <activity android:name=".functions.system.MaxMemoryActivity" />
         <activity android:name=".functions.ui.AdvBannerActivity" />
-        <activity
-            android:name=".functions.h5.HtmlActivity"
-            android:theme="@style/MyTheme.Html">
+
+        <activity android:name=".functions.h5.HtmlActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".functions.ui.CollapsingToolbarLayoutActivity"
-            android:theme="@style/NoActionBarTheme"/>
+            android:name=".functions.ui.CollapsingToolbarLayoutActivity" />
     </application>
 
 </manifest>
