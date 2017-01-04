@@ -25,7 +25,7 @@ public class HtmlActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        CommonUtil.fullScreen(this);
+//        CommonUtil.fullScreen(this);
         setContentView(R.layout.activity_html);
         mWebView = (ProgressWebView) findViewById(R.id.wv_html);
         setWebViewParam();
