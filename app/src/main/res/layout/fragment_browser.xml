@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--可以单独设置此界面的Theme     android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
 
     <ImageView
         android:id="@+id/iv_browser_logo"

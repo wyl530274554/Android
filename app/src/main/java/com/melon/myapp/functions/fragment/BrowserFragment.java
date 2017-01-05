@@ -23,11 +23,10 @@ import com.melon.mylibrary.util.CommonUtil;
 public class BrowserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Context context = new ContextThemeWrapper(getActivity(), R.style.AppBaseTheme);
-        // clone the inflater using the ContextThemeWrapper
-        LayoutInflater localInflater = inflater.cloneInContext(context);
+//        Context context = new ContextThemeWrapper(getActivity(), R.style.AppBaseTheme);
+//        LayoutInflater localInflater = inflater.cloneInContext(context);
 
-        View view = localInflater.inflate(R.layout.fragment_browser, container, false);
+        View view = inflater.inflate(R.layout.fragment_browser, container, false);
         init(view);
         return view;
     }

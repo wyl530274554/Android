@@ -48,8 +48,6 @@ public class MainActivity extends BaseActivity {
         mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色
 //        mToolbar.setNavigationIcon(R.drawable.ic_menu_selectall_holo_light);//设置导航栏图标
 
-        //Toolbar高度+状态栏高度(不设置，图标会变形)
-//        mToolbar.getLayoutParams().height = getAppBarHeight() + 50;
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -145,30 +143,6 @@ public class MainActivity extends BaseActivity {
             ViewHelper.setScaleX(mContent, rightScale);
             ViewHelper.setScaleY(mContent, rightScale);
         }
-
-//                if (drawerView.getTag().equals("LEFT")) {
-//                    float leftScale = 1 - 0.3f * scale;
-//                    ViewHelper.setScaleX(mMenu, leftScale);
-//                    ViewHelper.setScaleY(mMenu, leftScale);
-//                    ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
-//                    ViewHelper.setTranslationX(mContent,
-//                            mMenu.getMeasuredWidth() * (1 - scale));
-//                    ViewHelper.setPivotX(mContent, 0);
-//                    ViewHelper.setPivotY(mContent,
-//                            mContent.getMeasuredHeight() / 2);
-//                    mContent.invalidate();
-//                    ViewHelper.setScaleX(mContent, rightScale);
-//                    ViewHelper.setScaleY(mContent, rightScale);
-//                } else {
-//                    ViewHelper.setTranslationX(mContent,
-//                            -mMenu.getMeasuredWidth() * slideOffset);
-//                    ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
-//                    ViewHelper.setPivotY(mContent,
-//                            mContent.getMeasuredHeight() / 2);
-//                    mContent.invalidate();
-//                    ViewHelper.setScaleX(mContent, rightScale);
-//                    ViewHelper.setScaleY(mContent, rightScale);
-//                }
     }
 
     /**

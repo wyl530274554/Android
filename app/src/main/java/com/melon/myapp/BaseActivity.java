@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 
