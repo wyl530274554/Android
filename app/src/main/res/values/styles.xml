@@ -1,10 +1,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="NewApi">
-        <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">#FF03A9F4</item>
-        <item name="colorPrimaryDark">#FF0288D1</item>
-        <item name="colorAccent">#FF4081</item>-->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.NoActionBar" tools:ignore="NewApi">
+        <item name="colorPrimary">@color/color_app_primary</item>
+        <item name="colorPrimaryDark">@color/color_app_primary_dark</item>
+        <item name="colorAccent">@color/color_app_primary</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <!-- 整个应用的基本主题 -->
@@ -14,4 +14,5 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
+
 </resources>

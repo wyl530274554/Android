@@ -22,11 +22,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
         initView();
         initData();
 
-        //透明状态栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //透明导航栏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
         if (isSideRight) {
             SwipeBackHelper.onCreate(this);
             SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
