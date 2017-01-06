@@ -1,5 +1,6 @@
 package com.melon.myapp;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import com.melon.myapp.functions.ui.AdvBannerActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
+import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
@@ -42,10 +44,10 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             "侧滑", "自动换行", "ActionBar",
             "沉浸式状态栏", "下拉刷新","Toolbar",
             "RecycleView","动画","NavigationView",
-            "CardView","Snackbar\nFloatingActBtn","Coordinator\nAppBar", //6
+            "CardView","Snackbar\nFloatingActBtn","广告轮播", //6
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新","微信进度","TextSwither",//8
-            "最大内存","广告轮播", "CollapsingToolbarLayout"//9
+            "最大内存","Coordinator\nAppBar", "CollapsingToolbarLayout"//9
     };
 
     @Override
@@ -134,9 +136,9 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
                 //Snackbar
                 CommonUtil.enterActivity(mContext, SnackbarActivity.class);
                 break;
-            case 17:
-                //CoordinatorLayout
-                CommonUtil.enterActivity(mContext, MainActivity.class);
+            case 25:
+                //Main
+                CommonUtil.enterActivity(mContext, CoordinatorLayoutActivity.class);
                 break;
             case 18:
                 //ViewFlipper
@@ -165,7 +167,7 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
                 //最大内存
                 CommonUtil.enterActivity(mContext, MaxMemoryActivity.class);
                 break;
-            case 25:
+            case 17:
                 //广告Banner
                 CommonUtil.enterActivity(mContext, AdvBannerActivity.class);
                 break;
