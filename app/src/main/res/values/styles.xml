@@ -5,7 +5,7 @@
         <item name="colorPrimaryDark">@color/color_app_primary_dark</item><!--状态栏颜色-->
         <item name="colorAccent">@color/color_app_primary</item><!--EditText、CheckBox颜色-->
         <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
-        <!--<item name="android:textColorPrimary">@color/color_green</item> 主文字颜色如Button -->
+        <item name="android:textColorPrimary">@color/color_blue</item> <!--主文字颜色如Button-->
     </style>
 
     <!-- 整个应用的主题 -->
