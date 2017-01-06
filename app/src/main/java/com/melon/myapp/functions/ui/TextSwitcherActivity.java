@@ -1,7 +1,5 @@
 package com.melon.myapp.functions.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,15 +8,15 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 
 import java.util.Random;
 
-public class TextSwitcherActivity extends Activity implements ViewSwitcher.ViewFactory {
+public class TextSwitcherActivity extends BaseActivity implements ViewSwitcher.ViewFactory {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_text_switcher);
 
         final TextSwitcher textSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher);
@@ -40,9 +38,19 @@ public class TextSwitcherActivity extends Activity implements ViewSwitcher.ViewF
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public View makeView() {
         TextView textView = new TextView(this);
         textView.setTextSize(36);
         return textView;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -160,7 +160,7 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
                 CommonUtil.enterActivity(mContext, WxProgressBarActivity.class);
                 break;
             case 23:
-                //微信进度
+                //TextSwitcher
                 CommonUtil.enterActivity(mContext, TextSwitcherActivity.class);
                 break;
             case 24:
