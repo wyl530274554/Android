@@ -16,7 +16,7 @@
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
 
-    <!--有ActionBar-->
+    <!--有ActionBar的主题-->
     <style name="MyTheme.HasActionBar" parent="@style/Theme.AppCompat.Light">
         <item name="colorPrimary">@color/color_app_primary</item><!--Toolbar、ActionBar颜色-->
         <item name="colorPrimaryDark">@color/color_app_primary_dark</item><!--状态栏颜色-->
