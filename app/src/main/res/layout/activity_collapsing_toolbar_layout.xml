@@ -7,6 +7,7 @@
     tools:context=".AndroidUiMainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_collapsing"
         android:background="@color/color_app_primary"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
@@ -51,4 +52,14 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
     </LinearLayout>
+
+    <!--第三部分：漂浮按钮-->
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:clickable="true"
+        android:src="@drawable/add"
+        app:layout_anchor="@id/appbar_collapsing"
+        app:layout_anchorGravity="bottom|right|end" />
 </android.support.design.widget.CoordinatorLayout>
