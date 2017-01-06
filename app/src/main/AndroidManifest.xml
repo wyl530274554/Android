@@ -38,7 +38,7 @@
         <activity android:name=".functions.ui.ProgressActivity" />
         <activity android:name=".functions.ui.FlowLayoutActivity" />
         <activity android:name=".functions.ui.DrawerLayoutActivity" />
-        <activity android:name=".functions.ui.AppActionBarActivity" />
+        <activity android:name=".functions.ui.AppActionBarActivity" android:theme="@style/MyTheme.HasActionBar"/>
         <activity android:name=".functions.ui.StatusBarActivity" />
         <activity android:name=".functions.ui.PullRefreshActivity" />
         <activity android:name=".functions.ui.NavigationActivity" />

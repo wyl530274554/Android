@@ -1,24 +1,31 @@
 package com.melon.myapp.functions.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.view.MyListView;
 
-public class ScrollListViewActivity extends Activity {
+public class ScrollListViewActivity extends BaseActivity {
+
+    private MyListView mListView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_my_list_view);
+        mListView = (MyListView) findViewById(R.id.my_list_view);
+    }
 
-        MyListView mListView= (MyListView) findViewById(R.id.my_list_view);
-        String[] names = {"1","2","3"};
-        ArrayAdapter<String> mAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,names);
+    @Override
+    protected void initData() {
+        String[] names = {"1", "2", "3"};
+        ArrayAdapter<String> mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
         mListView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -1,25 +1,28 @@
 package com.melon.myapp.functions.ui;
 
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.ToastUtil;
 
 import java.lang.reflect.Method;
 
-public class AppActionBarActivity extends AppCompatActivity {
+public class AppActionBarActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_action_bar);
 
         init();
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     private void init() {
@@ -32,8 +35,7 @@ public class AppActionBarActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_app_actionbar, menu);
         //返回true才会显示overflow按钮
@@ -42,7 +44,7 @@ public class AppActionBarActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ToastUtil.showShortToast(getApplicationContext(),item.getTitle()+"");
+        ToastUtil.showShortToast(getApplicationContext(), item.getTitle() + "");
         return super.onOptionsItemSelected(item);
     }
 
@@ -50,7 +52,7 @@ public class AppActionBarActivity extends AppCompatActivity {
     protected boolean onPrepareOptionsPanel(View view, Menu menu) {
         if (menu != null) {
             if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
-                try{
+                try {
                     Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
                     m.setAccessible(true);
                     m.invoke(menu, true);
@@ -60,5 +62,10 @@ public class AppActionBarActivity extends AppCompatActivity {
             }
         }
         return super.onPrepareOptionsPanel(view, menu);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

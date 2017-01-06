@@ -1,15 +1,24 @@
 package com.melon.myapp.functions.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.view.View;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 
-public class NavigationViewActivity extends Activity {
+public class NavigationViewActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_navigation_view);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

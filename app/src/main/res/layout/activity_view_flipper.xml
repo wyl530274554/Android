@@ -9,4 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.melon.myapp.functions.ui.ViewFlipperActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="请使用ViewPager" />
 </RelativeLayout>

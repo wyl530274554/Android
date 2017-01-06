@@ -1,18 +1,17 @@
 package com.melon.myapp.functions.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 
-public class SnackbarActivity extends Activity {
+public class SnackbarActivity extends BaseActivity {
     CoordinatorLayout container;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_snackbar);
 
         container = (CoordinatorLayout) findViewById(R.id.container);
@@ -24,12 +23,22 @@ public class SnackbarActivity extends Activity {
         });
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
     public void createSnackbar(View v) {
-        Snackbar.make(container, "SnackbarTest",Snackbar.LENGTH_SHORT).setAction("Action", new View.OnClickListener() {
+        Snackbar.make(container, "SnackbarTest", Snackbar.LENGTH_SHORT).setAction("Action", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(container,"ActionClick",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(container, "ActionClick", Snackbar.LENGTH_SHORT).show();
             }
         }).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

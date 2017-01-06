@@ -39,7 +39,6 @@ public class ShowWifiInfoActivity extends BaseActivity {
 
 	private void show() {
 		try {
-			wm.startScan();
 			List<ScanResult> scanResults = wm.getScanResults();
 
 			NetUtil.sort(scanResults);
