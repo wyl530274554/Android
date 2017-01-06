@@ -33,8 +33,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_item_fragment_one, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
+        return new MyViewHolder(view);
     }
 
     @Override
