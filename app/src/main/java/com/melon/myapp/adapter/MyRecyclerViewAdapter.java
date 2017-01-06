@@ -50,6 +50,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, HtmlActivity.class);
+                intent.putExtra("url", website.getUrl());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }
