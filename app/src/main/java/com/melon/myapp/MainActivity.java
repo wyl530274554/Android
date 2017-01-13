@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +30,7 @@ import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
 import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
@@ -35,8 +38,7 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
-    ActionBarDrawerToggle mDrawerToggle;
-    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
 
@@ -67,7 +69,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initDrawLayout() {
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        mDrawerLayout.setScrimColor(Color.parseColor("#66111111"));
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -75,7 +76,7 @@ public class MainActivity extends BaseActivity {
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
 
-                LogUtils.e("slideOffset: "+slideOffset);
+                LogUtils.e("slideOffset: " + slideOffset);
                 silde(drawerView, slideOffset);
             }
 
@@ -96,13 +97,27 @@ public class MainActivity extends BaseActivity {
         });
         mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, mToolbar, R.string.text_open, R.string.text_close);
 
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //Navigation View
+        NavigationView navigation_view_main = (NavigationView) findViewById(R.id.navigation_view_main);
+        View headerView = navigation_view_main.getHeaderView(0);
+        headerView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:
+            public void onClick(View v) {
+                ToastUtil.showShortToast(getApplicationContext(),"HeaderView");
+            }
+        });
+
+        navigation_view_main.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                //在这里处理item的点击事件
+                CharSequence title = item.getTitle();
+                ToastUtil.showShortToast(getApplicationContext(),title+"");
+
+                switch (item.getItemId()){
+                    case R.id.menu_navigation_home:
                         break;
-                    case 1:
+                    case R.id.menu_navigation_about:
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -113,15 +128,17 @@ public class MainActivity extends BaseActivity {
                 }
 
                 mDrawerLayout.closeDrawers();
+                return true;
             }
         });
+
     }
 
     private void showAboutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("提示");
         builder.setMessage("一切解释权归本人所有...\n电话: 18321152272");
-        builder.setPositiveButton("确定",null);
+        builder.setPositiveButton("确定", null);
         Dialog dialog = builder.create();
         dialog.show();
     }
@@ -136,7 +153,7 @@ public class MainActivity extends BaseActivity {
             ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * (1 - scale));
             mContent.invalidate();
         } else {
-            ViewHelper.setTranslationX(mContent,  -mMenu.getMeasuredWidth() * slideOffset);
+            ViewHelper.setTranslationX(mContent, -mMenu.getMeasuredWidth() * slideOffset);
             ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
             ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
             mContent.invalidate();
@@ -181,12 +198,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        List<String> myArrayList = new ArrayList<>();
-        myArrayList.add("首页");
-        myArrayList.add("关于");
-        ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myArrayList);
-        mDrawerList.setAdapter(myArrayAdapter);
-
         setSlideRight(false);
     }
 
