@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 //在这里处理item的点击事件
                 CharSequence title = item.getTitle();
-                ToastUtil.showShortToast(getApplicationContext(),title+"");
+//                ToastUtil.showShortToast(getApplicationContext(),title+"");
 
                 switch (item.getItemId()){
                     case R.id.menu_navigation_home:

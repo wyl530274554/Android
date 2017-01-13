@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
+import com.melon.mylibrary.util.CommonUtil;
 
 public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
     public static Handler mHandler = new Handler();
@@ -17,6 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        CommonUtil.fullScreen(this);
         mContext = getApplicationContext();
         initView();
         initData();
