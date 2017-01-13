@@ -23,6 +23,12 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
         initView();
         initData();
 
+        //加上此段，可以让状态栏无色，并且浮在主内容之上
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
+
         if (isSideRight) {
             SwipeBackHelper.onCreate(this);
             SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
