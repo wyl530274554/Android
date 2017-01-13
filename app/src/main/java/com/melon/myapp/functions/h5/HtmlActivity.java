@@ -15,6 +15,7 @@ import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.view.ProgressWebView;
 
 public class HtmlActivity extends BaseActivity {
@@ -28,7 +29,9 @@ public class HtmlActivity extends BaseActivity {
 //        CommonUtil.fullScreen(this);
         setContentView(R.layout.activity_html);
         mWebView = (ProgressWebView) findViewById(R.id.wv_html);
+
         setWebViewParam();
+
     }
 
     private void setWebViewParam() {
@@ -42,6 +45,15 @@ public class HtmlActivity extends BaseActivity {
                 return true;//解决三星手机 长按弹出复制、粘贴，滑出界面时，闪退问题。
             }
         });
+
+        //智能图片加载 只在wifi下显示
+        if(NetUtil.isWifiConnected(this)){
+            settings.setBlockNetworkImage(false);
+            LogUtils.e("wifi conn");
+        }else {
+            settings.setBlockNetworkImage(true);
+            LogUtils.e("wifi unConn");
+        }
     }
 
     @Override
