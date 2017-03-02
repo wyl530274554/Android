@@ -1,6 +1,5 @@
 package com.melon.myapp;
 
-import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +19,7 @@ import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
+import com.melon.myapp.functions.ui.ImageViewPressActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
 import com.melon.myapp.functions.ui.NavigationViewActivity;
@@ -47,7 +47,8 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             "CardView","Snackbar\nFloatingActBtn","广告轮播", //6
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新","微信进度","TextSwither",//8
-            "最大内存","Coordinator\nAppBar", "CollapsingToolbarLayout"//9
+            "最大内存","Coordinator\nAppBar", "CollapsingToolbarLayout",//9
+            "图片按下状态"
     };
 
     @Override
@@ -174,6 +175,10 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             case 26:
                 //CollapsingToolbarLayout标题折叠
                 CommonUtil.enterActivity(mContext, CollapsingToolbarLayoutActivity.class);
+                break;
+            case 27:
+                //图片按下
+                CommonUtil.enterActivity(mContext, ImageViewPressActivity.class);
                 break;
         }
     }
