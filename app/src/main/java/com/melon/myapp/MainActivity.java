@@ -25,10 +25,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
+import com.melon.myapp.functions.SettingActivity;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
@@ -76,7 +78,6 @@ public class MainActivity extends BaseActivity {
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
 
-                LogUtils.e("slideOffset: " + slideOffset);
                 silde(drawerView, slideOffset);
             }
 
@@ -116,6 +117,9 @@ public class MainActivity extends BaseActivity {
 
                 switch (item.getItemId()){
                     case R.id.menu_navigation_home:
+                        break;
+                    case R.id.menu_navigation_setting:
+                        CommonUtil.enterActivity(getApplicationContext(), SettingActivity.class);
                         break;
                     case R.id.menu_navigation_about:
                         mHandler.postDelayed(new Runnable() {

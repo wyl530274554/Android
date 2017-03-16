@@ -16,6 +16,7 @@ import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
+import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
 
 public class HtmlActivity extends BaseActivity {
@@ -46,13 +47,13 @@ public class HtmlActivity extends BaseActivity {
             }
         });
 
+
+        boolean isWebNoImgOpen = SpUtil.getBoolean(getApplicationContext(), "isSmartWebNoImgOpen");
         //智能图片加载 只在wifi下显示
-        if(NetUtil.isWifiConnected(this)){
-            settings.setBlockNetworkImage(false);
-            LogUtils.e("wifi conn");
-        }else {
+        if(isWebNoImgOpen && !NetUtil.isWifiConnected(this)){
             settings.setBlockNetworkImage(true);
-            LogUtils.e("wifi unConn");
+        }else {
+            settings.setBlockNetworkImage(false);
         }
     }
 

@@ -79,7 +79,8 @@
         <activity android:name=".functions.ui.CoordinatorLayoutActivity" />
         <activity
             android:name=".functions.ui.ImageViewPressActivity"
-            android:label="@string/title_activity_image_view_press"></activity>
+            android:label="@string/title_activity_image_view_press" />
+        <activity android:name=".functions.SettingActivity"></activity>
     </application>
 
 </manifest>
