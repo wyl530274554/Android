@@ -13,6 +13,7 @@ import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.system.MaxMemoryActivity;
 import com.melon.myapp.functions.ui.AdvBannerActivity;
+import com.melon.myapp.functions.ui.AnimationActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
@@ -124,6 +125,10 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             case 12:
                 //RecycleView
                 CommonUtil.enterActivity(mContext, RecycleViewActivity.class);
+                break;
+            case 13:
+                //动画
+                CommonUtil.enterActivity(mContext, AnimationActivity.class);
                 break;
             case 14:
                 //NavigationView
