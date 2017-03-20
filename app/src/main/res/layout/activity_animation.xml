@@ -17,6 +17,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="动画有：Drawable Animation(帧)、View Animation(补间)、Property Animation(属性)" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="帧动画：" />
 
         <LinearLayout
