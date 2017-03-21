@@ -39,6 +39,12 @@ public class CommonUtil {
         display.getMetrics(metrics);
         return metrics.heightPixels;
     }
+    public static int getScreenWidth(Context ctx) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        Display display = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        display.getMetrics(metrics);
+        return metrics.widthPixels;
+    }
 
     //全屏
     public static void fullScreen(Activity act) {
