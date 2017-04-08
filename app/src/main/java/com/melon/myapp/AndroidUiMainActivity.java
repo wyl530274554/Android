@@ -20,6 +20,7 @@ import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
+import com.melon.myapp.functions.ui.FullScreenImageActivity;
 import com.melon.myapp.functions.ui.ImageViewPressActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
@@ -49,7 +50,7 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新","微信进度","TextSwither",//8
             "最大内存","Coordinator\nAppBar", "CollapsingToolbarLayout",//9
-            "图片按下状态"
+            "图片按下状态","沉浸式图片"
     };
 
     @Override
@@ -184,6 +185,10 @@ public class AndroidUiMainActivity extends BaseActivity implements OnItemClickLi
             case 27:
                 //图片按下
                 CommonUtil.enterActivity(mContext, ImageViewPressActivity.class);
+                break;
+            case 28:
+                //沉浸式图片
+                CommonUtil.enterActivity(mContext, FullScreenImageActivity.class);
                 break;
         }
     }
