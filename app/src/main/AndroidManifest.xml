@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.melon.myapp">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -84,6 +85,11 @@
         <activity android:name=".functions.SettingActivity" />
         <activity android:name=".functions.ui.AnimationActivity" />
         <activity android:name=".functions.ui.FullScreenImageActivity"></activity>
+
+        <!--<service android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" >
+        </service>-->
     </application>
 
 </manifest>

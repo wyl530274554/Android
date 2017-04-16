@@ -13,6 +13,8 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by melon on 2017/4/8.
  */
@@ -23,6 +25,8 @@ public class MyApplication extends Application {
         super.onCreate();
 
         Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler());
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     private class MyExceptionHandler implements Thread.UncaughtExceptionHandler {
