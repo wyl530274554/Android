@@ -5,11 +5,18 @@
     tools:context=".functions.fragment.StudyFragment">
 
     <Button
-        android:layout_centerInParent="true"
         android:id="@+id/bt_study_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="News" />
+
+    <Button
+        android:id="@+id/bt_study_fragment_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bt_study_fragment"
+        android:layout_margin="20dp"
+        android:text="发通知" />
 
 </RelativeLayout>

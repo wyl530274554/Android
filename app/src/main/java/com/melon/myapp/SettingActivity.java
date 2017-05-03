@@ -1,4 +1,4 @@
-package com.melon.myapp.functions;
+package com.melon.myapp;
 
 import android.view.View;
 import android.widget.CompoundButton;

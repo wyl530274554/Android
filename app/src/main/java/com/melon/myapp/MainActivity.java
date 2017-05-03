@@ -20,23 +20,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
-import com.melon.myapp.functions.SettingActivity;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
 import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends BaseActivity {

@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.melon.myapp.AndroidUiMainActivity;
+import com.melon.myapp.NotificationActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 
 /**
  * 学习记录
  */
-public class StudyFragment extends Fragment {
+public class StudyFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study,container, false);
@@ -25,6 +26,7 @@ public class StudyFragment extends Fragment {
         Button btAndroid = (Button) view.findViewById(R.id.bt_study_fragment);
         btAndroid.setText(content);
 
+        view.findViewById(R.id.bt_study_fragment_notify).setOnClickListener(this);
         btAndroid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,5 +34,14 @@ public class StudyFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_study_fragment_notify:
+                CommonUtil.enterActivity(getContext(), NotificationActivity.class);
+                break;
+        }
     }
 }
