@@ -2,10 +2,12 @@ package com.melon.mylibrary.util;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -39,6 +41,7 @@ public class CommonUtil {
         display.getMetrics(metrics);
         return metrics.heightPixels;
     }
+
     public static int getScreenWidth(Context ctx) {
         DisplayMetrics metrics = new DisplayMetrics();
         Display display = ((WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -70,5 +73,16 @@ public class CommonUtil {
         options.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeResource(ctx.getResources(), img, options);
         return options.outHeight;
+    }
+
+    /**
+     * 复制到剪切板
+     */
+    public static void addToClipboard(Context ctx, String value) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ClipboardManager cmb2 = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+            cmb2.setText(value);
+            ToastUtil.showShortToast(ctx, "已复制");
+        }
     }
 }

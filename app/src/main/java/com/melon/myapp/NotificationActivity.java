@@ -23,6 +23,7 @@ public class NotificationActivity extends BaseActivity {
 
         et_notify_input = (EditText) findViewById(R.id.et_notify_input);
         findViewById(R.id.et_notify_send).setOnClickListener(this);
+        findViewById(R.id.et_notify_clear).setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +36,9 @@ public class NotificationActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.et_notify_send:
                 sendNotify();
+                break;
+            case R.id.et_notify_clear:
+                et_notify_input.setText("");
                 break;
         }
     }

@@ -4,24 +4,37 @@
     android:id="@+id/activity_notification"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context="com.melon.myapp.NotificationActivity">
 
     <EditText
-        android:padding="30dp"
         android:id="@+id/et_notify_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="enter content" />
+        android:hint="enter content"
+        android:padding="30dp" />
 
-    <Button
-        android:id="@+id/et_notify_send"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送"      />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/et_notify_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送" />
+
+        <Button
+            android:id="@+id/et_notify_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="清空" />
+    </LinearLayout>
 </LinearLayout>
