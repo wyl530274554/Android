@@ -81,11 +81,12 @@ public class NotificationActivity extends BaseActivity {
                     os.flush();
                     int responseCode = urlConnection.getResponseCode();
                     if (responseCode == 200) {
-                        os.close();
                         success();
                     } else {
                         failure(1 + "---responseCode: " + responseCode);
                     }
+
+                    os.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                     failure("2" + "---" + e.getMessage());
