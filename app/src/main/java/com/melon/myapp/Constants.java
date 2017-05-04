@@ -6,5 +6,8 @@ package com.melon.myapp;
  */
 
 public class Constants {
+    public static final String JPUSH_AUTH = "Basic N2NlMTNjOWFjNmRlMDc4ODQ1MWVjZTRlOjQ0YzM3MDJjZjY1YTg0NTU5NzkzYWM2OQ==";
+
     public static final String URL_BAIDU = "https://m.baidu.com/s?word=";
+    public static final String URL_JPUSH_API = "https://api.jpush.cn/v3/push";
 }

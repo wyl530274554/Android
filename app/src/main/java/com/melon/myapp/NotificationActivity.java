@@ -66,13 +66,13 @@ public class NotificationActivity extends BaseActivity {
 
                     String data = dataObj.toString();
 
-                    URL url = new URL("https://api.jpush.cn/v3/push");
+                    URL url = new URL(Constants.URL_JPUSH_API);
                     HttpsURLConnection urlConnection = (HttpsURLConnection) url
                             .openConnection();
                     urlConnection.setRequestMethod("POST");
                     // 设置请求的头
                     urlConnection.setRequestProperty("Content-Type", "application/json");
-                    urlConnection.setRequestProperty("Authorization", "Basic N2NlMTNjOWFjNmRlMDc4ODQ1MWVjZTRlOjQ0YzM3MDJjZjY1YTg0NTU5NzkzYWM2OQ==");
+                    urlConnection.setRequestProperty("Authorization", Constants.JPUSH_AUTH);
                     urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
                     urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
                     //获取输出流
