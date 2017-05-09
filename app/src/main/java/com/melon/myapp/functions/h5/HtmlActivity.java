@@ -1,12 +1,20 @@
 package com.melon.myapp.functions.h5;
 
+import android.annotation.TargetApi;
 import android.app.SearchManager;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.renderscript.Script;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
@@ -34,9 +42,42 @@ public class HtmlActivity extends BaseActivity {
         setWebViewParam();
 
     }
-
+boolean isLoading = true;
     private void setWebViewParam() {
-        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //是hittype=0，就开新窗口， 并且
+
+//                LogUtils.e("老loading: "+" url: "+url);
+                if(url.startsWith("http")){
+                    if(isLoading){
+                        view.loadUrl(url);
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
+                        intent.putExtra("url", url);
+                        startActivity(intent);
+                    }
+                    return true;
+                }
+
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                LogUtils.e("onPageStarted: "+url);
+                isLoading = true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                LogUtils.e("onPageFinished: "+url);
+                isLoading=false;
+            }
+        });
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);//解决百度新闻，第二次打不开的问题。
