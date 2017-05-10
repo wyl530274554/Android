@@ -81,7 +81,7 @@ public class NoteFragment extends BaseFragment {
                             //显示在当前列表
                             notes.add(input);
                             mAdapter.notifyDataSetChanged();
-                            //TODO 记录到数据库
+                            // 记录到数据库
                             dbHelper.getNoteDao().create(new Note(System.currentTimeMillis()+"", input));
                         }
                     }
