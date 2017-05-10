@@ -8,7 +8,6 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.melon.myapp.bean.Note;
-
 import java.sql.SQLException;
 
 /**
@@ -43,6 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    //创建相应dao
     public RuntimeExceptionDao<Note, Integer> getNoteDao() {
         if (mNoteDao == null) {
             mNoteDao = getRuntimeExceptionDao(Note.class);
@@ -54,6 +54,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         //TableUtils.dropTable(connectionSource, Note.class, true);
     }
-
-
 }
