@@ -20,6 +20,7 @@ public class Note implements Serializable {
     public String content; //内容
 
     public Note() {
+        // needed by ormlite
     }
 
     public Note(String time, String content) {
