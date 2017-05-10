@@ -1,25 +1,15 @@
 package com.melon.myapp.functions.h5;
 
-import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
-import android.os.Bundle;
-import android.renderscript.Script;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.myapp.BaseActivity;
-import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
@@ -42,18 +32,20 @@ public class HtmlActivity extends BaseActivity {
         setWebViewParam();
 
     }
-boolean isLoading = true;
+
+    boolean isLoading = true;
+
     private void setWebViewParam() {
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //是hittype=0，就开新窗口， 并且
 
 //                LogUtils.e("老loading: "+" url: "+url);
-                if(url.startsWith("http")){
-                    if(isLoading){
+                if (url.startsWith("http")) {
+                    if (isLoading) {
                         view.loadUrl(url);
-                    }else {
+                    } else {
                         Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
                         intent.putExtra("url", url);
                         startActivity(intent);
@@ -67,15 +59,15 @@ boolean isLoading = true;
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                LogUtils.e("onPageStarted: "+url);
+                LogUtils.e("onPageStarted: " + url);
                 isLoading = true;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                LogUtils.e("onPageFinished: "+url);
-                isLoading=false;
+                LogUtils.e("onPageFinished: " + url);
+                isLoading = false;
             }
         });
         WebSettings settings = mWebView.getSettings();
@@ -91,9 +83,9 @@ boolean isLoading = true;
 
         boolean isWebNoImgOpen = SpUtil.getBoolean(getApplicationContext(), "isSmartWebNoImgOpen");
         //智能图片加载 只在wifi下显示
-        if(isWebNoImgOpen && !NetUtil.isWifiConnected(this)){
+        if (isWebNoImgOpen && !NetUtil.isWifiConnected(this)) {
             settings.setBlockNetworkImage(true);
-        }else {
+        } else {
             settings.setBlockNetworkImage(false);
         }
     }
@@ -105,16 +97,16 @@ boolean isLoading = true;
 
         //搜索按钮
         String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
-        if(!CommonUtil.isEmpty(searchContent)){
-            if(searchContent.startsWith("http")){
+        if (!CommonUtil.isEmpty(searchContent)) {
+            if (searchContent.startsWith("http")) {
                 url = searchContent;
-            }else{
+            } else {
                 url = "http://" + searchContent;
             }
 
             //自动加.com
-            if(!url.contains(".")){
-                url+=".com";
+            if (!url.contains(".")) {
+                url += ".com";
             }
         }
 
