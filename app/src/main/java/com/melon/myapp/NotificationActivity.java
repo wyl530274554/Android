@@ -48,7 +48,7 @@ public class NotificationActivity extends BaseActivity {
         if (!CommonUtil.isEmpty(content)) {
             send(content);
         } else {
-            ToastUtil.showShortToast(this, "请输入内容");
+            ToastUtil.toast(this, "请输入内容");
         }
     }
 
@@ -99,7 +99,7 @@ public class NotificationActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastUtil.showShortToast(getApplicationContext(), "failure " + errorStr);
+                ToastUtil.toast(getApplicationContext(), "failure " + errorStr);
             }
         });
     }
@@ -108,7 +108,7 @@ public class NotificationActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ToastUtil.showShortToast(getApplicationContext(), "success");
+                ToastUtil.toast(getApplicationContext(), "success");
             }
         });
     }

@@ -44,7 +44,7 @@ public class AppActionBarActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ToastUtil.showShortToast(getApplicationContext(), item.getTitle() + "");
+        ToastUtil.toast(getApplicationContext(), item.getTitle() + "");
         return super.onOptionsItemSelected(item);
     }
 

@@ -24,7 +24,7 @@ public class ImageViewPressActivity extends Activity {
         iv_image_press.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShortToast(getApplicationContext(), "点击");
+                ToastUtil.toast(getApplicationContext(), "点击");
             }
         });
     }
@@ -38,7 +38,7 @@ public class ImageViewPressActivity extends Activity {
 //        iv_image_press.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                ToastUtil.showShortToast(getApplicationContext(),"点击");
+//                ToastUtil.toast(getApplicationContext(),"点击");
 //            }
 //        });
 //    }

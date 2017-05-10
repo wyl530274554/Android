@@ -23,6 +23,7 @@ import android.view.View;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.fragment.BrowserFragment;
+import com.melon.myapp.functions.fragment.NoteFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
@@ -49,12 +50,14 @@ public class MainActivity extends BaseActivity {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
+        viewPagerAdapter.addFragment(new NoteFragment(), "记事本");
         viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
         viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
@@ -96,7 +99,7 @@ public class MainActivity extends BaseActivity {
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showShortToast(getApplicationContext(),"HeaderView");
+                ToastUtil.toast(getApplicationContext(),"HeaderView");
             }
         });
 
@@ -105,7 +108,7 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 //在这里处理item的点击事件
                 CharSequence title = item.getTitle();
-//                ToastUtil.showShortToast(getApplicationContext(),title+"");
+//                ToastUtil.toast(getApplicationContext(),title+"");
 
                 switch (item.getItemId()){
                     case R.id.menu_navigation_home:

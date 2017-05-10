@@ -68,7 +68,7 @@ public class RecycleViewActivity extends BaseActivity {
 
             public ViewHolder(View view) {
                 super(view);
-                tv = (TextView) view.findViewById(R.id.id_num);
+                tv = (TextView) view.findViewById(R.id.tv_text_view_content);
             }
         }
 

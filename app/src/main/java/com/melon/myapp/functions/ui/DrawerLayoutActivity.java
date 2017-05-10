@@ -62,12 +62,12 @@ public class DrawerLayoutActivity extends BaseActivity implements AdapterView.On
 
     @Override
     public void onDrawerOpened(View drawerView) {
-        ToastUtil.showShortToast(this,"打开...");
+        ToastUtil.toast(this,"打开...");
     }
 
     @Override
     public void onDrawerClosed(View drawerView) {
-        ToastUtil.showShortToast(this,"关闭...");
+        ToastUtil.toast(this,"关闭...");
     }
 
     @Override

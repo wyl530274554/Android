@@ -1,7 +1,6 @@
 package com.melon.myapp.functions.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +27,7 @@ public class ToolbarActivity extends BaseActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                ToastUtil.showShortToast(getApplicationContext(),item.getTitle()+"");
+                ToastUtil.toast(getApplicationContext(),item.getTitle()+"");
                 return true;
             }
         });

@@ -53,9 +53,13 @@ public class MyApplication extends Application {
 
                 Field[] fields = Build.class.getDeclaredFields();
                 for (Field field : fields) {
-                    String name = field.getName();
-                    String value = field.get(null).toString();
-                    sb.append(name + ":" + value + "\n");
+                    try {
+                        String name = field.getName();
+                        String value = field.get(null).toString();
+                        sb.append(name + ":" + value + "\n");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 sb.append(str);
 

@@ -44,7 +44,7 @@ public class PullRefreshActivity extends BaseActivity implements SwipeRefreshLay
             public void run() {
                 tv_time.setText("刷新时间："+new Date().toLocaleString());
                 swipeRefreshLayout.setRefreshing(false);
-                ToastUtil.showShortToast(getApplicationContext(), "刷新完毕");
+                ToastUtil.toast(getApplicationContext(), "刷新完毕");
             }
         }, 2000);
     }

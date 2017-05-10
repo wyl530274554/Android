@@ -40,7 +40,7 @@ public class ToastUtil {
     /**
      * 短时间Toast显示
      */
-    public static void showShortToast(Context context, String msg) {
+    public static void toast(Context context, String msg) {
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         View view = LayoutInflater.from(context).inflate(R.layout.my_toast, null);
         TextView tviewInfo = (TextView) view.findViewById(R.id.TextViewInfo);

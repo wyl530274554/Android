@@ -10,7 +10,9 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by admin on 2016/5/17.
@@ -82,7 +84,29 @@ public class CommonUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             ClipboardManager cmb2 = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
             cmb2.setText(value);
-            ToastUtil.showShortToast(ctx, "已复制");
+            ToastUtil.toast(ctx, "已复制");
+        }
+    }
+
+    /**
+     * 隐藏软键盘
+     *
+     * @param activity
+     * @param flag     true    隐藏
+     */
+    public static void hideInputMode(Activity activity, boolean flag) {
+        if (flag) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            View view = activity.getCurrentFocus();
+            if (view != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        } else {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            View view = activity.getCurrentFocus();
+            if (view != null) {
+                imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+            }
         }
     }
 }

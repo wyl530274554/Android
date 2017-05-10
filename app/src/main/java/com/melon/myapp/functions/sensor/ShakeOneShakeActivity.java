@@ -55,7 +55,7 @@ public class ShakeOneShakeActivity extends BaseActivity implements SensorEventLi
 			 * 所以，经过实际测试，只需监听任一轴的加速度大于14的时候，改变你需要的设置就OK了~~~
 			 */
 			if ((Math.abs(values[0]) > 14 || Math.abs(values[1]) > 14 || Math.abs(values[2]) > 14)) {
-				ToastUtil.showShortToast(getApplicationContext(), "摇动了");
+				ToastUtil.toast(getApplicationContext(), "摇动了");
 				// 摇动手机后，再伴随震动提示
 				mVibrator.vibrate(500);
 			}
