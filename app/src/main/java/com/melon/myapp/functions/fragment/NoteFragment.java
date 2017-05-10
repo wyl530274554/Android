@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Note;
@@ -21,7 +22,7 @@ import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -31,17 +32,22 @@ public class NoteFragment extends BaseFragment {
 
     private ListView lv_note;
     private LayoutInflater mInflater;
-    private List<String> notes = new ArrayList<>();
     private MyAdapter mAdapter;
     private DatabaseHelper mDatabaseHelper;
-    private DatabaseHelper dbHelper;
+    private RuntimeExceptionDao mDao;
+    private List<Note> mNotes;
 
     @Override
     protected void initData() {
+        mDao = getDBHelper().getNoteDao();
+        try {
+            mNotes = mDao.queryBuilder().orderBy("time", false).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         mAdapter = new MyAdapter();
         lv_note.setAdapter(mAdapter);
-
-        dbHelper = getDBHelper();
     }
 
     @Override
@@ -79,10 +85,10 @@ public class NoteFragment extends BaseFragment {
                             ToastUtil.toast(getContext(), "内容不能为空");
                         } else {
                             //显示在当前列表
-                            notes.add(input);
+                            mNotes.add(0, new Note(System.currentTimeMillis()+"", input));
                             mAdapter.notifyDataSetChanged();
                             // 记录到数据库
-                            dbHelper.getNoteDao().create(new Note(System.currentTimeMillis()+"", input));
+                            mDao.create(new Note(System.currentTimeMillis()+"", input));
                         }
                     }
                 })
@@ -142,7 +148,7 @@ public class NoteFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return notes.size();
+            return mNotes.size();
         }
 
         @Override
@@ -161,7 +167,7 @@ public class NoteFragment extends BaseFragment {
                 convertView = mInflater.inflate(R.layout.my_text_view, parent, false);
             }
             TextView tv_text_view_content = ViewHolder.get(convertView, R.id.tv_text_view_content);
-            tv_text_view_content.setText(notes.get(position));
+            tv_text_view_content.setText(mNotes.get(position).content);
             return convertView;
         }
     }
