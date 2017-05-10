@@ -39,9 +39,6 @@ public class HtmlActivity extends BaseActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //是hittype=0，就开新窗口， 并且
-
-//                LogUtils.e("老loading: "+" url: "+url);
                 if (url.startsWith("http")) {
                     if (isLoading) {
                         view.loadUrl(url);
