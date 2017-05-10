@@ -5,6 +5,7 @@
     tools:context="com.melon.myapp.functions.fragment.NoteFragment">
 
     <ListView
+        android:dividerHeight="1px"
         android:id="@+id/lv_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

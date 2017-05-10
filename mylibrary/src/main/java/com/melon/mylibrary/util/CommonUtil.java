@@ -1,5 +1,6 @@
 package com.melon.mylibrary.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.ClipboardManager;
@@ -13,6 +14,10 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by admin on 2016/5/17.
@@ -108,5 +113,62 @@ public class CommonUtil {
                 imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
             }
         }
+    }
+
+    /**
+     * 时间截转日期、时间
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static String getDateTime(String time) {
+        String date = "";
+        try {
+            date = new SimpleDateFormat("MM-dd-yyyy  HH:mm:ss").format(new Date(Long.parseLong(time))); // * 1000
+        } catch (Exception e) {
+            if (!isEmpty(time)) {
+                return time;
+            }
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    /**
+     * 友好时间
+     *
+     * @param time 毫秒
+     * @return
+     */
+    public static String getMyDateFormat(String time) {
+        String result = "未知";
+        try {
+            long dataTime = Long.parseLong(time);
+
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+            String today = sdfDate.format(new Date());
+            long zeroTime = sdfDate.parse(today).getTime(); // 今天0点，毫秒
+            long dTime = zeroTime - dataTime; // 时间间隔
+            if (dTime < 0) {
+                result = "今天 " + sdfTime.format(dataTime);
+            } else if (dTime < 86400000) {
+                result = "昨天 " + sdfTime.format(dataTime);
+            } else if (dTime < 86400000 * 6) {
+                int day = (int) (dTime / 86400000);
+                result = (day + 1) + "天前";
+//            } else if (dTime < 86400000 * 13) {
+//                result = "1周前";
+//            } else if (dTime < 86400000 * 20) {
+//                result = "2周前";
+//            } else if (dTime < 86400000 * 27L) {
+//                result = "3周前";
+//            } else {
+//                result = "更早";
+            } else {
+                result = getDateTime(time);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -4,12 +4,15 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -23,7 +26,10 @@ import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 笔记主页
@@ -40,14 +46,30 @@ public class NoteFragment extends BaseFragment {
     @Override
     protected void initData() {
         mDao = getDBHelper().getNoteDao();
+        getMyNotes();
+        mAdapter = new MyAdapter();
+        lv_note.setAdapter(mAdapter);
+
+        initEmptyView();
+    }
+
+    private void initEmptyView() {
+        TextView emptyView = new TextView(getContext());
+        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        emptyView.setText("暂无内容");
+        emptyView.setGravity(Gravity.CENTER);
+        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        emptyView.setVisibility(View.GONE);
+        ((ViewGroup) lv_note.getParent()).addView(emptyView);
+        lv_note.setEmptyView(emptyView);
+    }
+
+    private void getMyNotes() {
         try {
             mNotes = mDao.queryBuilder().orderBy("time", false).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        mAdapter = new MyAdapter();
-        lv_note.setAdapter(mAdapter);
     }
 
     @Override
@@ -85,10 +107,10 @@ public class NoteFragment extends BaseFragment {
                             ToastUtil.toast(getContext(), "内容不能为空");
                         } else {
                             //显示在当前列表
-                            mNotes.add(0, new Note(System.currentTimeMillis()+"", input));
+                            mNotes.add(0, new Note(System.currentTimeMillis() + "", input));
                             mAdapter.notifyDataSetChanged();
                             // 记录到数据库
-                            mDao.create(new Note(System.currentTimeMillis()+"", input));
+                            mDao.create(new Note(System.currentTimeMillis() + "", input));
                         }
                     }
                 })
@@ -96,7 +118,13 @@ public class NoteFragment extends BaseFragment {
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        CommonUtil.hideInputMode(getActivity(), true);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommonUtil.hideInputMode(getActivity(), true);
+                            }
+                        }, 300);
+
                     }
                 })
                 .show();
@@ -148,7 +176,7 @@ public class NoteFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return mNotes.size();
+            return mNotes == null ? 0 : mNotes.size();
         }
 
         @Override
@@ -164,10 +192,13 @@ public class NoteFragment extends BaseFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.my_text_view, parent, false);
+                convertView = mInflater.inflate(R.layout.item_note, parent, false);
             }
-            TextView tv_text_view_content = ViewHolder.get(convertView, R.id.tv_text_view_content);
-            tv_text_view_content.setText(mNotes.get(position).content);
+
+            TextView tv_note_time = ViewHolder.get(convertView, R.id.tv_note_time);
+            TextView tv_note_content = ViewHolder.get(convertView, R.id.tv_note_content);
+            tv_note_content.setText(mNotes.get(position).content);
+            tv_note_time.setText(CommonUtil.getMyDateFormat(mNotes.get(position).time));
             return convertView;
         }
     }
