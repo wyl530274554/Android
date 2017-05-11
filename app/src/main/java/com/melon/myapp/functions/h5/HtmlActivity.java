@@ -41,6 +41,7 @@ public class HtmlActivity extends BaseActivity {
                         view.loadUrl(url);
                         return true;
                     } else {
+                        //开新的一页。
                         Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
                         intent.putExtra("url", url);
                         startActivity(intent);
