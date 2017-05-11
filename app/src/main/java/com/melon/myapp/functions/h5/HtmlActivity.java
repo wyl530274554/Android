@@ -16,7 +16,7 @@ import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
-
+//FIXME 网页有重定向时，返回有问题。(直接：mWebView.setWebViewClient(new WebViewClient())可解决这问题，但不能自定义形为)
 public class HtmlActivity extends BaseActivity {
 
     private static final java.lang.String TAG = "HtmlActivity";
