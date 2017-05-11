@@ -24,6 +24,7 @@ import android.view.View;
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.NoteFragment;
+import com.melon.myapp.functions.fragment.NotificationFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
@@ -53,6 +54,7 @@ public class MainActivity extends BaseActivity {
         viewPagerAdapter.addFragment(new NoteFragment(), "记事本");
         viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
         viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
+        viewPagerAdapter.addFragment(new NotificationFragment(), "通知");
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -60,6 +62,7 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("通知"));
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
 
         initDrawLayout();

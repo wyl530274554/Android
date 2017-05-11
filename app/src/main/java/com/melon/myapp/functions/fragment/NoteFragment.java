@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -26,10 +25,7 @@ import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 笔记主页
@@ -49,8 +45,6 @@ public class NoteFragment extends BaseFragment {
         getMyNotes();
         mAdapter = new MyAdapter();
         lv_note.setAdapter(mAdapter);
-
-        initEmptyView();
     }
 
     private void initEmptyView() {
@@ -77,6 +71,7 @@ public class NoteFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
         lv_note = (ListView) view.findViewById(R.id.lv_note);
         this.mInflater = inflater;
+        initEmptyView();
 
         view.findViewById(R.id.fab_note_add).setOnClickListener(this);
         return view;

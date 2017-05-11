@@ -4,10 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.melon.myapp.Constants;
+import com.melon.myapp.bean.Notify;
+import com.melon.myapp.db.DatabaseHelper;
 import com.melon.myapp.functions.h5.HtmlActivity;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 
 import org.json.JSONObject;
@@ -18,10 +25,20 @@ import cn.jpush.android.api.JPushInterface;
  * 自定义接收器 如果不定义这个 Receiver，则： 1) 默认用户会打开主界面 2) 处理不了自定义消息
  */
 public class MyJpushReceiver extends BroadcastReceiver {
+    private DatabaseHelper mDatabaseHelper;
     private static final String TAG = "JPush";
-
+    RuntimeExceptionDao<Notify, Integer> notifyDao;
+    private DatabaseHelper getDBHelper(Context ctx) {
+        if (mDatabaseHelper == null) {
+            mDatabaseHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
+        }
+        return mDatabaseHelper;
+    }
     @Override
     public void onReceive(final Context context, Intent intent) {
+        if(notifyDao==null)
+            notifyDao = getDBHelper(context).getNotifyDao();
+
         Bundle bundle = intent.getExtras();
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -33,7 +50,18 @@ public class MyJpushReceiver extends BroadcastReceiver {
             Log.d(TAG, "发了消息");
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             // 发了通知
-            Log.d(TAG, "发了通知");
+            Log.e(TAG, "发了通知");
+            String alterValue = bundle.getString(JPushInterface.EXTRA_ALERT);
+            // 存数据库
+            notifyDao.create(new Notify(System.currentTimeMillis()+"", alterValue));
+
+            // 发通知，更新界面。
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    context.sendBroadcast(new Intent(Constants.BROADCAST_NEW_NOTIFY));
+                }
+            }, 1000);
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
             try {

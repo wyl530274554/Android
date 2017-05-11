@@ -22,7 +22,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,6 @@
                 android:value=".functions.h5.HtmlActivity" />
         </activity>
         <activity android:name=".SplashActivity" />
-        <activity android:name=".AndroidUiMainActivity" />
         <activity android:name=".functions.wifi.ShowWifiInfoActivity" />
         <activity android:name=".functions.sensor.ShakeOneShakeActivity" />
         <activity android:name=".functions.beacon.ShowBeaconsActivity" />
@@ -85,8 +84,7 @@
             android:label="@string/title_activity_image_view_press" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".functions.ui.AnimationActivity" />
-        <activity android:name=".functions.ui.FullScreenImageActivity"></activity>
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".functions.ui.FullScreenImageActivity"/>
 
         <!-- jpush接收 -->
         <receiver

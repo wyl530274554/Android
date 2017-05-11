@@ -41,11 +41,11 @@ public class TabLayoutActivity extends BaseActivity {
 //            bunlde.putString("content", titles[i]);
 //            commonFragment.setArguments(bunlde);
 //            fragments[i] = commonFragment;
-            View view = getLayoutInflater().inflate(R.layout.fragment_study, null);
-            view.setBackgroundColor(Color.TRANSPARENT);
-            TextView tv_common_fragment = (TextView) view.findViewById(R.id.bt_study_fragment);
-            tv_common_fragment.setText(titles[i]);
-            mViewList.add(view);
+//            View view = getLayoutInflater().inflate(R.layout.fragment_study, null);
+//            view.setBackgroundColor(Color.TRANSPARENT);
+//            TextView tv_common_fragment = (TextView) view.findViewById(R.id.bt_study_fragment);
+//            tv_common_fragment.setText(titles[i]);
+//            mViewList.add(view);
         }
     }
 

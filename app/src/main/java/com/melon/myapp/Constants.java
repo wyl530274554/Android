@@ -10,4 +10,6 @@ public class Constants {
 
     public static final String URL_BAIDU = "https://m.baidu.com/s?word=";
     public static final String URL_JPUSH_API = "https://api.jpush.cn/v3/push";
+
+    public static final String BROADCAST_NEW_NOTIFY = "1000";
 }

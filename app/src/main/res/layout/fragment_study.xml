@@ -1,22 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".functions.fragment.StudyFragment">
+    android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/bt_study_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Android Ui" />
-
-    <Button
-        android:id="@+id/bt_study_fragment_notify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bt_study_fragment"
-        android:layout_margin="20dp"
-        android:text="发通知" />
+    <GridView
+        android:layout_margin="5dp"
+        android:id="@+id/gv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="5dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:verticalSpacing="5dp" />
 
 </RelativeLayout>

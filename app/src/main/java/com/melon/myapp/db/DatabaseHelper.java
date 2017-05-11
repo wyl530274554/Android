@@ -8,6 +8,8 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.melon.myapp.bean.Note;
+import com.melon.myapp.bean.Notify;
+
 import java.sql.SQLException;
 
 /**
@@ -20,7 +22,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "HelloOrmlite.db";
     // 数据库version
     private static final int DATABASE_VERSION = 1;
-    public RuntimeExceptionDao mNoteDao;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,19 +36,21 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
-            //建立User表
+            //建立表
             TableUtils.createTable(connectionSource, Note.class);
+            TableUtils.createTable(connectionSource, Notify.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    //创建相应dao
+    //创建笔记dao
     public RuntimeExceptionDao<Note, Integer> getNoteDao() {
-        if (mNoteDao == null) {
-            mNoteDao = getRuntimeExceptionDao(Note.class);
-        }
-        return mNoteDao;
+        return getRuntimeExceptionDao(Note.class);
+    }
+    //创建通知dao
+    public RuntimeExceptionDao<Notify, Integer> getNotifyDao() {
+        return getRuntimeExceptionDao(Notify.class);
     }
 
     @Override
