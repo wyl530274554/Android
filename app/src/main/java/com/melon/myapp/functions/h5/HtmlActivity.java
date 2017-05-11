@@ -21,7 +21,7 @@ public class HtmlActivity extends BaseActivity {
 
     private static final java.lang.String TAG = "HtmlActivity";
     private ProgressWebView mWebView;
-
+    private boolean isLoading = true;
 
     @Override
     protected void initView() {
@@ -30,10 +30,7 @@ public class HtmlActivity extends BaseActivity {
         mWebView = (ProgressWebView) findViewById(R.id.wv_html);
 
         setWebViewParam();
-
     }
-
-    boolean isLoading = true;
 
     private void setWebViewParam() {
         mWebView.setWebViewClient(new WebViewClient() {
@@ -42,14 +39,14 @@ public class HtmlActivity extends BaseActivity {
                 if (url.startsWith("http")) {
                     if (isLoading) {
                         view.loadUrl(url);
+                        return true;
                     } else {
                         Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
                         intent.putExtra("url", url);
                         startActivity(intent);
+                        return true;
                     }
-                    return true;
                 }
-
                 return super.shouldOverrideUrlLoading(view, url);
             }
 
@@ -58,13 +55,14 @@ public class HtmlActivity extends BaseActivity {
                 super.onPageStarted(view, url, favicon);
                 LogUtils.e("onPageStarted: " + url);
                 isLoading = true;
+                mHandler.removeCallbacks(stopLoadingTask);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 LogUtils.e("onPageFinished: " + url);
-                isLoading = false;
+                mHandler.postDelayed(stopLoadingTask,1000);
             }
         });
         WebSettings settings = mWebView.getSettings();
@@ -84,6 +82,14 @@ public class HtmlActivity extends BaseActivity {
             settings.setBlockNetworkImage(true);
         } else {
             settings.setBlockNetworkImage(false);
+        }
+    }
+
+    private StopLoadingTask stopLoadingTask = new StopLoadingTask();
+    class StopLoadingTask implements Runnable{
+        @Override
+        public void run() {
+            isLoading = false;
         }
     }
 
