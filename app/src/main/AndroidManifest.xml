@@ -84,13 +84,13 @@
             android:label="@string/title_activity_image_view_press" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".functions.ui.AnimationActivity" />
-        <activity android:name=".functions.ui.FullScreenImageActivity"/>
+        <activity android:name=".functions.ui.FullScreenImageActivity" />
 
         <!-- jpush接收 -->
         <receiver
             android:name=".receiver.MyJpushReceiver"
-            android:enabled="true" >
-            <intent-filter android:priority="1000" >
+            android:enabled="true">
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
@@ -101,10 +101,13 @@
             </intent-filter>
         </receiver>
 
-        <!--<service android:name="cn.jpush.android.service.PushService"
+        <!--
+        <service android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
             tools:node="replace" >
-        </service>-->
+        </service>
+        -->
+        <activity android:name=".functions.ui.AddToCartAnimActivity"></activity>
     </application>
 
 </manifest>

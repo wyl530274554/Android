@@ -16,6 +16,7 @@ import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.system.MaxMemoryActivity;
+import com.melon.myapp.functions.ui.AddToCartAnimActivity;
 import com.melon.myapp.functions.ui.AdvBannerActivity;
 import com.melon.myapp.functions.ui.AnimationActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
@@ -57,7 +58,7 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             "ViewFlipper", "Twitter登录", "Like",//7
             "自定义下拉刷新", "微信进度", "TextSwither",//8
             "最大内存", "Coordinator\nAppBar", "CollapsingToolbarLayout",//9
-            "图片按下状态", "沉浸式图片"
+            "图片按下状态", "沉浸式图片","添加购物车动画"
     };
     private Context mContext;
 
@@ -190,6 +191,10 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             case 28:
                 //沉浸式图片
                 CommonUtil.enterActivity(mContext, FullScreenImageActivity.class);
+                break;
+            case 29:
+                //添加购物车动画
+                CommonUtil.enterActivity(mContext, AddToCartAnimActivity.class);
                 break;
         }
     }
