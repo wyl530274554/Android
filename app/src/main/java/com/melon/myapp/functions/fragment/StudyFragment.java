@@ -34,6 +34,7 @@ import com.melon.myapp.functions.ui.NavigationViewActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.RecycleViewActivity;
+import com.melon.myapp.functions.ui.RecyclerViewShowWayActivity;
 import com.melon.myapp.functions.ui.ScrollListViewActivity;
 import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
@@ -61,7 +62,7 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             "自定义下拉刷新", "微信进度", "TextSwither",//8
             "最大内存", "Coordinator\nAppBar", "CollapsingToolbarLayout",//9
             "图片按下状态", "沉浸式图片","添加购物车动画", //10
-            "贝塞尔曲线添加购物车","XRecyclerView"
+            "贝塞尔曲线添加购物车","XRecyclerView","列表网络切换"
     };
     private Context mContext;
 
@@ -206,6 +207,10 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             case 31:
                 //XRecyclerView
                 CommonUtil.enterActivity(mContext, XRecyclerViewActivity.class);
+                break;
+            case 32:
+                //列表网络切换
+                CommonUtil.enterActivity(mContext, RecyclerViewShowWayActivity.class);
                 break;
         }
     }
