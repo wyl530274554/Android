@@ -1,4 +1,4 @@
-package com.melon.myapp;
+package com.melon.mylibrary;
 
 /**
  * Created by melon on 2017/8/7.

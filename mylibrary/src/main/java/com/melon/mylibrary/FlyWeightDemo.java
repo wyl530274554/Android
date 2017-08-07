@@ -1,4 +1,4 @@
-package com.melon.myapp;
+package com.melon.mylibrary;
 
 import java.util.Hashtable;
 
