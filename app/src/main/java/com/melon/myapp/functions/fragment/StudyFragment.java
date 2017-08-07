@@ -42,6 +42,7 @@ import com.melon.myapp.functions.ui.TextSwitcherActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
 import com.melon.myapp.functions.ui.ViewFlipperActivity;
 import com.melon.myapp.functions.ui.WxProgressBarActivity;
+import com.melon.myapp.functions.ui.WxWebProgressActivity;
 import com.melon.myapp.functions.ui.XRecyclerViewActivity;
 import com.melon.myapp.functions.wifi.ShowWifiInfoActivity;
 import com.melon.mylibrary.util.CommonUtil;
@@ -62,7 +63,8 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             "自定义下拉刷新", "微信进度", "TextSwither",//8
             "最大内存", "Coordinator\nAppBar", "CollapsingToolbarLayout",//9
             "图片按下状态", "沉浸式图片","添加购物车动画", //10
-            "贝塞尔曲线添加购物车","XRecyclerView","列表网络切换"
+            "贝塞尔曲线添加购物车","XRecyclerView","列表网络切换",//11
+            "微信进度2"
     };
     private Context mContext;
 
@@ -212,6 +214,9 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
                 //列表网络切换
                 CommonUtil.enterActivity(mContext, RecyclerViewShowWayActivity.class);
                 break;
+            case 33:
+                //微信进度2
+                CommonUtil.enterActivity(mContext, WxWebProgressActivity.class);
         }
     }
 
