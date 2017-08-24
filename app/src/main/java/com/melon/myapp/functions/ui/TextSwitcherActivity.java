@@ -13,6 +13,9 @@ import com.melon.myapp.R;
 
 import java.util.Random;
 
+/**
+ *
+ */
 public class TextSwitcherActivity extends BaseActivity implements ViewSwitcher.ViewFactory {
 
     @Override
@@ -27,6 +30,21 @@ public class TextSwitcherActivity extends BaseActivity implements ViewSwitcher.V
         Animation out = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
         textSwitcher.setInAnimation(in);
         textSwitcher.setOutAnimation(out);
+
+        //也可以切换不同的View
+//        textSwitcher.setFactory(new ViewFactory() {
+//
+//            @Override
+//            public View makeView() {
+//                TextView tv = new TextView(MainActivity.this);
+//                tv.setTextSize(40);
+//                // 字体颜色品红
+//                tv.setTextColor(Color.MAGENTA);
+//                return tv;
+//            }
+//        });
+//        //调用next方法显示下一个字符串
+//        next(null);
 
         Button btnChange = (Button) this.findViewById(R.id.btnChange);
         btnChange.setOnClickListener(new View.OnClickListener() {
