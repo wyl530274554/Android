@@ -25,7 +25,7 @@ public class FragmentTabHostCustomTitleActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(getTabTitleView(i)), StudyFragment.class, putContent(titles[i]));
+            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(getTabTitleView(i)), TextFragment.class, putContent(titles[i]));
             //设置Tab按钮的背景
             mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.selector_tab_item_title_bg);
         }

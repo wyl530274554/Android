@@ -60,7 +60,7 @@ public class TabLayoutFragmentActivity extends BaseFragmentActivity {
     }
 
     private Fragment createFragment(int position) {
-        StudyFragment fragment = new StudyFragment();
+        TextFragment fragment = new TextFragment();
         Bundle args = new Bundle();
         args.putString("content",titles[position]);
         fragment.setArguments(args);

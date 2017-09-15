@@ -22,7 +22,7 @@ public class FragmentTabhostActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(titles[i]), StudyFragment.class, putContent(titles[i]));
+            mTabHost.addTab(mTabHost.newTabSpec(i+"").setIndicator(titles[i]), TextFragment.class, putContent(titles[i]));
         }
     }
 

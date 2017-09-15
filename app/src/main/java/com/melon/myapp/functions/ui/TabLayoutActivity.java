@@ -1,9 +1,12 @@
 package com.melon.myapp.functions.ui;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,7 +19,6 @@ import java.util.List;
 
 public class TabLayoutActivity extends BaseActivity {
     private String[] titles = {"热门推荐", "热门收藏", "本月热榜"};
-    //    private Fragment[] fragments = new Fragment[titles.length];
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private List<View> mViewList = new ArrayList<>();//页卡视图集合
@@ -36,16 +38,13 @@ public class TabLayoutActivity extends BaseActivity {
     @Override
     protected void initData() {
         for (int i = 0; i < titles.length; i++) {
-//            StudyFragment commonFragment = new StudyFragment();
-//            Bundle bunlde = new Bundle();
-//            bunlde.putString("content", titles[i]);
-//            commonFragment.setArguments(bunlde);
-//            fragments[i] = commonFragment;
-//            View view = getLayoutInflater().inflate(R.layout.fragment_study, null);
-//            view.setBackgroundColor(Color.TRANSPARENT);
-//            TextView tv_common_fragment = (TextView) view.findViewById(R.id.bt_study_fragment);
-//            tv_common_fragment.setText(titles[i]);
-//            mViewList.add(view);
+            TextView textView = new TextView(getApplicationContext());
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            textView.setLayoutParams(params);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(Color.BLACK);
+            textView.setText(titles[i]);
+            mViewList.add(textView);
         }
     }
 
