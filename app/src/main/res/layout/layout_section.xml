@@ -16,18 +16,21 @@
             android:id="@+id/text_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:textColor="@color/color_white"
+            android:layout_weight="1000"
             android:padding="7dp"
             android:textSize="20sp" />
 
         <ToggleButton
             android:id="@+id/toggle_button_section"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:padding="7dp"
-            android:textOff="更多"
-            android:textOn="收起" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_section_toggle"
+            android:textOff=""
+            android:textOn="" />
 
     </LinearLayout>
 
