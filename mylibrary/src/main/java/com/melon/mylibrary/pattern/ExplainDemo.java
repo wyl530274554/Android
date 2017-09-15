@@ -1,4 +1,4 @@
-package com.melon.mylibrary;
+package com.melon.mylibrary.pattern;
 
 import java.util.HashMap;
 import java.util.Map;

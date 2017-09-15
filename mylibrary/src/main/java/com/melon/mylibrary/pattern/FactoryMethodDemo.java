@@ -1,4 +1,4 @@
-package com.melon.mylibrary;
+package com.melon.mylibrary.pattern;
 //
 ///**
 // * Created by melon on 2017/6/15.

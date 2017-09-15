@@ -67,7 +67,6 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
             "微信进度2"
     };
     private Context mContext;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
@@ -245,8 +244,6 @@ public class StudyFragment extends Fragment implements AdapterView.OnItemClickLi
 
             TextView tvName = ViewHolder.get(convertView, R.id.tv_item_main_name);
             tvName.setText(items[position]);
-//            if (position == 5)
-//                tvName.setTextColor(Color.RED);
             return convertView;
         }
     }
