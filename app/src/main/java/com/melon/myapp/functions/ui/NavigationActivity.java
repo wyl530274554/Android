@@ -9,6 +9,9 @@ import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 
+/**
+ * 标签导航
+ */
 public class NavigationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
