@@ -2,6 +2,7 @@ package com.melon.myapp.functions.wifi;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ public class ShowWifiInfoActivity extends BaseActivity {
 		tvBssid = (TextView) findViewById(R.id.tv_wifi_bssid);
 	}
 
+	@SuppressLint("WifiManagerLeak")
 	@Override
 	protected void initData() {
 		setTitle("Wifi列表");
