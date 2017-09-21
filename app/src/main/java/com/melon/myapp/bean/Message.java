@@ -16,7 +16,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity(indexes = {@Index(value = "text, date DESC", unique = true)})
 public class Message {
     @Id()
-    public Long id;
+    public Long id; //默认是自增长的。
     @NotNull
     public String text;
     public Date date;
