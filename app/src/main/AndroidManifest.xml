@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.melon.myapp">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -8,6 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -112,7 +114,14 @@
         <activity android:name=".functions.ui.XRecyclerViewActivity" />
         <activity android:name=".functions.ui.WxWebProgressActivity" />
         <activity android:name=".CommonFragmentActivity" />
-        <activity android:name=".functions.ui.RecyclerViewShowWayActivity" android:theme="@style/MyTheme.HasActionBar"></activity>
+        <activity
+            android:name=".functions.ui.RecyclerViewShowWayActivity"
+            android:theme="@style/MyTheme.HasActionBar" />
+        <activity android:name=".functions.camera.ZxingActivity"></activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

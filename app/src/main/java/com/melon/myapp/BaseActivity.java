@@ -11,6 +11,8 @@ import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.StatusBarCompat;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
     public static Handler mHandler = new Handler();
     Context mContext;
@@ -31,6 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
             SwipeBackHelper.onCreate(this);
             SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
         }
+
+        ButterKnife.bind(this);
     }
 
     protected abstract void initView();

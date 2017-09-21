@@ -11,6 +11,7 @@ import com.melon.myapp.BaseFragment;
 import com.melon.myapp.CommonFragmentActivity;
 import com.melon.myapp.R;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
+import com.melon.myapp.functions.camera.ZxingActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
 import com.melon.myapp.functions.system.MaxMemoryActivity;
@@ -48,7 +49,6 @@ import com.melon.myapp.third.expandablegridrecycleview.ItemClickListener;
 import com.melon.myapp.third.expandablegridrecycleview.Section;
 import com.melon.myapp.third.expandablegridrecycleview.SectionedExpandableLayoutHelper;
 import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -81,6 +81,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("Beacon", 3));
         arrayList.add(new Item("屏幕信息", 4));
         arrayList.add(new Item("最大内存", 5));
+        arrayList.add(new Item("扫一扫Zxing", 35));
         sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
@@ -271,6 +272,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 34:
                 //微信进度2
                 CommonUtil.enterActivity(mContext, WxWebProgressActivity.class);
+                break;
+            case 35:
+                //zxing
+                CommonUtil.enterActivity(mContext, ZxingActivity.class);
                 break;
         }
     }
