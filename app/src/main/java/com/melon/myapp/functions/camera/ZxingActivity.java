@@ -1,65 +1,57 @@
 package com.melon.myapp.functions.camera;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
+import com.melon.mylibrary.util.ImageUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import butterknife.OnClick;
-import me.dm7.barcodescanner.zbar.Result;
-import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 /**
- * zbar扫描速率要高于zxing
+ * Created by melon on 2017/9/21.
+ * Email 530274554@qq.com
  */
-public class ZxingActivity extends BaseActivity implements ZBarScannerView.ResultHandler {
-    private ZBarScannerView mScannerView;
+
+public class ZxingActivity extends BaseActivity {
+
     private static final int REQUEST_CODE = 100;
+    private static final int REQUEST_IMAGE = 101;
 
     @Override
     protected void initView() {
-        mScannerView = new ZBarScannerView(this);
-//        setContentView(R.layout.activity_zxing);
-        setContentView(mScannerView);
+        setContentView(R.layout.activity_zxing);
     }
 
     @Override
     protected void initData() {
-//        ZXingLibrary.initDisplayOpinion(this);
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
+    private void scan() {
+        Intent intent = new Intent(this, CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mScannerView.stopCamera();           // Stop camera on pause
-    }
-
-//    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
+    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:
-//                scan();
-//                scan2();
-                scan3();
+                scan();
                 break;
             case R.id.button1:
+                parseImage();
                 break;
             case R.id.button2:
                 break;
@@ -68,63 +60,58 @@ public class ZxingActivity extends BaseActivity implements ZBarScannerView.Resul
         }
     }
 
-    //zbar compile 'me.dm7.barcodescanner:zbar:1.9.8'
-    private void scan3() {
-
-    }
-
-    //ZXing Android Embedded
-    private void scan2() {
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setOrientationLocked(false);
-        integrator.initiateScan();
-    }
-
-    //yipianfengye/android-zxingLibrary
-    private void scan() {
-        Intent intent = new Intent(this, CaptureActivity.class);
-        startActivityForResult(intent, REQUEST_CODE);
+    private void parseImage() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_IMAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                ToastUtil.toast(getApplicationContext(), "Cancelled");
-            } else {
-                ToastUtil.toast(getApplicationContext(), "Scanned: " + result.getContents());
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    ToastUtil.toast(getApplicationContext(), "result: " + result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtil.toast(getApplicationContext(), "解析二维码失败: ");
+                }
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
 
+        if (requestCode == REQUEST_IMAGE) {
+            if (data != null) {
+                Uri uri = data.getData();
+                ContentResolver cr = getContentResolver();
+                try {
+                    Bitmap mBitmap = MediaStore.Images.Media.getBitmap(cr, uri);//显得到bitmap图片
+                    String path = uri.getPath();
+                    CodeUtils.analyzeBitmap(ImageUtil.getImageAbsolutePath(ZxingActivity.this, uri), new CodeUtils.AnalyzeCallback() {
+                        @Override
+                        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                            ToastUtil.toast(getApplicationContext(), "result: " + result);
+                        }
 
-//        if (requestCode == REQUEST_CODE) {
-//            //处理扫描结果（在界面上显示）
-//            if (null != data) {
-//                Bundle bundle = data.getExtras();
-//                if (bundle == null) {
-//                    return;
-//                }
-//                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-//                    String result = bundle.getString(CodeUtils.RESULT_STRING);
-//                    ToastUtil.toast(getApplicationContext(), "result: " + result);
-//                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-//                    ToastUtil.toast(getApplicationContext(), "解析二维码失败: ");
-//                }
-//            }
-//        }
+                        @Override
+                        public void onAnalyzeFailed() {
+                            ToastUtil.toast(getApplicationContext(), "解析二维码失败: ");
+                        }
+                    });
+
+                    if (mBitmap != null) {
+                        mBitmap.recycle();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    @Override
-    public void handleResult(Result result) {
-        // Do something with the result here
-
-        ToastUtil.toast(getApplicationContext(), result.getContents());
-        ToastUtil.toast(getApplicationContext(), result.getBarcodeFormat().getName());
-        // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
-        finish();
-    }
 }

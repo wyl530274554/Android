@@ -117,6 +117,7 @@
         <activity
             android:name=".functions.ui.RecyclerViewShowWayActivity"
             android:theme="@style/MyTheme.HasActionBar" />
+        <activity android:name=".functions.camera.ZBarActivity"></activity>
         <activity android:name=".functions.camera.ZxingActivity"></activity>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
