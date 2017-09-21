@@ -9,6 +9,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'io.fabric' //这个加上会报错
 
 repositories {
@@ -63,4 +64,5 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'org.greenrobot:greendao:3.2.2'
 }

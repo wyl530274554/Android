@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.melon.myapp.BaseFragment;
+import com.melon.myapp.CommonFragmentActivity;
 import com.melon.myapp.R;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
@@ -133,7 +134,8 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
     public void itemClicked(Item item) {
         switch (item.getId()) {
             case 0:
-                ToastUtil.toast(mContext, "GreenDao");
+                //greenDao
+                CommonUtil.enterFragment(mContext, CommonFragmentActivity.class, CommonFragmentActivity.FRAGMENT_GREEN_DAO);
                 break;
             case 1:
                 // wifi列表

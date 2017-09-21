@@ -36,6 +36,20 @@ public class CommonUtil {
         }
         ctx.startActivity(intent);
     }
+    /**
+     * 启动Fragment
+     *
+     * @param ctx   上下文
+     * @param target CommonFragmentActivity中定义的常量 目标fragment
+     */
+    public static void enterFragment(Context ctx, Class commonFragmentClazz , int target) {
+        Intent intent = new Intent(ctx, commonFragmentClazz);
+        intent.putExtra("target", target);
+        if (ctx instanceof Application) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        ctx.startActivity(intent);
+    }
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
