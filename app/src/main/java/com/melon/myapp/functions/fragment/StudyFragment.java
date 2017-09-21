@@ -81,7 +81,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("Beacon", 3));
         arrayList.add(new Item("屏幕信息", 4));
         arrayList.add(new Item("最大内存", 5));
-        sectionedExpandableLayoutHelper.addSection("硬件信息", arrayList);
+        sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
         arrayList = new ArrayList<>();
