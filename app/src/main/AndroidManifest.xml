@@ -113,6 +113,7 @@
         <activity android:name=".functions.ui.AddToCartAnim2Activity" />
         <activity android:name=".functions.ui.XRecyclerViewActivity" />
         <activity android:name=".functions.ui.WxWebProgressActivity" />
+        <activity android:name=".functions.ui.TourGuideActivity" />
         <activity android:name=".CommonFragmentActivity" />
         <activity
             android:name=".functions.ui.RecyclerViewShowWayActivity"

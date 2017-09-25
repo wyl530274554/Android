@@ -40,6 +40,7 @@ import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
 import com.melon.myapp.functions.ui.TextSwitcherActivity;
 import com.melon.myapp.functions.ui.ToolbarActivity;
+import com.melon.myapp.functions.ui.TourGuideActivity;
 import com.melon.myapp.functions.ui.ViewFlipperActivity;
 import com.melon.myapp.functions.ui.WxProgressBarActivity;
 import com.melon.myapp.functions.ui.WxWebProgressActivity;
@@ -117,6 +118,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("XRecyclerView", 32));
         arrayList.add(new Item("列表网络切换", 33));
         arrayList.add(new Item("微信进度2", 34));
+        arrayList.add(new Item("TourGuide向导", 37));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
@@ -282,6 +284,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 36:
                 //zxing
                 CommonUtil.enterActivity(mContext, ZxingActivity.class);
+                break;
+            case 37:
+                //zxing
+                CommonUtil.enterActivity(mContext, TourGuideActivity.class);
                 break;
         }
     }

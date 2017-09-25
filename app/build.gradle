@@ -14,6 +14,10 @@ apply plugin: 'org.greenrobot.greendao'
 
 repositories {
     jcenter()
+    mavenCentral()
+    maven() {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
 }
 android {
     compileSdkVersion 25
@@ -69,4 +73,7 @@ dependencies {
 
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     compile 'me.dm7.barcodescanner:zbar:1.9.8'
+    compile ('com.github.worker8:tourguide:1.0.17-SNAPSHOT@aar') {
+        transitive=true
+    }
 }

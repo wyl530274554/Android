@@ -24,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
 //        CommonUtil.fullScreen(this);
         mContext = getApplicationContext();
         initView();
+        ButterKnife.bind(this);
         initData();
 
         //加上此段，可以让状态栏无色，并且浮在主内容之上
@@ -34,7 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
             SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
         }
 
-        ButterKnife.bind(this);
     }
 
     protected abstract void initView();
