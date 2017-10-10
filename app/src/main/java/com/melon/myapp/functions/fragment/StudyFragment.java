@@ -286,7 +286,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
                 CommonUtil.enterActivity(mContext, ZxingActivity.class);
                 break;
             case 37:
-                //zxing
+                //TourGuide
                 CommonUtil.enterActivity(mContext, TourGuideActivity.class);
                 break;
         }
