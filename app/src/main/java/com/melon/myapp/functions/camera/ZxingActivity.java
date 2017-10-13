@@ -19,6 +19,7 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import butterknife.OnClick;
 
 /**
+ * 本例用的api是比较简单的。还可以使用：zxing zxing-android-embedded
  * Created by melon on 2017/9/21.
  * Email 530274554@qq.com
  */

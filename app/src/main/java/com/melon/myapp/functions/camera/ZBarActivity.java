@@ -1,25 +1,18 @@
 package com.melon.myapp.functions.camera;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.ToastUtil;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
-import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
-import butterknife.OnClick;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 /**
- * zbar扫描速率要高于zxing
+ * zbar扫描速率要高于
+ * 它有两个so文件，比较大。libiconv.so(870KB) libzbarjni.so(98KB) ，三个平台(arm/x86/arm-v7)加起来就大了。
  */
 public class ZBarActivity extends BaseActivity implements ZBarScannerView.ResultHandler {
     private ZBarScannerView mScannerView;
@@ -50,7 +43,7 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         mScannerView.stopCamera();           // Stop camera on pause
     }
 
-//    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
+    //    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -71,13 +64,6 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     //zbar compile 'me.dm7.barcodescanner:zbar:1.9.8'
     private void scan3() {
 
-    }
-
-    //ZXing Android Embedded
-    private void scan2() {
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setOrientationLocked(false);
-        integrator.initiateScan();
     }
 
     //yipianfengye/android-zxingLibrary
