@@ -17,15 +17,20 @@ import android.widget.TextView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.melon.myapp.BaseFragment;
+import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Note;
 import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * 笔记主页
@@ -106,6 +111,9 @@ public class NoteFragment extends BaseFragment {
                             mAdapter.notifyDataSetChanged();
                             // 记录到数据库
                             mDao.create(new Note(System.currentTimeMillis() + "", input));
+
+                            //上传至服务器
+                            uploadNote(input);
                         }
                     }
                 })
@@ -149,6 +157,16 @@ public class NoteFragment extends BaseFragment {
 //            }
 //        });
 //        mDialog.show();
+    }
+
+    private void uploadNote(String content) {
+        OkHttpUtils
+                .post()
+                .url(Constants.API_NOTE_ADD)
+                .addParams("content", content)
+                .addParams("user", Build.MODEL)
+                .build()
+                .execute(null);
     }
 
     @Override

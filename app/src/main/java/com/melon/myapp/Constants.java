@@ -12,4 +12,6 @@ public class Constants {
     public static final String URL_JPUSH_API = "https://api.jpush.cn/v3/push";
 
     public static final String BROADCAST_NEW_NOTIFY = "1000";
+
+    public static final String API_NOTE_ADD = "http://www.xiazhilu.top/public/index.php/index/index/addNote";
 }
