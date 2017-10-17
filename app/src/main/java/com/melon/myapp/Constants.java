@@ -13,5 +13,7 @@ public class Constants {
 
     public static final String BROADCAST_NEW_NOTIFY = "1000";
 
-    public static final String API_NOTE_ADD = "http://www.xiazhilu.top/public/index.php/index/index/addNote";
+
+    public static final String API_BASE = "http://www.xiazhilu.top/public/index.php/";
+    public static final String API_NOTE_ADD = API_BASE+"index/index/addNote";
 }
