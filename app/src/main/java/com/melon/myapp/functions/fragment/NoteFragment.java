@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import com.melon.myapp.R;
 import com.melon.myapp.bean.Note;
 import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -35,8 +37,9 @@ import okhttp3.Call;
 /**
  * 笔记主页
  */
-public class NoteFragment extends BaseFragment {
+public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener {
 
+    private static final java.lang.String TAG = "NoteFragment";
     private ListView lv_note;
     private LayoutInflater mInflater;
     private MyAdapter mAdapter;
@@ -75,6 +78,7 @@ public class NoteFragment extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
         lv_note = (ListView) view.findViewById(R.id.lv_note);
+        lv_note.setOnItemLongClickListener(this);
         this.mInflater = inflater;
         initEmptyView();
 
@@ -107,13 +111,14 @@ public class NoteFragment extends BaseFragment {
                             ToastUtil.toast(getContext(), "内容不能为空");
                         } else {
                             //显示在当前列表
-                            mNotes.add(0, new Note(System.currentTimeMillis() + "", input));
+                            Note note = new Note(System.currentTimeMillis() + "", input);
+                            mNotes.add(0, note);
                             mAdapter.notifyDataSetChanged();
                             // 记录到数据库
-                            mDao.create(new Note(System.currentTimeMillis() + "", input));
+                            mDao.create(note);
 
                             //上传至服务器
-                            uploadNote(input);
+                            uploadNote(note);
                         }
                     }
                 })
@@ -159,14 +164,27 @@ public class NoteFragment extends BaseFragment {
 //        mDialog.show();
     }
 
-    private void uploadNote(String content) {
+    private void uploadNote(final Note note) {
         OkHttpUtils
                 .post()
                 .url(Constants.API_NOTE_ADD)
-                .addParams("content", content)
+                .addParams("content", note.content)
                 .addParams("user", Build.MODEL)
                 .build()
-                .execute(null);
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.toast(getContext(), e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //TODO 更新本地note信息 sid
+                        note.sid = response;
+                        int update = mDao.update(note);
+                        ToastUtil.toast(getContext(), "sid: "+response);
+                    }
+                });
     }
 
     @Override
@@ -183,6 +201,53 @@ public class NoteFragment extends BaseFragment {
             mDatabaseHelper = OpenHelperManager.getHelper(getContext(), DatabaseHelper.class);
         }
         return mDatabaseHelper;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("要删除吗？")
+                .setCancelable(false)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //显示在当前列表
+                        Note note = mNotes.get(position);
+                        mNotes.remove(note);
+                        mAdapter.notifyDataSetChanged();
+                        // 记录到数据库
+                        mDao.delete(note);
+
+                        //上传至服务器
+                        delNote(note);
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+        return false;
+    }
+
+    private void delNote(Note note) {
+        if(CommonUtil.isEmpty(note.sid)){
+            ToastUtil.toast(getContext(), "服务器中不存在此信息");
+            return;
+        }
+
+        OkHttpUtils
+                .post()
+                .url(Constants.API_NOTE_DEL)
+                .addParams("sid", note.sid+"")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.toast(getContext(), e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ToastUtil.toast(getContext(), response);
+                    }
+                });
     }
 
     class MyAdapter extends BaseAdapter {

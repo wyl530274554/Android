@@ -5,6 +5,9 @@ import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.os.Environment;
 
+import com.melon.myapp.third.LoggerInterceptor;
+import com.zhy.http.okhttp.OkHttpUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -14,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cn.jpush.android.api.JPushInterface;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by melon on 2017/4/8.
@@ -27,6 +31,12 @@ public class MyApplication extends Application {
         Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler());
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new LoggerInterceptor("Melon",true))
+                //其他配置
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
     }
 
     private class MyExceptionHandler implements Thread.UncaughtExceptionHandler {

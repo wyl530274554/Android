@@ -18,6 +18,8 @@ public class Note implements Serializable {
     public String time;//创建时间
     @DatabaseField(canBeNull = false)
     public String content; //内容
+    @DatabaseField(canBeNull = true)
+    public String sid; //服务器id
 
     public Note() {
         // needed by ormlite

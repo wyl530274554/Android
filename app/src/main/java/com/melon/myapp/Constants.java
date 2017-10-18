@@ -16,4 +16,5 @@ public class Constants {
 
     public static final String API_BASE = "http://www.xiazhilu.top/public/index.php/";
     public static final String API_NOTE_ADD = API_BASE+"index/index/addNote";
+    public static final String API_NOTE_DEL = API_BASE+"index/index/delNote";
 }
