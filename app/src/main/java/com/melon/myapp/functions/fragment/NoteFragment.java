@@ -37,7 +37,7 @@ import okhttp3.Call;
 /**
  * 笔记主页
  */
-public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener {
+public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private static final java.lang.String TAG = "NoteFragment";
     private ListView lv_note;
@@ -79,6 +79,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         View view = inflater.inflate(R.layout.fragment_note, container, false);
         lv_note = (ListView) view.findViewById(R.id.lv_note);
         lv_note.setOnItemLongClickListener(this);
+        lv_note.setOnItemClickListener(this);
         this.mInflater = inflater;
         initEmptyView();
 
@@ -207,7 +208,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
         new AlertDialog.Builder(getActivity())
                 .setMessage("要删除吗？")
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //显示在当前列表
@@ -236,6 +237,79 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                 .post()
                 .url(Constants.API_NOTE_DEL)
                 .addParams("sid", note.sid+"")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.toast(getContext(), e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ToastUtil.toast(getContext(), response);
+                    }
+                });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        final Note note = mNotes.get(position);
+
+        final EditText et = new EditText(getContext());
+        et.setText(note.content);
+        et.setMinimumHeight(200);
+        new AlertDialog.Builder(getActivity())
+                .setView(et)
+                .setCancelable(false)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String input = et.getText().toString().trim();
+                        if (CommonUtil.isEmpty(input)) {
+                            ToastUtil.toast(getContext(), "内容不能为空");
+                        } else {
+                            //显示在当前列表
+                            note.content=input;
+                            note.time = System.currentTimeMillis() + "";
+                            mNotes.remove(note);
+                            mNotes.add(0, note);
+                            mAdapter.notifyDataSetChanged();
+                            // 记录到数据库
+                            mDao.update(note);
+
+                            //上传至服务器
+                            updateNote(note);
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommonUtil.hideInputMode(getActivity(), true);
+                            }
+                        }, 300);
+
+                    }
+                })
+                .show();
+        CommonUtil.hideInputMode(getActivity(), false);
+    }
+
+    private void updateNote(Note note) {
+        if(CommonUtil.isEmpty(note.sid)){
+            ToastUtil.toast(getContext(), "服务器中不存在此信息");
+            return;
+        }
+
+        OkHttpUtils
+                .post()
+                .url(Constants.API_NOTE_UPDATE)
+                .addParams("sid", note.sid+"")
+                .addParams("content", note.content)
                 .build()
                 .execute(new StringCallback() {
                     @Override
