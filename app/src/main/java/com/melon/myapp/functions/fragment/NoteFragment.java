@@ -37,7 +37,7 @@ import okhttp3.Call;
 /**
  * 笔记主页
  */
-public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
+public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, View.OnLongClickListener {
 
     private static final java.lang.String TAG = "NoteFragment";
     private ListView lv_note;
@@ -83,7 +83,9 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         this.mInflater = inflater;
         initEmptyView();
 
-        view.findViewById(R.id.fab_note_add).setOnClickListener(this);
+        View addBtn = view.findViewById(R.id.fab_note_add);
+        addBtn.setOnClickListener(this);
+        addBtn.setOnLongClickListener(this);
         return view;
     }
 
@@ -322,6 +324,28 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                         ToastUtil.toast(getContext(), response);
                     }
                 });
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        //长按添加按钮，查询服务器数据
+        ToastUtil.toast(getContext(), "查询服务器");
+        OkHttpUtils
+                .post()
+                .url(Constants.API_NOTE_QUERY)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.toast(getContext(), e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        ToastUtil.toast(getContext(),"查询成功");
+                    }
+                });
+        return true;
     }
 
     class MyAdapter extends BaseAdapter {
