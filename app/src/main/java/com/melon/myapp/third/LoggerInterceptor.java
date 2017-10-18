@@ -57,7 +57,7 @@ public class LoggerInterceptor implements Interceptor
 //            Log.e(tag, "========response'log=======");
             Response.Builder builder = response.newBuilder();
             Response clone = builder.build();
-            Log.e(tag, "response url : " + clone.request().url());
+//            Log.e(tag, "response url : " + clone.request().url());
 //            Log.e(tag, "code : " + clone.code());
 //            Log.e(tag, "protocol : " + clone.protocol());
             if (!TextUtils.isEmpty(clone.message()))
