@@ -4,6 +4,10 @@
         <item name="colorPrimary">@color/color_app_primary</item><!--Toolbar、ActionBar颜色-->
         <item name="colorPrimaryDark">@color/color_app_primary_dark</item><!--状态栏颜色-->
         <item name="colorAccent">@color/color_app_accent</item><!--EditText、CheckBox颜色-->
+    </style>
+
+    <!-- 整个应用的主题 -->
+    <style name="MyTheme.Application" parent="@style/AppBaseTheme">
         <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
         <!--<item name="android:textColorPrimary">@color/color_blue</item> &lt;!&ndash;主文字颜色如Button&ndash;&gt;-->
         <item name="android:windowNoTitle">true</item>
@@ -11,9 +15,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
-
-    <!-- 整个应用的主题 -->
-    <style name="MyTheme.Application" parent="@style/AppBaseTheme"></style>
 
     <!--有ActionBar的主题-->
     <style name="MyTheme.HasActionBar" parent="@style/Theme.AppCompat.Light">
