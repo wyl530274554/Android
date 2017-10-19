@@ -18,6 +18,9 @@ import java.util.List;
 import static com.melon.myapp.adapter.ItemAdapter.SPAN_COUNT_ONE;
 import static com.melon.myapp.adapter.ItemAdapter.SPAN_COUNT_THREE;
 
+/**
+ * 网格切换
+ */
 public class RecyclerViewShowWayActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
