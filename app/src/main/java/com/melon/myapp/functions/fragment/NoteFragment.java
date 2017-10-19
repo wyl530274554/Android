@@ -226,7 +226,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                 })
                 .setNegativeButton("取消", null)
                 .show();
-        return false;
+        return true;
     }
 
     private void delNote(Note note) {
