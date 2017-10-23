@@ -342,7 +342,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
 
                     @Override
                     public void onResponse(String response, int id) {
-                        ToastUtil.toast(getContext(),"查询成功");
+                        ToastUtil.toast(getContext(),"查询成功,  共："+response+"条数据");
                     }
                 });
         return true;

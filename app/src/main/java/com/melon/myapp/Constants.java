@@ -14,9 +14,9 @@ public class Constants {
     public static final String BROADCAST_NEW_NOTIFY = "1000";
 
 
-    public static final String API_BASE = "http://www.xiazhilu.top/public/index.php/";
-    public static final String API_NOTE_ADD = API_BASE+"index/index/addNote";
-    public static final String API_NOTE_DEL = API_BASE+"index/index/delNote";
-    public static final String API_NOTE_UPDATE = API_BASE+"index/index/updateNote";
-    public static final String API_NOTE_QUERY = API_BASE+"index/index/queryNote";
+    public static final String API_BASE = "http://117.68.127.109:2020/";
+    public static final String API_NOTE_ADD = API_BASE+"note/addNote";
+    public static final String API_NOTE_DEL = API_BASE+"note/delNote";
+    public static final String API_NOTE_UPDATE = API_BASE+"note/updateNote";
+    public static final String API_NOTE_QUERY = API_BASE+"note/queryNote";
 }
