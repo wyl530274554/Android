@@ -1,6 +1,7 @@
 package com.melon.myapp;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.os.Environment;
@@ -24,6 +25,7 @@ import okhttp3.OkHttpClient;
  */
 
 public class MyApplication extends Application {
+    private static MyApplication mApplication;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,6 +39,12 @@ public class MyApplication extends Application {
                 //其他配置
                 .build();
         OkHttpUtils.initClient(okHttpClient);
+
+        mApplication = this;
+    }
+
+    public static Context getInstance() {
+        return mApplication;
     }
 
     private class MyExceptionHandler implements Thread.UncaughtExceptionHandler {

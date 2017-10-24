@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.melon.myapp.functions.fragment.GreenDaoFragment;
+import com.melon.myapp.functions.fragment.HostAlterFragment;
 import com.melon.mylibrary.util.ToastUtil;
 
 /**
@@ -17,6 +18,7 @@ import com.melon.mylibrary.util.ToastUtil;
 
 public class CommonFragmentActivity extends BaseActivity {
     public static final int FRAGMENT_GREEN_DAO = 1;
+    public static final int FRAGMENT_ALTER_HOST = 2;
 
     private FragmentManager fragmentManager;
 
@@ -36,6 +38,9 @@ public class CommonFragmentActivity extends BaseActivity {
         switch (target) {
             case FRAGMENT_GREEN_DAO:
                 fragment = new GreenDaoFragment();
+                break;
+            case FRAGMENT_ALTER_HOST:
+                fragment = new HostAlterFragment();
                 break;
         }
         transaction.add(R.id.fl_common_fragment, fragment);

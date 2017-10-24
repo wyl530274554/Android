@@ -17,13 +17,13 @@ import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.melon.myapp.ApiManager;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Note;
 import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -170,7 +170,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     private void uploadNote(final Note note) {
         OkHttpUtils
                 .post()
-                .url(Constants.API_NOTE_ADD)
+                .url(ApiManager.API_NOTE_ADD)
                 .addParams("content", note.content)
                 .addParams("user", Build.MODEL)
                 .build()
@@ -185,7 +185,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                         //TODO 更新本地note信息 sid
                         note.sid = response;
                         int update = mDao.update(note);
-                        ToastUtil.toast(getContext(), "sid: "+response);
+                        ToastUtil.toast(getContext(), "sid: " + response);
                     }
                 });
     }
@@ -230,15 +230,15 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     }
 
     private void delNote(Note note) {
-        if(CommonUtil.isEmpty(note.sid)){
+        if (CommonUtil.isEmpty(note.sid)) {
             ToastUtil.toast(getContext(), "服务器中不存在此信息");
             return;
         }
 
         OkHttpUtils
                 .post()
-                .url(Constants.API_NOTE_DEL)
-                .addParams("sid", note.sid+"")
+                .url(ApiManager.API_NOTE_DEL)
+                .addParams("sid", note.sid + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -271,7 +271,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                             ToastUtil.toast(getContext(), "内容不能为空");
                         } else {
                             //显示在当前列表
-                            note.content=input;
+                            note.content = input;
                             note.time = System.currentTimeMillis() + "";
                             mNotes.remove(note);
                             mNotes.add(0, note);
@@ -302,15 +302,15 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     }
 
     private void updateNote(Note note) {
-        if(CommonUtil.isEmpty(note.sid)){
+        if (CommonUtil.isEmpty(note.sid)) {
             ToastUtil.toast(getContext(), "服务器中不存在此信息");
             return;
         }
 
         OkHttpUtils
                 .post()
-                .url(Constants.API_NOTE_UPDATE)
-                .addParams("sid", note.sid+"")
+                .url(ApiManager.API_NOTE_UPDATE)
+                .addParams("sid", note.sid + "")
                 .addParams("content", note.content)
                 .build()
                 .execute(new StringCallback() {
@@ -332,7 +332,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         ToastUtil.toast(getContext(), "查询服务器");
         OkHttpUtils
                 .post()
-                .url(Constants.API_NOTE_QUERY)
+                .url(ApiManager.API_NOTE_QUERY)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -342,7 +342,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
 
                     @Override
                     public void onResponse(String response, int id) {
-                        ToastUtil.toast(getContext(),"查询成功,  共："+response+"条数据");
+                        ToastUtil.toast(getContext(), "查询成功,  共：" + response + "条数据");
                     }
                 });
         return true;
