@@ -9,6 +9,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_splash);
+//        setContentView(R.layout.my_demo);
     }
 
     @Override

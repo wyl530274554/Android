@@ -131,12 +131,13 @@ public class CommonUtil {
 
     /**
      * 时间截转日期、时间
+     * @param time 秒
      */
     @SuppressLint("SimpleDateFormat")
     public static String getDateTime(String time) {
         String date = "";
         try {
-            date = new SimpleDateFormat("MM-dd-yyyy  HH:mm:ss").format(new Date(Long.parseLong(time))); // * 1000
+            date = new SimpleDateFormat("MM-dd-yyyy  HH:mm:ss").format(new Date(Long.parseLong(time)*1000)); // * 1000
         } catch (Exception e) {
             if (!isEmpty(time)) {
                 return time;
@@ -149,13 +150,13 @@ public class CommonUtil {
     /**
      * 友好时间
      *
-     * @param time 毫秒
+     * @param time 秒
      * @return
      */
     public static String getMyDateFormat(String time) {
         String result = "未知";
         try {
-            long dataTime = Long.parseLong(time);
+            long dataTime = Long.parseLong(time)*1000;
 
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
@@ -169,12 +170,12 @@ public class CommonUtil {
             } else if (dTime < 86400000 * 6) {
                 int day = (int) (dTime / 86400000);
                 result = (day + 1) + "天前";
-//            } else if (dTime < 86400000 * 13) {
-//                result = "1周前";
-//            } else if (dTime < 86400000 * 20) {
-//                result = "2周前";
-//            } else if (dTime < 86400000 * 27L) {
-//                result = "3周前";
+            } else if (dTime < 86400000 * 13) {
+                result = "1周前";
+            } else if (dTime < 86400000 * 20) {
+                result = "2周前";
+            } else if (dTime < 86400000 * 27L) {
+                result = "3周前";
 //            } else {
 //                result = "更早";
             } else {

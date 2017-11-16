@@ -24,17 +24,23 @@
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|stateHidden">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".functions.h5.HtmlActivity" />
         </activity>
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".functions.wifi.ShowWifiInfoActivity" />
         <activity android:name=".functions.sensor.ShakeOneShakeActivity" />
         <activity android:name=".functions.beacon.ShowBeaconsActivity" />

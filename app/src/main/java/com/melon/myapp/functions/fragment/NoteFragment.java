@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.melon.myapp.ApiManager;
@@ -53,6 +55,36 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         getMyNotes();
         mAdapter = new MyAdapter();
         lv_note.setAdapter(mAdapter);
+
+        if(mNotes==null || mNotes.size()==0){
+            //TODO 从服务器中获取最新的50条数据
+            getMyServerNotes();
+        }
+    }
+
+    private void getMyServerNotes() {
+        OkHttpUtils
+                .post()
+                .url(ApiManager.API_NOTE_ALL)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.toast(getContext(), e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try{
+                            //TODO 存储在本地db      获取本地并显示
+                            List<Note> serverNotes = new Gson().fromJson(response, new TypeToken<List<Note>>(){}.getType());
+                            if(serverNotes!=null && serverNotes.size()!=0){
+                                mNotes.addAll(serverNotes);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        }catch (Exception e){e.printStackTrace();}
+                    }
+                });
     }
 
     private void initEmptyView() {
@@ -114,7 +146,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                             ToastUtil.toast(getContext(), "内容不能为空");
                         } else {
                             //显示在当前列表
-                            Note note = new Note(System.currentTimeMillis() + "", input);
+                            Note note = new Note(System.currentTimeMillis()/1000 + "", input);
                             mNotes.add(0, note);
                             mAdapter.notifyDataSetChanged();
                             // 记录到数据库
@@ -185,7 +217,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                         //TODO 更新本地note信息 sid
                         note.sid = response;
                         int update = mDao.update(note);
-                        ToastUtil.toast(getContext(), "sid: " + response);
+                        ToastUtil.toast(getContext(), "上传成功: " + response);
                     }
                 });
     }
@@ -272,7 +304,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                         } else {
                             //显示在当前列表
                             note.content = input;
-                            note.time = System.currentTimeMillis() + "";
+                            note.time = System.currentTimeMillis()/1000 + "";
                             mNotes.remove(note);
                             mNotes.add(0, note);
                             mAdapter.notifyDataSetChanged();
