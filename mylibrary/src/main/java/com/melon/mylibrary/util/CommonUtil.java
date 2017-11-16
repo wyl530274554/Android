@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -185,5 +186,15 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void setTransparentStateBar(Activity act){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            View decorView = act.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            act.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 }

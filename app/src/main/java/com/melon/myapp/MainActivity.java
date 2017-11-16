@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
+        CommonUtil.setTransparentStateBar(this);
 
         mToolbar = (Toolbar) findViewById(R.id.toolBar);
         mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色

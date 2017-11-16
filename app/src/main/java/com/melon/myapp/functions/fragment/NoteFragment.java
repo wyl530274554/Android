@@ -21,7 +21,6 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.melon.myapp.ApiManager;
 import com.melon.myapp.BaseFragment;
-import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Note;
 import com.melon.myapp.db.DatabaseHelper;
@@ -52,7 +51,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     @Override
     protected void initData() {
         mDao = getDBHelper().getNoteDao();
-        getMyNotes();
+        getMyPhoneNotes();
         mAdapter = new MyAdapter();
         lv_note.setAdapter(mAdapter);
 
@@ -62,6 +61,12 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         }
     }
 
+
+    /**
+     * 可改进设计 带上上次请求时间（服务器给）：
+     * 如果有时间：在服务器上取这时间之后的最多50条数据并且时间倒序（或全取）
+     * 如果无时间：取最近50条数据。
+     */
     private void getMyServerNotes() {
         OkHttpUtils
                 .post()
@@ -76,11 +81,14 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
                     @Override
                     public void onResponse(String response, int id) {
                         try{
-                            //TODO 存储在本地db      获取本地并显示
                             List<Note> serverNotes = new Gson().fromJson(response, new TypeToken<List<Note>>(){}.getType());
                             if(serverNotes!=null && serverNotes.size()!=0){
+                                //TODO 获取本地并显示
                                 mNotes.addAll(serverNotes);
                                 mAdapter.notifyDataSetChanged();
+
+                                //TODO 存储在本地db
+                                mDao.create(serverNotes);
                             }
                         }catch (Exception e){e.printStackTrace();}
                     }
@@ -98,7 +106,8 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         lv_note.setEmptyView(emptyView);
     }
 
-    private void getMyNotes() {
+    //本地db记录
+    private void getMyPhoneNotes() {
         try {
             mNotes = mDao.queryBuilder().orderBy("time", false).query();
         } catch (SQLException e) {

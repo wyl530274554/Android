@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
     <!-- The main content view -->
     <LinearLayout
         android:id="@+id/coordinator_layout"
@@ -16,23 +15,23 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                android:fitsSystemWindows="true"
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
                 android:theme="@style/Theme.AppCompat.NoActionBar"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
-
+            <!--android:layout_height="?attr/actionBarSize"-->
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-15dp"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/color_yellow"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/color_yellow"
                 app:tabTextColor="@color/color_white" />
+            <!--android:layout_marginTop="-15dp"-->
         </android.support.design.widget.AppBarLayout>
 
         <LinearLayout
@@ -58,9 +57,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:tag="LEFT"
-        app:itemIconTint="@color/color_orange"
         app:headerLayout="@layout/layout_main_navigation_header"
-        app:menu="@menu/menu_main_navigation_item"/>
+        app:itemIconTint="@color/color_orange"
+        app:menu="@menu/menu_main_navigation_item" />
 </android.support.v4.widget.DrawerLayout>
 
 
