@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity {
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
 
-                silde(drawerView, slideOffset);
+                slide(drawerView, slideOffset);
             }
 
             @Override
@@ -146,7 +146,7 @@ public class MainActivity extends BaseActivity {
         dialog.show();
     }
 
-    private void silde(View drawerView, float slideOffset) {
+    private void slide(View drawerView, float slideOffset) {
         View mContent = mDrawerLayout.getChildAt(0);
         View mMenu = drawerView;
         float scale = 1 - slideOffset;
