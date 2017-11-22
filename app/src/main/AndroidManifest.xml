@@ -42,6 +42,7 @@
         <activity android:name=".functions.ui.ProgressActivity" />
         <activity android:name=".functions.ui.FlowLayoutActivity" />
         <activity android:name=".functions.ui.DrawerLayoutActivity" />
+        <activity android:name=".functions.ui.CustomerViewActivity" />
         <activity
             android:name=".functions.ui.AppActionBarActivity"
             android:theme="@style/MyTheme.HasActionBar" />

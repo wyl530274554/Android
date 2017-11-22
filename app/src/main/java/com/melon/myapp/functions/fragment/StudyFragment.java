@@ -24,6 +24,7 @@ import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
+import com.melon.myapp.functions.ui.CustomerViewActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
 import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.FullScreenImageActivity;
@@ -119,6 +120,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("列表网络切换", 33));
         arrayList.add(new Item("微信进度2", 34));
         arrayList.add(new Item("TourGuide向导", 37));
+        arrayList.add(new Item("自定义View", 38));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
@@ -288,6 +290,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 37:
                 //TourGuide
                 CommonUtil.enterActivity(mContext, TourGuideActivity.class);
+                break;
+            case 38:
+                //自定义View
+                CommonUtil.enterActivity(mContext, CustomerViewActivity.class);
                 break;
         }
     }
