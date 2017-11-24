@@ -15,6 +15,7 @@ public class ApiManager {
     public static final String API_PORT = "2020";
     public static String API_BASE = getApiBase()+"/";
 
+
     public static final String API_NOTE_ADD = API_BASE + "note/addNote";
     public static final String API_NOTE_DEL = API_BASE + "note/delNote";
     public static final String API_NOTE_UPDATE = API_BASE + "note/updateNote";
