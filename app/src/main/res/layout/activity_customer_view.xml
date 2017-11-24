@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <TextView
+        android:text="可以在下面画矩形"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <com.melon.mylibrary.view.MyBoxView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
