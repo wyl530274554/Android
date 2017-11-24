@@ -21,7 +21,7 @@ repositories {
 }
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.melon.myapp"
@@ -77,4 +77,5 @@ dependencies {
         transitive=true
     }
     compile 'com.zhy:okhttputils:2.6.2'
+    implementation 'com.google.code.gson:gson:2.6.2'
 }
