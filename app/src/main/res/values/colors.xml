@@ -16,4 +16,9 @@
     <color name="color_green">#0F711F</color>
     <color name="color_blue">#3633E6</color>
     <color name="color_orange">#f87622</color>
+    <color name="sky_blue">#1e7ac7</color>
+    <color name="sky_sea">#224869</color>
+    <color name="sky_sun_bright">#fcfcb7</color>
+    <color name="sky_sunset">#ec8100</color>
+    <color name="sky_night">#05192e</color>
 </resources>

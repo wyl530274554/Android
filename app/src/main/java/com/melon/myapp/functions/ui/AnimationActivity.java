@@ -1,17 +1,23 @@
 package com.melon.myapp.functions.ui;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
@@ -19,8 +25,10 @@ import com.melon.mylibrary.util.CommonUtil;
 
 public class AnimationActivity extends BaseActivity {
 
-    private ImageView iv_anim_frame, iv_anim_frame_2, iv_anim_tween_rotate, iv_anim_tween_scale,iv_anim_tween_trans, iv_anim_tween_alpha, iv_anim_tween_set, iv_anim_property_object, iv_anim_property_value, iv_anim_property_value_ball;
+    private ImageView iv_anim_frame, iv_anim_frame_2, iv_anim_tween_rotate, iv_anim_tween_scale, iv_anim_tween_trans, iv_anim_tween_alpha, iv_anim_tween_set, iv_anim_property_object, iv_anim_property_value, iv_anim_property_value_ball, iv_anim_sun;
     private AnimationDrawable frameAnim;
+    private View view_anim_sea;
+    private RelativeLayout rl_anim_sky;
 
     @Override
     protected void initView() {
@@ -34,12 +42,16 @@ public class AnimationActivity extends BaseActivity {
         iv_anim_tween_set = (ImageView) findViewById(R.id.iv_anim_tween_set);
         iv_anim_property_object = (ImageView) findViewById(R.id.iv_anim_property_object);
         iv_anim_property_value = (ImageView) findViewById(R.id.iv_anim_property_value);
+        iv_anim_sun = (ImageView) findViewById(R.id.iv_anim_sun);
         iv_anim_property_value_ball = (ImageView) findViewById(R.id.iv_anim_property_value_ball);
+        view_anim_sea = findViewById(R.id.view_anim_sea);
+        rl_anim_sky = (RelativeLayout) findViewById(R.id.rl_anim_sky);
 
         AnimationDrawable a = (AnimationDrawable) iv_anim_frame_2.getDrawable();
         a.setOneShot(false);
         a.start();
         iv_anim_frame.setOnClickListener(this);
+        view_anim_sea.setOnClickListener(this);
 
         findViewById(R.id.bt_anim_tween_rotate).setOnClickListener(this);
         findViewById(R.id.bt_anim_tween_scale).setOnClickListener(this);
@@ -89,7 +101,7 @@ public class AnimationActivity extends BaseActivity {
                 break;
             case R.id.bt_anim_property_object:
                 //属性
-                ObjectAnimator.ofFloat(iv_anim_property_object,"rotationX",0,360).setDuration(1000).start();
+                ObjectAnimator.ofFloat(iv_anim_property_object, "rotationX", 0, 360).setDuration(1000).start();
                 break;
             case R.id.bt_anim_property_value:
                 //属性
@@ -97,11 +109,9 @@ public class AnimationActivity extends BaseActivity {
                 valueAnimator.setTarget(iv_anim_property_value);
                 valueAnimator.setDuration(1000).start();
                 //上面，不刷新就调用它
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-                {
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
-                    public void onAnimationUpdate(ValueAnimator animation)
-                    {
+                    public void onAnimationUpdate(ValueAnimator animation) {
                         iv_anim_property_value.setTranslationX((Float) animation.getAnimatedValue());
                     }
                 });
@@ -121,17 +131,61 @@ public class AnimationActivity extends BaseActivity {
                     }
                 });
                 valueAnimator2.start();
-                valueAnimator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-                {
+                valueAnimator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
-                    public void onAnimationUpdate(ValueAnimator animation)
-                    {
+                    public void onAnimationUpdate(ValueAnimator animation) {
                         PointF point = (PointF) animation.getAnimatedValue();
                         iv_anim_property_value_ball.setX(point.x);
                         iv_anim_property_value_ball.setY(point.y);
                     }
                 });
                 break;
+            case R.id.view_anim_sea:
+                sunAnim();
+                break;
         }
+    }
+
+    private void sunAnim() {
+        float startY = iv_anim_sun.getTop();
+        float endY = view_anim_sea.getTop() - 100;
+
+        //太阳移动
+        TimeInterpolator interpolator = new AccelerateInterpolator();
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv_anim_sun, "y", startY, endY).setDuration(3000);
+        animator.setInterpolator(interpolator);
+
+        //天空颜色
+        int skyColorStart = getResources().getColor(R.color.sky_blue);
+        int skySunset = getResources().getColor(R.color.sky_sunset); //晚霞
+        int skyNight = getResources().getColor(R.color.sky_night); //晚霞
+        ObjectAnimator skyAnim = ObjectAnimator.ofInt(rl_anim_sky, "backgroundColor", skyColorStart, skySunset).setDuration(3000);
+        skyAnim.setEvaluator(new ArgbEvaluator());
+
+        //夜空颜色
+        ObjectAnimator nightSkyAnim = ObjectAnimator.ofInt(rl_anim_sky, "backgroundColor", skySunset, skyNight).setDuration(1500);
+        nightSkyAnim.setEvaluator(new ArgbEvaluator());
+
+        AnimatorSet set = new AnimatorSet();
+        set.play(animator).with(skyAnim).before(nightSkyAnim);
+        set.start();
+        //可以多次调用play
+    }
+
+    private void sunAnim2() {
+        float startY = iv_anim_sun.getTop();
+        float endY = view_anim_sea.getTop() - 100;
+        TimeInterpolator interpolator = new AccelerateInterpolator();
+//        TimeInterpolator interpolator = new AccelerateDecelerateInterpolator();
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv_anim_sun, "y", startY, endY).setDuration(3000);
+        animator.setInterpolator(interpolator);
+        animator.start();
+
+        //天空颜色
+        int skyColorStart = getResources().getColor(R.color.sky_blue);
+        int skyColorEnd = getResources().getColor(R.color.sky_sunset);
+        ObjectAnimator skyAnim = ObjectAnimator.ofInt(rl_anim_sky, "backgroundColor", skyColorStart, skyColorEnd).setDuration(3000);
+        skyAnim.setEvaluator(new ArgbEvaluator());
+        skyAnim.start();
     }
 }
