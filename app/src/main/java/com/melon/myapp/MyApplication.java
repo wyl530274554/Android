@@ -65,7 +65,7 @@ public class MyApplication extends Application {
             try {
                 StringBuffer sb = new StringBuffer();
 
-                String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                String dirPath = getExternalFilesDir("")+"";
                 File file = new File(dirPath, "error.txt");
                 FileOutputStream fos = new FileOutputStream(file, false);
 

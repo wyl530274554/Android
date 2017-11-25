@@ -30,6 +30,7 @@ import com.melon.myapp.functions.ui.FlowLayoutActivity;
 import com.melon.myapp.functions.ui.FullScreenImageActivity;
 import com.melon.myapp.functions.ui.ImageViewPressActivity;
 import com.melon.myapp.functions.ui.LikeActivity;
+import com.melon.myapp.functions.ui.MaterialDesignActivity;
 import com.melon.myapp.functions.ui.NavigationActivity;
 import com.melon.myapp.functions.ui.NavigationViewActivity;
 import com.melon.myapp.functions.ui.ProgressActivity;
@@ -121,6 +122,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("微信进度2", 34));
         arrayList.add(new Item("TourGuide向导", 37));
         arrayList.add(new Item("自定义View", 38));
+        arrayList.add(new Item("Material Design", 39));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
@@ -294,6 +296,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 38:
                 //自定义View
                 CommonUtil.enterActivity(mContext, CustomerViewActivity.class);
+                break;
+            case 39:
+                //Material Design
+                CommonUtil.enterActivity(mContext, MaterialDesignActivity.class);
                 break;
         }
     }
