@@ -25,6 +25,7 @@ import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.NoteFragment;
 import com.melon.myapp.functions.fragment.NotificationFragment;
+import com.melon.myapp.functions.fragment.PasswordFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.HtmlActivity;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
+        viewPagerAdapter.addFragment(new PasswordFragment(), "密码本");
         viewPagerAdapter.addFragment(new NoteFragment(), "记事本");
         viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
         viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
@@ -60,6 +62,7 @@ public class MainActivity extends BaseActivity {
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("密码本"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));

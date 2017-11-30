@@ -11,7 +11,8 @@ import com.melon.mylibrary.util.SpUtil;
 
 public class ApiManager {
     public static final String API_PROTOCOL = "http://";
-    public static final String API_IP = "xiazhilu.top";
+    public static final String API_IP = "wyl530274554.vicp.cc";
+//    public static final String API_IP = "xiazhilu.top";
     public static final String API_PORT = "2020";
     public static String API_BASE = getApiBase()+"/";
 
@@ -21,6 +22,9 @@ public class ApiManager {
     public static final String API_NOTE_UPDATE = API_BASE + "note/updateNote";
     public static final String API_NOTE_QUERY = API_BASE + "note/queryNote";
     public static final String API_NOTE_ALL = API_BASE + "note/queryAllNote";
+
+    public static final String API_PASSWORD_ADD = API_BASE + "index/addPassword";
+    public static final String API_PASSWORD_ALL = API_BASE + "index/queryAllPassword";
 
     public static String getApiBase() {
         String host = SpUtil.getString(MyApplication.getInstance(),"api_host");
