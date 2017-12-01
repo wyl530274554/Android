@@ -32,13 +32,18 @@ public class GreenDaoFragment extends BaseFragment {
     TextView textView;
 
     @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_green_dao, container, false);
+    }
+
+    @Override
     protected void initData() {
 
     }
 
     @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_green_dao, container, false);
+    protected void initView() {
+
     }
 
     @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4})

@@ -23,7 +23,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden"> <!--adjustResize|stateHidden-->
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".functions.h5.HtmlActivity" />

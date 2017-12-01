@@ -3,6 +3,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--android:fitsSystemWindows="true"
+        最外层若不加这个属性，则adjustResize的EditText会让ToolBar整体拉下来
+        最外层加这个属性，则状态栏会加一层深的阴影。
+    -->
+
     <!-- The main content view -->
     <LinearLayout
         android:id="@+id/coordinator_layout"

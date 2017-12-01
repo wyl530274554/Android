@@ -17,12 +17,7 @@ import com.melon.mylibrary.util.CommonUtil;
 
 public class TextFragment extends BaseFragment {
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
         TextView textView = new TextView(getContext());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         textView.setLayoutParams(params);
@@ -32,6 +27,16 @@ public class TextFragment extends BaseFragment {
         if(!CommonUtil.isEmpty(content))
             textView.setText(content +"    默认文本");
         return textView;
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
     @Override

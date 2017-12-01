@@ -37,15 +37,26 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class NotificationFragment extends BaseFragment {
-    private EditText et_notify_input;
-    private ListView lv_notification;
+    @BindView(R.id.et_notify_input)
+    public EditText et_notify_input;
+    @BindView(R.id.lv_notification)
+    public ListView lv_notification;
     private LayoutInflater mInflater;
     private DatabaseHelper mDatabaseHelper;
     private RuntimeExceptionDao mDao;
     private MyAdapter mAdapter;
     private List<Notify> mNotify = new ArrayList<>();
     private BroadcastReceiver mNotifyReceiver;
+
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        this.mInflater = inflater;
+        return inflater.inflate(R.layout.fragment_notification, container, false);
+    }
 
     @Override
     protected void initData() {
@@ -56,6 +67,11 @@ public class NotificationFragment extends BaseFragment {
         lv_notification.setSelection(mNotify.size());
 
         registerBroadcast();
+    }
+
+    @Override
+    protected void initView() {
+        initEmptyView();
     }
 
     private void registerBroadcast() {
@@ -73,18 +89,6 @@ public class NotificationFragment extends BaseFragment {
             }
         };
         getActivity().registerReceiver(mNotifyReceiver, intentFilter);
-    }
-
-    @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        this.mInflater = inflater;
-        View view = inflater.inflate(R.layout.fragment_notification, container, false);
-        et_notify_input = (EditText) view.findViewById(R.id.et_notify_input);
-        view.findViewById(R.id.et_notify_send).setOnClickListener(this);
-        lv_notification = (ListView) view.findViewById(R.id.lv_notification);
-//        view.findViewById(R.id.et_notify_clear).setOnClickListener(this);
-        initEmptyView();
-        return view;
     }
 
     private void getMyData() {
@@ -129,6 +133,7 @@ public class NotificationFragment extends BaseFragment {
         return mDatabaseHelper;
     }
 
+    @OnClick(R.id.et_notify_send)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -21,13 +21,16 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = initView(inflater, container);
+        View view = createView(inflater, container);
         ButterKnife.bind(this, view);
+        initView();
         initData();
         return view;
     }
 
+    protected abstract View createView(LayoutInflater inflater, ViewGroup container);
+
     protected abstract void initData();
 
-    protected abstract View initView(LayoutInflater inflater, ViewGroup container);
+    protected abstract void initView();
 }

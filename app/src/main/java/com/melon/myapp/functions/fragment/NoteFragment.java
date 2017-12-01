@@ -33,6 +33,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.sql.SQLException;
 import java.util.List;
 
+import butterknife.BindView;
 import okhttp3.Call;
 
 /**
@@ -41,12 +42,21 @@ import okhttp3.Call;
 public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, View.OnLongClickListener {
 
     private static final java.lang.String TAG = "NoteFragment";
-    private ListView lv_note;
+    @BindView(R.id.lv_note)
+    public ListView lv_note;
     private LayoutInflater mInflater;
     private MyAdapter mAdapter;
     private DatabaseHelper mDatabaseHelper;
     private RuntimeExceptionDao mDao;
     private List<Note> mNotes;
+    @BindView(R.id.fab_note_add)
+    public View addBtn;
+
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        this.mInflater = inflater;
+        return inflater.inflate(R.layout.fragment_note, container, false);
+    }
 
     @Override
     protected void initData() {
@@ -59,6 +69,16 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
             //TODO 从服务器中获取最新的50条数据
             getMyServerNotes();
         }
+    }
+
+    @Override
+    protected void initView() {
+        lv_note.setOnItemLongClickListener(this);
+        lv_note.setOnItemClickListener(this);
+        initEmptyView();
+
+        addBtn.setOnClickListener(this);
+        addBtn.setOnLongClickListener(this);
     }
 
 
@@ -113,21 +133,6 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_note, container, false);
-        lv_note = (ListView) view.findViewById(R.id.lv_note);
-        lv_note.setOnItemLongClickListener(this);
-        lv_note.setOnItemClickListener(this);
-        this.mInflater = inflater;
-        initEmptyView();
-
-        View addBtn = view.findViewById(R.id.fab_note_add);
-        addBtn.setOnClickListener(this);
-        addBtn.setOnLongClickListener(this);
-        return view;
     }
 
     @Override

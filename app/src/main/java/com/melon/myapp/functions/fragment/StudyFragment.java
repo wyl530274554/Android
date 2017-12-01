@@ -68,6 +68,11 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
     Context mContext;
 
     @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_study, container, false);
+    }
+
+    @Override
     protected void initData() {
         mContext = getContext();
 
@@ -129,9 +134,8 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
     }
 
     @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_study, container, false);
-        return view;
+    protected void initView() {
+
     }
 
     @Override

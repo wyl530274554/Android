@@ -26,6 +26,12 @@ public class HostAlterFragment extends BaseFragment {
     EditText et_alter_host_ip;
     @BindView(R.id.et_alter_host_port)
     EditText et_alter_host_port;
+
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_host_alter,container,false);
+    }
+
     @Override
     protected void initData() {
         et_alter_host_ip.setText(ApiManager.getApiIp());
@@ -33,8 +39,8 @@ public class HostAlterFragment extends BaseFragment {
     }
 
     @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_host_alter,container,false);
+    protected void initView() {
+
     }
 
     @OnClick({R.id.bt_alter_host_ok})

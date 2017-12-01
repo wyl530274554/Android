@@ -8,12 +8,15 @@ import android.os.Build;
 import android.renderscript.Script;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.melon.myapp.bean.Note;
 import com.melon.myapp.bean.Password;
 import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -37,20 +41,53 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 /**
  * 笔记主页
  */
-public class PasswordFragment extends BaseFragment {
-    private ListView lv_password;
+public class PasswordFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+    @BindView(R.id.lv_password)
+    public ListView lv_password;
     private LayoutInflater mInflater;
     private MyAdapter mAdapter;
     private List<Password> mPasswords = new ArrayList<>();
+    @BindView(R.id.et_password)
+    public EditText et_password;
+    @BindView(R.id.fl_password)
+    public FrameLayout fl_password;
+
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container) {
+        this.mInflater = inflater;
+        return inflater.inflate(R.layout.fragment_password, container, false);
+    }
 
     @Override
     protected void initData() {
         getMyServerNotes();
+    }
+
+    @Override
+    protected void initView() {
+        initEmptyView();
+
+        mAdapter = new MyAdapter();
+        lv_password.setAdapter(mAdapter);
+        lv_password.setOnItemClickListener(this);
+
+        et_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (v.getText().toString().trim().equals("android")) {
+                    fl_password.setVisibility(View.GONE);
+                    CommonUtil.hideInputMode(getActivity(), true);
+                }
+                return false;
+            }
+        });
     }
 
     private void getMyServerNotes() {
@@ -93,20 +130,13 @@ public class PasswordFragment extends BaseFragment {
     }
 
     @Override
-    protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_note, container, false);
-        lv_password = (ListView) view.findViewById(R.id.lv_note);
-        this.mInflater = inflater;
-        initEmptyView();
-
-        View addBtn = view.findViewById(R.id.fab_note_add);
-        addBtn.setOnClickListener(this);
-
-        mAdapter = new MyAdapter();
-        lv_password.setAdapter(mAdapter);
-        return view;
+    public void onResume() {
+        super.onResume();
+        et_password.setText("");
+        fl_password.setVisibility(View.VISIBLE);
     }
 
+    @OnClick(R.id.fab_password_add)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -154,7 +184,7 @@ public class PasswordFragment extends BaseFragment {
                         }
 
                         //上传至服务器
-                        uploadPassword(new Password(title,user,pwd,desc), mDialog);
+                        uploadPassword(new Password(title, user, pwd, desc), mDialog);
                     }
                 });
                 negativeButton.setOnClickListener(new View.OnClickListener() {
@@ -197,19 +227,25 @@ public class PasswordFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        if("1".equalsIgnoreCase(response)){
+                        if ("1".equalsIgnoreCase(response)) {
                             ToastUtil.toast(getContext(), "添加成功");
                             mDialog.dismiss();
                             mPasswords.add(0, password);
                             mAdapter.notifyDataSetChanged();
-                        }else {
+                        } else {
                             ToastUtil.toast(getContext(), "添加失败: " + response);
                         }
                     }
                 });
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mAdapter.show(position);
+    }
+
     class MyAdapter extends BaseAdapter {
+        private int showPos;
 
         @Override
         public int getCount() {
@@ -237,32 +273,47 @@ public class PasswordFragment extends BaseFragment {
             TextView tv_password_pwd = ViewHolder.get(convertView, R.id.tv_password_pwd);
             TextView tv_password_other = ViewHolder.get(convertView, R.id.tv_password_other);
 
-            Password password = mPasswords.get(position);
-
-            tv_password_title.setText(password.title);
-
-            if(CommonUtil.isEmpty(password.user)){
-                tv_password_user.setVisibility(View.GONE);
-            }else {
+            //收起/展开
+            if (showPos == position) {
                 tv_password_user.setVisibility(View.VISIBLE);
+                tv_password_pwd.setVisibility(View.VISIBLE);
+                tv_password_other.setVisibility(View.VISIBLE);
+            } else {
+                tv_password_user.setVisibility(View.GONE);
+                tv_password_pwd.setVisibility(View.GONE);
+                tv_password_other.setVisibility(View.GONE);
+            }
+
+            Password password = mPasswords.get(position);
+            tv_password_title.setText("(" + (++position) + ") " + password.title);
+
+            if (CommonUtil.isEmpty(password.user)) {
+                tv_password_user.setVisibility(View.GONE);
+                tv_password_user.setText("");
+            } else {
                 tv_password_user.setText("账号：" + password.user);
             }
 
-            if(CommonUtil.isEmpty(password.password)){
+            if (CommonUtil.isEmpty(password.password)) {
+                tv_password_pwd.setText("");
                 tv_password_pwd.setVisibility(View.GONE);
-            }else {
-                tv_password_pwd.setVisibility(View.VISIBLE);
+            } else {
                 tv_password_pwd.setText("密码：" + password.password);
             }
 
-            if(CommonUtil.isEmpty(password.desc)){
+            if (CommonUtil.isEmpty(password.desc)) {
+                tv_password_other.setText("");
                 tv_password_other.setVisibility(View.GONE);
-            }else {
-                tv_password_other.setVisibility(View.VISIBLE);
-                tv_password_other.setText("附加：" + password.desc);
+            } else {
+                tv_password_other.setText(password.desc);
             }
 
             return convertView;
+        }
+
+        public void show(int position) {
+            showPos = position;
+            notifyDataSetChanged();
         }
     }
 }
