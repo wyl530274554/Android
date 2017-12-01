@@ -67,6 +67,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     protected void initData() {
+        mPasswords.clear();
         getMyServerNotes();
     }
 
