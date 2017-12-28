@@ -37,6 +37,7 @@ import com.melon.myapp.functions.ui.ProgressActivity;
 import com.melon.myapp.functions.ui.PullRefreshActivity;
 import com.melon.myapp.functions.ui.RecycleViewActivity;
 import com.melon.myapp.functions.ui.RecyclerViewShowWayActivity;
+import com.melon.myapp.functions.ui.ScaleImageViewActivity;
 import com.melon.myapp.functions.ui.ScrollListViewActivity;
 import com.melon.myapp.functions.ui.SnackbarActivity;
 import com.melon.myapp.functions.ui.StatusBarActivity;
@@ -128,6 +129,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("TourGuide向导", 37));
         arrayList.add(new Item("自定义View", 38));
         arrayList.add(new Item("Material Design", 39));
+        arrayList.add(new Item("缩放ImageView", 40));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
@@ -304,6 +306,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 39:
                 //Material Design
                 CommonUtil.enterActivity(mContext, MaterialDesignActivity.class);
+                break;
+            case 40:
+                //缩放ImageView
+                CommonUtil.enterActivity(mContext, ScaleImageViewActivity.class);
                 break;
         }
     }
