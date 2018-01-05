@@ -48,6 +48,13 @@ public class BrowserFragment extends Fragment {
 
             }
         });
+        bt_browser_search.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                et_browser_search.setText("");
+                return true;
+            }
+        });
     }
 
 
