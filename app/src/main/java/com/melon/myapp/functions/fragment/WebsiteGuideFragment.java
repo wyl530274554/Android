@@ -46,12 +46,8 @@ public class WebsiteGuideFragment extends Fragment {
     private void initData() {
         if (mWebsites.size() > 0) return;
         mWebsites.add(new Website("http://m.news.baidu.com/news?fr=mohome", R.drawable.ic_baidu_news));
-        mWebsites.add(new Website("http://3g.163.com/touch/news", R.drawable.ic_163_news));
         mWebsites.add(new Website("https://m.taobao.com", R.drawable.ic_taobao));
         mWebsites.add(new Website("https://www.jd.com", R.drawable.ic_jd));
         mWebsites.add(new Website("https://www.baidu.com/s?wd=天气", R.drawable.ic_weather));
     }
-
-
-
 }
