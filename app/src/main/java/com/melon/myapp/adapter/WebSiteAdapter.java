@@ -21,11 +21,11 @@ import java.util.Random;
  * Email 530274554@qq.com
  */
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class WebSiteAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private Context context;
     private List<Website> websites;
 
-    public MyRecyclerViewAdapter(Context context, List<Website> websites) {
+    public WebSiteAdapter(Context context, List<Website> websites) {
         this.context = context;
         this.websites = websites;
     }

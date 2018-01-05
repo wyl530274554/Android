@@ -16,12 +16,14 @@ import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
+
 //FIXME 网页有重定向时，返回有问题。(直接：mWebView.setWebViewClient(new WebViewClient())可解决这问题，但不能自定义行为)
 public class HtmlActivity extends BaseActivity {
 
     private static final java.lang.String TAG = "HtmlActivity";
     private ProgressWebView mWebView;
     private boolean isLoading = true;
+    private String mUrl;
 
     @Override
     protected void initView() {
@@ -63,7 +65,7 @@ public class HtmlActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 LogUtils.e("onPageFinished: " + url);
-                mHandler.postDelayed(stopLoadingTask,1000);
+                mHandler.postDelayed(stopLoadingTask, 1000);
             }
         });
         WebSettings settings = mWebView.getSettings();
@@ -87,7 +89,8 @@ public class HtmlActivity extends BaseActivity {
     }
 
     private StopLoadingTask stopLoadingTask = new StopLoadingTask();
-    class StopLoadingTask implements Runnable{
+
+    class StopLoadingTask implements Runnable {
         @Override
         public void run() {
             isLoading = false;
@@ -97,34 +100,40 @@ public class HtmlActivity extends BaseActivity {
     @Override
     protected void initData() {
         //百度一下
-        String url = getIntent().getStringExtra("url");
+        mUrl = getIntent().getStringExtra("url");
 
         //搜索按钮
         String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
         if (!CommonUtil.isEmpty(searchContent)) {
             if (searchContent.startsWith("http")) {
-                url = searchContent;
+                mUrl = searchContent;
             } else {
-                url = "http://" + searchContent;
+                mUrl = "http://" + searchContent;
             }
 
             //自动加.com
-            if (!url.contains(".")) {
-                url += ".com";
+            if (!mUrl.contains(".")) {
+                mUrl += ".com";
             }
         }
 
-        LogUtils.e(TAG, "URL: " + url);
+        LogUtils.e(TAG, "URL: " + mUrl);
 
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(mUrl);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-            mWebView.goBack();// 返回前一个页面
-            return true;
+
+        if (mUrl.contains("fr=")) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+                mWebView.goBack();// 返回前一个页面
+                return true;
+            }
+        } else {
+            finish();
         }
+
         return super.onKeyDown(keyCode, event);
     }
 

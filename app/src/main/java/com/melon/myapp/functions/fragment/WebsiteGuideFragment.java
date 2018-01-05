@@ -1,7 +1,5 @@
 package com.melon.myapp.functions.fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,17 +8,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.melon.myapp.R;
-import com.melon.myapp.adapter.MyRecyclerViewAdapter;
+import com.melon.myapp.adapter.WebSiteAdapter;
 import com.melon.myapp.bean.Website;
-import com.melon.myapp.functions.h5.HtmlActivity;
-import com.melon.mylibrary.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 网址导航
@@ -43,7 +37,7 @@ public class WebsiteGuideFragment extends Fragment {
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), mWebsites));
+        mRecyclerView.setAdapter(new WebSiteAdapter(getActivity(), mWebsites));
 
         initData();
         return view;

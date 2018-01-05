@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
-import com.melon.myapp.adapter.MyRecyclerViewAdapter;
+import com.melon.myapp.adapter.WebSiteAdapter;
 import com.melon.myapp.bean.Website;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         for (int i = 0; i < 20; i++) {
             datas.add(new Website("http://m.news.baidu.com/news?fr=mohome", R.drawable.ic_baidu_news));
         }
-        coordinator_recycler_view.setAdapter(new MyRecyclerViewAdapter(getApplicationContext(), datas));
+        coordinator_recycler_view.setAdapter(new WebSiteAdapter(getApplicationContext(), datas));
     }
 
     @Override
