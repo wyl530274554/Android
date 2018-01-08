@@ -24,7 +24,7 @@ public class SplashActivity extends BaseActivity {
                 CommonUtil.enterActivity(getApplicationContext(),MainActivity.class);
                 finish();
             }
-        },2000);
+        },1000);
     }
 
     @Override
