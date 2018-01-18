@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
+import com.melon.myapp.functions.camera.ZBarActivity;
 import com.melon.myapp.functions.fragment.BrowserFragment;
 import com.melon.myapp.functions.fragment.NoteFragment;
 import com.melon.myapp.functions.fragment.NotificationFragment;
@@ -192,6 +193,8 @@ public class MainActivity extends BaseActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu_coordinator, menu);
 
+
+
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSubmitButtonEnabled(true);
@@ -199,6 +202,15 @@ public class MainActivity extends BaseActivity {
 //        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
         SearchableInfo searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
         searchView.setSearchableInfo(searchableInfo);
+
+        //扫一扫
+        menu.findItem(R.id.scan).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                CommonUtil.enterActivity(mContext, ZBarActivity.class);
+                return false;
+            }
+        });
         return true;
     }
 

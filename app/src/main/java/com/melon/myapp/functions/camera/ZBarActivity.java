@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
+import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 
 import me.dm7.barcodescanner.zbar.Result;
@@ -103,9 +104,16 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     @Override
     public void handleResult(Result result) {
         // Do something with the result here
+        String content = result.getContents();
+        String formatType = result.getBarcodeFormat().getName();
+        ToastUtil.toast(getApplicationContext(), content);
+        ToastUtil.toast(getApplicationContext(), formatType);
 
-        ToastUtil.toast(getApplicationContext(), result.getContents());
-        ToastUtil.toast(getApplicationContext(), result.getBarcodeFormat().getName());
+        //TODO 下载APK
+        if(!CommonUtil.isEmpty(content) && content.endsWith(".apk")) {
+            CommonUtil.downloadFile(getApplicationContext(), content);
+        }
+
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
         finish();

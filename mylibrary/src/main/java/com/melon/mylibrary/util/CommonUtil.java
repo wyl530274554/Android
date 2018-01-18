@@ -3,13 +3,16 @@ package com.melon.mylibrary.util;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.app.DownloadManager;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -37,13 +40,14 @@ public class CommonUtil {
         }
         ctx.startActivity(intent);
     }
+
     /**
      * 启动Fragment
      *
-     * @param ctx   上下文
+     * @param ctx    上下文
      * @param target CommonFragmentActivity中定义的常量 目标fragment
      */
-    public static void enterFragment(Context ctx, Class commonFragmentClazz , int target) {
+    public static void enterFragment(Context ctx, Class commonFragmentClazz, int target) {
         Intent intent = new Intent(ctx, commonFragmentClazz);
         intent.putExtra("target", target);
         if (ctx instanceof Application) {
@@ -132,13 +136,14 @@ public class CommonUtil {
 
     /**
      * 时间截转日期、时间
+     *
      * @param time 秒
      */
     @SuppressLint("SimpleDateFormat")
     public static String getDateTime(String time) {
         String date = "";
         try {
-            date = new SimpleDateFormat("MM-dd-yyyy  HH:mm:ss").format(new Date(Long.parseLong(time)*1000)); // * 1000
+            date = new SimpleDateFormat("MM-dd-yyyy  HH:mm:ss").format(new Date(Long.parseLong(time) * 1000)); // * 1000
         } catch (Exception e) {
             if (!isEmpty(time)) {
                 return time;
@@ -157,7 +162,7 @@ public class CommonUtil {
     public static String getMyDateFormat(String time) {
         String result = "未知";
         try {
-            long dataTime = Long.parseLong(time)*1000;
+            long dataTime = Long.parseLong(time) * 1000;
 
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
@@ -188,13 +193,29 @@ public class CommonUtil {
         return result;
     }
 
-    public static void setTransparentStateBar(Activity act){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+    public static void setTransparentStateBar(Activity act) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View decorView = act.getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
             act.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    //系统下载文件
+    public static void downloadFile(Context ctx, String url) {
+        int start = url.lastIndexOf("/");
+        String fileName = url.substring(start+1);
+
+        DownloadManager downloadManager = ((DownloadManager) ctx.getSystemService(Activity.DOWNLOAD_SERVICE));
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        // 在通知栏中显示
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);//文件存储路径 绝对路径
+        request.setTitle("正在下载 "+fileName);
+        //下载时在通知栏显示的文字
+        downloadManager.enqueue(request);//执行下载
     }
 }

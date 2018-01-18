@@ -7,4 +7,9 @@
         android:title="搜索"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
+    <item
+        android:id="@+id/scan"
+        android:icon="@drawable/app_icon_barcode"
+        android:title="扫一扫"
+        app:showAsAction="collapseActionView|ifRoom" />
 </menu>
