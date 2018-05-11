@@ -59,6 +59,7 @@ public class HostAlterFragment extends BaseFragment {
                 String apiHost = ip+":"+port;
                 SpUtil.setString(getContext(),"api_host", apiHost);
                 getActivity().finish();
+                System.exit(0);
                 break;
         }
     }

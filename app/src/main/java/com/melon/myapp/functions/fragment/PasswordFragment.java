@@ -108,7 +108,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                             List<Password> serverNotes = new Gson().fromJson(response, new TypeToken<List<Password>>() {
                             }.getType());
                             if (serverNotes != null && serverNotes.size() != 0) {
-                                //TODO 获取本地并显示
+                                // 获取本地并显示
                                 mPasswords.addAll(serverNotes);
                                 mAdapter.notifyDataSetChanged();
                             }
@@ -141,7 +141,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fab_note_add:
+            case R.id.fab_password_add:
                 //添加笔记
                 addPassword();
                 break;
