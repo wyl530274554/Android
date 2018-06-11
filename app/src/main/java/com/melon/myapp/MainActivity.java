@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.sdkdemo.SdkMelon;
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.camera.ZBarActivity;
 import com.melon.myapp.functions.fragment.BrowserFragment;
@@ -217,6 +218,15 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         setSlideRight(false);
+
+        SdkMelon.getInstance().init();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SdkMelon.getInstance().enterLogin(MainActivity.this);
+            }
+        }, 3000);
     }
 
     @Override

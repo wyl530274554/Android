@@ -56,6 +56,11 @@ android {
             dimension "channel"
         }
     }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -82,4 +87,6 @@ dependencies {
     }
     compile 'com.zhy:okhttputils:2.6.2'
     implementation 'com.google.code.gson:gson:2.8.2'
+
+    compile(name:'sdkdemo-debug', ext:'aar')
 }
