@@ -2,10 +2,8 @@ package com.melon.myapp.functions.fragment;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.renderscript.Script;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -23,23 +21,17 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.melon.myapp.ApiManager;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.R;
-import com.melon.myapp.bean.Note;
 import com.melon.myapp.bean.Password;
-import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.nio.file.WatchEvent;
 import java.util.ArrayList;
 import java.util.List;
 

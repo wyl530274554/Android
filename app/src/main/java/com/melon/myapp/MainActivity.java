@@ -225,6 +225,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 SdkMelon.getInstance().enterLogin(MainActivity.this);
+                ToastUtil.toast(getApplicationContext(), "调用三方AAR文件接口");
             }
         }, 3000);
     }
