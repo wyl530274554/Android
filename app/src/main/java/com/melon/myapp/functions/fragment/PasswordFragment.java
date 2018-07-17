@@ -33,11 +33,13 @@ import com.melon.myapp.bean.Password;
 import com.melon.myapp.db.DatabaseHelper;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.nio.file.WatchEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,17 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtil.toast(getContext(), e.getMessage());
+                        //加载本地的
+                        String pwd = SpUtil.getString(getContext(), "pwd");
+                        if(!CommonUtil.isEmpty(pwd)) {
+                            List<Password> serverNotes = new Gson().fromJson(pwd, new TypeToken<List<Password>>() {
+                            }.getType());
+                            if (serverNotes != null && serverNotes.size() != 0) {
+                                // 获取本地并显示
+                                mPasswords.addAll(serverNotes);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        }
                     }
 
                     @Override
@@ -108,9 +121,12 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                             List<Password> serverNotes = new Gson().fromJson(response, new TypeToken<List<Password>>() {
                             }.getType());
                             if (serverNotes != null && serverNotes.size() != 0) {
-                                //TODO 获取本地并显示
+                                // 获取本地并显示
                                 mPasswords.addAll(serverNotes);
                                 mAdapter.notifyDataSetChanged();
+
+                                // 记录在本地
+                                SpUtil.setString(getContext(),"pwd", response);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -141,7 +157,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fab_note_add:
+            case R.id.fab_password_add:
                 //添加笔记
                 addPassword();
                 break;

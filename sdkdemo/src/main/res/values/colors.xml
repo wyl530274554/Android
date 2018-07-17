@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--base color start-->
+    <color name="colorPrimary">#424040</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="app_head_bg">@color/colorPrimary</color>
+    <color name="app_bg_color">#f3f5f9</color>
+    <!--base color end-->
+
+    <!--Kilimall字体颜色标准  开始-->
+    <color name="color_white">#ffffff</color>
+    <color name="color_black">#000000</color>
+    <color name="color_font_title">#150000</color>
+    <color name="color_font_status">#cccccc</color>
+    <color name="color_font_explain_7e7">#7e7e7e</color>
+    <color name="color_font_explain_999">#999999</color>
+    <color name="color_font_explain_afb">#AFB1B7</color>
+    <color name="color_font_explain_666">#666666</color>
+    <color name="color_font_enable">#C4C8D2</color>
+    <color name="color_divider">#dddfe4</color>
+    <color name="color_green">#3ac641</color>
+    <color name="color_yellow">#ffba00</color>
+    <color name="color_yellow_captcha">#E4C187</color>
+    <color name="color_blue">#4A90E2</color>
+    <color name="color_money">#f87622</color>
+    <color name="color_font_blue">#335496</color>
+    <color name="color_font_gray">#9b9b9b</color>
+    <color name="color_red">#E10106</color>
+    <color name="color_transparent">#00000000</color>
+
+    <color name="bg_item_voucher">#FFA66C</color>
+    <color name="kili_btn_bg_normal">@color/color_money</color>
+    <color name="kili_btn_bg_press">#E86D1E</color>
+    <color name="kili_btn_bg_enable">#D0D3D9</color>
+    <!--Kilimall字体颜色标准  结束-->
+
+    <color name="color_font_black">@color/colorPrimary</color>
+    <color name="color_btn_black">@color/colorPrimary</color>
+
+    <color name="color_item_pressed">#15000000</color>
+    <color name="et_hint_color">@color/color_font_explain_afb</color>
+
+    <color name="color_bg_buy_step">#FFFCFA</color>
+    <color name="divider_buy_step">#FFE4D2</color>
+
+    <color name="color_content_bg">#F9FAFC</color>
+    <color name="user_center_start_color">#ff783a</color>
+    <color name="user_center_end_color">#ffb999</color>
+    <color name="splash_start_color">#ff7f3f</color>
+    <color name="splash_end_color">#f5a418</color>
+    <color name="color_main_tab">#fbd363</color>
+    <color name="text_login_tab_color">#f08300</color>
+
+    <color name="app_bg_h_color">#FAFAFA</color>
+    <color name="touming_bg_color">#00000000</color>
+    <color name="text_Fcode">#4081E2</color>
+    <color name="touming_color">#00000000</color>
+    <color name="ban_touming_color">#E0000000</color>
+    <color name="possible_result_points">#c0ffbd21</color>
+    <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color>
+    <!-- Android standard ICS color -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color>
+    <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+
+    <color name="app_update_red_pressed">#CB2A37</color>
+    <color name="app_update_red">#D9434E</color>
+    <color name="app_update_gray_pressed">#757575</color>
+    <color name="app_update_gray">#909090</color>
+    <color name="color_circle_orange">#f87622</color>
+    <color name="color_text_tab">#f87622</color>
+    <color name="kili_divider_bg_high">#eeeeee</color> <!--高一点的分隔线，如定单列表-->
+
+
+    <color name="color_item_title_black">#5d5d5d</color><!--条目中的标题-->
+    <color name="color_item_content_black">#9d9d9d</color>
+
+    <color name="color_goods_list_tab_def">#6D6D6D</color>
+    <color name="color_goods_list_tab_selected">@color/color_money</color>
+
+    <color name="color_global">#6c3eb4</color>
+    <color name="color_drop_shipping">#369339</color>
+    <color name="color_fbk">#ff7f3f</color>
+    <color name="voucher_item_bg">#FFA700</color>
+
+    <color name="color_use_voucher_unselect">#fcc7a4</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="btn_bg_gray">#e0e0e0</color>
+    <color name="btn_orange2">#EBD0A8</color>
+    <color name="color_christ">#5a0b0a</color>
+
+    <color name="color_tag_black">#232323</color>
+    <color name="color_tips_bg">#FDF4ED</color>
+    <color name="color_black_search">#444444</color>
+    <color name="color_goods_filter_reset_def">#fde6d2</color>
+    <color name="color_goods_filter_reset_press">#FCDBC0</color>
+    <color name="color_cart_num_bg">#f87622</color>
+    <color name="color_money_orange">#f87622</color>
+    <color name="color_home_slide_item_bg">#15E4C187</color>
+    <color name="color_pop_item_normal">#2c2b2b</color>
+
+    <color name="color_load_page_bg">#f2f2f2</color>
+    <color name="color_top_goods_more">#924698</color>
+    <color name="color_top_goods_pop">#651A6B</color>
+    <color name="color_top_goods_pop_2">#FFB5C4</color>
+    <color name="color_cart_no_addr_tips">#FFFDBB</color>
+    <color name="color_half_transparent">#33000000</color>
+    <color name="color_half_transparent_status">#66000000</color>
+    <color name="color_gray_aaa">#aaa</color>
+</resources>
