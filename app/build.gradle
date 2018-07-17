@@ -21,7 +21,6 @@ repositories {
 }
 android {
     compileSdkVersion 25
-
     defaultConfig {
         applicationId "com.melon.myapp"
         minSdkVersion 16
