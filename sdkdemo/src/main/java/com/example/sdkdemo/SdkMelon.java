@@ -20,7 +20,7 @@ public class SdkMelon {
     }
 
     public void enterLogin(Activity activity) {
-        Intent intent = new Intent(activity, LoginActivity.class);
+        Intent intent = new Intent(activity, SdkActivity.class);
         activity.startActivity(intent);
     }
 }

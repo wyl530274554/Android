@@ -5,11 +5,11 @@ import android.view.View;
 /**
  * 登录界面
  */
-public class LoginActivity extends BaseActivity {
+public class SdkActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sdk);
     }
 
     @Override

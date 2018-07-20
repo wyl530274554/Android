@@ -2,6 +2,6 @@
     package="com.example.sdkdemo">
 
     <application>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".SdkActivity" />
     </application>
 </manifest>
