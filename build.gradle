@@ -12,6 +12,10 @@ buildscript {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
 }
-repositories {
-    google()
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
 }
