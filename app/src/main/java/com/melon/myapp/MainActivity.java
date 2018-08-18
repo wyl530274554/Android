@@ -46,13 +46,13 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         CommonUtil.setTransparentStateBar(this);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolBar);
+        mToolbar = findViewById(R.id.toolBar);
         mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色
 //        mToolbar.setNavigationIcon(R.drawable.ic_menu_selectall_holo_light);//设置导航栏图标
 
         setSupportActionBar(mToolbar);
 
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager mViewPager = findViewById(R.id.viewpager);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
         viewPagerAdapter.addFragment(new PasswordFragment(), "密码本");
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
         viewPagerAdapter.addFragment(new NotificationFragment(), "通知");
         mViewPager.setAdapter(viewPagerAdapter);//设置适配器
 
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        TabLayout mTabLayout = findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("密码本"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));//给TabLayout添加Tab
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initDrawLayout() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 //        mDrawerLayout.setScrimColor(Color.parseColor("#66111111"));
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, mToolbar, R.string.text_open, R.string.text_close);
 
         //Navigation View
-        NavigationView navigation_view_main = (NavigationView) findViewById(R.id.navigation_view_main);
+        NavigationView navigation_view_main = findViewById(R.id.navigation_view_main);
         View headerView = navigation_view_main.getHeaderView(0);
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,16 +218,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         setSlideRight(false);
-
-        SdkMelon.getInstance().init();
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SdkMelon.getInstance().enterLogin(MainActivity.this);
-                ToastUtil.toast(getApplicationContext(), "调用三方AAR文件接口");
-            }
-        }, 3000);
     }
 
     @Override

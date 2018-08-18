@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.sdkdemo.SdkMelon;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.CommonFragmentActivity;
 import com.melon.myapp.R;
@@ -131,6 +132,11 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("Material Design", 39));
         arrayList.add(new Item("缩放ImageView", 40));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
+
+        //其它
+        arrayList = new ArrayList<>();
+        arrayList.add(new Item("调用ARR文件", 41));
+        sectionedExpandableLayoutHelper.addSection("其它", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
     }
@@ -311,7 +317,17 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
                 //缩放ImageView
                 CommonUtil.enterActivity(mContext, ScaleImageViewActivity.class);
                 break;
+            case 41:
+                //调用ARR SDK
+                startAar();
+                break;
+            default:
         }
+    }
+
+    private void startAar() {
+        SdkMelon.getInstance().init();
+        SdkMelon.getInstance().enterLogin(getActivity());
     }
 
     @Override
