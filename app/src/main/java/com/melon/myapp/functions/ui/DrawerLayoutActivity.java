@@ -44,11 +44,6 @@ public class DrawerLayoutActivity extends BaseActivity implements AdapterView.On
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String title = myArrayList.get(position);
         tv_content.setText(title);

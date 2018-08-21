@@ -51,11 +51,6 @@ public class RecycleViewActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private ArrayList<String> mDataset;
 

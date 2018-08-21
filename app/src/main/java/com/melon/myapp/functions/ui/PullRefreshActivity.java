@@ -33,11 +33,6 @@ public class PullRefreshActivity extends BaseActivity implements SwipeRefreshLay
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public void onRefresh() {
         mHandler.postDelayed(new Runnable() {
             @Override

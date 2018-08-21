@@ -29,8 +29,4 @@ public class FullScreenImageActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

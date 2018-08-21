@@ -51,7 +51,6 @@ public class SettingActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_setting_server_host})
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_setting_server_host:

@@ -23,6 +23,8 @@ import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 
+import butterknife.OnClick;
+
 public class AnimationActivity extends BaseActivity {
 
     private ImageView iv_anim_frame, iv_anim_frame_2, iv_anim_tween_rotate, iv_anim_tween_scale, iv_anim_tween_trans, iv_anim_tween_alpha, iv_anim_tween_set, iv_anim_property_object, iv_anim_property_value, iv_anim_property_value_ball, iv_anim_sun;
@@ -50,17 +52,6 @@ public class AnimationActivity extends BaseActivity {
         AnimationDrawable a = (AnimationDrawable) iv_anim_frame_2.getDrawable();
         a.setOneShot(false);
         a.start();
-        iv_anim_frame.setOnClickListener(this);
-        view_anim_sea.setOnClickListener(this);
-
-        findViewById(R.id.bt_anim_tween_rotate).setOnClickListener(this);
-        findViewById(R.id.bt_anim_tween_scale).setOnClickListener(this);
-        findViewById(R.id.bt_anim_tween_trans).setOnClickListener(this);
-        findViewById(R.id.bt_anim_tween_alpha).setOnClickListener(this);
-        findViewById(R.id.bt_anim_tween_set).setOnClickListener(this);
-        findViewById(R.id.bt_anim_property_object).setOnClickListener(this);
-        findViewById(R.id.bt_anim_property_value).setOnClickListener(this);
-        findViewById(R.id.bt_anim_property_value_ball).setOnClickListener(this);
     }
 
     @Override
@@ -68,7 +59,8 @@ public class AnimationActivity extends BaseActivity {
 
     }
 
-    @Override
+
+    @OnClick({R.id.iv_anim_frame,R.id.view_anim_sea,R.id.bt_anim_property_value_ball, R.id.bt_anim_property_value, R.id.bt_anim_property_object,R.id.bt_anim_tween_rotate, R.id.bt_anim_tween_scale, R.id.bt_anim_tween_trans, R.id.bt_anim_tween_alpha, R.id.bt_anim_tween_set, })
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_anim_frame:

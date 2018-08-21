@@ -63,11 +63,6 @@ public class AddToCartAnim2Activity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     /**
      * 设置适配器
      *

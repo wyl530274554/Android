@@ -34,11 +34,6 @@ public class ShowBeaconsActivity extends BaseActivity {
 	private TextView tv_show_beacons;
 
 	@Override
-	public void onClick(View v) {
-
-	}
-
-	@Override
 	protected void initView() {
 		setContentView(R.layout.activity_show_beacons);
 

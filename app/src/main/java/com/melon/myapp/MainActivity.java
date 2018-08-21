@@ -214,10 +214,4 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         setSlideRight(false);
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
 }

@@ -21,8 +21,4 @@ public class CustomerViewActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

@@ -22,9 +22,4 @@ public class StatusBarActivity extends BaseActivity {
     protected void initData() {
 
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

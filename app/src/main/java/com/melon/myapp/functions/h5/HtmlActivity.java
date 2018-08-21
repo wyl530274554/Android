@@ -18,6 +18,9 @@ import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * H5页面
  *
@@ -26,24 +29,24 @@ import com.melon.mylibrary.view.ProgressWebView;
  */
 public class HtmlActivity extends BaseActivity {
 
-    private static final java.lang.String TAG = "HtmlActivity";
+    private static final String TAG = "HtmlActivity";
+    @BindView(R.id.wv_html)
     private ProgressWebView mWebView;
+
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
-        mWebView = findViewById(R.id.wv_html);
-
         setWebViewParam();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                LogUtils.e("url: "+url);
+                LogUtils.e("url: " + url);
             }
         });
         WebSettings settings = mWebView.getSettings();
@@ -147,8 +150,7 @@ public class HtmlActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void onClick(View v) {
-
+    @OnClick(R.id.iv_html_share)
+    public void onViewClicked() {
     }
 }

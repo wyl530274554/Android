@@ -18,6 +18,7 @@ public class TabLayoutFragmentActivity extends BaseFragmentActivity {
     ViewPager viewPager;
     private String[] titles = {"热门推荐","热门收藏","今日头条"};
 
+    @Override
     protected void initView() {
         setContentView(R.layout.activity_tab_layout_fragment);
 
@@ -28,6 +29,7 @@ public class TabLayoutFragmentActivity extends BaseFragmentActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
     protected void initData() {
 
     }

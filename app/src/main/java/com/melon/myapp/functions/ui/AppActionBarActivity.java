@@ -64,8 +64,4 @@ public class AppActionBarActivity extends BaseActivity {
         return super.onPrepareOptionsPanel(view, menu);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

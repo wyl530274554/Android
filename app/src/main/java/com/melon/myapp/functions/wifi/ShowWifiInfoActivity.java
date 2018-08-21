@@ -61,9 +61,4 @@ public class ShowWifiInfoActivity extends BaseActivity {
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-
-	}
-
 }

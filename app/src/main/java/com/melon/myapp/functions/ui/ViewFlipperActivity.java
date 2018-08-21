@@ -17,8 +17,4 @@ public class ViewFlipperActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

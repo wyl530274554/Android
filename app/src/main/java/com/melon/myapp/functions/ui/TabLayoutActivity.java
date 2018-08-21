@@ -48,11 +48,6 @@ public class TabLayoutActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private class MyAdapter extends PagerAdapter {
 
         @Override

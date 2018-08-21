@@ -59,11 +59,6 @@ public class CollapsingToolbarLayoutActivity extends BaseActivity {
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_collapsing_toolbar, menu);
         return true;

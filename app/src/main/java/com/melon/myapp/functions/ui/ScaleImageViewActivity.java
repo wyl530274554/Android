@@ -26,8 +26,4 @@ public class ScaleImageViewActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

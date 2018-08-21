@@ -45,7 +45,6 @@ public class ZxingActivity extends BaseActivity {
     }
 
     @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:

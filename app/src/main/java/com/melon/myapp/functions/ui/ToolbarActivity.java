@@ -44,8 +44,4 @@ public class ToolbarActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

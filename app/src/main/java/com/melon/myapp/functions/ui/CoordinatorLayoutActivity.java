@@ -42,8 +42,4 @@ public class CoordinatorLayoutActivity extends BaseActivity {
         coordinator_recycler_view.setAdapter(new WebSiteAdapter(getApplicationContext(), datas));
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

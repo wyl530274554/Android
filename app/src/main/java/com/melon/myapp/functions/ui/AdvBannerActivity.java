@@ -25,11 +25,6 @@ public class AdvBannerActivity extends BaseActivity {
         init();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private void init() {
         localImages.add(R.mipmap.ic_1);
         localImages.add(R.mipmap.ic_2);

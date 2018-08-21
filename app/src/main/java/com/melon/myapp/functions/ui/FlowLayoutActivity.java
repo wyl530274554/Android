@@ -33,9 +33,4 @@ public class FlowLayoutActivity extends BaseActivity {
             flow_layout.addView(btn);
         }
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

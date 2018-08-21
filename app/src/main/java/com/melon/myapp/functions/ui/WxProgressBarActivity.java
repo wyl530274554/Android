@@ -7,6 +7,8 @@ import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.view.ProgressWebView;
 
+import butterknife.OnClick;
+
 public class WxProgressBarActivity extends BaseActivity {
     protected ProgressWebView mWebView;
     private EditText etUrl;
@@ -17,7 +19,6 @@ public class WxProgressBarActivity extends BaseActivity {
         mWebView = (ProgressWebView) findViewById(R.id.wv_progress_bar);
 
         etUrl = (EditText) findViewById(R.id.et_wx_progress_bar);
-        findViewById(R.id.bt_wx_progress_bar).setOnClickListener(this);
     }
 
 
@@ -27,7 +28,7 @@ public class WxProgressBarActivity extends BaseActivity {
         mWebView.loadUrl("http://www.sina.com.cn");
     }
 
-    @Override
+    @OnClick(R.id.bt_wx_progress_bar)
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_wx_progress_bar:

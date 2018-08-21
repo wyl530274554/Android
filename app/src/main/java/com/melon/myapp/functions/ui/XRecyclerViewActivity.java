@@ -51,10 +51,5 @@ public class XRecyclerViewActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
 
 }

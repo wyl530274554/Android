@@ -37,8 +37,4 @@ public class SnackbarActivity extends BaseActivity {
         }).show();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

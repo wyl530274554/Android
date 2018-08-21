@@ -10,6 +10,8 @@ import android.view.animation.AccelerateInterpolator;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
 
+import butterknife.OnClick;
+
 /**
  * Created by melon on 2017/11/25.
  * Email 530274554@qq.com
@@ -20,7 +22,6 @@ public class MaterialDesignActivity extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.activity_material_design);
 
-        findViewById(R.id.bt_material_circular).setOnClickListener(this);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class MaterialDesignActivity extends BaseActivity {
 
     }
 
-    @Override
+    @OnClick(R.id.bt_material_circular)
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_material_circular:

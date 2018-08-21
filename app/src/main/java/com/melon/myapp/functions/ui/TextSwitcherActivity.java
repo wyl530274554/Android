@@ -66,9 +66,4 @@ public class TextSwitcherActivity extends BaseActivity implements ViewSwitcher.V
         textView.setTextSize(36);
         return textView;
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

@@ -56,7 +56,4 @@ public class PhoneDensityActivity extends BaseActivity {
         tvContent = (TextView) findViewById(R.id.tv_phone_density_content);
     }
 
-    @Override
-    public void onClick(View v) {
-    }
 }

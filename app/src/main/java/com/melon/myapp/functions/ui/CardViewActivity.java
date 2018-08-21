@@ -16,9 +16,4 @@ public class CardViewActivity extends BaseActivity {
     protected void initData() {
 
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

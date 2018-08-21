@@ -42,7 +42,6 @@ public class TourGuideActivity extends BaseActivity {
     }
 
     @OnClick({R.id.button5})
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button5:

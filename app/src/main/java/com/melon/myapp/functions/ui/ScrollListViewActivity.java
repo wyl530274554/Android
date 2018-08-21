@@ -23,9 +23,4 @@ public class ScrollListViewActivity extends BaseActivity {
         ArrayAdapter<String> mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
         mListView.setAdapter(mAdapter);
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

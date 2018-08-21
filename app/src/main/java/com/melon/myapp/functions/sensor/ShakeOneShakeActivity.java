@@ -19,11 +19,6 @@ public class ShakeOneShakeActivity extends BaseActivity implements SensorEventLi
 	private Vibrator mVibrator;
 
 	@Override
-	public void onClick(View v) {
-
-	}
-
-	@Override
 	protected void initView() {
 		setContentView(R.layout.activity_shake_one_shake);
 	}

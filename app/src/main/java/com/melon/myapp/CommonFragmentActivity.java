@@ -51,9 +51,4 @@ public class CommonFragmentActivity extends BaseActivity {
     protected void initData() {
 
     }
-
-    @Override
-    public void onClick(View view) {
-
-    }
 }

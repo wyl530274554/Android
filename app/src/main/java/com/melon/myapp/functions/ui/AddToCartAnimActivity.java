@@ -102,11 +102,6 @@ public class AddToCartAnimActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     /**
      * 要start 动画的那张图片的ImageView
      *

@@ -126,8 +126,4 @@ public class WxWebProgressActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

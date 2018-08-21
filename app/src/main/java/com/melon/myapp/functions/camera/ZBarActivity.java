@@ -8,6 +8,7 @@ import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 
+import butterknife.OnClick;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
@@ -44,8 +45,7 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         mScannerView.stopCamera();           // Stop camera on pause
     }
 
-    //    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
-    @Override
+    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:

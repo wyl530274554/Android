@@ -27,9 +27,4 @@ public class MaxMemoryActivity extends BaseActivity {
         long freeMemory = ((int) Runtime.getRuntime().freeMemory())/1024/1024;
         tv_max_memory.setText("maxMemory="+maxMemory+"M, totalMemory="+totalMemory+"M, freeMemory="+freeMemory+"M");
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

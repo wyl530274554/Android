@@ -30,11 +30,6 @@ public class NavigationActivity extends BaseActivity implements AdapterView.OnIt
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CommonUtil.enterActivity(this,clazz[position]);
     }

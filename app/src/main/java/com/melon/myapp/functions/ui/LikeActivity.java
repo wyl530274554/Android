@@ -29,8 +29,4 @@ public class LikeActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

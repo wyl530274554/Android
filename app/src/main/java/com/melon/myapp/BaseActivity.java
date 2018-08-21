@@ -8,12 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
-import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.StatusBarCompat;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
+/**
+ * Activity 基类
+ *
+ * @author melon.wang
+ * @date 2018/8/21
+ */
+public abstract class BaseActivity extends AppCompatActivity {
     public static Handler mHandler = new Handler();
     Context mContext;
     private boolean isSideRight = true;
@@ -21,7 +26,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        CommonUtil.fullScreen(this);
         mContext = getApplicationContext();
         initView();
         ButterKnife.bind(this);

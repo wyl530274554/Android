@@ -54,11 +54,6 @@ public class RecyclerViewShowWayActivity extends BaseActivity {
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.meun_main_1, menu);
         return true;
