@@ -206,7 +206,7 @@ public class CommonUtil {
     //系统下载文件
     public static void downloadFile(Context ctx, String url) {
         int start = url.lastIndexOf("/");
-        String fileName = url.substring(start+1);
+        String fileName = url.substring(start + 1);
 
         DownloadManager downloadManager = ((DownloadManager) ctx.getSystemService(Activity.DOWNLOAD_SERVICE));
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -214,8 +214,24 @@ public class CommonUtil {
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);//文件存储路径 绝对路径
-        request.setTitle("正在下载 "+fileName);
+        request.setTitle("正在下载 " + fileName);
         //下载时在通知栏显示的文字
         downloadManager.enqueue(request);//执行下载
+    }
+
+    /**
+     * 网页分享
+     *
+     * @param context 上下文
+     * @param url 分享内容
+     */
+    public static void shareWebUrl(Context context, String url) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, url);
+        shareIntent.setType("text/plain");
+
+        //设置分享列表的标题，并且每次都显示分享列表
+        context.startActivity(Intent.createChooser(shareIntent, "Share To"));
     }
 }

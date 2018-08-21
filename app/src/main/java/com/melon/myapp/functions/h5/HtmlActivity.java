@@ -30,14 +30,15 @@ import butterknife.OnClick;
 public class HtmlActivity extends BaseActivity {
 
     private static final String TAG = "HtmlActivity";
+    private String mUrl;
+
     @BindView(R.id.wv_html)
-    private ProgressWebView mWebView;
+    public ProgressWebView mWebView;
 
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
-        setWebViewParam();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -47,6 +48,7 @@ public class HtmlActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 LogUtils.e("url: " + url);
+                mUrl = url;
             }
         });
         WebSettings settings = mWebView.getSettings();
@@ -122,6 +124,8 @@ public class HtmlActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        setWebViewParam();
+
         //百度一下
         String mUrl = getIntent().getStringExtra("url");
 
@@ -152,5 +156,6 @@ public class HtmlActivity extends BaseActivity {
 
     @OnClick(R.id.iv_html_share)
     public void onViewClicked() {
+        CommonUtil.shareWebUrl(this, mUrl);
     }
 }
