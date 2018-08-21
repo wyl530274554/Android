@@ -125,7 +125,7 @@ public class HtmlActivity extends BaseActivity {
         //搜索按钮
         String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
         if (!CommonUtil.isEmpty(searchContent)) {
-            if (searchContent.startsWith("http")) {
+            if (searchContent.startsWith(getString(R.string.text_http))) {
                 mUrl = searchContent;
             } else {
                 mUrl = "http://" + searchContent;
