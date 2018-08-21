@@ -1,8 +1,9 @@
 package com.melon.myapp.functions.h5;
 
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -17,64 +18,76 @@ import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
 
-//FIXME 网页有重定向时，返回有问题。(直接：mWebView.setWebViewClient(new WebViewClient())可解决这问题，但不能自定义行为)
+/**
+ * H5页面
+ *
+ * @author melon.wang
+ * @date 2018/8/21
+ */
 public class HtmlActivity extends BaseActivity {
 
     private static final java.lang.String TAG = "HtmlActivity";
     private ProgressWebView mWebView;
-    private boolean isLoading = true;
-    private String mUrl;
 
     @Override
     protected void initView() {
-//        CommonUtil.fullScreen(this);
         setContentView(R.layout.activity_html);
-        mWebView = (ProgressWebView) findViewById(R.id.wv_html);
+        mWebView = findViewById(R.id.wv_html);
 
         setWebViewParam();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.startsWith("http")) {
-                    if (isLoading) {
-                        view.loadUrl(url);
-                        return true;
-                    } else {
-                        //开新的一页。
-                        Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
-                        intent.putExtra("url", url);
-                        startActivity(intent);
-                        return true;
-                    }
-                }
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                LogUtils.e("onPageStarted: " + url);
-                isLoading = true;
-                mHandler.removeCallbacks(stopLoadingTask);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                LogUtils.e("onPageFinished: " + url);
-                mHandler.postDelayed(stopLoadingTask, 1000);
-            }
-        });
+        mWebView.setWebViewClient(new WebViewClient());
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);//解决百度新闻，第二次打不开的问题。
+        //解决百度新闻，第二次打不开的问题。
+        settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return true;//解决三星手机 长按弹出复制、粘贴，滑出界面时，闪退问题。
+                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+                if (null == result) {
+                    return false;
+                }
+                int type = result.getType();
+                String extra = result.getExtra();
+                LogUtils.e("type: " + type + ", extra: " + extra);
+                switch (type) {
+                    // 选中的文字类型
+                    case WebView.HitTestResult.EDIT_TEXT_TYPE:
+                        break;
+                    // 处理拨号
+                    case WebView.HitTestResult.PHONE_TYPE:
+                        break;
+                    // 处理Email
+                    case WebView.HitTestResult.EMAIL_TYPE:
+                        break;
+                    // 　地图类型
+                    case WebView.HitTestResult.GEO_TYPE:
+                        break;
+                    // 超链接
+                    case WebView.HitTestResult.SRC_ANCHOR_TYPE:
+                        // 另起一页
+                        if (!CommonUtil.isEmpty(extra)) {
+                            openNewWindow(extra);
+                        }
+                        break;
+                    // 带有链接的图片类型
+                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                        // 处理长按图片的菜单项
+                    case WebView.HitTestResult.IMAGE_TYPE:
+                        return true;
+                    //未知
+                    case WebView.HitTestResult.UNKNOWN_TYPE:
+                        break;
+                    default:
+                }
+                return true;
             }
         });
 
@@ -88,19 +101,19 @@ public class HtmlActivity extends BaseActivity {
         }
     }
 
-    private StopLoadingTask stopLoadingTask = new StopLoadingTask();
-
-    class StopLoadingTask implements Runnable {
-        @Override
-        public void run() {
-            isLoading = false;
-        }
+    /**
+     * 开启新窗口
+     */
+    private void openNewWindow(String url) {
+        Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
 
     @Override
     protected void initData() {
         //百度一下
-        mUrl = getIntent().getStringExtra("url");
+        String mUrl = getIntent().getStringExtra("url");
 
         //搜索按钮
         String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
@@ -124,14 +137,9 @@ public class HtmlActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (mUrl.contains("fr=")) {
-            if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-                mWebView.goBack();// 返回前一个页面
-                return true;
-            }
-        } else {
-            finish();
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+            mWebView.goBack();// 返回前一个页面
+            return true;
         }
 
         return super.onKeyDown(keyCode, event);
