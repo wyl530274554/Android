@@ -42,9 +42,10 @@ public class HtmlActivity extends BaseActivity {
         mWebView.setWebViewClient(new WebViewClient());
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        //解决百度新闻，第二次打不开的问题。
+        //解决页面第二次打不开的问题(百度)
         settings.setDomStorageEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Https嵌套http图片问题
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
