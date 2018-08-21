@@ -39,7 +39,13 @@ public class HtmlActivity extends BaseActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
-        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                LogUtils.e("url: "+url);
+            }
+        });
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         //解决页面第二次打不开的问题(百度)
