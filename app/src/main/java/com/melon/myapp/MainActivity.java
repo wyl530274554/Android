@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -21,7 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.sdkdemo.SdkMelon;
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.camera.ZBarActivity;
 import com.melon.myapp.functions.fragment.BrowserFragment;
@@ -35,7 +35,12 @@ import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
 
-
+/**
+ * 主界面
+ *
+ * @author melon.wang
+ * @date 2018/8/21
+ */
 public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -47,8 +52,8 @@ public class MainActivity extends BaseActivity {
         CommonUtil.setTransparentStateBar(this);
 
         mToolbar = findViewById(R.id.toolBar);
-        mToolbar.setTitleTextColor(Color.WHITE);//设置ToolBar的title颜色
-//        mToolbar.setNavigationIcon(R.drawable.ic_menu_selectall_holo_light);//设置导航栏图标
+        //设置ToolBar的title颜色
+        mToolbar.setTitleTextColor(Color.WHITE);
 
         setSupportActionBar(mToolbar);
 
@@ -57,26 +62,27 @@ public class MainActivity extends BaseActivity {
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
         viewPagerAdapter.addFragment(new PasswordFragment(), "密码本");
         viewPagerAdapter.addFragment(new NoteFragment(), "记事本");
-        viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");//添加Fragment
+        viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");
         viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
         viewPagerAdapter.addFragment(new NotificationFragment(), "通知");
-        mViewPager.setAdapter(viewPagerAdapter);//设置适配器
+        //设置适配器
+        mViewPager.setAdapter(viewPagerAdapter);
 
         TabLayout mTabLayout = findViewById(R.id.tabLayout);
-        mTabLayout.addTab(mTabLayout.newTab().setText("主页"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("密码本"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("主页"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("密码本"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));
         mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
         mTabLayout.addTab(mTabLayout.newTab().setText("通知"));
-        mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
+        //给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
+        mTabLayout.setupWithViewPager(mViewPager);
 
         initDrawLayout();
     }
 
     private void initDrawLayout() {
         mDrawerLayout = findViewById(R.id.drawer_layout);
-//        mDrawerLayout.setScrimColor(Color.parseColor("#66111111"));
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -87,12 +93,14 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                mDrawerToggle.onDrawerOpened(drawerView);//开关状态改为opened
+                //开关状态改为opened
+                mDrawerToggle.onDrawerOpened(drawerView);
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                mDrawerToggle.onDrawerClosed(drawerView);//开关状态改为closed
+                //开关状态改为closed
+                mDrawerToggle.onDrawerClosed(drawerView);
             }
 
             @Override
@@ -103,23 +111,20 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, mToolbar, R.string.text_open, R.string.text_close);
 
         //Navigation View
-        NavigationView navigation_view_main = findViewById(R.id.navigation_view_main);
-        View headerView = navigation_view_main.getHeaderView(0);
+        NavigationView navigationViewMain = findViewById(R.id.navigation_view_main);
+        View headerView = navigationViewMain.getHeaderView(0);
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.toast(getApplicationContext(),"HeaderView");
+                ToastUtil.toast(getApplicationContext(), "HeaderView");
             }
         });
 
-        navigation_view_main.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationViewMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //在这里处理item的点击事件
-                CharSequence title = item.getTitle();
-//                ToastUtil.toast(getApplicationContext(),title+"");
-
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_navigation_home:
                         break;
                     case R.id.menu_navigation_setting:
@@ -133,6 +138,7 @@ public class MainActivity extends BaseActivity {
                             }
                         }, 300);
                         break;
+                    default:
                 }
 
                 mDrawerLayout.closeDrawers();
@@ -153,15 +159,14 @@ public class MainActivity extends BaseActivity {
 
     private void slide(View drawerView, float slideOffset) {
         View mContent = mDrawerLayout.getChildAt(0);
-        View mMenu = drawerView;
         float scale = 1 - slideOffset;
         float rightScale = 0.8f + scale * 0.2f;
 
         if (drawerView.getTag().equals("LEFT")) {
-            ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * (1 - scale));
+            ViewHelper.setTranslationX(mContent, drawerView.getMeasuredWidth() * (1 - scale));
             mContent.invalidate();
         } else {
-            ViewHelper.setTranslationX(mContent, -mMenu.getMeasuredWidth() * slideOffset);
+            ViewHelper.setTranslationX(mContent, -drawerView.getMeasuredWidth() * slideOffset);
             ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
             ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
             mContent.invalidate();
@@ -179,29 +184,20 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();//该方法会自动和actionBar关联, 将开关的图片显示在了action上，如果不设置，也可以有抽屉的效果，不过是默认的图标
     }
 
-    private int getAppBarHeight() {
-        int actionBarHeight = 0;
-        TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-
-        return actionBarHeight;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu_coordinator, menu);
 
 
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSubmitButtonEnabled(true);
 
-//        SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
-        SearchableInfo searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
+        SearchableInfo searchableInfo = null;
+        if (searchManager != null) {
+            searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
+        }
         searchView.setSearchableInfo(searchableInfo);
 
         //扫一扫
