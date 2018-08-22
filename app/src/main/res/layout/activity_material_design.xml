@@ -13,7 +13,19 @@
 
     <Button
         android:id="@+id/bt_material_circular"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="波纹" />
+    <Button
+        android:id="@+id/bt_material_circular_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="反向波纹" />
+
+    <View
+        android:visibility="invisible"
+        android:id="@+id/secondView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_black"/>
 </LinearLayout>
