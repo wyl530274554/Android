@@ -45,23 +45,6 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         mScannerView.stopCamera();           // Stop camera on pause
     }
 
-    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3})
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button:
-//                scan();
-//                scan2();
-                scan3();
-                break;
-            case R.id.button1:
-                break;
-            case R.id.button2:
-                break;
-            case R.id.button3:
-                break;
-        }
-    }
-
     //zbar compile 'me.dm7.barcodescanner:zbar:1.9.8'
     private void scan3() {
 
