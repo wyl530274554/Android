@@ -1,12 +1,13 @@
 package com.melon.myapp;
 
-import android.graphics.Color;
-import android.os.Build;
-import android.view.View;
-import android.view.WindowManager;
-
 import com.melon.mylibrary.util.CommonUtil;
 
+/**
+ * App启动
+ *
+ * @author melon.wang
+ * @date 2018/8/22
+ */
 public class SplashActivity extends BaseActivity {
 
     @Override
@@ -21,10 +22,10 @@ public class SplashActivity extends BaseActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                CommonUtil.enterActivity(getApplicationContext(),MainActivity.class);
+                CommonUtil.enterActivity(getApplicationContext(), MainActivity.class);
                 finish();
             }
-        },1000);
+        }, 1000);
     }
 
 }
