@@ -28,7 +28,6 @@
         android:layout_alignBottom="@id/et_browser_search"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:stateListAnimator="@animator/selector_material_design_z"
         android:text="百度一下" />
 
 </RelativeLayout>
