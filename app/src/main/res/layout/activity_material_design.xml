@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
+    <View
+        android:id="@+id/secondView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_black"
+        android:visibility="invisible" />
+
     <Button
+        android:id="@+id/bt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stateListAnimator="@animator/selector_material_design_z"
@@ -15,17 +23,15 @@
         android:id="@+id/bt_material_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bt_1"
         android:text="波纹" />
+
     <Button
         android:id="@+id/bt_material_circular_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bt_material_circular"
         android:text="反向波纹" />
 
-    <View
-        android:visibility="invisible"
-        android:id="@+id/secondView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_black"/>
-</LinearLayout>
+
+</RelativeLayout>
