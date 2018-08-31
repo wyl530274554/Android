@@ -122,6 +122,7 @@
         <activity android:name=".functions.camera.ZxingActivity"></activity>
         <activity android:name=".functions.ui.MaterialDesignActivity" />
         <activity android:name=".functions.ui.ScaleImageViewActivity" />
+        <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />
     </application>
 
 </manifest>

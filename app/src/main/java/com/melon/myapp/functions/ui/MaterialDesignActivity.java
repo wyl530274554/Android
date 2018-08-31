@@ -1,11 +1,16 @@
 package com.melon.myapp.functions.ui;
 
 import android.animation.Animator;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
+import android.widget.ImageView;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.R;
@@ -22,9 +27,12 @@ import butterknife.OnClick;
 public class MaterialDesignActivity extends BaseActivity {
     @BindView(R.id.secondView)
     public View secondView;
+    @BindView(R.id.iv_shared_element)
+    public ImageView ivSharedElement;
 
     @Override
     protected void initView() {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_material_design);
     }
 
@@ -47,7 +55,7 @@ public class MaterialDesignActivity extends BaseActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @OnClick({R.id.bt_material_circular, R.id.bt_material_circular_back})
+    @OnClick({R.id.bt_material_circular, R.id.bt_material_circular_back, R.id.iv_shared_element})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_material_circular:
@@ -55,6 +63,11 @@ public class MaterialDesignActivity extends BaseActivity {
                 break;
             case R.id.bt_material_circular_back:
                 startRevealBack();
+                break;
+            case R.id.iv_shared_element:
+                Intent intent = new Intent(this, MaterialDesignSharedElementActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,ivSharedElement,"melonShareImg");
+                startActivity(intent,options.toBundle());
                 break;
             default:
         }

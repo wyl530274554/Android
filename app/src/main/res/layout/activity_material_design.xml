@@ -33,5 +33,12 @@
         android:layout_toRightOf="@id/bt_material_circular"
         android:text="反向波纹" />
 
+    <ImageView
+        android:id="@+id/iv_shared_element"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bt_material_circular_back"
+        android:src="@drawable/ic_money_50"
+        android:transitionName="melonShareImg" />
 
 </RelativeLayout>
