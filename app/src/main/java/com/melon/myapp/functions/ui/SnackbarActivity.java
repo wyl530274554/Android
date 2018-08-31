@@ -29,10 +29,10 @@ public class SnackbarActivity extends BaseActivity {
     }
 
     public void createSnackbar(View v) {
-        Snackbar.make(container, "SnackbarTest", Snackbar.LENGTH_SHORT).setAction("Action", new View.OnClickListener() {
+        Snackbar.make(container, "SnackbarTest SnackbarTest SnackbarTest SnackbarTest SnackbarTest SnackbarTest", Snackbar.LENGTH_INDEFINITE).setAction("Action", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(container, "ActionClick", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(container, "ActionClickActionClickActionClickActionClickActionClickActionClickActionClickActionClickActionClick", Snackbar.LENGTH_LONG).show();
             }
         }).show();
     }
