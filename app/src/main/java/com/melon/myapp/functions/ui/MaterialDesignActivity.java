@@ -64,12 +64,10 @@ public class MaterialDesignActivity extends BaseActivity {
      * 跟随手指 揭露
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void startRevealByFinger(int x, int y) {
+    private void startRevealByFinger(int centerX, int centerY) {
         secondView.setVisibility(View.VISIBLE);
 
         // 获取动画显示的View的中心点的坐标
-        int centerX = x;
-        int centerY = y;
         // 获取扩散的半径
         float finalRadius = (float) Math.hypot(centerX, centerY);
         // 定义揭露动画
