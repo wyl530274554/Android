@@ -16,11 +16,12 @@
         android:layout_alignParentBottom="true">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btnFloatingAction"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@android:drawable/ic_input_add"
-            app:borderWidth="0dp"
+            app:borderWidth="5dp"
             app:fabSize="normal" />
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
