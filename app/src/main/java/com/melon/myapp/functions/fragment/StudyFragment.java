@@ -24,6 +24,7 @@ import com.melon.myapp.functions.ui.AnimationActivity;
 import com.melon.myapp.functions.ui.AppActionBarActivity;
 import com.melon.myapp.functions.ui.CardViewActivity;
 import com.melon.myapp.functions.ui.CollapsingToolbarLayoutActivity;
+import com.melon.myapp.functions.ui.ConstraintLayoutActivity;
 import com.melon.myapp.functions.ui.CoordinatorLayoutActivity;
 import com.melon.myapp.functions.ui.CustomerViewActivity;
 import com.melon.myapp.functions.ui.DrawerLayoutActivity;
@@ -131,6 +132,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("自定义View", 38));
         arrayList.add(new Item("Material Design", 39));
         arrayList.add(new Item("缩放ImageView", 40));
+        arrayList.add(new Item("ConstraintLayout约束", 42));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
         //其它
@@ -320,6 +322,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 41:
                 //调用ARR SDK
                 startAar();
+                break;
+            case 42:
+                //约束布局
+                CommonUtil.enterActivity(mContext, ConstraintLayoutActivity.class);
                 break;
             default:
         }

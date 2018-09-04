@@ -123,6 +123,7 @@
         <activity android:name=".functions.ui.MaterialDesignActivity" />
         <activity android:name=".functions.ui.ScaleImageViewActivity" />
         <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />
+        <activity android:name=".functions.ui.ConstraintLayoutActivity" />
     </application>
 
 </manifest>
