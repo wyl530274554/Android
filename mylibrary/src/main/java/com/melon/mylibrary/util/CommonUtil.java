@@ -22,6 +22,8 @@ import android.view.inputmethod.InputMethodManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by admin on 2016/5/17.
@@ -201,6 +203,16 @@ public class CommonUtil {
             decorView.setSystemUiVisibility(option);
             act.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    /**
+     * 手机号校验
+     */
+    public static boolean isMobileChina(String phone) {
+        // 验证手机号
+        Pattern p = Pattern.compile("^[1][3,4,5, 6,7,8][0-9]{9}$");
+        Matcher m = p.matcher(phone);
+        return m.matches();
     }
 
     //系统下载文件
