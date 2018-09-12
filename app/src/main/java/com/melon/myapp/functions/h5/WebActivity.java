@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -49,6 +51,17 @@ public class WebActivity extends BaseActivity {
                 super.onPageFinished(view, url);
                 LogUtils.e("url: " + url);
                 mUrl = url;
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                String url = request.getUrl().toString();
+                if (url.startsWith("http")) {
+                    return true;
+                }
+
+                return super.shouldOverrideUrlLoading(view, request);
             }
         });
         WebSettings settings = mWebView.getSettings();
