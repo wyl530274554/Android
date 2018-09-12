@@ -93,7 +93,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        ToastUtil.toast(getContext(), e.getMessage());
+                        ToastUtil.toast(getContext(), "请求失败");
                         //加载本地的
                         String pwd = SpUtil.getString(getContext(), "pwd");
                         if(!CommonUtil.isEmpty(pwd)) {
