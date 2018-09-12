@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Website;
-import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class WebSiteAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HtmlActivity.class);
+                Intent intent = new Intent(context, WebActivity.class);
                 intent.putExtra("url", website.getUrl());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

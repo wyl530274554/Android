@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.melon.myapp.functions.h5.HtmlActivity">
+    tools:context="com.melon.myapp.functions.h5.WebActivity">
 
     <com.melon.mylibrary.view.ProgressWebView
         android:id="@+id/wv_html"

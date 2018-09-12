@@ -29,7 +29,7 @@ import com.melon.myapp.functions.fragment.NotificationFragment;
 import com.melon.myapp.functions.fragment.PasswordFragment;
 import com.melon.myapp.functions.fragment.StudyFragment;
 import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
-import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity {
 
         SearchableInfo searchableInfo = null;
         if (searchManager != null) {
-            searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, HtmlActivity.class));
+            searchableInfo = searchManager.getSearchableInfo(new ComponentName(this, WebActivity.class));
         }
         searchView.setSearchableInfo(searchableInfo);
 

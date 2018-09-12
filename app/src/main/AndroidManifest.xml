@@ -70,7 +70,7 @@
         <activity android:name=".functions.ui.ViewFlipperActivity" />
         <activity android:name=".functions.system.MaxMemoryActivity" />
         <activity android:name=".functions.ui.AdvBannerActivity" />
-        <activity android:name=".functions.h5.HtmlActivity">
+        <activity android:name=".functions.h5.WebActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -118,8 +118,8 @@
         <activity
             android:name=".functions.ui.RecyclerViewShowWayActivity"
             android:theme="@style/MyTheme.HasActionBar" />
-        <activity android:name=".functions.camera.ZBarActivity"></activity>
-        <activity android:name=".functions.camera.ZxingActivity"></activity>
+        <activity android:name=".functions.camera.ZBarActivity"/>
+        <activity android:name=".functions.camera.ZxingActivity"/>
         <activity android:name=".functions.ui.MaterialDesignActivity" />
         <activity android:name=".functions.ui.ScaleImageViewActivity" />
         <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />

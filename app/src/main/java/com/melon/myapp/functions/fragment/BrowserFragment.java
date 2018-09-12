@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 import com.melon.myapp.Constants;
 import com.melon.myapp.R;
-import com.melon.myapp.functions.h5.HtmlActivity;
+import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -48,7 +48,7 @@ public class BrowserFragment extends Fragment {
                 String key = etBrowserSearch.getText().toString().trim();
 
                 if (!CommonUtil.isEmpty(key)) {
-                    Intent intent = new Intent(getActivity(), HtmlActivity.class);
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
                     intent.putExtra("url", Constants.URL_BAIDU + key);
                     startActivity(intent);
                 }
@@ -83,7 +83,7 @@ public class BrowserFragment extends Fragment {
                             JSONObject resObj = new JSONObject(response);
                             String redirectUrl = resObj.optString("redirect_url");
 
-                            Intent intent = new Intent(getContext(), HtmlActivity.class);
+                            Intent intent = new Intent(getContext(), WebActivity.class);
                             intent.putExtra("url", redirectUrl);
                             startActivity(intent);
                         } catch (JSONException e) {

@@ -27,9 +27,9 @@ import butterknife.OnClick;
  * @author melon.wang
  * @date 2018/8/21
  */
-public class HtmlActivity extends BaseActivity {
+public class WebActivity extends BaseActivity {
 
-    private static final String TAG = "HtmlActivity";
+    private static final String TAG = "WebActivity";
     private String mUrl;
 
     @BindView(R.id.wv_html)
@@ -117,7 +117,7 @@ public class HtmlActivity extends BaseActivity {
      * 开启新窗口
      */
     private void openNewWindow(String url) {
-        Intent intent = new Intent(getApplicationContext(), HtmlActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WebActivity.class);
         intent.putExtra("url", url);
         startActivity(intent);
     }

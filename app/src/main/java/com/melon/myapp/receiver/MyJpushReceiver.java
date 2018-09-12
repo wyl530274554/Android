@@ -1,24 +1,5 @@
 package com.melon.myapp.receiver;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.melon.myapp.Constants;
-import com.melon.myapp.bean.Notify;
-import com.melon.myapp.db.DatabaseHelper;
-import com.melon.myapp.functions.h5.HtmlActivity;
-import com.melon.mylibrary.util.CommonUtil;
-import com.melon.mylibrary.util.LogUtils;
-import com.melon.mylibrary.util.ToastUtil;
-
-import org.json.JSONObject;
-
 //import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -68,7 +49,7 @@ import org.json.JSONObject;
 //                String alterValue = bundle.getString(JPushInterface.EXTRA_ALERT);
 //                if (!CommonUtil.isEmpty(alterValue)) {
 //                    if (alterValue.startsWith("http") || alterValue.startsWith("https")) {
-//                        Intent mIntent = new Intent(context, HtmlActivity.class);
+//                        Intent mIntent = new Intent(context, WebActivity.class);
 //                        mIntent.putExtra("url", alterValue);
 //                        mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                        context.startActivity(mIntent);
