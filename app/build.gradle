@@ -58,7 +58,7 @@ android {
             variant.outputs.all {
                 output ->
                     def outputFile = output.outputFile
-                    output.outputFileName = outputFile.name.replace(outputFile.name, "app_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + name.replace("Release", "") + ".apk")
+                    output.outputFileName = outputFile.name.replace(outputFile.name, "Melon_"+defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk")
             }
     }
 }
