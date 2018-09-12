@@ -67,7 +67,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         });
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        //解决页面第二次打不开的问题(百度)
+        //页面第二次打不开的问题(百度)
         settings.setDomStorageEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Https嵌套http图片问题
