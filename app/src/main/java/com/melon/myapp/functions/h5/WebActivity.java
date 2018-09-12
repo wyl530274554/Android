@@ -42,12 +42,11 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
-
-        mWebView.setOnLongClickListener(this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
+        mWebView.setOnLongClickListener(this);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
