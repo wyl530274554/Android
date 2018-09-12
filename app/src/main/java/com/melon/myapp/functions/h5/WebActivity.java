@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.melon.myapp.BaseActivity;
+import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
  * @author melon.wang
  * @date 2018/8/21
  */
-public class WebActivity extends BaseActivity {
+public class WebActivity extends BaseActivity implements View.OnLongClickListener {
 
     private static final String TAG = "WebActivity";
     private String mUrl;
@@ -41,6 +42,8 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
+
+        mWebView.setOnLongClickListener(this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -57,10 +60,9 @@ public class WebActivity extends BaseActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith("http")) {
+                if (url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
                     return true;
                 }
-
                 return super.shouldOverrideUrlLoading(view, request);
             }
         });
@@ -72,50 +74,6 @@ public class WebActivity extends BaseActivity {
             // Https嵌套http图片问题
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-                if (null == result) {
-                    return false;
-                }
-                int type = result.getType();
-                String extra = result.getExtra();
-                LogUtils.e("type: " + type + ", extra: " + extra);
-                switch (type) {
-                    // 选中的文字类型
-                    case WebView.HitTestResult.EDIT_TEXT_TYPE:
-                        break;
-                    // 处理拨号
-                    case WebView.HitTestResult.PHONE_TYPE:
-                        break;
-                    // 处理Email
-                    case WebView.HitTestResult.EMAIL_TYPE:
-                        break;
-                    // 　地图类型
-                    case WebView.HitTestResult.GEO_TYPE:
-                        break;
-                    // 超链接
-                    case WebView.HitTestResult.SRC_ANCHOR_TYPE:
-                        // 另起一页
-                        if (!CommonUtil.isEmpty(extra)) {
-                            openNewWindow(extra);
-                        }
-                        break;
-                    // 带有链接的图片类型
-                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
-                        // 处理长按图片的菜单项
-                    case WebView.HitTestResult.IMAGE_TYPE:
-                        return true;
-                    //未知
-                    case WebView.HitTestResult.UNKNOWN_TYPE:
-                        break;
-                    default:
-                }
-                return true;
-            }
-        });
-
 
         boolean isWebNoImgOpen = SpUtil.getBoolean(getApplicationContext(), "isSmartWebNoImgOpen");
         //智能图片加载 只在wifi下显示
@@ -170,5 +128,47 @@ public class WebActivity extends BaseActivity {
     @OnClick(R.id.iv_html_share)
     public void onViewClicked() {
         CommonUtil.shareWebUrl(this, mUrl);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        WebView.HitTestResult result = ((WebView) view).getHitTestResult();
+        if (null == result) {
+            return false;
+        }
+        int type = result.getType();
+        String extra = result.getExtra();
+        LogUtils.e("type: " + type + ", extra: " + extra);
+        switch (type) {
+            // 选中的文字类型
+            case WebView.HitTestResult.EDIT_TEXT_TYPE:
+                break;
+            // 处理拨号
+            case WebView.HitTestResult.PHONE_TYPE:
+                break;
+            // 处理Email
+            case WebView.HitTestResult.EMAIL_TYPE:
+                break;
+            // 　地图类型
+            case WebView.HitTestResult.GEO_TYPE:
+                break;
+            // 超链接
+            case WebView.HitTestResult.SRC_ANCHOR_TYPE:
+                // 另起一页
+                if (!CommonUtil.isEmpty(extra)) {
+                    openNewWindow(extra);
+                }
+                break;
+            // 带有链接的图片类型
+            case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                // 处理长按图片的菜单项
+            case WebView.HitTestResult.IMAGE_TYPE:
+                return true;
+            //未知
+            case WebView.HitTestResult.UNKNOWN_TYPE:
+                break;
+            default:
+        }
+        return true;
     }
 }
