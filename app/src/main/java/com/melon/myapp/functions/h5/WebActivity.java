@@ -51,7 +51,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                LogUtils.e("url: " + url);
+                LogUtils.e("onPageFinished: " + url);
                 mUrl = url;
             }
 
@@ -59,7 +59,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
+                if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
                     return true;
                 }
                 return super.shouldOverrideUrlLoading(view, request);
