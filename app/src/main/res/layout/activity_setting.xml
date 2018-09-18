@@ -30,7 +30,8 @@
             android:layout_centerVertical="true" />
     </RelativeLayout>
 
-    <RelativeLayout android:id="@+id/rl_setting_server_host"
+    <RelativeLayout
+        android:id="@+id/rl_setting_server_host"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -45,7 +46,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/ic_next"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/ic_next" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_setting_server_local_ip"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="服务器内部IP" />
 </LinearLayout>
