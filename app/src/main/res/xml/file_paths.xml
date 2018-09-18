@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path path="Android/data/net.kilimall.shop/" name="files_root" />
-    <external-path path="." name="external_storage_root"/>
+    <!--Android/data/net.kilimall.shop/files-->
+    <external-files-path
+        name="external_file_root"
+        path="." />
 </paths>
