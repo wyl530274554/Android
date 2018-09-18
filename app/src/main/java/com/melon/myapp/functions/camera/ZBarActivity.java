@@ -7,28 +7,27 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.Toast;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.BuildConfig;
-import com.melon.myapp.MainActivity;
-import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
 
 import java.io.File;
 
-import butterknife.OnClick;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 /**
- * zbar扫描速率要高于
+ * zBar扫描速率要高于zxing
  * 它有两个so文件，比较大。libiconv.so(870KB) libzbarjni.so(98KB) ，三个平台(arm/x86/arm-v7)加起来就大了。
+ *
+ * @author melon.wang
+ * @date 2018/9/18
  */
 public class ZBarActivity extends BaseActivity implements ZBarScannerView.ResultHandler {
     private ZBarScannerView mScannerView;
@@ -44,7 +43,6 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     @Override
     protected void initData() {
 //        ZXingLibrary.initDisplayOpinion(this);
-
         //注册广播接收器
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         registerReceiver(downloadReceiver, filter);
@@ -53,8 +51,10 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     @Override
     public void onResume() {
         super.onResume();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
+        // Register ourselves as a handler for scan results.
+        mScannerView.setResultHandler(this);
+        // Start camera on resume
+        mScannerView.startCamera();
     }
 
     @Override
@@ -73,9 +73,6 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     private void scan3() {
 
     }
-
-    //yipianfengye/android-zxingLibrary
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,7 +115,11 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
 
         //TODO 下载APK
         if (!CommonUtil.isEmpty(content) && content.endsWith(".apk")) {
+            mScannerView.stopCamera();
+            mScannerView.stopCameraPreview();
+            mScannerView.setVisibility(View.GONE);
             downloadApk = CommonUtil.downloadFile(getApplicationContext(), content);
+            ToastUtil.showLongToast(this, "Apk下载中...");
             LogUtils.e("downloadApk: " + downloadApk);
             return;
         }
@@ -128,6 +129,9 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         finish();
     }
 
+    /**
+     * APK存储路径
+     */
     private String downloadApk;
 
     /**
@@ -173,6 +177,7 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
             }
 
             startActivity(intent);
+            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }
