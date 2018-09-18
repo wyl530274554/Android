@@ -215,8 +215,13 @@ public class CommonUtil {
         return m.matches();
     }
 
-    //系统下载文件
-    public static void downloadFile(Context ctx, String url) {
+    /**
+     * 系统下载文件
+     *
+     * @param url 完整下载地址
+     * @return APK存储的路径
+     */
+    public static String downloadFile(Context ctx, String url) {
         int start = url.lastIndexOf("/");
         String fileName = url.substring(start + 1);
 
@@ -225,17 +230,22 @@ public class CommonUtil {
         // 在通知栏中显示
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);//文件存储路径 绝对路径
-        request.setTitle("正在下载 " + fileName);
+        //文件存储路径 绝对路径
+        request.setDestinationInExternalFilesDir(ctx, Environment.DIRECTORY_DOWNLOADS, fileName);
         //下载时在通知栏显示的文字
-        downloadManager.enqueue(request);//执行下载
+        request.setTitle(fileName);
+
+        //执行下载
+        downloadManager.enqueue(request);
+
+        return ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)+"/"+fileName;
     }
 
     /**
      * 网页分享
      *
      * @param context 上下文
-     * @param url 分享内容
+     * @param url     分享内容
      */
     public static void shareWebUrl(Context context, String url) {
         Intent shareIntent = new Intent();

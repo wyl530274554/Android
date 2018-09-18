@@ -103,6 +103,16 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.melon.myapp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <!--
         <service android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
@@ -124,6 +134,7 @@
         <activity android:name=".functions.ui.ScaleImageViewActivity" />
         <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />
         <activity android:name=".functions.ui.ConstraintLayoutActivity" />
+        <activity android:name=".functions.system.FileStoragePathActivity" />
     </application>
 
 </manifest>

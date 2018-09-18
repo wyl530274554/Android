@@ -3,10 +3,14 @@ package com.melon.myapp;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.camera.ZBarActivity;
@@ -230,4 +235,5 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         setSlideRight(false);
     }
+
 }

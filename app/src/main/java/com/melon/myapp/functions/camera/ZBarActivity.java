@@ -1,12 +1,26 @@
 package com.melon.myapp.functions.camera;
 
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.view.View;
+import android.widget.Toast;
 
 import com.melon.myapp.BaseActivity;
+import com.melon.myapp.BuildConfig;
+import com.melon.myapp.MainActivity;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.ToastUtil;
+
+import java.io.File;
 
 import butterknife.OnClick;
 import me.dm7.barcodescanner.zbar.Result;
@@ -30,6 +44,10 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
     @Override
     protected void initData() {
 //        ZXingLibrary.initDisplayOpinion(this);
+
+        //注册广播接收器
+        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        registerReceiver(downloadReceiver, filter);
     }
 
     @Override
@@ -37,6 +55,12 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         super.onResume();
         mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
         mScannerView.startCamera();          // Start camera on resume
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(downloadReceiver);
     }
 
     @Override
@@ -93,12 +117,64 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         ToastUtil.toast(getApplicationContext(), formatType);
 
         //TODO 下载APK
-        if(!CommonUtil.isEmpty(content) && content.endsWith(".apk")) {
-            CommonUtil.downloadFile(getApplicationContext(), content);
+        if (!CommonUtil.isEmpty(content) && content.endsWith(".apk")) {
+            downloadApk = CommonUtil.downloadFile(getApplicationContext(), content);
+            LogUtils.e("downloadApk: " + downloadApk);
+            return;
         }
 
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
         finish();
+    }
+
+    private String downloadApk;
+
+    /**
+     * 广播接受器, 下载完成监听器
+     */
+    BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
+                //下载完成了
+                //获取当前完成任务的ID
+                long reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                Toast.makeText(ZBarActivity.this, "下载完成了", Toast.LENGTH_SHORT).show();
+
+                //自动安装应用
+                installApk();
+            }
+        }
+    };
+
+    /**
+     * 安装apk
+     */
+    private void installApk() {
+        try {
+            File apkFile = new File(downloadApk);
+            if (!apkFile.exists()) {
+                ToastUtil.toast(this, "文件不存在");
+                return;
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            //判断是否是AndroidN以及更高的版本
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -16,6 +16,7 @@ import com.melon.myapp.functions.camera.ZBarActivity;
 import com.melon.myapp.functions.camera.ZxingActivity;
 import com.melon.myapp.functions.screen.PhoneDensityActivity;
 import com.melon.myapp.functions.sensor.ShakeOneShakeActivity;
+import com.melon.myapp.functions.system.FileStoragePathActivity;
 import com.melon.myapp.functions.system.MaxMemoryActivity;
 import com.melon.myapp.functions.ui.AddToCartAnim2Activity;
 import com.melon.myapp.functions.ui.AddToCartAnimActivity;
@@ -95,6 +96,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("最大内存", 5));
         arrayList.add(new Item("扫一扫Zbar", 35));
         arrayList.add(new Item("扫一扫Zxing", 36));
+        arrayList.add(new Item("File位置", 43));
         sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
@@ -326,6 +328,10 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 42:
                 //约束布局
                 CommonUtil.enterActivity(mContext, ConstraintLayoutActivity.class);
+                break;
+            case 43:
+                //File存储的路径
+                CommonUtil.enterActivity(mContext, FileStoragePathActivity.class);
                 break;
             default:
         }
