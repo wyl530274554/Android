@@ -1,5 +1,6 @@
 package com.melon.myapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
@@ -34,12 +35,16 @@ import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.nineoldandroids.view.ViewHelper;
 
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+
 /**
  * 主界面
  *
  * @author melon.wang
  * @date 2018/8/21
  */
+@RuntimePermissions
 public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -203,11 +208,22 @@ public class MainActivity extends BaseActivity {
         menu.findItem(R.id.scan).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                CommonUtil.enterActivity(mContext, ZBarActivity.class);
+                MainActivityPermissionsDispatcher.scanWithPermissionCheck(MainActivity.this);
                 return false;
             }
         });
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    public void scan() {
+        CommonUtil.enterActivity(mContext, ZBarActivity.class);
     }
 
     @Override
