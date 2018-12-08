@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
 
+import com.melon.myapp.BaseActivity;
 import com.melon.myapp.BaseFragmentActivity;
 import com.melon.myapp.R;
 import com.melon.myapp.functions.fragment.StudyFragment;
 
-public class FragmentTabhostActivity extends BaseFragmentActivity {
+public class FragmentTabhostActivity extends BaseActivity {
     private String[] titles = {"新闻", "音乐", "人生"};
     private FragmentTabHost mTabHost = null;
 
@@ -30,11 +31,6 @@ public class FragmentTabhostActivity extends BaseFragmentActivity {
         Bundle bundle = new Bundle();
         bundle.putString("content", content);
         return bundle;
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     @Override

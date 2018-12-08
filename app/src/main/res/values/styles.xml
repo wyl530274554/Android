@@ -18,6 +18,15 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
     </style>
+    <!-- MainActivity的主题 -->
+    <style name="MyTheme.Main" parent="@style/AppBaseTheme">
+        <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
+        <!--<item name="android:textColorPrimary">@color/color_blue</item> &lt;!&ndash;主文字颜色如Button&ndash;&gt;-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 
     <!--有ActionBar的主题-->
     <style name="MyTheme.HasActionBar" parent="@style/AppBaseTheme">
