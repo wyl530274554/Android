@@ -4,16 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.melon.myapp.BaseActivity;
-import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
@@ -33,11 +29,8 @@ import butterknife.OnClick;
 public class WebActivity extends BaseActivity implements View.OnLongClickListener {
 
     private static final String TAG = "WebActivity";
-    private String mUrl;
-
     @BindView(R.id.wv_html)
     public ProgressWebView mWebView;
-
 
     @Override
     protected void initView() {
@@ -47,24 +40,6 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
         mWebView.setOnLongClickListener(this);
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                LogUtils.e("onPageFinished: " + url);
-                mUrl = url;
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                String url = request.getUrl().toString();
-                if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
-                    return true;
-                }
-                return super.shouldOverrideUrlLoading(view, request);
-            }
-        });
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         //页面第二次打不开的问题(百度)
@@ -126,7 +101,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 
     @OnClick(R.id.iv_html_share)
     public void onViewClicked() {
-        CommonUtil.shareWebUrl(this, mUrl);
+        CommonUtil.shareWebUrl(this, mWebView.getCurrentUrl());
     }
 
     @Override

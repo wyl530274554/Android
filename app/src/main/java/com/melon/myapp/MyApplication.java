@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Environment;
 
 import com.melon.myapp.third.LoggerInterceptor;
+import com.melon.mylibrary.util.LogUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -54,6 +55,8 @@ public class MyApplication extends Application {
             record(ex);
             // 结束应用
             android.os.Process.killProcess(android.os.Process.myPid());
+
+            LogUtils.e("uncaughtException: "+ex.getMessage());
         }
 
         private void record(Throwable ex) {
