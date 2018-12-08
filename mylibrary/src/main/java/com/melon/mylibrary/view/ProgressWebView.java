@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -47,6 +48,14 @@ public class ProgressWebView extends WebView {
         pb.setProgressDrawable(drawable);
         addView(pb);
         mSlowlyProgressBar = new SlowlyProgressBar(pb);
+
+        getSettings().setJavaScriptEnabled(true);
+        getSettings().setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Https嵌套http图片问题
+            getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
         setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
