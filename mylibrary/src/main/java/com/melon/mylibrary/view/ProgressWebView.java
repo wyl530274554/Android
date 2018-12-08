@@ -24,11 +24,15 @@ import com.melon.mylibrary.util.ToastUtil;
  * @date 20181208
  */
 public class ProgressWebView extends WebView {
-    private final SlowlyProgressBar mSlowlyProgressBar;
+    public SlowlyProgressBar mSlowlyProgressBar;
     /**
      * 当前加载的URL
      */
     private String mCurrentUrl;
+
+    public SlowlyProgressBar getSlowlyProgressBar() {
+        return mSlowlyProgressBar;
+    }
 
     public String getCurrentUrl() {
         return mCurrentUrl;
@@ -76,8 +80,5 @@ public class ProgressWebView extends WebView {
                 return super.shouldOverrideUrlLoading(view, request);
             }
         });
-        //是否可以缩放
-        getSettings().setSupportZoom(true);
-        getSettings().setBuiltInZoomControls(true);
     }
 }

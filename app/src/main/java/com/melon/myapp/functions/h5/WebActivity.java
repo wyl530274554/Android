@@ -16,6 +16,7 @@ import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.ProgressWebView;
+import com.melon.mylibrary.view.SlowlyProgressBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -65,6 +66,16 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         Intent intent = new Intent(getApplicationContext(), WebActivity.class);
         intent.putExtra("url", url);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SlowlyProgressBar slowlyProgressBar = mWebView.getSlowlyProgressBar();
+        if (slowlyProgressBar != null) {
+            slowlyProgressBar.destroy();
+            slowlyProgressBar = null;
+        }
     }
 
     @Override
