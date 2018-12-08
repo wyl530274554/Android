@@ -3,19 +3,25 @@ package com.melon.myapp.functions.h5;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.melon.myapp.BaseActivity;
+import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
-import com.melon.mylibrary.view.ProgressWebView;
 import com.melon.mylibrary.view.SlowlyProgressBar;
 
 import butterknife.BindView;
@@ -28,10 +34,17 @@ import butterknife.OnClick;
  * @date 2018/8/21
  */
 public class WebActivity extends BaseActivity implements View.OnLongClickListener {
-
     private static final String TAG = "WebActivity";
     @BindView(R.id.wv_html)
-    public ProgressWebView mWebView;
+    public WebView mWebView;
+    @BindView(R.id.pb_web_view)
+    public ProgressBar pb;
+    private SlowlyProgressBar mSlowlyProgressBar;
+
+    /**
+     * 当前加载的URL
+     */
+    private String mCurrentUrl;
 
     @Override
     protected void initView() {
@@ -41,7 +54,47 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
         mWebView.setOnLongClickListener(this);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                if (mSlowlyProgressBar != null) {
+                    mSlowlyProgressBar.onProgressStart();
+                }
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                LogUtils.e("onPageFinished: " + url);
+                mCurrentUrl = url;
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                String url = request.getUrl().toString();
+                if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
+                    return true;
+                }
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+        });
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                mSlowlyProgressBar.onProgressChange(newProgress);
+            }
+        });
         WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Https嵌套http图片问题
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
         boolean isWebNoImgOpen = SpUtil.getBoolean(getApplicationContext(), "isSmartWebNoImgOpen");
         //智能图片加载 只在wifi下显示
         if (isWebNoImgOpen && !NetUtil.isWifiConnected(this)) {
@@ -63,16 +116,16 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SlowlyProgressBar slowlyProgressBar = mWebView.getSlowlyProgressBar();
-        if (slowlyProgressBar != null) {
-            slowlyProgressBar.destroy();
-            slowlyProgressBar = null;
+        if (mSlowlyProgressBar != null) {
+            mSlowlyProgressBar.destroy();
+            mSlowlyProgressBar = null;
         }
     }
 
     @Override
     protected void initData() {
         setWebViewParam();
+        mSlowlyProgressBar = new SlowlyProgressBar(pb);
 
         //百度一下
         String mUrl = getIntent().getStringExtra("url");
@@ -104,7 +157,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 
     @OnClick(R.id.iv_html_share)
     public void onViewClicked() {
-        CommonUtil.shareWebUrl(this, mWebView.getCurrentUrl());
+        CommonUtil.shareWebUrl(this, mCurrentUrl);
     }
 
     @Override

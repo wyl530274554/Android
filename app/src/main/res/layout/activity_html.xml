@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_html"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.melon.myapp.functions.h5.WebActivity">
+    android:fitsSystemWindows="true">
 
-    <com.melon.mylibrary.view.ProgressWebView
+    <WebView
         android:id="@+id/wv_html"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_web_view"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:progressDrawable="@drawable/progress_bar_states"
+        android:layout_height="2dp" />
 
     <ImageView
         android:id="@+id/iv_html_share"
