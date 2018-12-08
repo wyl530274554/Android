@@ -74,7 +74,7 @@ public class ProgressWebView extends WebView {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (!url.startsWith("http://")) {
+                if (!url.startsWith("http")) {
                     return true;
                 }
                 return super.shouldOverrideUrlLoading(view, request);
