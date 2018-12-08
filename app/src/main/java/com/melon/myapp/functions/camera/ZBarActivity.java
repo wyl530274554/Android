@@ -113,6 +113,8 @@ public class ZBarActivity extends BaseActivity implements ZBarScannerView.Result
         ToastUtil.toast(getApplicationContext(), content);
         ToastUtil.toast(getApplicationContext(), formatType);
 
+        CommonUtil.addToClipboard(getApplicationContext(),content);
+
         //TODO 下载APK
         if (!CommonUtil.isEmpty(content) && content.endsWith(".apk")) {
             mScannerView.stopCamera();
