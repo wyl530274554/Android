@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 /**
@@ -33,7 +34,7 @@ public class MyApplication extends Application {
 
         Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler());
 //        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(this);
+        JPushInterface.init(this);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("Melon",true))

@@ -167,18 +167,25 @@ public class NotificationFragment extends BaseFragment {
             @Override
             public void run() {
                 try {
+                    //文档：https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#notification
                     JSONObject dataObj = new JSONObject();
+                    //手机系统
                     dataObj.put("platform", "all");
+                    //分类标签
                     dataObj.put("audience", "all");
                     JSONObject notifyObj = new JSONObject();
-                    notifyObj.put("alert", content);
+                    JSONObject androidObj = new JSONObject();
+                    notifyObj.put("android", androidObj);
+                    androidObj.put("alert", content);
+//                    androidObj.put("title", "请注意");
+                    //style为1时，是长文本
+//                    androidObj.put("style", 1);
+                    //长文本
+//                    androidObj.put("big_text", "big text content big text content big text content big text content big text content big text content big text content big text content big text content big text content big text content big text content ");
                     dataObj.put("notification", notifyObj);
-
                     String data = dataObj.toString();
-
                     URL url = new URL(Constants.URL_JPUSH_API);
-                    HttpsURLConnection urlConnection = (HttpsURLConnection) url
-                            .openConnection();
+                    HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("POST");
                     // 设置请求的头
                     urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -193,7 +200,7 @@ public class NotificationFragment extends BaseFragment {
                     if (responseCode == 200) {
                         success();
                     } else {
-                        failure(1 + "---responseCode: " + responseCode);
+                        failure(1 + "---responseCode: " + responseCode+", msg: "+urlConnection.getResponseMessage());
                     }
                     os.close();
                 } catch (Exception e) {
