@@ -190,8 +190,10 @@ public class NotificationFragment extends BaseFragment {
                     // 设置请求的头
                     urlConnection.setRequestProperty("Content-Type", "application/json");
                     urlConnection.setRequestProperty("Authorization", Constants.JPUSH_AUTH);
-                    urlConnection.setDoOutput(true); // 发送POST请求必须设置允许输出
-                    urlConnection.setDoInput(true); // 发送POST请求必须设置允许输入
+                    // 发送POST请求必须设置允许输出
+                    urlConnection.setDoOutput(true);
+                    // 发送POST请求必须设置允许输入
+                    urlConnection.setDoInput(true);
                     //获取输出流
                     OutputStream os = urlConnection.getOutputStream();
                     os.write(data.getBytes());
