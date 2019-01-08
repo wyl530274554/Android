@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -13,6 +15,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.melon.myapp.BaseActivity;
@@ -37,6 +40,8 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     private static final String TAG = "WebActivity";
     @BindView(R.id.wv_html)
     public WebView mWebView;
+    @BindView(R.id.iv_html_share)
+    public ImageView ivShare;
     @BindView(R.id.pb_web_view)
     public ProgressBar pb;
     private SlowlyProgressBar mSlowlyProgressBar;
@@ -49,6 +54,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
+        CommonUtil.fullScreen(this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -70,10 +76,29 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
                 mCurrentUrl = url;
             }
 
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                LogUtils.e("old loading: " + url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+            /*上面这个过时的是5.0以下可用；下面这个是5.0以上可用。
+             *如果测试机是8.0系统，当这两个都存在时，只会调用下面的；而如果只存在上面的，也会调用上面的。(很神奇，很智能)
+             *所以暂时可以只处理上面的
+             */
+
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                Uri uri = request.getUrl();
                 String url = request.getUrl().toString();
+                LogUtils.e("shouldOverrideUrlLoading url: " + url);
+                //电话处理
+                if (url.startsWith(Constants.PROTOCOL_TEL)) {
+                    startActivity(new Intent(Intent.ACTION_DIAL, uri));
+                    return true;
+                }
+                //非http请求处理
                 if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
                     return true;
                 }
@@ -149,6 +174,13 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
             mWebView.goBack();// 返回前一个页面
+            return true;
+        }
+
+        //监听菜单键
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+//            ivShare.setVisibility(View.VISIBLE);
+            CommonUtil.shareWebUrl(this, mCurrentUrl);
             return true;
         }
 

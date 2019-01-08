@@ -8,6 +8,7 @@ package com.melon.myapp;
  */
 public class Constants {
     public static final String NET_PROTOCOL_HTTP = "http";
+    public static final String PROTOCOL_TEL = "tel";
 
     public static final String JPUSH_AUTH = "Basic N2NlMTNjOWFjNmRlMDc4ODQ1MWVjZTRlOjQ0YzM3MDJjZjY1YTg0NTU5NzkzYWM2OQ==";
 
