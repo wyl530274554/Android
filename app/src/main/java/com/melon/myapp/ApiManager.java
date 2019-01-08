@@ -5,10 +5,10 @@ import com.melon.mylibrary.util.SpUtil;
 
 /**
  * 接口地址管理
- * Created by melon on 2017/10/24.
+ * @author melon.wang
+ * @date 2019/1/7 17:28
  * Email 530274554@qq.com
  */
-
 public class ApiManager {
     private static final String API_PROTOCOL = "http://";
     private static final String API_IP = "xiazhilu.top";
