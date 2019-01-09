@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -60,58 +59,8 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewParam() {
         mWebView.setOnLongClickListener(this);
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                if (mSlowlyProgressBar != null) {
-                    mSlowlyProgressBar.onProgressStart();
-                }
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                LogUtils.e("onPageFinished: " + url);
-                mCurrentUrl = url;
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.e("old loading: " + url);
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-
-            /*上面这个过时的是5.0以下可用；下面这个是5.0以上可用。
-             *如果测试机是8.0系统，当这两个都存在时，只会调用下面的；而如果只存在上面的，也会调用上面的。(很神奇，很智能)
-             *所以暂时可以只处理上面的
-             */
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Uri uri = request.getUrl();
-                String url = request.getUrl().toString();
-                LogUtils.e("shouldOverrideUrlLoading url: " + url);
-                //电话处理
-                if (url.startsWith(Constants.PROTOCOL_TEL)) {
-                    startActivity(new Intent(Intent.ACTION_DIAL, uri));
-                    return true;
-                }
-                //非http请求处理
-                if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
-                    return true;
-                }
-                return super.shouldOverrideUrlLoading(view, request);
-            }
-        });
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                mSlowlyProgressBar.onProgressChange(newProgress);
-            }
-        });
+        mWebView.setWebViewClient(new MyWebViewClient());
+        mWebView.setWebChromeClient(new MyWebChromeClient());
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -179,7 +128,6 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 
         //监听菜单键
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-//            ivShare.setVisibility(View.VISIBLE);
             CommonUtil.shareWebUrl(this, mCurrentUrl);
             return true;
         }
@@ -232,5 +180,67 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             default:
         }
         return true;
+    }
+
+    /**
+     * 自己业务的WebViewClient
+     */
+    class MyWebViewClient extends WebViewClient {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            if (mSlowlyProgressBar != null) {
+                mSlowlyProgressBar.onProgressStart();
+            }
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            LogUtils.e("onPageFinished: " + url);
+            mCurrentUrl = url;
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            LogUtils.e("old loading: " + url);
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+
+        /*上面这个过时的是5.0以下可用；下面这个是5.0以上可用。
+         *如果测试机是8.0系统，当这两个都存在时，只会调用下面的；而如果只存在上面的，也会调用上面的。(很神奇，很智能)
+         *所以暂时可以只处理上面的
+         */
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            Uri uri = request.getUrl();
+            String url = request.getUrl().toString();
+            LogUtils.e("shouldOverrideUrlLoading url: " + url);
+            //电话处理
+            if (url.startsWith(Constants.PROTOCOL_TEL)) {
+                startActivity(new Intent(Intent.ACTION_DIAL, uri));
+                return true;
+            }
+            //非http请求处理
+            if (!url.startsWith(Constants.NET_PROTOCOL_HTTP)) {
+                return true;
+            }
+            return super.shouldOverrideUrlLoading(view, request);
+        }
+    }
+
+    /**
+     * 自己业务的WebChromeClient
+     */
+    class MyWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (mSlowlyProgressBar != null) {
+                mSlowlyProgressBar.onProgressChange(newProgress);
+            }
+        }
     }
 }
