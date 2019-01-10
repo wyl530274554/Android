@@ -9,6 +9,7 @@
         android:id="@+id/et_browser_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="请输入搜索内容"
         android:layout_toLeftOf="@+id/bt_browser_search"
         android:singleLine="true"
         android:textColor="@color/color_black" />
