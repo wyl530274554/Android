@@ -1,22 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="30dp">
     <!--可以单独设置此界面的Theme     android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
-
-    <ImageView
-        android:id="@+id/iv_browser_logo"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_baidu" />
 
     <EditText
         android:id="@+id/et_browser_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_browser_logo"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_toLeftOf="@+id/bt_browser_search"
         android:singleLine="true"
         android:textColor="@color/color_black" />
@@ -27,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/et_browser_search"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="百度一下" />
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/color_blue"
+        android:text="搜索" />
 
 </RelativeLayout>

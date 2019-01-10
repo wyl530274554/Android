@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -54,6 +55,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public FrameLayout fl_password;
     @BindView(R.id.empty)
     public TextView emptyView;
+    @BindView(R.id.srl_password)
+    public SwipeRefreshLayout srl_password;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container) {
@@ -63,8 +66,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     protected void initData() {
-        mPasswords.clear();
-        getMyServerNotes();
+        loadLocalData();
     }
 
     @Override
@@ -85,6 +87,13 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 return false;
             }
         });
+
+        srl_password.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMyServerNotes();
+            }
+        });
     }
 
     private void getMyServerNotes() {
@@ -96,17 +105,14 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ToastUtil.toast(getContext(), "请求失败");
-                        //加载本地的
-                        String pwd = SpUtil.getString(getContext(), "pwd");
-                        if (!CommonUtil.isEmpty(pwd)) {
-                            List<Password> serverNotes = new Gson().fromJson(pwd, new TypeToken<List<Password>>() {
-                            }.getType());
-                            if (serverNotes != null && serverNotes.size() != 0) {
-                                // 获取本地并显示
-                                mPasswords.addAll(serverNotes);
-                                mAdapter.notifyDataSetChanged();
-                            }
-                        }
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        super.onAfter(id);
+
+                        //刷新完成
+                        srl_password.setRefreshing(false);
                     }
 
                     @Override
@@ -116,6 +122,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                             }.getType());
                             if (serverNotes != null && serverNotes.size() != 0) {
                                 // 获取本地并显示
+                                mPasswords.clear();
                                 mPasswords.addAll(serverNotes);
                                 mAdapter.notifyDataSetChanged();
 
@@ -129,15 +136,22 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 });
     }
 
+    private void loadLocalData() {
+        //加载本地的
+        String pwd = SpUtil.getString(getContext(), "pwd");
+        if (!CommonUtil.isEmpty(pwd)) {
+            List<Password> serverNotes = new Gson().fromJson(pwd, new TypeToken<List<Password>>() {
+            }.getType());
+            if (serverNotes != null && serverNotes.size() != 0) {
+                // 获取本地并显示
+                mPasswords.clear();
+                mPasswords.addAll(serverNotes);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     private void initEmptyView() {
-//        TextView emptyView = new TextView(getContext());
-//        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        emptyView.setText("暂无内容");
-//        emptyView.setGravity(Gravity.CENTER);
-//        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-//        emptyView.setVisibility(View.GONE);
-//        ((ViewGroup) lv_password.getParent()).addView(emptyView);
-//        lv_password.setEmptyView(emptyView);
         lv_password.setEmptyView(emptyView);
     }
 

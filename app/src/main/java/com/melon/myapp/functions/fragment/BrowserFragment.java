@@ -40,7 +40,6 @@ public class BrowserFragment extends Fragment {
     private void init(View view) {
         final EditText etBrowserSearch = view.findViewById(R.id.et_browser_search);
         Button btBrowserSearch = view.findViewById(R.id.bt_browser_search);
-        ImageView ivBrowserLogo = view.findViewById(R.id.iv_browser_logo);
         btBrowserSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,38 +61,5 @@ public class BrowserFragment extends Fragment {
                 return true;
             }
         });
-        ivBrowserLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OkHttpUtils.post()
-                        .addParams("signature", "RXF1aXR5QmFuayw4LG9pazBRNFRVQXpwb0ZxQUdscVBuY0pWaVBQVGdJeWhneEJCQWRQTno")
-                        .addParams("openid", "kilimall_testtest")
-                        .url("https://api.kilimall.com/v1/ke/authorization")
-                        .build().execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        LogUtils.e("res: " + response);
-
-                        try {
-                            JSONObject resObj = new JSONObject(response);
-                            String redirectUrl = resObj.optString("redirect_url");
-
-                            Intent intent = new Intent(getContext(), WebActivity.class);
-                            intent.putExtra("url", redirectUrl);
-                            startActivity(intent);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
     }
-
-
 }
