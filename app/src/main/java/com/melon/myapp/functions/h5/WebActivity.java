@@ -4,10 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -16,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.Constants;
@@ -24,7 +30,10 @@ import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
+import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.view.SlowlyProgressBar;
+
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,8 +50,12 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     public WebView mWebView;
     @BindView(R.id.iv_html_share)
     public ImageView ivShare;
+    @BindView(R.id.title_html)
+    public TextView tvTitle;
     @BindView(R.id.pb_web_view)
     public ProgressBar pb;
+    @BindView(R.id.tb_html)
+    public Toolbar mToolbar;
     private SlowlyProgressBar mSlowlyProgressBar;
 
     /**
@@ -54,6 +67,40 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     protected void initView() {
         setContentView(R.layout.activity_html);
         CommonUtil.fullScreen(this);
+    }
+
+    private void initToolbar() {
+//        setSupportActionBar(mToolbar);
+        //设置导航栏图标
+        mToolbar.setNavigationIcon(R.drawable.ic_back_white);
+        //设置app logo
+//        mToolbar.setLogo(R.mipmap.ic_launcher);
+        //设置主标题
+//        mToolbar.setTitle("Title");
+        mToolbar.setTitleTextColor(Color.WHITE);
+        //设置子标题
+//        mToolbar.setSubtitle("Subtitle");
+        //设置右上角的填充菜单
+        mToolbar.inflateMenu(R.menu.menu_toolbar_html);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_item1:
+                        CommonUtil.shareWebUrl(WebActivity.this, mCurrentUrl);
+                        break;
+                    default:
+                }
+
+                return true;
+            }
+        });
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -99,6 +146,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void initData() {
         setWebViewParam();
+        initToolbar();
         mSlowlyProgressBar = new SlowlyProgressBar(pb);
 
         //百度一下
@@ -127,10 +175,10 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         }
 
         //监听菜单键
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            CommonUtil.shareWebUrl(this, mCurrentUrl);
-            return true;
-        }
+//        if (keyCode == KeyEvent.KEYCODE_MENU) {
+//            CommonUtil.shareWebUrl(this, mCurrentUrl);
+//            return true;
+//        }
 
         return super.onKeyDown(keyCode, event);
     }
@@ -240,6 +288,15 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             super.onProgressChanged(view, newProgress);
             if (mSlowlyProgressBar != null) {
                 mSlowlyProgressBar.onProgressChange(newProgress);
+            }
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+
+            if (title != null) {
+                tvTitle.setText(title);
             }
         }
     }
