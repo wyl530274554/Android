@@ -11,10 +11,11 @@
 
     </style>
     <!--Toolbar Pop-->
-    <style name="ToolbarPopupTheme" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+    <style name="ToolbarPopupTheme">
         <item name="android:colorBackground">@color/color_app_primary</item> <!--也可以设置背景色以及menu中的其他属性-->
         <item name="overlapAnchor">false</item>  <!--设置不覆盖锚点-->
-
+        <item name="android:textColor">@color/color_white</item><!--条目字体颜色-->
+        <item name="android:textSize">14sp</item><!--条目字体大小-->
     </style>
     <!--Toolbar-->
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">

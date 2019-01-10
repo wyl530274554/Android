@@ -2,6 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_item1"
+        android:title="Share"
+        android:icon="@drawable/ic_share_html_white"
+        app:showAsAction="ifRoom" />
+    <!--若没有icon，会在右上角展示title-->
+
+
+    <!--用二级子菜单，当条目收起后，可以同时展示标题和图标-->
+    <!--app:actionLayout="@layout/item_menu_share"-->
+    <!--<item
         android:icon="@drawable/ic_more"
         android:title="More"
         app:showAsAction="always">
@@ -12,7 +22,7 @@
                 android:title="Share"
                 app:showAsAction="collapseActionView" />
         </menu>
-    </item>
+    </item>-->
 
 
 </menu>
