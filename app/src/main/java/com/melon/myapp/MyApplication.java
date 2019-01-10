@@ -8,6 +8,7 @@ import android.os.Environment;
 
 import com.melon.myapp.third.LoggerInterceptor;
 import com.melon.mylibrary.util.LogUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -31,6 +32,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 
         Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler());
 //        JPushInterface.setDebugMode(true);

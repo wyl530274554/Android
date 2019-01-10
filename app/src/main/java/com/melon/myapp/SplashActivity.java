@@ -15,6 +15,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 //        setContentView(R.layout.my_demo);
         CommonUtil.setTransparentStateBar(this);
+        setSlideRight(false);
     }
 
     @Override
