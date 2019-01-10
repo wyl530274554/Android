@@ -51,6 +51,8 @@ public class NotificationFragment extends BaseFragment {
     private MyAdapter mAdapter;
     private List<Notify> mNotify = new ArrayList<>();
     private BroadcastReceiver mNotifyReceiver;
+    @BindView(R.id.empty)
+    public TextView emptyView;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container) {
@@ -105,13 +107,13 @@ public class NotificationFragment extends BaseFragment {
     }
 
     private void initEmptyView() {
-        TextView emptyView = new TextView(getContext());
-        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        emptyView.setText("暂无内容");
-        emptyView.setGravity(Gravity.CENTER);
-        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        emptyView.setVisibility(View.GONE);
-        ((ViewGroup) lv_notification.getParent()).addView(emptyView);
+//        TextView emptyView = new TextView(getContext());
+//        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        emptyView.setText("暂无内容");
+//        emptyView.setGravity(Gravity.CENTER);
+//        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+//        emptyView.setVisibility(View.GONE);
+//        ((ViewGroup) lv_notification.getParent()).addView(emptyView);
         lv_notification.setEmptyView(emptyView);
     }
 

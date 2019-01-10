@@ -51,6 +51,8 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     private List<Note> mNotes;
     @BindView(R.id.fab_note_add)
     public View addBtn;
+    @BindView(R.id.empty)
+    public TextView emptyView;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container) {
@@ -116,13 +118,6 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     }
 
     private void initEmptyView() {
-        TextView emptyView = new TextView(getContext());
-        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        emptyView.setText("暂无内容");
-        emptyView.setGravity(Gravity.CENTER);
-        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        emptyView.setVisibility(View.GONE);
-        ((ViewGroup) lv_note.getParent()).addView(emptyView);
         lv_note.setEmptyView(emptyView);
     }
 

@@ -52,6 +52,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public EditText et_password;
     @BindView(R.id.fl_password)
     public FrameLayout fl_password;
+    @BindView(R.id.empty)
+    public TextView emptyView;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container) {
@@ -96,7 +98,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                         ToastUtil.toast(getContext(), "请求失败");
                         //加载本地的
                         String pwd = SpUtil.getString(getContext(), "pwd");
-                        if(!CommonUtil.isEmpty(pwd)) {
+                        if (!CommonUtil.isEmpty(pwd)) {
                             List<Password> serverNotes = new Gson().fromJson(pwd, new TypeToken<List<Password>>() {
                             }.getType());
                             if (serverNotes != null && serverNotes.size() != 0) {
@@ -118,7 +120,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                                 mAdapter.notifyDataSetChanged();
 
                                 // 记录在本地
-                                SpUtil.setString(getContext(),"pwd", response);
+                                SpUtil.setString(getContext(), "pwd", response);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -128,13 +130,14 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     }
 
     private void initEmptyView() {
-        TextView emptyView = new TextView(getContext());
-        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        emptyView.setText("暂无内容");
-        emptyView.setGravity(Gravity.CENTER);
-        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        emptyView.setVisibility(View.GONE);
-        ((ViewGroup) lv_password.getParent()).addView(emptyView);
+//        TextView emptyView = new TextView(getContext());
+//        emptyView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        emptyView.setText("暂无内容");
+//        emptyView.setGravity(Gravity.CENTER);
+//        emptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+//        emptyView.setVisibility(View.GONE);
+//        ((ViewGroup) lv_password.getParent()).addView(emptyView);
+//        lv_password.setEmptyView(emptyView);
         lv_password.setEmptyView(emptyView);
     }
 
@@ -153,6 +156,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 //添加笔记
                 addPassword();
                 break;
+            default:
         }
     }
 
