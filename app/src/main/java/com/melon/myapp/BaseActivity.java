@@ -56,4 +56,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             SwipeBackHelper.onPostCreate(this);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isSideRight) {
+            SwipeBackHelper.onDestroy(this);
+        }
+    }
 }
