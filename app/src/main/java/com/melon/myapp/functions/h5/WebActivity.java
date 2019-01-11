@@ -246,7 +246,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         }
 
         @Override
-        public void onPageFinished(WebView view, String url) {
+        public void onPageFinished(final WebView view, String url) {
             super.onPageFinished(view, url);
             LogUtils.e("onPageFinished: " + url);
             mCurrentUrl = url;
@@ -254,6 +254,11 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             //去广告
             String js = AdFilterTool.getClearAdDivJs(WebActivity.this);
             view.loadUrl(js);
+
+            String jsClass = AdFilterTool.getClearAdDivJsByClass(WebActivity.this);
+            view.loadUrl(jsClass);
+            //调用js方法
+            view.loadUrl("javascript:hideAd();");
         }
 
         @Override

@@ -7,4 +7,8 @@
         <item>rightCouple</item>
         <item>leftFloat</item>
     </string-array>
+    <string-array name="adBlockDivClass">
+        <item>top_box</item>
+        <item>box-footer clearfix</item>
+    </string-array>
 </resources>
