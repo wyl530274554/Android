@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_item1"
-        android:title="Share"
+        android:title="分享"
         android:icon="@drawable/ic_share_html_white"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_item2"
+        android:title="刷新"
+        android:icon="@drawable/ic_refresh"
         app:showAsAction="ifRoom" />
     <!--若没有icon，会在右上角展示title-->
 

@@ -8,10 +8,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -26,14 +24,12 @@ import android.widget.TextView;
 import com.melon.myapp.BaseActivity;
 import com.melon.myapp.Constants;
 import com.melon.myapp.R;
+import com.melon.mylibrary.util.AdFilterTool;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
-import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.view.SlowlyProgressBar;
-
-import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -95,6 +91,10 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
                     case R.id.action_item1:
                         CommonUtil.shareWebUrl(WebActivity.this, mCurrentUrl);
                         break;
+                    case R.id.action_item2:
+                        //TODO 刷新
+                        mWebView.loadUrl(mCurrentUrl);
+                        break;
                     default:
                 }
 
@@ -108,6 +108,9 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         mWebView.setOnLongClickListener(this);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.setWebChromeClient(new MyWebChromeClient());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -247,6 +250,10 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             super.onPageFinished(view, url);
             LogUtils.e("onPageFinished: " + url);
             mCurrentUrl = url;
+
+            //去广告
+            String js = AdFilterTool.getClearAdDivJs(WebActivity.this);
+            view.loadUrl(js);
         }
 
         @Override
