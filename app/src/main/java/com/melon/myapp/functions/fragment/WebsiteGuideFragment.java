@@ -20,14 +20,10 @@ import java.util.List;
  * 网址导航
  */
 public class WebsiteGuideFragment extends Fragment {
-    private static WebsiteGuideFragment instance = null;
     private List<Website> mWebsites = new ArrayList<>();
 
     public static WebsiteGuideFragment newInstance() {
-        if (instance == null) {
-            instance = new WebsiteGuideFragment();
-        }
-        return instance;
+        return new WebsiteGuideFragment();
     }
 
     @Override
