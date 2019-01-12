@@ -67,14 +67,13 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = findViewById(R.id.viewpager);
-        mViewPager.setOffscreenPageLimit(5);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
-        viewPagerAdapter.addFragment(new PasswordFragment(), "密码本");
-        viewPagerAdapter.addFragment(new NoteFragment(), "记事本");
-        viewPagerAdapter.addFragment(WebsiteGuideFragment.newInstance(), "网址导航");
-        viewPagerAdapter.addFragment(new StudyFragment(), "学习记录");
-        viewPagerAdapter.addFragment(new NotificationFragment(), "通知");
+        viewPagerAdapter.addFragment( "主页");
+        viewPagerAdapter.addFragment( "密码本");
+        viewPagerAdapter.addFragment( "记事本");
+        viewPagerAdapter.addFragment( "网址导航");
+        viewPagerAdapter.addFragment( "学习记录");
+        viewPagerAdapter.addFragment( "通知");
         //设置适配器
         mViewPager.setAdapter(viewPagerAdapter);
 
