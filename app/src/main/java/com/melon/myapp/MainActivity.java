@@ -67,6 +67,7 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
 
         ViewPager mViewPager = findViewById(R.id.viewpager);
+        mViewPager.setOffscreenPageLimit(5);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BrowserFragment(), "主页");
         viewPagerAdapter.addFragment(new PasswordFragment(), "密码本");

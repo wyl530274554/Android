@@ -13,8 +13,10 @@ import java.util.List;
  */
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> mFragments = new ArrayList<>();//添加的Fragment的集合
-    private final List<String> mFragmentsTitles = new ArrayList<>();//每个Fragment对应的title的集合
+    //添加的Fragment的集合
+    private List<Fragment> mFragments = new ArrayList<>();
+    //每个Fragment对应的title的集合
+    private List<String> mFragmentsTitles = new ArrayList<>();
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);

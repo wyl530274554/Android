@@ -42,6 +42,7 @@ import okhttp3.Call;
 public class NoteFragment extends BaseFragment implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener, View.OnLongClickListener {
 
     private static final java.lang.String TAG = "NoteFragment";
+    private static final String OK_TAG_NOTE = "note";
     @BindView(R.id.lv_note)
     public ListView lv_note;
     private LayoutInflater mInflater;
@@ -92,6 +93,7 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     private void getMyServerNotes() {
         OkHttpUtils
                 .post()
+                .tag(OK_TAG_NOTE)
                 .url(ApiManager.API_NOTE_ALL)
                 .build()
                 .execute(new StringCallback() {
@@ -232,12 +234,14 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mDatabaseHelper != null) {
             OpenHelperManager.releaseHelper();
             mDatabaseHelper = null;
         }
+
+        OkHttpUtils.getInstance().cancelTag(OK_TAG_NOTE);
     }
 
     private DatabaseHelper getDBHelper() {
