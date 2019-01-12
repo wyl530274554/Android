@@ -44,8 +44,6 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     private static final String TAG = "WebActivity";
     @BindView(R.id.wv_html)
     public WebView mWebView;
-    @BindView(R.id.iv_html_share)
-    public ImageView ivShare;
     @BindView(R.id.title_html)
     public TextView tvTitle;
     @BindView(R.id.pb_web_view)
@@ -184,11 +182,6 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 //        }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    @OnClick(R.id.iv_html_share)
-    public void onViewClicked() {
-        CommonUtil.shareWebUrl(this, mCurrentUrl);
     }
 
     @Override
