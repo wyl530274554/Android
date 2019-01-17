@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -90,6 +91,13 @@ public class CommonUtil {
             return true;
         else
             return false;
+    }
+
+    /**
+     * 空判断
+     */
+    public static boolean isNotEmpty(CharSequence str) {
+        return !isEmpty(str);
     }
 
     /**
@@ -238,7 +246,7 @@ public class CommonUtil {
         //执行下载
         downloadManager.enqueue(request);
 
-        return ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)+"/"+fileName;
+        return ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/" + fileName;
     }
 
     /**
@@ -255,5 +263,23 @@ public class CommonUtil {
 
         //设置分享列表的标题，并且每次都显示分享列表
         context.startActivity(Intent.createChooser(shareIntent, "Share To"));
+    }
+
+    public static String getDataSize(long size) {
+        DecimalFormat formater = new DecimalFormat("####.00");
+        if (size < 1024) {
+            return size + "bytes";
+        } else if (size < 1024 * 1024) {
+            float kbsize = size / 1024f;
+            return formater.format(kbsize) + "KB";
+        } else if (size < 1024 * 1024 * 1024) {
+            float mbsize = size / 1024f / 1024f;
+            return formater.format(mbsize) + "MB";
+        } else if (size < 1024 * 1024 * 1024 * 1024) {
+            float gbsize = size / 1024f / 1024f / 1024f;
+            return formater.format(gbsize) + "GB";
+        } else {
+            return "size: error";
+        }
     }
 }

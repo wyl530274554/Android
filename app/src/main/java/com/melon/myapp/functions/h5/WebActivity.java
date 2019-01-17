@@ -1,7 +1,10 @@
 package com.melon.myapp.functions.h5;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
 import android.app.SearchManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,12 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.DownloadListener;
+import android.webkit.MimeTypeMap;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,13 +30,14 @@ import com.melon.myapp.Constants;
 import com.melon.myapp.R;
 import com.melon.mylibrary.util.AdFilterTool;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.DialogUtil;
 import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.MimeType;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.view.SlowlyProgressBar;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * H5页面
@@ -90,7 +95,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
                         CommonUtil.shareWebUrl(WebActivity.this, mCurrentUrl);
                         break;
                     case R.id.action_item2:
-                        //TODO 刷新
+                        // 刷新
                         mWebView.loadUrl(mCurrentUrl);
                         break;
                     default:
@@ -102,7 +107,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void setWebViewParam() {
+    private void initWebParams() {
         mWebView.setOnLongClickListener(this);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.setWebChromeClient(new MyWebChromeClient());
@@ -124,6 +129,44 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         } else {
             settings.setBlockNetworkImage(false);
         }
+
+        //支持下载
+        mWebView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(final String url, String userAgent, final String contentDisposition, String mimetype, long contentLength) {
+                //TODO 调用系统下载
+                LogUtils.e("url: " + url + ", userAgent: " + userAgent + ", contentDisposition: " + contentDisposition + ", mimetype: " + mimetype + ", contentLength: " + contentLength);
+
+                //非apk下载，跳转至浏览器
+                if (!MimeType.APK.equals(mimetype)) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                    return;
+                }
+
+                //弹出确认对话框
+                DialogUtil.show(WebActivity.this, CommonUtil.getDataSize(contentLength) + "\n确定下载吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        downFileBySystem(url);
+                    }
+                });
+            }
+        });
+    }
+
+    private void downFileBySystem(String url) {
+        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+
+        //下载时，下载完成后显示通知
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        //下载的路径，第一个参数是文件夹名称，第二个参数是下载的文件名
+        request.setDestinationInExternalFilesDir(WebActivity.this, null, System.currentTimeMillis() + ".apk");
+        request.setVisibleInDownloadsUi(true);
+        downloadManager.enqueue(request);
     }
 
     /**
@@ -146,7 +189,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 
     @Override
     protected void initData() {
-        setWebViewParam();
+        initWebParams();
         initToolbar();
         mSlowlyProgressBar = new SlowlyProgressBar(pb);
 
