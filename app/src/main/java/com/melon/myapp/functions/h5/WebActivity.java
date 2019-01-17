@@ -65,7 +65,8 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
-        CommonUtil.fullScreen(this);
+//        CommonUtil.fullScreen(this);
+        CommonUtil.setTransparentStateBar(this);
     }
 
     private void initToolbar() {

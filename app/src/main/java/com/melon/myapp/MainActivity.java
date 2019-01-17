@@ -78,12 +78,6 @@ public class MainActivity extends BaseActivity {
         mViewPager.setAdapter(viewPagerAdapter);
 
         TabLayout mTabLayout = findViewById(R.id.tabLayout);
-//        mTabLayout.addTab(mTabLayout.newTab().setText("主页"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("密码本"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("记事本"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("网址导航"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("学习记录"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("通知"));
         //给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
         mTabLayout.setupWithViewPager(mViewPager);
 

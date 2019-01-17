@@ -2,7 +2,7 @@ package com.melon.mylibrary.util;
 /**
  * 文件类型
  * @author melon.wang
- * @date 2019/1/17 17:30
+ * @date 2019/1/17 17:40
  * Email 530274554@qq.com
  */
 public interface MimeType {

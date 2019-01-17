@@ -7,6 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_html"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_app_primary"
@@ -33,6 +34,7 @@
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_below="@id/tb_html"
         android:progressDrawable="@drawable/progress_bar_states" />
 
 </RelativeLayout>
