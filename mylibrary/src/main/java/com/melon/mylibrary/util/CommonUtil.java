@@ -78,6 +78,22 @@ public class CommonUtil {
         return metrics.widthPixels;
     }
 
+    /**
+     * 通过反射获取状态栏高度，默认25dp
+     */
+    public static int getStatusBarHeight(Context context) {
+        int statusBarHeight = dip2px(context, 25);
+        try {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return statusBarHeight;
+    }
     //全屏
     public static void fullScreen(Activity act) {
         act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
