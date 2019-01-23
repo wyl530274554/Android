@@ -63,6 +63,8 @@ public class MainActivity extends BaseActivity {
         mToolbar = findViewById(R.id.toolBar);
         //设置ToolBar的title颜色
         mToolbar.setTitleTextColor(Color.WHITE);
+        //由于输入法的影响，需要设置toolbar的paddingTop
+        //mToolbar.setPadding(0, CommonUtil.getStatusBarHeight(this), 0, 0);
 
         setSupportActionBar(mToolbar);
 
