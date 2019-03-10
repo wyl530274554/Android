@@ -11,6 +11,8 @@ import com.example.sdkdemo.SdkMelon;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.CommonFragmentActivity;
 import com.melon.myapp.R;
+import com.melon.myapp.functions.activity.RetrofitActivity;
+import com.melon.myapp.functions.architecture.mvvm.view.MvvmActivity;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
 import com.melon.myapp.functions.camera.ZBarActivity;
 import com.melon.myapp.functions.camera.ZxingActivity;
@@ -137,10 +139,19 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("ConstraintLayout约束", 42));
         sectionedExpandableLayoutHelper.addSection("Ui界面", arrayList);
 
-        //其它
+        //网络
+        arrayList = new ArrayList<>();
+        arrayList.add(new Item("Retrofit", 45));
+        sectionedExpandableLayoutHelper.addSection("网络", arrayList);
+        //架构
+        arrayList = new ArrayList<>();
+        arrayList.add(new Item("MVVM", 44));
+        sectionedExpandableLayoutHelper.addSection("架构", arrayList);
+
+        //底层
         arrayList = new ArrayList<>();
         arrayList.add(new Item("调用ARR文件", 41));
-        sectionedExpandableLayoutHelper.addSection("其它", arrayList);
+        sectionedExpandableLayoutHelper.addSection("底层", arrayList);
 
         sectionedExpandableLayoutHelper.notifyDataSetChanged();
     }
@@ -332,6 +343,14 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
             case 43:
                 //File存储的路径
                 CommonUtil.enterActivity(mContext, FileStoragePathActivity.class);
+                break;
+            case 44:
+                //MVVM
+                CommonUtil.enterActivity(mContext, MvvmActivity.class);
+                break;
+            case 45:
+                //网络
+                CommonUtil.enterActivity(mContext, RetrofitActivity.class);
                 break;
             default:
         }

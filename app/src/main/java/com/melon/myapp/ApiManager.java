@@ -13,7 +13,7 @@ public class ApiManager {
     private static final String API_PROTOCOL = "http://";
     private static final String API_IP = "xiazhilu.top";
     private static final String API_PORT = "2020";
-    private static String API_BASE = getApiBase()+"/";
+    public static String API_BASE = getApiBase()+"/";
 
 
     public static final String API_NOTE_ADD = API_BASE + "note/addNote";
