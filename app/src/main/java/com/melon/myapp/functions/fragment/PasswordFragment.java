@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,8 +86,6 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
             ToastUtil.toast(getContext(), "此设备没有录入指纹");
             return;
         }
-
-        mCancellationSignal = new CancellationSignal();
     }
 
     @Override
@@ -185,7 +182,26 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         fl_password.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.fab_password_add,R.id.fl_password})
+    @Override
+    public void onPause() {
+        super.onPause();
+        cancelFingerprintAuth();
+    }
+
+    private void cancelFingerprintAuth() {
+        if (mCancellationSignal != null)
+            mCancellationSignal.cancel();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser) {
+            cancelFingerprintAuth();
+        }
+    }
+
+    @OnClick({R.id.fab_password_add, R.id.fl_password})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_password_add:
@@ -200,14 +216,9 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mCancellationSignal.cancel();
-    }
-
     private void authFinger() {
         ToastUtil.toast(getContext(), "请验证指纹");
+        mCancellationSignal = new CancellationSignal();
         mFingerprintManagerCompat.authenticate(null, 0, mCancellationSignal, new FingerprintCallback(), new Handler());
     }
 
@@ -371,7 +382,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     }
 
     /**
-     *  更新密码
+     * 更新密码
      */
     private void uploadUpdatedPassword(final Password password, final AlertDialog mDialog) {
         OkHttpUtils
