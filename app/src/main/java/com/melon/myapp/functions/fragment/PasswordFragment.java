@@ -163,7 +163,6 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     }
 
     @OnClick(R.id.fab_password_add)
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_password_add:

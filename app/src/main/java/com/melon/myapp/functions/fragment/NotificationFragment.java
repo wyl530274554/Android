@@ -136,7 +136,6 @@ public class NotificationFragment extends BaseFragment {
     }
 
     @OnClick(R.id.et_notify_send)
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.et_notify_send:

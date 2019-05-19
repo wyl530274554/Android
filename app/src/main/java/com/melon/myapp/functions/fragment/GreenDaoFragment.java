@@ -47,7 +47,6 @@ public class GreenDaoFragment extends BaseFragment {
     }
 
     @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4})
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:

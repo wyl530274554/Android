@@ -161,7 +161,6 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
 
     }
 
-    @Override
     public void onClick(View v) {
 
     }

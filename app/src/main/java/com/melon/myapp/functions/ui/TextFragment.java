@@ -39,7 +39,6 @@ public class TextFragment extends BaseFragment {
 
     }
 
-    @Override
     public void onClick(View v) {
 
     }

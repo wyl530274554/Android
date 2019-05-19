@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:padding="30dp">
     <!--可以单独设置此界面的Theme     android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
 
@@ -9,8 +8,9 @@
         android:id="@+id/et_browser_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入搜索内容"
+        android:layout_marginTop="150dp"
         android:layout_toLeftOf="@+id/bt_browser_search"
+        android:hint="请输入搜索内容"
         android:singleLine="true"
         android:textColor="@color/color_black" />
 
@@ -21,7 +21,17 @@
         android:layout_alignBottom="@id/et_browser_search"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/color_blue"
-        android:text="搜索" />
+        android:text="搜索"
+        android:textColor="@color/color_blue" />
 
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_browser_del"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@id/bt_browser_search"
+        android:layout_marginBottom="8dp"
+        android:layout_toLeftOf="@id/bt_browser_search"
+        android:scaleType="center"
+        android:src="@mipmap/ic_del" />
 </RelativeLayout>

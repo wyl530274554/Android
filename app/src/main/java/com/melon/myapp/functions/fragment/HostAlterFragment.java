@@ -44,7 +44,6 @@ public class HostAlterFragment extends BaseFragment {
     }
 
     @OnClick({R.id.bt_alter_host_ok})
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_alter_host_ok:

@@ -80,7 +80,6 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         lv_note.setOnItemClickListener(this);
         initEmptyView();
 
-        addBtn.setOnClickListener(this);
         addBtn.setOnLongClickListener(this);
     }
 
@@ -132,7 +131,6 @@ public class NoteFragment extends BaseFragment implements AdapterView.OnItemLong
         }
     }
 
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_note_add:

@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import com.melon.mylibrary.util.LogUtils;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment implements View.OnClickListener {
+public abstract class BaseFragment extends Fragment{
     public Handler mHandler = new Handler();
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LogUtils.e("onCreateView fragment: "+this.getClass().getSimpleName());
         View view = createView(inflater, container);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initView();
         initData();
         return view;
@@ -41,6 +43,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void onDestroyView() {
         super.onDestroyView();
         LogUtils.e("onDestroyView fragment: "+this.getClass().getSimpleName());
+        unbinder.unbind();
     }
 
     @Override
