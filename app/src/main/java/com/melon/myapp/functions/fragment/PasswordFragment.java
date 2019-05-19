@@ -100,16 +100,16 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         lv_password.setOnItemClickListener(this);
         lv_password.setOnItemLongClickListener(this);
 
-        et_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (v.getText().toString().trim().equals("android")) {
-                    fl_password.setVisibility(View.GONE);
-                    CommonUtil.hideInputMode(getActivity(), true);
-                }
-                return false;
-            }
-        });
+//        et_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (v.getText().toString().trim().equals("android")) {
+//                    fl_password.setVisibility(View.GONE);
+//                    CommonUtil.hideInputMode(getActivity(), true);
+//                }
+//                return false;
+//            }
+//        });
 
         srl_password.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -181,7 +181,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public void onResume() {
         super.onResume();
-        et_password.setText("");
+//        et_password.setText("");
         fl_password.setVisibility(View.VISIBLE);
     }
 
