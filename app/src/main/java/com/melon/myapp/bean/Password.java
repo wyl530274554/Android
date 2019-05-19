@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 
 public class Password implements Serializable {
+    public int id;
     public String title;
     public String user;
     public String password;

@@ -23,6 +23,7 @@ public class ApiManager {
     public static final String API_NOTE_ALL = API_BASE + "note/queryAllNote";
 
     public static final String API_PASSWORD_ADD = API_BASE + "index/addPassword";
+    public static final String API_PASSWORD_UPDATE = API_BASE + "index/updatePassword";
     public static final String API_PASSWORD_ALL = API_BASE + "index/queryAllPassword";
 
     public static final String API_GET_LOCAL_IP = API_BASE + "index/getLocalIp";
