@@ -11,6 +11,7 @@
         android:layout_marginTop="150dp"
         android:layout_toLeftOf="@+id/bt_browser_search"
         android:hint="请输入搜索内容"
+        android:paddingRight="30dp"
         android:singleLine="true"
         android:textColor="@color/color_black" />
 
@@ -25,7 +26,6 @@
         android:textColor="@color/color_blue" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/iv_browser_del"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -33,5 +33,6 @@
         android:layout_marginBottom="8dp"
         android:layout_toLeftOf="@id/bt_browser_search"
         android:scaleType="center"
-        android:src="@mipmap/ic_del" />
+        android:src="@mipmap/ic_del"
+        android:visibility="gone" />
 </RelativeLayout>

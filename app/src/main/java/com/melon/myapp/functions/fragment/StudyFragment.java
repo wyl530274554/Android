@@ -1,5 +1,6 @@
 package com.melon.myapp.functions.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,7 +60,13 @@ import com.melon.myapp.third.expandablegridrecycleview.ItemClickListener;
 import com.melon.myapp.third.expandablegridrecycleview.Section;
 import com.melon.myapp.third.expandablegridrecycleview.SectionedExpandableLayoutHelper;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.DialogUtil;
+import com.melon.mylibrary.util.ToastUtil;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -99,6 +106,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("扫一扫Zbar", 35));
         arrayList.add(new Item("扫一扫Zxing", 36));
         arrayList.add(new Item("File位置", 43));
+        arrayList.add(new Item("System Properties", 46));
         sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
@@ -351,8 +359,20 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
                 //网络
                 CommonUtil.enterActivity(mContext, RetrofitActivity.class);
                 break;
+            case 46:
+                //System properties
+                showProperties();
+                break;
             default:
         }
+    }
+
+    private void showProperties() {
+        Writer outPutStream = new StringWriter();
+        PrintWriter out = new PrintWriter(outPutStream);
+        System.getProperties().list(out);
+
+        DialogUtil.showMsgOnly(getActivity(),outPutStream.toString());
     }
 
     private void startAar() {
