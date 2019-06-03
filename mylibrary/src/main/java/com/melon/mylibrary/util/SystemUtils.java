@@ -1,6 +1,9 @@
 package com.melon.mylibrary.util;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 
 public class SystemUtils {
     /**
@@ -28,5 +31,22 @@ public class SystemUtils {
                 "\nbuilder类型：" + Build.TYPE +
                 "\nUSER:" + Build.USER;
         return sb;
+    }
+
+    public static String getIMEI(Context context) {
+        try {
+            //实例化TelephonyManager对象
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            //获取IMEI号
+            @SuppressLint("MissingPermission") String imei = telephonyManager.getDeviceId();
+            //在次做个验证，也不是什么时候都能获取到的啊
+            if (imei == null) {
+                imei = "";
+            }
+            return imei;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

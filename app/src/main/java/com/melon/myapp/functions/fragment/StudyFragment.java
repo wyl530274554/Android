@@ -106,6 +106,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("File位置", 43));
         arrayList.add(new Item("System Properties", 46));
         arrayList.add(new Item("Build信息", 47));
+        arrayList.add(new Item("手机唯一标识", 48));
         sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
@@ -366,8 +367,17 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
                 //System Build
                 showBuild();
                 break;
+            case 48:
+                //手机唯一标识
+                showIMEI();
+                break;
             default:
         }
+    }
+
+    private void showIMEI() {
+
+        DialogUtil.showMsgOnly(getActivity(), "IMEI: "+SystemUtils.getIMEI(getContext()));
     }
 
     private void showBuild() {
