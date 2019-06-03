@@ -1,6 +1,5 @@
 package com.melon.myapp.functions.fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import com.example.sdkdemo.SdkMelon;
 import com.melon.myapp.BaseFragment;
 import com.melon.myapp.CommonFragmentActivity;
 import com.melon.myapp.R;
+import com.melon.mylibrary.util.SystemUtils;
 import com.melon.myapp.functions.activity.RetrofitActivity;
 import com.melon.myapp.functions.architecture.mvvm.view.MvvmActivity;
 import com.melon.myapp.functions.beacon.ShowBeaconsActivity;
@@ -61,9 +61,7 @@ import com.melon.myapp.third.expandablegridrecycleview.Section;
 import com.melon.myapp.third.expandablegridrecycleview.SectionedExpandableLayoutHelper;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.DialogUtil;
-import com.melon.mylibrary.util.ToastUtil;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -107,6 +105,7 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
         arrayList.add(new Item("扫一扫Zxing", 36));
         arrayList.add(new Item("File位置", 43));
         arrayList.add(new Item("System Properties", 46));
+        arrayList.add(new Item("Build信息", 47));
         sectionedExpandableLayoutHelper.addSection("硬件", arrayList);
 
         //UI界面
@@ -363,8 +362,16 @@ public class StudyFragment extends BaseFragment implements ItemClickListener {
                 //System properties
                 showProperties();
                 break;
+            case 47:
+                //System Build
+                showBuild();
+                break;
             default:
         }
+    }
+
+    private void showBuild() {
+        DialogUtil.showMsgOnly(getActivity(), SystemUtils.getDeviceInfo());
     }
 
     private void showProperties() {
