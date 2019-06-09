@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.melon.myapp">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -15,7 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    //指纹
+    <!--指纹-->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
@@ -126,12 +127,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!--
         <service android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
             tools:node="replace" >
         </service>
-        -->
         <activity android:name=".functions.ui.AddToCartAnimActivity" />
         <activity android:name=".functions.ui.AddToCartAnim2Activity" />
         <activity android:name=".functions.ui.XRecyclerViewActivity" />
@@ -148,7 +147,7 @@
         <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />
         <activity android:name=".functions.ui.ConstraintLayoutActivity" />
         <activity android:name=".functions.system.FileStoragePathActivity" />
-        <activity android:name=".functions.architecture.mvvm.view.MvvmActivity"></activity>
+        <activity android:name=".functions.architecture.mvvm.view.MvvmActivity"/>
         <activity android:name=".functions.activity.RetrofitActivity" />
     </application>
 
