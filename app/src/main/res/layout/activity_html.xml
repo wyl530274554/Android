@@ -7,6 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_html"
+        android:visibility="gone"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -65,7 +65,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
     @Override
     protected void initView() {
         setContentView(R.layout.activity_html);
-//        CommonUtil.fullScreen(this);
+        CommonUtil.fullScreen(this);
         CommonUtil.setTransparentStateBar(this);
     }
 
@@ -220,10 +220,11 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         }
 
         //监听菜单键
-//        if (keyCode == KeyEvent.KEYCODE_MENU) {
-//            CommonUtil.shareWebUrl(this, mCurrentUrl);
-//            return true;
-//        }
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            CommonUtil.cancelFullScreen(this);
+            mToolbar.setVisibility(View.VISIBLE);
+            return true;
+        }
 
         return super.onKeyDown(keyCode, event);
     }

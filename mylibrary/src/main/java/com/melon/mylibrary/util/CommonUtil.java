@@ -98,6 +98,9 @@ public class CommonUtil {
     public static void fullScreen(Activity act) {
         act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+    public static void cancelFullScreen(Activity act) {
+        act.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
 
     /**
      * 空判断
