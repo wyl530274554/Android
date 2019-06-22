@@ -148,7 +148,7 @@ public class NotificationFragment extends BaseFragment {
     }
 
     private void sendNotify() {
-        if(isSending == true){
+        if(isSending){
             ToastUtil.toast(getContext(), "发送中，请稍等...");
             return;
         }
