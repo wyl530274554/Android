@@ -53,7 +53,7 @@ android {
     }
 
     //包名
-    android.applicationVariants.all {
+    applicationVariants.all {
         variant ->
             variant.outputs.all {
                 output ->
