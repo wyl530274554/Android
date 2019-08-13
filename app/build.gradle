@@ -56,7 +56,7 @@ android {
     applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "Melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
+                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
             }
     }
 
