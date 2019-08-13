@@ -12,6 +12,6 @@ public class Demo {
         String c = new String("kilimall");
         System.out.print(a==b);
         System.out.print(c==b);
-        System.out.print(a.equals(b));
+        System.out.print(!a.equals(b));
     }
 }
