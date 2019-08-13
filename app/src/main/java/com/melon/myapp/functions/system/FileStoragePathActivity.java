@@ -45,6 +45,8 @@ public class FileStoragePathActivity extends BaseActivity {
         sb.append("\n\n");
         sb.append("Environment.getDownloadCacheDirectory()").append("\n").append(Environment.getDownloadCacheDirectory());
         sb.append("\n\n");
+        sb.append("System.getenv('SECONDARY_STORAGE')").append("\n").append(System.getenv("SECONDARY_STORAGE"));
+        sb.append("\n\n");
 
         tvContent.setText(sb.toString());
     }

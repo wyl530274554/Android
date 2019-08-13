@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.Build;
-import android.os.Environment;
 
 import com.melon.myapp.third.LoggerInterceptor;
 import com.melon.mylibrary.util.LogUtils;
@@ -19,8 +18,6 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//import cn.jpush.android.api.JPushInterface;
-//import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 /**

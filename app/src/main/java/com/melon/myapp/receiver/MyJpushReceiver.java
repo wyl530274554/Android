@@ -17,23 +17,26 @@ import com.melon.myapp.db.DatabaseHelper;
 import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 
-//import cn.jpush.android.api.JPushInterface;
 
 /**
  * 自定义接收器 如果不定义这个 Receiver，则： 1) 默认用户会打开主界面 2) 处理不了自定义消息
  */
 public class MyJpushReceiver extends BroadcastReceiver {
-    private DatabaseHelper mDatabaseHelper;
-    private static final String TAG = "JPush";
-    RuntimeExceptionDao<Notify, Integer> notifyDao;
-    private DatabaseHelper getDBHelper(Context ctx) {
-        if (mDatabaseHelper == null) {
-            mDatabaseHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
-        }
-        return mDatabaseHelper;
-    }
     @Override
-    public void onReceive(final Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent) {
+
+    }
+//    private DatabaseHelper mDatabaseHelper;
+//    private static final String TAG = "JPush";
+//    RuntimeExceptionDao<Notify, Integer> notifyDao;
+//    private DatabaseHelper getDBHelper(Context ctx) {
+//        if (mDatabaseHelper == null) {
+//            mDatabaseHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
+//        }
+//        return mDatabaseHelper;
+//    }
+//    @Override
+//    public void onReceive(final Context context, Intent intent) {
 //        if(notifyDao==null) {
 //            notifyDao = getDBHelper(context).getNotifyDao();
 //        }
@@ -78,15 +81,15 @@ public class MyJpushReceiver extends BroadcastReceiver {
 //                }
 //
 //
-//                String extraJson = bundle.getString(JPushInterface.EXTRA_EXTRA);
-//
-//                JSONObject extraObj = new JSONObject(extraJson);
-//                //String type = extraObj.optString("type"); // 1、单店 2、爱街 3、写字楼  4、特卖活动
-//                String id = extraObj.optString("id");
-//                int action = extraObj.optInt("action"); // 1、消息 2、专题(跳转到详情时，隐藏分享) 3、单品 4、团购 5、普通网页
-//                String url = extraObj.optString("url");
-//
-//                Log.d(TAG, "id: " + id + ", action: " + action + ", url: " + url);
+////                String extraJson = bundle.getString(JPushInterface.EXTRA_EXTRA);
+////
+////                JSONObject extraObj = new JSONObject(extraJson);
+////                //String type = extraObj.optString("type"); // 1、单店 2、爱街 3、写字楼  4、特卖活动
+////                String id = extraObj.optString("id");
+////                int action = extraObj.optInt("action"); // 1、消息 2、专题(跳转到详情时，隐藏分享) 3、单品 4、团购 5、普通网页
+////                String url = extraObj.optString("url");
+////
+////                Log.d(TAG, "id: " + id + ", action: " + action + ", url: " + url);
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
@@ -100,12 +103,12 @@ public class MyJpushReceiver extends BroadcastReceiver {
 //        } else {
 //            Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
 //        }
-    }
-
-    // 打印所有的 intent extra 数据
-    private static String printBundle(Bundle bundle) {
-        StringBuilder sb = new StringBuilder();
-        for (String key : bundle.keySet()) {
+//    }
+//
+//    // 打印所有的 intent extra 数据
+//    private static String printBundle(Bundle bundle) {
+//        StringBuilder sb = new StringBuilder();
+//        for (String key : bundle.keySet()) {
 //            if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
 //                sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
 //            } else if (key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)) {
@@ -113,8 +116,8 @@ public class MyJpushReceiver extends BroadcastReceiver {
 //            } else {
 //                sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
 //            }
-        }
-        return sb.toString();
-    }
+//        }
+//        return sb.toString();
+//    }
 
 }
