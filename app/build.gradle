@@ -49,16 +49,14 @@ android {
     }
 
     dexOptions {
-        preDexLibraries = false //解决问题：DexException - Multiple dex files define Lokio/Sink
+        preDexLibraries = false //解决问题：DexException - Multiple dex files define
     }
 
     //包名
     applicationVariants.all {
         variant ->
             variant.outputs.all {
-                output ->
-                    def outputFile = output.outputFile
-                    output.outputFileName = outputFile.name.replace(outputFile.name, "Melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk")
+                outputFileName = "Melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
             }
     }
 
