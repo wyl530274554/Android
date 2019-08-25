@@ -1,5 +1,6 @@
 package com.melon.myapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -31,6 +32,10 @@ public abstract class BaseFragment extends Fragment{
         initView();
         initData();
         return view;
+    }
+
+    public Context getContext(){
+        return MyApplication.getInstance();
     }
 
     protected abstract View createView(LayoutInflater inflater, ViewGroup container);
