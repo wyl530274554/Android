@@ -72,10 +72,10 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     protected void initData() {
         loadLocalData();
         //指纹
-        initFingerprinter();
+        initFingerPrinter();
     }
 
-    private void initFingerprinter() {
+    private void initFingerPrinter() {
         mFingerprintManagerCompat = FingerprintManagerCompat.from(getContext());
         if (!mFingerprintManagerCompat.isHardwareDetected()) {
             ToastUtil.toast(getContext(), "此设备不支持指纹识别");
