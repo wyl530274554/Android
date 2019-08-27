@@ -29,11 +29,10 @@ public class TourGuideActivity extends BaseActivity {
     }
 
     private void initGuide() {
-        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+        TourGuide.init(this).with(TourGuide.Technique.CLICK)
                 .setPointer(new Pointer())
                 .setToolTip(new ToolTip().setTitle("Welcome!").setDescription("Click on Get Started to begin..."))
-                .setOverlay(new Overlay())
-                .playOn(button5);
+                .setOverlay(new Overlay());
     }
 
     @Override
