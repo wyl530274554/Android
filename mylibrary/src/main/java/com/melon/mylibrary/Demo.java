@@ -16,6 +16,7 @@ public class Demo {
 //        System.out.print(c==b);
 //        System.out.print(!a.equals(b));
         Timestamp ts = new Timestamp(System.currentTimeMillis());
+
         System.out.println(ts.toString());
     }
 }
