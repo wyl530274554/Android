@@ -35,7 +35,6 @@ public class MyApplication extends Application {
             return;
         }
         LeakCanary.install(this);
-
         Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler());
 //        JPushInterface.setDebugMode(true);
 //        JPushInterface.init(this);
