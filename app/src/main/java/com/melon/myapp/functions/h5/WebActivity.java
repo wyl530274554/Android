@@ -128,7 +128,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         if (isWebNoImgOpen && !NetUtil.isWifiConnected(this)) {
             settings.setBlockNetworkImage(true);
         } else {
-            settings.setBlockNetworkImage(false);
+            settings.setBlockNetworkImage(true);
         }
 
         //支持下载

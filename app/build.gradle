@@ -33,15 +33,27 @@ android {
 //                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
 //        ]
     }
+
+    signingConfigs {
+        //系统签名
+        common {
+            keyAlias 'melon'
+            keyPassword '123456'
+            storeFile file('myapp.jks')
+            storePassword '123456'
+        }
+    }
+
     buildTypes {    //构建类型
         release {   //版本配置
             minifyEnabled false
+            signingConfig signingConfigs.common
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     productFlavors {
-        MELON {
+        melon {
             dimension "channel"
         }
     }
