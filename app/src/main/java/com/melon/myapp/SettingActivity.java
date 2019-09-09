@@ -61,7 +61,7 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onResponse(String response, int id) {
                 if (!CommonUtil.isEmpty(response)) {
-                    tvSettingServerLocalIp.setText("服务器内部IP: "+response);
+                    tvSettingServerLocalIp.setText(response);
                 }
             }
         });

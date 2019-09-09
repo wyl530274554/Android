@@ -53,7 +53,7 @@ android {
     }
 
     productFlavors {
-        melon {
+        Melon {
             dimension "channel"
         }
     }
