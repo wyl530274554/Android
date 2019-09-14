@@ -125,10 +125,10 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
 
         boolean isWebNoImgOpen = SpUtil.getBoolean(getApplicationContext(), "isSmartWebNoImgOpen");
         //智能图片加载 只在wifi下显示
-        if (isWebNoImgOpen && !NetUtil.isWifiConnected(this)) {
+        if (isWebNoImgOpen) {
             settings.setBlockNetworkImage(true);
         } else {
-            settings.setBlockNetworkImage(true);
+            settings.setBlockNetworkImage(false);
         }
 
         //支持下载
