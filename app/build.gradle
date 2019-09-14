@@ -21,12 +21,12 @@ android {
 
         flavorDimensions "channel"
 
-//        ndk {
-//            //选择要添加的对应cpu类型的.so库。
-////            abiFilters 'armeabi','x86'  'armeabi-v7a', 'armeabi-v8a'
-//            abiFilters 'armeabi'
-//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-//        }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+//            abiFilters 'armeabi','x86'  'armeabi-v7a', 'armeabi-v8a'
+            abiFilters 'armeabi-v7a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
 
 //        manifestPlaceholders = [
 //                JPUSH_PKGNAME: applicationId,
