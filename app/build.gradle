@@ -11,11 +11,12 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
+    def currentVersionCode = getVersionCode()
     defaultConfig {
         applicationId "com.melon.myapp"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 8
+        versionCode currentVersionCode
         versionName "1.0"
 
         flavorDimensions "channel"
@@ -90,6 +91,20 @@ configurations.all {
             }
         }
     }
+}
+/**
+ * @param filename 要打开的文件名字
+ * @param propName 文件里面的键名字
+ * @return 所选择的文件里面的propName对应的值
+ */
+def getVersionCode() {
+    def propsFile = file('version.properties')
+    def properties = new Properties()
+    properties.load(new FileInputStream(propsFile))
+    def vCode = properties['V_CODE'].toInteger()
+    properties['V_CODE'] = (++vCode).toString()
+    properties.store(propsFile.newWriter(), null)
+    return vCode
 }
 
 dependencies {

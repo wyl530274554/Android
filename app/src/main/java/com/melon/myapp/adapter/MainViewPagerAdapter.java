@@ -62,13 +62,13 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new PasswordFragment();
             case 2:
-                return new NoteFragment();
-            case 3:
-                return WebsiteGuideFragment.newInstance();
-            case 4:
                 return new StudyFragment();
-            case 5:
-                return new NotificationFragment();
+//            case 3:
+//                return WebsiteGuideFragment.newInstance();
+//            case 4:
+//                return new StudyFragment();
+//            case 5:
+//                return new NotificationFragment();
             default:
         }
         return null;
@@ -77,7 +77,7 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         //返回Fragment的数量
-        return 6;
+        return mFragmentsTitles.size();
     }
 
     @Override

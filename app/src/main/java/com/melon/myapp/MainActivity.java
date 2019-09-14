@@ -3,14 +3,10 @@ package com.melon.myapp;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,16 +21,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.melon.myapp.adapter.MainViewPagerAdapter;
 import com.melon.myapp.functions.camera.ZBarActivity;
-import com.melon.myapp.functions.fragment.BrowserFragment;
-import com.melon.myapp.functions.fragment.NoteFragment;
-import com.melon.myapp.functions.fragment.NotificationFragment;
-import com.melon.myapp.functions.fragment.PasswordFragment;
-import com.melon.myapp.functions.fragment.StudyFragment;
-import com.melon.myapp.functions.fragment.WebsiteGuideFragment;
 import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.ToastUtil;
@@ -70,12 +59,12 @@ public class MainActivity extends BaseActivity {
 
         ViewPager mViewPager = findViewById(R.id.viewpager);
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment( "主页");
-        viewPagerAdapter.addFragment( "密码本");
-        viewPagerAdapter.addFragment( "记事本");
-        viewPagerAdapter.addFragment( "网址导航");
-        viewPagerAdapter.addFragment( "学习记录");
-        viewPagerAdapter.addFragment( "通知");
+        viewPagerAdapter.addFragment("主页");
+        viewPagerAdapter.addFragment("密码本");
+//        viewPagerAdapter.addFragment( "记事本");
+//        viewPagerAdapter.addFragment( "网址导航");
+        viewPagerAdapter.addFragment("学习记录");
+//        viewPagerAdapter.addFragment( "通知");
         //设置适配器
         mViewPager.setAdapter(viewPagerAdapter);
 
