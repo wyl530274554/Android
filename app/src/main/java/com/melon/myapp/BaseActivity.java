@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View.OnClickListener;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.mylibrary.util.StatusBarCompat;
@@ -36,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (isSideRight) {
             SwipeBackHelper.onCreate(this);
-            SwipeBackHelper.getCurrentPage(this).setSwipeEdge(50);
+            SwipeBackHelper.getCurrentPage(this).setSwipeRelateEnable(true);
         }
 
     }
