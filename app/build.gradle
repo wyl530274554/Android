@@ -14,7 +14,7 @@ android {
     def currentVersionCode = getVersionCode()
     defaultConfig {
         applicationId "com.melon.myapp"
-        minSdkVersion 16
+        minSdkVersion 20
         targetSdkVersion 26
         versionCode currentVersionCode
         versionName "1.0"
@@ -116,7 +116,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'me.yifeiyuan.periscopelayout:library:1.0.0'
     implementation 'com.bigkoo:convenientbanner:2.0.5'
-    implementation 'com.jude:swipebackhelper:3.1.2'
+//    implementation 'com.jude:swipebackhelper:3.1.2'
 //    implementation 'cn.jiguang.sdk:jpush:3.0.3'
 //    implementation 'cn.jiguang.sdk:jcore:1.1.1'
     implementation 'com.j256.ormlite:ormlite-android:5.1'

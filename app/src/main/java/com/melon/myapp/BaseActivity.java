@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.jude.swipbackhelper.SwipeBackHelper;
 import com.melon.mylibrary.util.StatusBarCompat;
 
 import butterknife.ButterKnife;
@@ -33,10 +32,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         //加上此段，可以让状态栏无色，并且浮在主内容之上
         StatusBarCompat.compat(this);
 
-        if (isSideRight) {
-            SwipeBackHelper.onCreate(this);
-            SwipeBackHelper.getCurrentPage(this).setSwipeRelateEnable(true);
-        }
+//        if (isSideRight) {
+//            SwipeBackHelper.onCreate(this);
+//            SwipeBackHelper.getCurrentPage(this).setSwipeRelateEnable(true);
+//        }
 
     }
 
@@ -52,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         if (isSideRight) {
-            SwipeBackHelper.onPostCreate(this);
+//            SwipeBackHelper.onPostCreate(this);
         }
     }
 
@@ -60,7 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (isSideRight) {
-            SwipeBackHelper.onDestroy(this);
+//            SwipeBackHelper.onDestroy(this);
         }
     }
 }
