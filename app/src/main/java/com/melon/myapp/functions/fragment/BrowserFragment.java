@@ -1,10 +1,8 @@
 package com.melon.myapp.functions.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +17,7 @@ import com.melon.myapp.functions.h5.WebActivity;
 import com.melon.mylibrary.util.CommonUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 搜索
@@ -79,15 +75,26 @@ public class BrowserFragment extends BaseFragment {
     private void search() {
         //搜索
         String key = etBrowserSearch.getText().toString().trim();
+        search(key);
+    }
 
+    private void search(String key) {
         if (!CommonUtil.isEmpty(key)) {
             Intent intent = new Intent(getActivity(), WebActivity.class);
-            intent.putExtra("url", Constants.URL_BAIDU + key);
+            intent.putExtra("url", Constants.URL_BAI_DU + key);
             startActivity(intent);
         }
     }
 
-    @OnClick({R.id.bt_browser_search, R.id.iv_browser_del})
+    private void enterWeb(String url) {
+        if (!CommonUtil.isEmpty(url)) {
+            Intent intent = new Intent(getActivity(), WebActivity.class);
+            intent.putExtra("url", url);
+            startActivity(intent);
+        }
+    }
+
+    @OnClick({R.id.bt_browser_search, R.id.iv_browser_del, R.id.bt_weather, R.id.bt_jd})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_browser_search:
@@ -95,6 +102,12 @@ public class BrowserFragment extends BaseFragment {
                 break;
             case R.id.iv_browser_del:
                 clear();
+                break;
+            case R.id.bt_weather:
+                search("天气预报");
+                break;
+            case R.id.bt_jd:
+                enterWeb(Constants.URL_JD);
                 break;
         }
     }

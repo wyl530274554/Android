@@ -12,7 +12,8 @@ public class Constants {
 
     public static final String JPUSH_AUTH = "Basic N2NlMTNjOWFjNmRlMDc4ODQ1MWVjZTRlOjQ0YzM3MDJjZjY1YTg0NTU5NzkzYWM2OQ==";
 
-    public static final String URL_BAIDU = "https://m.baidu.com/s?word=";
+    public static final String URL_BAI_DU = "https://m.baidu.com/s?word=";
+    public static final String URL_JD = "https://m.jd.com";
     public static final String URL_JPUSH_API = "https://api.jpush.cn/v3/push";
 
     public static final String BROADCAST_NEW_NOTIFY = "1000";

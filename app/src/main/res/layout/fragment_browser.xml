@@ -8,7 +8,6 @@
         android:id="@+id/et_browser_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
         android:layout_toLeftOf="@+id/bt_browser_search"
         android:hint="请输入搜索内容"
         android:paddingRight="30dp"
@@ -35,4 +34,21 @@
         android:scaleType="center"
         android:src="@mipmap/ic_del"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/bt_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_browser_search"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="天气" />
+
+    <Button
+        android:id="@+id/bt_jd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_browser_search"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_toRightOf="@id/bt_weather"
+        android:text="京东" />
 </RelativeLayout>
