@@ -42,7 +42,7 @@ public class NettyServer {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
                 if (future.isSuccess()) {
-                    System.out.println("服务端启动成功");
+                    System.out.println("服务端启动成功："+future.channel().localAddress());
                 } else {
                     System.out.println("服务端启动失败");
                 }
@@ -78,6 +78,12 @@ public class NettyServer {
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             super.channelActive(ctx);
             System.out.println("客户端连上了...");
+        }
+
+        @Override
+        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+            super.channelInactive(ctx);
+            System.out.println("客户端断开了...");
         }
     }
 }

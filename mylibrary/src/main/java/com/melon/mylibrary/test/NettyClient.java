@@ -45,15 +45,15 @@ public class NettyClient {
                     }
                 });
         //创建异步连接 可添加多个端口
-        ChannelFuture cf1 = b.connect("10.1.1.43", 24635).sync();
+        ChannelFuture cf1 = b.connect("192.168.1.28", 24635).sync();
         cf1.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
                 if (future != null && future.isSuccess()) {
                     System.out.println(new String("连接成功"));
 
-                    byte[] bytes = new byte[(int)(1.5 * 1024 * 1024)];
-                    bytes[bytes.length-1] = 11;
+                    byte[] bytes = new byte[(int)(1024)];
+                    bytes[0] = 11;
                     bytes[1023] = 11;
 
                     ByteBuf content = Unpooled.copiedBuffer(bytes);
