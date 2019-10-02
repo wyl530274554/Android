@@ -19,6 +19,8 @@ android {
         versionCode currentVersionCode
         versionName "1.0"
 
+        multiDexEnabled true
+
         flavorDimensions "channel"
 
         ndk {
@@ -64,10 +66,6 @@ android {
         }
     }
 
-    dexOptions {
-        preDexLibraries = false //解决问题：DexException - Multiple dex files define
-    }
-
     //包名
     applicationVariants.all {
         variant ->
@@ -83,7 +81,7 @@ android {
 }
 
 configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+    resolutionStrategy.eachDependency { details ->
         def requested = details.requested
         if (requested.group == 'com.android.support') {
             if (!requested.name.startsWith("multidex")) {
@@ -114,6 +112,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'me.yifeiyuan.periscopelayout:library:1.0.0'
     implementation 'com.bigkoo:convenientbanner:2.0.5'
 //    implementation 'com.jude:swipebackhelper:3.1.2'
