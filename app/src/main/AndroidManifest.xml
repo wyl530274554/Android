@@ -28,7 +28,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
-            android:theme="@style/MyTheme.Main"
+            android:theme="@style/MyTheme.MainActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"> <!-- adjustResize|stateHidden -->
             <meta-data
                 android:name="android.app.default_searchable"
@@ -149,7 +149,7 @@
         <activity android:name=".functions.system.FileStoragePathActivity" />
         <activity android:name=".functions.architecture.mvvm.view.MvvmActivity"/>
         <activity android:name=".functions.activity.RetrofitActivity" />
-        <activity android:name=".MainSimpleActivity" />
+        <activity android:name=".MainSimpleActivity"  android:theme="@style/MyTheme.MainActivity"/>
     </application>
 
 </manifest>

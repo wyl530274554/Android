@@ -14,7 +14,7 @@ android {
     def currentVersionCode = getVersionCode()
     defaultConfig {
         applicationId "com.melon.myapp"
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode currentVersionCode
         versionName "1.0"
