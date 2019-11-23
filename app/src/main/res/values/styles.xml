@@ -45,7 +45,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item> <!--可以让首页的侧边导航顶到状态栏-->
     </style>
 
     <!--有ActionBar的主题-->

@@ -35,6 +35,7 @@ import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.MimeType;
 import com.melon.mylibrary.util.NetUtil;
 import com.melon.mylibrary.util.SpUtil;
+import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.view.SlowlyProgressBar;
 
 import butterknife.BindView;
@@ -223,6 +224,8 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         if (keyCode == KeyEvent.KEYCODE_MENU) {
             CommonUtil.cancelFullScreen(this);
             mToolbar.setVisibility(View.VISIBLE);
+
+            ToastUtil.toast(getApplicationContext(),"更多操作开启");
             return true;
         }
 
