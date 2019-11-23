@@ -9,7 +9,7 @@
     android:paddingRight="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main_simple">
 
     <!--可以单独设置此界面的Theme     android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
     <EditText
