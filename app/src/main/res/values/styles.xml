@@ -50,6 +50,7 @@
 
     <!--有ActionBar的主题-->
     <style name="MyTheme.HasActionBar" parent="@style/AppBaseTheme">
+
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
