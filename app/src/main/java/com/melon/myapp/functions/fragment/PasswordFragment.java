@@ -28,6 +28,7 @@ import com.melon.myapp.BaseFragment;
 import com.melon.myapp.R;
 import com.melon.myapp.bean.Password;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.melon.mylibrary.util.ViewHolder;
@@ -35,7 +36,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,7 +75,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     protected void initData() {
         loadLocalData();
         //指纹
-        initFingerPrinter();
+//        initFingerPrinter();
     }
 
     private void initFingerPrinter() {
@@ -117,43 +120,37 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     }
 
     private void getMyServerNotes() {
-        OkHttpUtils
-                .post()
-                .url(ApiManager.API_PASSWORD_ALL)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        ToastUtil.toast(getContext(), "请求失败");
+        OkHttpUtils.get().url(ApiManager.API_PASSWORD_ALL).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                //刷新完成
+                srl_password.setRefreshing(false);
+                LogUtils.e("get notes error: "+e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    List<Password> serverNotes = new Gson().fromJson(response, new TypeToken<List<Password>>() {
+                    }.getType());
+                    if (serverNotes != null && serverNotes.size() != 0) {
+                        // 获取本地并显示
+                        mPasswords.clear();
+                        mPasswords.addAll(serverNotes);
+                        mAdapter.notifyDataSetChanged();
+
+                        // 记录在本地
+                        SpUtil.setString(getContext(), "pwd", response);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    @Override
-                    public void onAfter(int id) {
-                        super.onAfter(id);
+                //刷新完成
+                srl_password.setRefreshing(false);
+            }
+        });
 
-                        //刷新完成
-                        srl_password.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        try {
-                            List<Password> serverNotes = new Gson().fromJson(response, new TypeToken<List<Password>>() {
-                            }.getType());
-                            if (serverNotes != null && serverNotes.size() != 0) {
-                                // 获取本地并显示
-                                mPasswords.clear();
-                                mPasswords.addAll(serverNotes);
-                                mAdapter.notifyDataSetChanged();
-
-                                // 记录在本地
-                                SpUtil.setString(getContext(), "pwd", response);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
     }
 
     private void loadLocalData() {
@@ -179,7 +176,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public void onResume() {
         super.onResume();
 //        et_password.setText("");
-        fl_password.setVisibility(View.VISIBLE);
+//        fl_password.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -197,7 +194,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (!isVisibleToUser) {
-            cancelFingerprintAuth();
+//            cancelFingerprintAuth();
         }
     }
 
@@ -286,32 +283,32 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     }
 
     private void uploadPassword(final Password password, final AlertDialog mDialog) {
-        OkHttpUtils
-                .post()
-                .url(ApiManager.API_PASSWORD_ADD)
-                .addParams("title", password.title)
-                .addParams("password", password.password)
-                .addParams("user", password.user)
-                .addParams("desc", password.desc)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        ToastUtil.toast(getContext(), e.getMessage());
-                    }
+        Map<String, String> map = new HashMap<>();
+        map.put("title", password.title);
+        map.put("password", password.password);
+        map.put("user", password.user);
+        map.put("desc", password.desc);
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if ("1".equalsIgnoreCase(response)) {
-                            ToastUtil.toast(getContext(), "添加成功");
-                            mDialog.dismiss();
-                            mPasswords.add(0, password);
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            ToastUtil.toast(getContext(), "添加失败: " + response);
-                        }
-                    }
-                });
+        OkHttpUtils.post().url(ApiManager.API_PASSWORD_ADD).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.d("net error: " + e.getCause());
+                ToastUtil.toast(getContext(), e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                if ("1".equalsIgnoreCase(response)) {
+                    ToastUtil.toast(getContext(), "添加成功");
+                    mDialog.dismiss();
+                    mPasswords.add(0, password);
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    ToastUtil.toast(getContext(), "添加失败: " + response);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -385,31 +382,29 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
      * 更新密码
      */
     private void uploadUpdatedPassword(final Password password, final AlertDialog mDialog) {
-        OkHttpUtils
-                .post()
-                .url(ApiManager.API_PASSWORD_UPDATE)
-                .addParams("id", password.id + "")
-                .addParams("title", password.title)
-                .addParams("password", password.password)
-                .addParams("user", password.user)
-                .addParams("desc", password.desc)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        ToastUtil.toast(getContext(), e.getMessage());
-                    }
+        Map<String, String> map = new HashMap<>();
+        map.put("id", password.id + "");
+        map.put("password", password.password);
+        map.put("user", password.user);
+        map.put("desc", password.desc);
+        OkHttpUtils.post().url(ApiManager.API_PASSWORD_UPDATE).params(map).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                LogUtils.d("net error: " + e.getCause());
+                ToastUtil.toast(getContext(), e.getMessage());
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if ("1".equalsIgnoreCase(response)) {
-                            ToastUtil.toast(getContext(), "修改成功");
-                            mDialog.dismiss();
-                        } else {
-                            ToastUtil.toast(getContext(), "修改失败: " + response);
-                        }
-                    }
-                });
+            @Override
+            public void onResponse(String response, int id) {
+                if ("1".equalsIgnoreCase(response)) {
+                    ToastUtil.toast(getContext(), "修改成功");
+                    mDialog.dismiss();
+                } else {
+                    ToastUtil.toast(getContext(), "修改失败: " + response);
+                }
+            }
+        });
+
     }
 
     class MyAdapter extends BaseAdapter {

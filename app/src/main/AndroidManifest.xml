@@ -149,6 +149,7 @@
         <activity android:name=".functions.system.FileStoragePathActivity" />
         <activity android:name=".functions.architecture.mvvm.view.MvvmActivity"/>
         <activity android:name=".functions.activity.RetrofitActivity" />
+        <activity android:name=".MainSimpleActivity" />
     </application>
 
 </manifest>
