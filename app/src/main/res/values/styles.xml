@@ -1,46 +1,30 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="MyBaseTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/color_app_primary</item><!--Toolbar、ActionBar颜色-->
         <item name="colorPrimaryDark">@color/color_app_primary_dark</item><!--状态栏颜色-->
         <item name="colorAccent">@color/color_app_accent</item><!--EditText、CheckBox颜色-->
         <item name="android:textAllCaps">false</item><!--取消大写-->
-        <item name="android:textColorSecondary">@color/color_white</item><!--菜单更多点的颜色-->
+        <item name="android:textColorSecondary">@color/color_white
+        </item><!--菜单更多点的颜色,没错是三个点的颜色，不要再验证了-->
         <!--<item name="actionMenuTextColor">@color/color_white</item>--><!--菜单字体颜色-->
+        <!--<item name="android:textColorPrimary">@color/color_blue</item>--><!--主文字颜色如Button/TextView-->
         <item name="android:colorBackground">@color/color_activity_background
         </item><!--页面背景颜色，只能在colors.xml中定义 ，否则为透明色-->
-
-    </style>
-    <!--Toolbar Pop-->
-    <style name="ToolbarPopupTheme">
-        <item name="android:colorBackground">@color/color_app_primary
-        </item> <!--也可以设置背景色以及menu中的其他属性-->
-        <item name="overlapAnchor">false</item>  <!--设置不覆盖锚点-->
-        <item name="android:textColor">@color/color_white</item><!--条目字体颜色-->
-        <item name="android:textSize">14sp</item><!--条目字体大小-->
-    </style>
-    <!--Toolbar-->
-    <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="actionMenuTextColor">@color/color_white</item>
-        <item name="android:textColor">@color/color_white</item>
-        <item name="android:textSize">16sp</item>
+        <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
     </style>
 
     <!-- 整个应用的主题 -->
-    <style name="MyTheme.Application" parent="@style/AppBaseTheme">
-        <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
-        <!--<item name="android:textColorPrimary">@color/color_blue</item> &lt;!&ndash;主文字颜色如Button&ndash;&gt;-->
+    <style name="MyTheme.Application" parent="@style/MyBaseTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <!--<item name="android:windowSwipeToDismiss">true</item>-->
+        <!--<item name="android:windowSwipeToDismiss">true</item>--> <!--右滑动退出Activity，不太好用-->
         <!--<item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>-->
     </style>
     <!-- MainActivity的主题 -->
-    <style name="MyTheme.MainActivity" parent="@style/AppBaseTheme">
-        <!--<item name="android:windowBackground">@android:color/transparent</item>--><!--页面背景颜色-->
-        <!--<item name="android:textColorPrimary">@color/color_blue</item> &lt;!&ndash;主文字颜色如Button&ndash;&gt;-->
+    <style name="MyTheme.MainActivity" parent="@style/MyBaseTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -49,12 +33,24 @@
     </style>
 
     <!--有ActionBar的主题-->
-    <style name="MyTheme.HasActionBar" parent="@style/AppBaseTheme">
-
+    <style name="MyTheme.HasActionBar" parent="@style/MyBaseTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <!--<item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>-->
     </style>
-
+    <!--Toolbar Pop-->
+    <style name="MyTheme.ToolbarPopup" parent="MyBaseTheme">
+        <item name="android:colorBackground">@color/color_app_primary
+        </item> <!--也可以设置背景色以及menu中的其他属性-->
+        <item name="overlapAnchor">false</item>  <!--设置不覆盖锚点-->
+        <item name="android:textColor">@color/color_white</item><!--条目字体颜色-->
+        <item name="android:textSize">14sp</item><!--条目字体大小-->
+    </style>
+    <!--Toolbar-->
+    <style name="MyToolbar">
+        <item name="actionMenuTextColor">@color/color_white</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="titleTextColor">@color/color_white</item>
+    </style>
 </resources>
