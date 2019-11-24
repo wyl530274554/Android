@@ -9,6 +9,9 @@ import android.os.Handler;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -53,12 +58,15 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     private LayoutInflater mInflater;
     private MyAdapter mAdapter;
     private List<Password> mPasswords = new ArrayList<>();
+    private List<Password> mPasswordsBackup = new ArrayList<>();
     @BindView(R.id.et_password)
     public EditText et_password;
     @BindView(R.id.fl_password)
     public FrameLayout fl_password;
     @BindView(R.id.empty)
     public TextView emptyView;
+    @BindView(R.id.et_pwd_search)
+    public EditText et_pwd_search;
     @BindView(R.id.srl_password)
     public SwipeRefreshLayout srl_password;
     private BiometricPrompt mBiometricPrompt;
@@ -100,21 +108,33 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         lv_password.setOnItemClickListener(this);
         lv_password.setOnItemLongClickListener(this);
 
-//        et_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (v.getText().toString().trim().equals("android")) {
-//                    fl_password.setVisibility(View.GONE);
-//                    CommonUtil.hideInputMode(getActivity(), true);
-//                }
-//                return false;
-//            }
-//        });
-
         srl_password.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 getMyServerNotes();
+            }
+        });
+
+        et_pwd_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String content = s.toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    lv_password.clearTextFilter();
+                } else {
+                    lv_password.setFilterText(content);
+                }
+                LogUtils.e("onTextChanged: " + content);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                LogUtils.e("afterTextChanged: " + s.toString());
             }
         });
     }
@@ -125,7 +145,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
             public void onError(Call call, Exception e, int id) {
                 //刷新完成
                 srl_password.setRefreshing(false);
-                LogUtils.e("get notes error: "+e.getMessage());
+                LogUtils.e("get notes error: " + e.getMessage());
             }
 
             @Override
@@ -135,10 +155,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     }.getType());
                     if (serverNotes != null && serverNotes.size() != 0) {
                         // 获取本地并显示
-                        mPasswords.clear();
-                        mPasswords.addAll(serverNotes);
-                        mAdapter.notifyDataSetChanged();
-
+                        initDataShow(serverNotes);
                         // 记录在本地
                         SpUtil.setString(getContext(), "pwd", response);
                     }
@@ -153,6 +170,14 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
     }
 
+    public void initDataShow(List<Password> pwds) {
+        mPasswords.clear();
+        mPasswordsBackup.clear();
+        mPasswords.addAll(pwds);
+        mPasswordsBackup.addAll(pwds);
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void loadLocalData() {
         //加载本地的
         String pwd = SpUtil.getString(getContext(), "pwd");
@@ -161,9 +186,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
             }.getType());
             if (serverNotes != null && serverNotes.size() != 0) {
                 // 获取本地并显示
-                mPasswords.clear();
-                mPasswords.addAll(serverNotes);
-                mAdapter.notifyDataSetChanged();
+                initDataShow(serverNotes);
             }
         }
     }
@@ -407,8 +430,9 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
     }
 
-    class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter implements Filterable {
         private int showPos;
+        MyFilter mFilter;
 
         @Override
         public int getCount() {
@@ -477,6 +501,56 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         public void show(int position) {
             showPos = position;
             notifyDataSetChanged();
+        }
+
+        @Override
+        public Filter getFilter() {
+            if (mFilter == null) {
+                mFilter = new MyFilter();
+            }
+            return mFilter;
+        }
+    }
+
+    class MyFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            LogUtils.e("performFiltering: " + charSequence);
+
+            //定义过滤规则
+            FilterResults result = new FilterResults();
+
+            List<Password> list;
+            if (TextUtils.isEmpty(charSequence)) {
+                //当过滤的关键字为空的时候，显示所有的数据
+                list = mPasswordsBackup;
+            } else {
+                //否则把符合条件的数据对象添加到集合中
+                list = new ArrayList<>();
+                for (Password pwd : mPasswordsBackup) {
+                    if (pwd.title.contains(charSequence) || pwd.desc.contains(charSequence)) {
+                        list.add(pwd);
+                    }
+                }
+            }
+            result.values = list;
+            result.count = list.size();
+
+            return result;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            LogUtils.e("filter: " + filterResults.count);
+            mPasswords = (List<Password>) filterResults.values;
+            //告诉适配器更新界面
+            if (filterResults.count > 0) {
+                mAdapter.notifyDataSetChanged();
+            } else {
+                mAdapter.notifyDataSetInvalidated();
+            }
         }
     }
 
