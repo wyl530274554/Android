@@ -11,7 +11,7 @@ import com.melon.mylibrary.util.SpUtil;
  */
 public class ApiManager {
     private static final String API_PROTOCOL = "http://";
-    private static final String API_IP = "wangyanlong.xyz";
+    private static final String API_IP = "host";
     private static final String API_PORT = "80";
     public static String API_BASE = getApiBase()+"/";
 
