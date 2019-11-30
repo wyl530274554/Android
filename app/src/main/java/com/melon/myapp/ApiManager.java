@@ -27,6 +27,7 @@ public class ApiManager {
     public static final String API_PASSWORD_ALL = API_BASE + "index/queryAllPassword";
 
     public static final String API_GET_LOCAL_IP = API_BASE + "index/getLocalIp";
+    public static final String API_GET_ALL_IMAGE = API_BASE + "index/allImages";
 
     private static String getApiBase() {
         String host = SpUtil.getString(MyApplication.getInstance(),"api_host");

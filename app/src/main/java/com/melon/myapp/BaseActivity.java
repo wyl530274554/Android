@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.melon.mylibrary.util.StatusBarCompat;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import butterknife.ButterKnife;
 
@@ -20,9 +22,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static Handler mHandler = new Handler();
     Context mContext;
     private boolean isSideRight = true;
-
+    public ImageLoader mImageLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mImageLoader = ImageLoader.getInstance();
+        mImageLoader.init(ImageLoaderConfiguration.createDefault(this));
+
         super.onCreate(savedInstanceState);
         mContext = getApplicationContext();
         initView();
