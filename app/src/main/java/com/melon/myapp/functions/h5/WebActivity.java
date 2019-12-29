@@ -113,9 +113,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         mWebView.setOnLongClickListener(this);
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.setWebChromeClient(new MyWebChromeClient());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
+        WebView.setWebContentsDebuggingEnabled(true);
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -136,7 +134,7 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
         mWebView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(final String url, String userAgent, final String contentDisposition, String mimetype, long contentLength) {
-                //TODO 调用系统下载
+                // 调用系统下载
                 LogUtils.e("url: " + url + ", userAgent: " + userAgent + ", contentDisposition: " + contentDisposition + ", mimetype: " + mimetype + ", contentLength: " + contentLength);
 
                 //非apk下载，跳转至浏览器
@@ -254,6 +252,10 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             // 　地图类型
             case WebView.HitTestResult.GEO_TYPE:
                 break;
+            // 带有链接的图片类型
+            case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                // 处理长按图片的菜单项
+            case WebView.HitTestResult.IMAGE_TYPE:
             // 超链接
             case WebView.HitTestResult.SRC_ANCHOR_TYPE:
                 // 另起一页
@@ -261,11 +263,6 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
                     openNewWindow(extra);
                 }
                 break;
-            // 带有链接的图片类型
-            case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
-                // 处理长按图片的菜单项
-            case WebView.HitTestResult.IMAGE_TYPE:
-                return true;
             //未知
             case WebView.HitTestResult.UNKNOWN_TYPE:
                 break;
@@ -291,15 +288,8 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             super.onPageFinished(view, url);
             LogUtils.e("onPageFinished: " + url);
             mCurrentUrl = url;
-
             //去广告
-            String js = AdFilterTool.getClearAdDivJs(WebActivity.this);
-            view.loadUrl(js);
-
-            String jsClass = AdFilterTool.getClearAdDivJsByClass(WebActivity.this);
-            view.loadUrl(jsClass);
-            //调用js方法
-            view.loadUrl("javascript:hideAd();");
+//            removeAd(view);
         }
 
         @Override
@@ -330,6 +320,16 @@ public class WebActivity extends BaseActivity implements View.OnLongClickListene
             }
             return super.shouldOverrideUrlLoading(view, request);
         }
+    }
+
+    private void removeAd(WebView view) {
+        String js = AdFilterTool.getClearAdDivJs(WebActivity.this);
+        view.loadUrl(js);
+
+        String jsClass = AdFilterTool.getClearAdDivJsByClass(WebActivity.this);
+        view.loadUrl(jsClass);
+        //调用js方法
+        view.loadUrl("javascript:hideAd();");
     }
 
     /**
