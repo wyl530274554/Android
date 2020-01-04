@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -67,9 +66,6 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public TextView emptyView;
     @BindView(R.id.et_pwd_search)
     public EditText et_pwd_search;
-    @BindView(R.id.srl_password)
-    public SwipeRefreshLayout srl_password;
-    private BiometricPrompt mBiometricPrompt;
     private FingerprintManagerCompat mFingerprintManagerCompat;
     private CancellationSignal mCancellationSignal;
 
@@ -82,6 +78,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     protected void initData() {
         loadLocalData();
+
         //指纹
 //        initFingerPrinter();
     }
@@ -108,13 +105,6 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         lv_password.setOnItemClickListener(this);
         lv_password.setOnItemLongClickListener(this);
 
-        srl_password.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getMyServerNotes();
-            }
-        });
-
         et_pwd_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -139,12 +129,11 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         });
     }
 
-    private void getMyServerNotes() {
+    private void getServerNotes() {
         OkHttpUtils.get().url(ApiManager.API_PASSWORD_ALL).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 //刷新完成
-                srl_password.setRefreshing(false);
                 LogUtils.e("get notes error: " + e.getMessage());
             }
 
@@ -162,9 +151,6 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                //刷新完成
-                srl_password.setRefreshing(false);
             }
         });
 
@@ -188,6 +174,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 // 获取本地并显示
                 initDataShow(serverNotes);
             }
+        } else {
+            getServerNotes();
         }
     }
 
