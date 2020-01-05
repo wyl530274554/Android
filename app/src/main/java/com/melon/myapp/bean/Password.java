@@ -20,4 +20,8 @@ public class Password implements Serializable {
         this.password = password;
         this.desc = desc;
     }
+
+    public Password(String title) {
+        this.title = title;
+    }
 }

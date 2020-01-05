@@ -159,6 +159,10 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public void initDataShow(List<Password> pwds) {
         mPasswords.clear();
         mPasswordsBackup.clear();
+
+        // 模拟刷新
+//        pwds.add(0, new Password("刷新"));
+
         mPasswords.addAll(pwds);
         mPasswordsBackup.addAll(pwds);
         mAdapter.notifyDataSetChanged();
@@ -314,6 +318,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     mDialog.dismiss();
                     mPasswords.add(0, password);
                     mAdapter.notifyDataSetChanged();
+
+                    getServerNotes();
                 } else {
                     ToastUtil.toast(getContext(), "添加失败: " + response);
                 }
@@ -324,6 +330,11 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        if (position == 0) {
+//            ToastUtil.toast(getContext(), "刷新");
+//            getServerNotes();
+//        }
+
         mAdapter.show(position);
     }
 
@@ -398,6 +409,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         map.put("password", password.password);
         map.put("user", password.user);
         map.put("desc", password.desc);
+        map.put("title", password.title);
         OkHttpUtils.post().url(ApiManager.API_PASSWORD_UPDATE).params(map).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -410,6 +422,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 if ("1".equalsIgnoreCase(response)) {
                     ToastUtil.toast(getContext(), "修改成功");
                     mDialog.dismiss();
+
+                    getServerNotes();
                 } else {
                     ToastUtil.toast(getContext(), "修改失败: " + response);
                 }
