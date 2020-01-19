@@ -1,155 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.melon.myapp">
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.melon.app">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <!--指纹-->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <dist:module dist:instant="true" />
 
     <application
-        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/MyTheme.Application">
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/MyTheme.MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"> <!-- adjustResize|stateHidden -->
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".functions.h5.HtmlActivity" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".SplashActivity">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".functions.wifi.ShowWifiInfoActivity" />
-        <activity android:name=".functions.sensor.ShakeOneShakeActivity" />
-        <activity android:name=".functions.beacon.ShowBeaconsActivity" />
-        <activity android:name=".functions.screen.PhoneDensityActivity" />
-        <activity android:name=".functions.ui.ProgressActivity" />
-        <activity android:name=".functions.ui.FlowLayoutActivity" />
-        <activity android:name=".functions.ui.DrawerLayoutActivity" />
-        <activity android:name=".functions.ui.CustomerViewActivity" />
-        <activity
-            android:name=".functions.ui.AppActionBarActivity"
-            android:theme="@style/MyTheme.HasActionBar" />
-        <activity android:name=".functions.ui.StatusBarActivity" />
-        <activity android:name=".functions.ui.PullRefreshActivity" />
-        <activity android:name=".functions.ui.NavigationActivity" />
-        <activity android:name=".functions.ui.FragmentTabhostActivity" />
-        <activity android:name=".functions.ui.FragmentTabHostCustomTitleActivity" />
-        <activity android:name=".functions.ui.TabLayoutActivity" />
-        <activity android:name=".functions.ui.TabLayoutFragmentActivity" />
-        <activity android:name=".functions.ui.ToolbarActivity" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="j4Gtw1WpVp80BKz74Kq0nJbkc" />
-
-        <activity android:name=".functions.ui.LikeActivity" />
-        <activity android:name=".functions.ui.RecycleViewActivity" />
-        <activity android:name=".functions.ui.NavigationViewActivity" />
-        <activity android:name=".functions.ui.CardViewActivity" />
-        <activity android:name=".functions.ui.SnackbarActivity" />
-        <activity android:name=".functions.ui.ScrollListViewActivity" />
-        <activity android:name=".functions.ui.WxProgressBarActivity" />
-        <activity android:name=".functions.ui.TextSwitcherActivity" />
-        <activity android:name=".functions.ui.ViewFlipperActivity" />
-        <activity android:name=".functions.system.MaxMemoryActivity" />
-        <activity android:name=".functions.ui.AdvBannerActivity" />
-        <activity
-            android:name=".functions.h5.WebActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
-        <activity android:name=".functions.ui.CollapsingToolbarLayoutActivity" />
-        <activity android:name=".functions.ui.CoordinatorLayoutActivity" />
-        <activity
-            android:name=".functions.ui.ImageViewPressActivity"
-            android:label="@string/title_activity_image_view_press" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".functions.ui.AnimationActivity" />
-        <activity android:name=".functions.ui.FullScreenImageActivity" />
-
-        <!-- jpush接收 -->
-        <receiver
-            android:name=".receiver.MyJpushReceiver"
-            android:enabled="true">
-            <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
-                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
-                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="com.melon.myapp" />
-            </intent-filter>
-        </receiver>
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.melon.myapp.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
-        <service android:name="cn.jpush.android.service.PushService"
-            android:process=":multiprocess"
-            tools:node="replace" >
-        </service>
-        <activity android:name=".functions.ui.AddToCartAnimActivity" />
-        <activity android:name=".functions.ui.AddToCartAnim2Activity" />
-        <activity android:name=".functions.ui.XRecyclerViewActivity" />
-        <activity android:name=".functions.ui.WxWebProgressActivity" />
-        <activity android:name=".functions.ui.TourGuideActivity" />
-        <activity android:name=".CommonFragmentActivity" />
-        <activity
-            android:name=".functions.ui.RecyclerViewShowWayActivity"
-            android:theme="@style/MyTheme.HasActionBar" />
-        <activity android:name=".functions.camera.ZBarActivity" />
-        <activity android:name=".functions.camera.ZxingActivity" />
-        <activity android:name=".functions.ui.MaterialDesignActivity" />
-        <activity android:name=".functions.ui.ScaleImageViewActivity" />
-        <activity android:name=".functions.ui.MaterialDesignSharedElementActivity" />
-        <activity android:name=".functions.ui.ConstraintLayoutActivity" />
-        <activity android:name=".functions.system.FileStoragePathActivity" />
-        <activity android:name=".functions.architecture.mvvm.view.MvvmActivity"/>
-        <activity android:name=".functions.activity.RetrofitActivity" />
-        <activity android:name=".MainSimpleActivity"  android:theme="@style/MyTheme.MainActivity"/>
     </application>
 
 </manifest>

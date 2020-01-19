@@ -1,7 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sdkdemo">
-
-    <application>
-        <activity android:name=".SdkActivity" />
-    </application>
-</manifest>
