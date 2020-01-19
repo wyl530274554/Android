@@ -1,3 +1,3 @@
 # MyApplication
-AS2.0
+AS3.5 build a tag
 Hello AS!
