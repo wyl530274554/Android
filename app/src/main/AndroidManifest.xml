@@ -26,10 +26,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.web.WebActivity"
+            android:name=".ui.activity.WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
             >
         </activity>
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".CommonFragmentActivity" />
     </application>
 
 </manifest>

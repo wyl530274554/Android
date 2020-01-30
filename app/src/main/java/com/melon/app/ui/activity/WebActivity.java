@@ -1,4 +1,4 @@
-package com.melon.app.ui.web;
+package com.melon.app.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
@@ -85,7 +85,7 @@ public class WebActivity extends AppCompatActivity implements View.OnLongClickLi
         if (isWebNoImgOpen) {
             settings.setBlockNetworkImage(true);
         } else {
-            settings.setBlockNetworkImage(true);
+            settings.setBlockNetworkImage(false);
         }
 
         //支持下载

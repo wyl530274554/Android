@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.melon.app.R;
-import com.melon.app.ui.web.WebActivity;
+import com.melon.app.ui.activity.WebActivity;
 import com.melon.mylibrary.BaseFragment;
 import com.melon.mylibrary.util.CommonUtil;
 
