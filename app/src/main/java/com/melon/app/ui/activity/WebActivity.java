@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.DownloadListener;
@@ -34,6 +35,7 @@ import com.melon.mylibrary.util.DialogUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.MimeType;
 import com.melon.mylibrary.util.SpUtil;
+import com.melon.mylibrary.util.ToastUtil;
 
 public class WebActivity extends AppCompatActivity implements View.OnLongClickListener {
 
@@ -285,5 +287,14 @@ public class WebActivity extends AppCompatActivity implements View.OnLongClickLi
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             super.onHideCustomView();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+            mWebView.goBack();// 返回前一个页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
