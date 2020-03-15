@@ -35,7 +35,6 @@ import com.melon.mylibrary.util.DialogUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.MimeType;
 import com.melon.mylibrary.util.SpUtil;
-import com.melon.mylibrary.util.ToastUtil;
 
 public class WebActivity extends AppCompatActivity implements View.OnLongClickListener {
 

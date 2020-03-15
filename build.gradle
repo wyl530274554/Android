@@ -2,11 +2,13 @@
 
 buildscript {
     repositories {
+        //国内镜像源
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        //部分找不到的从谷歌找
         google()
-        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -14,9 +16,10 @@ buildscript {
 
 allprojects {
     repositories {
+        //国内镜像源
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        //部分找不到的从谷歌找
         google()
-        jcenter()
-        
     }
 }
 
