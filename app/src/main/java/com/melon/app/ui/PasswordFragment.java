@@ -479,7 +479,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 //否则把符合条件的数据对象添加到集合中
                 list = new ArrayList<>();
                 for (Password pwd : mPasswordsBackup) {
-                    if (pwd.title.contains(charSequence) || pwd.desc.contains(charSequence)) {
+                    //忽略大小写
+                    if (pwd.title.toLowerCase().contains(((String) charSequence).toLowerCase()) || pwd.desc.toLowerCase().contains(((String) charSequence).toLowerCase())) {
                         list.add(pwd);
                     }
                 }
