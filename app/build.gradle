@@ -3,17 +3,28 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
+    def currentVersionCode = getVersionCode()
     defaultConfig {
         applicationId "com.melon.app"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 1
+        versionCode currentVersionCode
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        common {
+            keyAlias 'melon'
+            keyPassword '123456'
+            storeFile file('myapp.jks')
+            storePassword '123456'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.common
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,6 +32,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //包名
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
+            }
+    }
+}
+
+/**
+ * @param filename 要打开的文件名字
+ * @param propName 文件里面的键名字
+ * @return 所选择的文件里面的propName对应的值
+ */
+def getVersionCode() {
+    def propsFile = file('version.properties')
+    def properties = new Properties()
+    properties.load(new FileInputStream(propsFile))
+    def vCode = properties['V_CODE'].toInteger()
+    properties['V_CODE'] = (++vCode).toString()
+    properties.store(propsFile.newWriter(), null)
+    return vCode
 }
 
 dependencies {

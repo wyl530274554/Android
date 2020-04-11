@@ -11,6 +11,7 @@ import com.melon.app.R;
 import com.melon.mylibrary.BaseActivity;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.SpUtil;
+import com.melon.mylibrary.util.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -61,7 +62,7 @@ public class SettingActivity extends BaseActivity {
 
             @Override
             public void onError(okhttp3.Call call, Exception e, int id) {
-
+                ToastUtil.toast(getApplicationContext(),"onError: "+e.getMessage());
             }
 
             @Override

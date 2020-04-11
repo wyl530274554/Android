@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
+            //设置
             CommonUtil.enterActivity(this, SettingActivity.class);
         }
         return super.onOptionsItemSelected(item);
