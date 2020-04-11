@@ -32,11 +32,14 @@ public class SettingActivity extends BaseActivity {
     public TextView tvSettingServerHost;
     @BindView(R.id.tv_setting_server_local_ip)
     public TextView tvSettingServerLocalIp;
+    @BindView(R.id.tv_setting_version)
+    public TextView tvSettingVersion;
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_setting);
 
+        tvSettingVersion = findViewById(R.id.tv_setting_version);
         tvSettingServerLocalIp = findViewById(R.id.tv_setting_server_local_ip);
         switchSettingImg = findViewById(R.id.switch_setting_img);
         switchSettingImg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -54,6 +57,9 @@ public class SettingActivity extends BaseActivity {
 
         //获取远程服务器局域网IP
         getServerLocalIp();
+
+        //版本号
+        tvSettingVersion.setText(CommonUtil.getVersion(getApplicationContext()));
     }
 
     private void getServerLocalIp() {

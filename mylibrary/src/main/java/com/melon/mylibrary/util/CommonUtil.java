@@ -7,6 +7,8 @@ import android.app.DownloadManager;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -313,4 +315,18 @@ public class CommonUtil {
         }
     }
 
+    /**
+     * 软件版本号
+     */
+    public static String getVersion(Context context) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo pi = null;
+        try {
+            pi = pm.getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+        return pi.versionName + "_" + pi.versionCode;
+    }
 }
