@@ -49,4 +49,9 @@ public class Contacts {
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return name + ", " + phone + ", " + (isDeleted ? "不用" : "在用");
+    }
 }

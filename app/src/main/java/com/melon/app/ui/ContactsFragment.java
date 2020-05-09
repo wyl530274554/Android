@@ -164,7 +164,7 @@ public class ContactsFragment extends BaseFragment {
                     if (list != null && list.size() != 0) {
                         List<String> items = new ArrayList<>();
                         for (Contacts contacts : list) {
-                            items.add(contacts.getName() + ", " + contacts.getPhone());
+                            items.add(contacts.toString());
                         }
 
                         //显示出来
