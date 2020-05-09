@@ -2,7 +2,11 @@ package com.melon.app.ui;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Handler;
 import android.text.Editable;
@@ -21,6 +25,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -316,7 +322,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
      */
     private void uploadUpdatedPassword(final Password password, final AlertDialog mDialog) {
         String body = new Gson().toJson(password);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), body) ;
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), body);
         OkHttpUtils.patch().url(ApiManager.API_PASSWORD).requestBody(requestBody).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -376,6 +382,27 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
             }
         });
         loadLocalData();
+
+        //刷新广播接收
+        IntentFilter intentFilter = new IntentFilter("com.melon.refresh");
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, intentFilter);
+    }
+
+    RefreshReceiver receiver = new RefreshReceiver();
+
+    class RefreshReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //刷新
+            getServerNotes();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
     }
 
     class MyAdapter extends BaseAdapter implements Filterable {

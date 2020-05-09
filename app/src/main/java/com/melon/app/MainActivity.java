@@ -1,5 +1,6 @@
 package com.melon.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -66,10 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            //设置
-            CommonUtil.enterActivity(this, SettingActivity.class);
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                //设置
+                CommonUtil.enterActivity(this, SettingActivity.class);
+                break;
+            case R.id.action_refresh:
+                //刷新
+                Intent intent = new Intent("com.melon.refresh");
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
