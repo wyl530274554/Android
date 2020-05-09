@@ -64,18 +64,17 @@ public class SettingActivity extends BaseActivity {
 
     private void getServerLocalIp() {
         //TODO 换成自己的网络封装
-        OkHttpUtils.get().url(ApiManager.API_GET_LOCAL_IP).build().execute(new StringCallback() {
+        OkHttpUtils.get().url(ApiManager.API_FOO).build().execute(new StringCallback() {
 
             @Override
             public void onError(okhttp3.Call call, Exception e, int id) {
-                ToastUtil.toast(getApplicationContext(),"onError: "+e.getMessage());
+                ToastUtil.toast(getApplicationContext(), "onError: " + e.getMessage());
+                tvSettingServerLocalIp.setText("false");
             }
 
             @Override
             public void onResponse(String response, int id) {
-                if (!CommonUtil.isEmpty(response)) {
-                    tvSettingServerLocalIp.setText(response);
-                }
+                tvSettingServerLocalIp.setText(response);
             }
         });
     }

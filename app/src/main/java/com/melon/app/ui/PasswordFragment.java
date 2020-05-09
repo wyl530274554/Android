@@ -44,6 +44,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 笔记主页
@@ -64,7 +66,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     public EditText et_pwd_search;
 
     private void getServerNotes() {
-        OkHttpUtils.get().url(ApiManager.API_PASSWORD_ALL).build().execute(new StringCallback() {
+        OkHttpUtils.get().url(ApiManager.API_PASSWORD).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 //刷新完成
@@ -209,11 +211,11 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     private void uploadPassword(final Password password, final AlertDialog mDialog) {
         Map<String, String> map = new HashMap<>();
         map.put("title", password.title);
-        map.put("password", password.password);
-        map.put("user", password.user);
-        map.put("desc", password.desc);
+        map.put("pwd", password.pwd);
+        map.put("username", password.username);
+        map.put("remark", password.remark);
 
-        OkHttpUtils.post().url(ApiManager.API_PASSWORD_ADD).params(map).build().execute(new StringCallback() {
+        OkHttpUtils.post().url(ApiManager.API_PASSWORD).params(map).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.d("net error: " + e.getCause());
@@ -262,11 +264,11 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         final EditText etTitle = new EditText(getContext());
         etTitle.setText(password.title);
         final EditText etUser = new EditText(getContext());
-        etUser.setText(password.user);
+        etUser.setText(password.username);
         final EditText etPwd = new EditText(getContext());
-        etPwd.setText(password.password);
+        etPwd.setText(password.pwd);
         final EditText etDesc = new EditText(getContext());
-        etDesc.setText(password.desc);
+        etDesc.setText(password.remark);
 
         container.addView(etTitle);
         container.addView(etUser);
@@ -284,11 +286,11 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                         String title = etTitle.getText().toString().trim();
                         password.title = title;
                         String user = etUser.getText().toString().trim();
-                        password.user = user;
+                        password.username = user;
                         String pwd = etPwd.getText().toString().trim();
-                        password.password = pwd;
+                        password.pwd = pwd;
                         String desc = etDesc.getText().toString().trim();
-                        password.desc = desc;
+                        password.remark = desc;
                         if (CommonUtil.isEmpty(title)) {
                             ToastUtil.toast(getContext(), "内容不能为空");
                             return;
@@ -313,13 +315,9 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
      * 更新密码
      */
     private void uploadUpdatedPassword(final Password password, final AlertDialog mDialog) {
-        Map<String, String> map = new HashMap<>();
-        map.put("id", password.id + "");
-        map.put("password", password.password);
-        map.put("user", password.user);
-        map.put("desc", password.desc);
-        map.put("title", password.title);
-        OkHttpUtils.post().url(ApiManager.API_PASSWORD_UPDATE).params(map).build().execute(new StringCallback() {
+        String body = new Gson().toJson(password);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), body) ;
+        OkHttpUtils.patch().url(ApiManager.API_PASSWORD).requestBody(requestBody).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 LogUtils.d("net error: " + e.getCause());
@@ -424,25 +422,25 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
             Password password = mPasswords.get(position);
             tv_password_title.setText("(" + (++position) + ") " + password.title);
 
-            if (CommonUtil.isEmpty(password.user)) {
+            if (CommonUtil.isEmpty(password.username)) {
                 tv_password_user.setVisibility(View.GONE);
                 tv_password_user.setText("");
             } else {
-                tv_password_user.setText("账号：" + password.user);
+                tv_password_user.setText("账号：" + password.username);
             }
 
-            if (CommonUtil.isEmpty(password.password)) {
+            if (CommonUtil.isEmpty(password.pwd)) {
                 tv_password_pwd.setText("");
                 tv_password_pwd.setVisibility(View.GONE);
             } else {
-                tv_password_pwd.setText("密码：" + password.password);
+                tv_password_pwd.setText("密码：" + password.pwd);
             }
 
-            if (CommonUtil.isEmpty(password.desc)) {
+            if (CommonUtil.isEmpty(password.remark)) {
                 tv_password_other.setText("");
                 tv_password_other.setVisibility(View.GONE);
             } else {
-                tv_password_other.setText(password.desc);
+                tv_password_other.setText(password.remark);
             }
 
             return convertView;
@@ -480,7 +478,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 list = new ArrayList<>();
                 for (Password pwd : mPasswordsBackup) {
                     //忽略大小写
-                    if (pwd.title.toLowerCase().contains(((String) charSequence).toLowerCase()) || pwd.desc.toLowerCase().contains(((String) charSequence).toLowerCase())) {
+                    if (pwd.title.toLowerCase().contains(((String) charSequence).toLowerCase()) || pwd.remark.toLowerCase().contains(((String) charSequence).toLowerCase())) {
                         list.add(pwd);
                     }
                 }

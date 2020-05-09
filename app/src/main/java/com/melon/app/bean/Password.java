@@ -10,18 +10,14 @@ import java.io.Serializable;
 public class Password implements Serializable {
     public int id;
     public String title;
-    public String user;
-    public String password;
-    public String desc;
+    public String username;
+    public String pwd;
+    public String remark;
 
-    public Password(String title, String user, String password, String desc) {
+    public Password(String title, String username, String pwd, String remark) {
         this.title = title;
-        this.user = user;
-        this.password = password;
-        this.desc = desc;
-    }
-
-    public Password(String title) {
-        this.title = title;
+        this.username = username;
+        this.pwd = pwd;
+        this.remark = remark;
     }
 }

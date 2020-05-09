@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="服务器内部IP" />
+            android:text="服务器是否在线" />
 
         <TextView
             android:id="@+id/tv_setting_server_local_ip"
