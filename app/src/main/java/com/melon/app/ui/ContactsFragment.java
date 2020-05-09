@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +20,9 @@ import com.google.gson.reflect.TypeToken;
 import com.melon.app.ApiManager;
 import com.melon.app.R;
 import com.melon.app.bean.Contacts;
-import com.melon.app.bean.Password;
 import com.melon.mylibrary.BaseFragment;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.LogUtils;
-import com.melon.mylibrary.util.SpUtil;
 import com.melon.mylibrary.util.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -54,6 +53,16 @@ public class ContactsFragment extends BaseFragment {
 
     @Override
     protected void init() {
+        lvContacts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String phone = mContacts.get(position).getPhone();
+                CommonUtil.addToClipboard(getContext(), phone);
+                ToastUtil.toast(getContext(), "复制成功");
+                return true;
+            }
+        });
+
         fabContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +157,8 @@ public class ContactsFragment extends BaseFragment {
         return false;
     }
 
+    List<Contacts> mContacts;
+
     private void getServerData(String content) {
         OkHttpUtils.get().url(ApiManager.API_CONTACTS + content).build().execute(new StringCallback() {
             @Override
@@ -159,11 +170,11 @@ public class ContactsFragment extends BaseFragment {
             @Override
             public void onResponse(String response, int id) {
                 try {
-                    List<Contacts> list = new Gson().fromJson(response, new TypeToken<List<Contacts>>() {
+                    mContacts = new Gson().fromJson(response, new TypeToken<List<Contacts>>() {
                     }.getType());
-                    if (list != null && list.size() != 0) {
+                    if (mContacts != null && mContacts.size() != 0) {
                         List<String> items = new ArrayList<>();
-                        for (Contacts contacts : list) {
+                        for (Contacts contacts : mContacts) {
                             items.add(contacts.toString());
                         }
 
