@@ -25,6 +25,7 @@ public class ApiManager {
     public static final String API_NOTE_ALL = API_BASE + "note/queryAllNote";
     public static final String API_GET_ALL_IMAGE = API_BASE + "index/allImages";
 
+    public static final String API_CONTACTS = API_BASE + "contacts/";
     public static final String API_PASSWORD = API_BASE + "password";
     public static final String API_FOO = API_BASE + "foo";
 
