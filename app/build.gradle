@@ -48,13 +48,7 @@ android {
  * @return 所选择的文件里面的propName对应的值
  */
 def getVersionCode() {
-    def propsFile = file('version.properties')
-    def properties = new Properties()
-    properties.load(new FileInputStream(propsFile))
-    def vCode = properties['V_CODE'].toInteger()
-    properties['V_CODE'] = (++vCode).toString()
-    properties.store(propsFile.newWriter(), null)
-    return vCode
+    return 1
 }
 
 dependencies {
