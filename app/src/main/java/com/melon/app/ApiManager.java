@@ -9,13 +9,12 @@ import com.melon.mylibrary.util.SpUtil;
  *
  * @author melon.wang
  * 2019/1/7 17:28
- * 530274554@qq.com
  */
 public class ApiManager {
     private static final String API_PROTOCOL = "http://";
     private static final String API_IP = "192.168.100.234";
     private static final String API_PORT = "80";
-    public static String API_BASE = getApiBase() + "/";
+    private static String API_BASE = getApiBase() + "/";
 
 
     public static final String API_NOTE_ADD = API_BASE + "note/addNote";
