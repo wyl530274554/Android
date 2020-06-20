@@ -9,7 +9,6 @@ import com.melon.mylibrary.util.SpUtil;
  *
  * @author melon.wang
  * 2019/1/7 17:28
- * 530274554@qq.com
  */
 public class ApiManager {
     private static final String API_PROTOCOL = "http://";
