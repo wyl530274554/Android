@@ -163,7 +163,7 @@ public class WebActivity extends AppCompatActivity implements View.OnLongClickLi
                 break;
             //未知
             case WebView.HitTestResult.UNKNOWN_TYPE:
-                break;
+                return false;
             default:
         }
         return true;
