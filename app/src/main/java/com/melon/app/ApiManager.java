@@ -8,8 +8,8 @@ import com.melon.mylibrary.util.SpUtil;
  * 接口地址管理
  *
  * @author melon.wang
- * @date 2019/1/7 17:28
- * Email 530274554@qq.com
+ * 2019/1/7 17:28
+ * 530274554@qq.com
  */
 public class ApiManager {
     private static final String API_PROTOCOL = "http://";
