@@ -27,6 +27,9 @@ public class ApiManager {
     public static final String API_CONTACTS = API_BASE + "contacts/";
     public static final String API_PASSWORD = API_BASE + "password";
     public static final String API_FOO = API_BASE;
+    public static final String API_APP_UPGRADE = API_BASE + "/upgrade";
+
+    public static final String APP_DOWNLOAD = API_BASE.replace(":80", ":2020") + "/";
 
     private static String getApiBase() {
         String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");

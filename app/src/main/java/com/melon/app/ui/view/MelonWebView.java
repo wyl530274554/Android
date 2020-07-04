@@ -111,7 +111,7 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
                 DialogUtil.show((Activity) mContext, CommonUtil.formatDataSize(contentLength) + "\n确定下载吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        downFileBySystem(url, finalFileName);
+                        CommonUtil.downFileBySystem(mContext, url, finalFileName);
                     }
                 });
             }
@@ -119,19 +119,7 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
     }
 
 
-    private void downFileBySystem(String url, String fileName) {
-        DownloadManager downloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
-        //下载时，下载完成后显示通知
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        //下载的路径，第一个参数是文件夹名称，第二个参数是下载的文件名
-        request.setDestinationInExternalFilesDir(mContext, null, fileName);
-        request.setVisibleInDownloadsUi(true);
-        if (downloadManager != null) {
-            downloadManager.enqueue(request);
-        }
-    }
 
     @Override
     public boolean onLongClick(View view) {

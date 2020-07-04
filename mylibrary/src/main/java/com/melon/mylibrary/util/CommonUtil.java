@@ -256,32 +256,6 @@ public class CommonUtil {
     }
 
     /**
-     * 系统下载文件
-     *
-     * @param url 完整下载地址
-     * @return APK存储的路径
-     */
-    public static String downloadFile(Context ctx, String url) {
-        int start = url.lastIndexOf("/");
-        String fileName = url.substring(start + 1);
-
-        DownloadManager downloadManager = ((DownloadManager) ctx.getSystemService(Activity.DOWNLOAD_SERVICE));
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        // 在通知栏中显示
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-        //文件存储路径 绝对路径
-        request.setDestinationInExternalFilesDir(ctx, Environment.DIRECTORY_DOWNLOADS, fileName);
-        //下载时在通知栏显示的文字
-        request.setTitle(fileName);
-
-        //执行下载
-        downloadManager.enqueue(request);
-
-        return ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/" + fileName;
-    }
-
-    /**
      * 网页分享
      *
      * @param context 上下文
@@ -326,5 +300,39 @@ public class CommonUtil {
             return "";
         }
         return pi.versionName + "_" + pi.versionCode;
+    }
+
+    /**
+     * 软件版本Code
+     */
+    public static int getVersionCode(Context context) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo pi = null;
+        try {
+            pi = pm.getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return pi.versionCode;
+    }
+
+    /**
+     * 系统自带文件下载
+     * @param url   地址
+     * @param fileName 文件名
+     */
+    public static void downFileBySystem(Context context, String url, String fileName) {
+        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+
+        //下载时，下载完成后显示通知
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        //下载的路径，第一个参数是文件夹名称，第二个参数是下载的文件名
+        request.setDestinationInExternalFilesDir(context, null, fileName);
+        request.setVisibleInDownloadsUi(true);
+        if (downloadManager != null) {
+            downloadManager.enqueue(request);
+        }
     }
 }
