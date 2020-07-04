@@ -26,7 +26,7 @@ public class ApiManager {
 
     public static final String API_CONTACTS = API_BASE + "contacts/";
     public static final String API_PASSWORD = API_BASE + "password";
-    public static final String API_FOO = API_BASE + "foo";
+    public static final String API_FOO = API_BASE;
 
     private static String getApiBase() {
         String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");

@@ -37,16 +37,10 @@ public class WebActivity extends AppCompatActivity {
         //搜索按钮
         String searchContent = getIntent().getStringExtra(SearchManager.QUERY);
         if (!CommonUtil.isEmpty(searchContent)) {
-            if (searchContent.startsWith(Constants.NET_PROTOCOL_HTTP)) {
-                mUrl = searchContent;
-            } else {
-                mUrl = "http://" + searchContent;
-            }
+            mUrl = "http://" + searchContent;
+            LogUtils.e("URL: " + mUrl);
+            mWebView.loadUrl(mUrl);
         }
-
-        LogUtils.e("URL: " + mUrl);
-
-        mWebView.loadUrl(mUrl);
     }
 
 
