@@ -15,6 +15,7 @@ import com.melon.app.R;
 import com.melon.app.ui.activity.WebActivity;
 import com.melon.mylibrary.BaseFragment;
 import com.melon.mylibrary.util.CommonUtil;
+import com.melon.mylibrary.util.Constants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,23 +41,9 @@ public class HomeFragment extends BaseFragment {
         mHomeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String content) {
-                showSearchContent(content);
+                etHomeSearch.setText(content);
             }
         });
-        mHomeViewModel.getUrl().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String url) {
-                enterWeb(url);
-            }
-        });
-    }
-
-    private void showSearchContent(@Nullable String content) {
-        etHomeSearch.setText(content);
-    }
-
-    private void enterWeb(String url) {
-        CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", url);
     }
 
     @OnClick(R.id.iv_home_del)
@@ -67,7 +54,8 @@ public class HomeFragment extends BaseFragment {
     @OnEditorAction(R.id.et_home_search)
     boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            mHomeViewModel.setUrl(etHomeSearch.getText().toString().trim());
+            String content = textView.getText().toString().trim();
+            CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", Constants.URL_BAI_DU + content);
             return true;
         }
         return false;
