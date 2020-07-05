@@ -5,12 +5,14 @@ import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
+
 public class SystemUtils {
     /**
      * 设备信息
      */
+    @SuppressLint("HardwareIds")
     public static String getDeviceInfo() {
-        String sb = ("主板：" + Build.BOARD) +
+        return "主板：" + Build.BOARD +
                 "\n系统启动程序版本号：" + Build.BOOTLOADER +
                 "\n系统定制商：" + Build.BRAND +
                 "\ncpu指令集：" + Build.CPU_ABI +
@@ -28,9 +30,8 @@ public class SystemUtils {
                 "\n手机制造商：" + Build.PRODUCT +
                 "\n描述Build的标签：" + Build.TAGS +
                 "\nTIME:" + Build.TIME +
-                "\nbuilder类型：" + Build.TYPE +
+                "\nBuilder类型：" + Build.TYPE +
                 "\nUSER:" + Build.USER;
-        return sb;
     }
 
     public static String getIMEI(Context context) {

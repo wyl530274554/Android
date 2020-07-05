@@ -196,6 +196,13 @@ public class CommonUtil {
     }
 
     /**
+     * 获取日常时间显示
+     */
+    public static String getCurrentDataTime() {
+        return SimpleDateFormat.getDateTimeInstance().format(System.currentTimeMillis());
+    }
+
+    /**
      * 友好时间
      *
      * @param time 秒

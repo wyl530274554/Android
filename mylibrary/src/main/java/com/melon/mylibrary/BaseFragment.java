@@ -31,10 +31,6 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
-    public Context getContext() {
-        return CustomApplication.getInstance();
-    }
-
     /**
      * 获取界面布局
      */

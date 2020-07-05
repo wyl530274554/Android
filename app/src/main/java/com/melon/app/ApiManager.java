@@ -1,5 +1,7 @@
 package com.melon.app;
 
+import android.content.Context;
+
 import com.melon.mylibrary.CustomApplication;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.SpUtil;
@@ -14,7 +16,7 @@ public class ApiManager {
     private static final String API_PROTOCOL = "http://";
     private static final String API_IP = "192.168.100.234";
     private static final String API_PORT = "80";
-    private static String API_BASE = getApiBase() + "/";
+    private static String API_BASE = getApiBase(CustomApplication.getInstance()) + "/";
 
 
     public static final String API_NOTE_ADD = API_BASE + "note/addNote";
@@ -31,8 +33,8 @@ public class ApiManager {
 
     public static final String APP_DOWNLOAD = API_BASE.replace(":80", ":2020") + "/";
 
-    private static String getApiBase() {
-        String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");
+    private static String getApiBase(Context context) {
+        String host = SpUtil.getString(context, "api_host");
         if (CommonUtil.isEmpty(host)) {
             return API_PROTOCOL + API_IP + ":" + API_PORT;
         } else {
@@ -40,8 +42,8 @@ public class ApiManager {
         }
     }
 
-    public static String getApiHost() {
-        String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");
+    public static String getApiHost(Context context) {
+        String host = SpUtil.getString(context, "api_host");
         if (CommonUtil.isEmpty(host)) {
             return API_IP + ":" + API_PORT;
         } else {
@@ -49,8 +51,8 @@ public class ApiManager {
         }
     }
 
-    public static String getApiIp() {
-        String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");
+    public static String getApiIp(Context context) {
+        String host = SpUtil.getString(context, "api_host");
         if (!CommonUtil.isEmpty(host)) {
             String[] split = host.split(":");
             return split[0];
@@ -58,8 +60,8 @@ public class ApiManager {
         return API_IP;
     }
 
-    public static String getApiPort() {
-        String host = SpUtil.getString(CustomApplication.getInstance(), "api_host");
+    public static String getApiPort(Context context) {
+        String host = SpUtil.getString(context, "api_host");
         if (!CommonUtil.isEmpty(host)) {
             String[] split = host.split(":");
             return split[1];
