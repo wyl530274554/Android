@@ -37,6 +37,7 @@ import com.melon.mylibrary.util.ToastUtil;
  */
 public class MelonWebView extends WebView implements View.OnLongClickListener {
     private Context mContext;
+    private String url;
 
     public MelonWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,13 +68,15 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        boolean isWebNoImgOpen = SpUtil.getBoolean(getContext(), "isSmartWebNoImgOpen");
-        //智能图片加载 只在wifi下显示
-        if (isWebNoImgOpen) {
-            settings.setBlockNetworkImage(true);
-        } else {
-            settings.setBlockNetworkImage(false);
-        }
+//        boolean isWebNoImgOpen = SpUtil.getBoolean(getContext(), "isSmartWebNoImgOpen");
+//        //智能图片加载 只在wifi下显示
+//        if (isWebNoImgOpen) {
+//            settings.setBlockNetworkImage(true);
+//        } else {
+//            settings.setBlockNetworkImage(false);
+//        }
+        //不加载图片
+        settings.setBlockNetworkImage(true);
 
         //支持下载
         setDownloadListener(new DownloadListener() {
@@ -117,8 +120,6 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
             }
         });
     }
-
-
 
 
     @Override
@@ -169,6 +170,10 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
         CommonUtil.enterActivity(cxt, WebActivity.class, "url", url);
     }
 
+    public String getCurrentUrl() {
+        return url;
+    }
+
 
     private class MelonWebChromeClient extends WebChromeClient {
 
@@ -204,7 +209,7 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             Uri uri = request.getUrl();
-            String url = request.getUrl().toString();
+            url = request.getUrl().toString();
             LogUtils.e("shouldOverrideUrlLoading url: " + url);
             //电话处理
             if (url.startsWith(Constants.PROTOCOL_TEL)) {

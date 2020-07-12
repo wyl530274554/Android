@@ -31,8 +31,8 @@
         </activity>
         <activity
             android:name=".ui.activity.WebActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/MyThemeWebActivity" />
+            android:theme="@style/MyThemeWebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".CommonFragmentActivity" />
     </application>

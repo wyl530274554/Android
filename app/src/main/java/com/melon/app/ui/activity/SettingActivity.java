@@ -86,7 +86,7 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void showHost() {
-        String apiHost = ApiManager.getApiHost();
+        String apiHost = ApiManager.getApiHost(getApplicationContext());
         tvSettingServerHost.setText(apiHost);
     }
 

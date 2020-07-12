@@ -1,29 +1,39 @@
 package com.melon.app.ui.home;
 
+import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.gson.Gson;
-import com.melon.app.ApiManager;
 import com.melon.app.R;
 import com.melon.app.ui.activity.WebActivity;
 import com.melon.mylibrary.BaseFragment;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.Constants;
 import com.melon.mylibrary.util.LogUtils;
+import com.melon.mylibrary.util.SpUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +49,8 @@ public class HomeFragment extends BaseFragment {
     EditText etHomeSearch;
     @BindView(R.id.iv_home_del)
     ImageView ivHomeDel;
+    @BindView(R.id.lv_home_web_collect)
+    ListView lvCollect;
 
     private HomeViewModel mHomeViewModel;
 
@@ -58,6 +70,36 @@ public class HomeFragment extends BaseFragment {
         });
 
         getAppUpgradeInfo();
+
+        //收藏的网址
+        String collects = SpUtil.getString(getContext(), "webCollect");
+        Gson gson = new Gson();
+        String[] items = gson.fromJson(collects, String[].class);
+        if (items == null) items = new String[]{};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, items);
+        lvCollect.setAdapter(adapter);
+
+        String[] finalItems = items;
+        lvCollect.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", finalItems[position]);
+            }
+        });
+        lvCollect.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayList<String> arrayList = new ArrayList<>(finalItems.length);
+                Collections.addAll(arrayList, finalItems);
+                arrayList.remove(position);
+                SpUtil.setString(getContext(), "webCollect", gson.toJson(arrayList));
+
+                //更新界面
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, arrayList);
+                lvCollect.setAdapter(adapter);
+                return true;
+            }
+        });
     }
 
     private void getAppUpgradeInfo() {
@@ -94,7 +136,7 @@ public class HomeFragment extends BaseFragment {
     boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             String content = textView.getText().toString().trim();
-            CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", Constants.URL_BAI_DU + content);
+            CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", Constants.URL_BING + content);
             return true;
         }
         return false;

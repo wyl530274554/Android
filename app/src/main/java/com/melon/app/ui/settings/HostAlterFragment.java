@@ -52,7 +52,7 @@ public class HostAlterFragment extends BaseFragment {
 
     @Override
     protected void init() {
-        et_alter_host_ip.setText(ApiManager.getApiIp());
-        et_alter_host_port.setText(ApiManager.getApiPort());
+        et_alter_host_ip.setText(ApiManager.getApiIp(getContext()));
+        et_alter_host_port.setText(ApiManager.getApiPort(getContext()));
     }
 }
