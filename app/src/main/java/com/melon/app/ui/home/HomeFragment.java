@@ -85,7 +85,7 @@ public class HomeFragment extends BaseFragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 弹窗输入网址和标题
+                // 弹窗输入网址和标题
                 Dialog dialog = DialogUtil.getDown2UpDialog(getActivity(), R.layout.dialog_collect_web);
                 EditText etTitle = dialog.findViewById(R.id.et_dialog_collect_web_title);
                 EditText etUrl = dialog.findViewById(R.id.et_dialog_collect_web_url);
