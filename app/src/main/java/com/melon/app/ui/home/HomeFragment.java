@@ -1,29 +1,31 @@
 package com.melon.app.ui.home;
 
-import android.os.Build;
+import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.gson.Gson;
 import com.melon.app.R;
-import com.melon.app.ui.activity.WebActivity;
 import com.melon.mylibrary.BaseFragment;
 import com.melon.mylibrary.util.CommonUtil;
 import com.melon.mylibrary.util.Constants;
+import com.melon.mylibrary.util.DialogUtil;
 import com.melon.mylibrary.util.LogUtils;
 import com.melon.mylibrary.util.SpUtil;
+import com.melon.mylibrary.util.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -33,7 +35,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,6 +57,7 @@ public class HomeFragment extends BaseFragment {
 
     private HomeViewModel mHomeViewModel;
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -69,37 +73,68 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        //升级
         getAppUpgradeInfo();
 
-        //收藏的网址
-        String collects = SpUtil.getString(getContext(), "webCollect");
-        Gson gson = new Gson();
-        String[] items = gson.fromJson(collects, String[].class);
-        if (items == null) items = new String[]{};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, items);
+        //网址收藏sp
+        SharedPreferences sharedPreference = SpUtil.getSharedPreference(getContext(), SpUtil.COLLECT_WEB);
+
+        //添加ListView尾部
+        TextView textView = new TextView(getContext());
+        textView.setText("添加网址");
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO 弹窗输入网址和标题
+                Dialog dialog = DialogUtil.getDown2UpDialog(getActivity(), R.layout.dialog_collect_web);
+                EditText etTitle = dialog.findViewById(R.id.et_dialog_collect_web_title);
+                EditText etUrl = dialog.findViewById(R.id.et_dialog_collect_web_url);
+                Button btOk = dialog.findViewById(R.id.bt_dialog_collect_web_ok);
+                btOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String title = etTitle.getText().toString().trim();
+                        String url = etUrl.getText().toString().trim();
+                        sharedPreference.edit().putString(title, url).apply();
+                        dialog.dismiss();
+
+                        ToastUtil.showLongToast(getContext(), "已添加，下次生效");
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+        lvCollect.addFooterView(textView);
+
+
+        //所有网址
+        Map<String, ?> allWebs = sharedPreference.getAll();
+        Set<String> keySets = allWebs.keySet();
+        String[] keys = new String[keySets.size()];
+        keySets.toArray(keys);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, keys);
         lvCollect.setAdapter(adapter);
 
-        String[] finalItems = items;
         lvCollect.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", finalItems[position]);
+                enterWeb((String) allWebs.get(keys[position]));
             }
         });
         lvCollect.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayList<String> arrayList = new ArrayList<>(finalItems.length);
-                Collections.addAll(arrayList, finalItems);
-                arrayList.remove(position);
-                SpUtil.setString(getContext(), "webCollect", gson.toJson(arrayList));
-
-                //更新界面
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, arrayList);
-                lvCollect.setAdapter(adapter);
+                sharedPreference.edit().remove(keys[position]).apply();
+                ToastUtil.showLongToast(getContext(), "已删除，下次生效");
                 return true;
             }
         });
+    }
+
+    private void enterWeb(String url) {
+        CommonUtil.enterBrowser(getContext(), url);
     }
 
     private void getAppUpgradeInfo() {
@@ -136,7 +171,7 @@ public class HomeFragment extends BaseFragment {
     boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             String content = textView.getText().toString().trim();
-            CommonUtil.enterActivity(getActivity(), WebActivity.class, "url", Constants.URL_BING + content);
+            enterWeb(Constants.URL_BAI_DU + content);
             return true;
         }
         return false;

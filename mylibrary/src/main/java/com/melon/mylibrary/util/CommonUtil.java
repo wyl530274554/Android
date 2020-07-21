@@ -70,6 +70,17 @@ public class CommonUtil {
         ctx.startActivity(intent);
     }
 
+    /**
+     * 跳转至浏览器
+     */
+    public static void enterBrowser(Context ctx, String url) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri uri = Uri.parse(url);
+        intent.setData(uri);
+        ctx.startActivity(intent);
+    }
+
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
@@ -326,7 +337,8 @@ public class CommonUtil {
 
     /**
      * 系统自带文件下载
-     * @param url   地址
+     *
+     * @param url      地址
      * @param fileName 文件名
      */
     public static void downFileBySystem(Context context, String url, String fileName) {
