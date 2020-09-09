@@ -31,7 +31,7 @@ public class ApiManager {
     public static final String API_FOO = API_BASE;
     public static final String API_APP_UPGRADE = API_BASE + "/upgrade";
 
-    public static final String APP_DOWNLOAD = API_BASE.replace(":80", ":2020") + "/";
+    public static final String APP_DOWNLOAD = API_BASE + "file/";
 
     private static String getApiBase(Context context) {
         String host = SpUtil.getString(context, "api_host");

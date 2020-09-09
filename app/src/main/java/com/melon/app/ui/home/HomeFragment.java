@@ -2,6 +2,7 @@ package com.melon.app.ui.home;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -82,6 +83,7 @@ public class HomeFragment extends BaseFragment {
         //添加ListView尾部
         TextView textView = new TextView(getContext());
         textView.setText("添加网址");
+        textView.setGravity(Gravity.CENTER);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
