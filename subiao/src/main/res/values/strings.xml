@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">苏标</string>
+    <string name="tab_text_1">苏标外设协议</string>
+    <string name="tab_text_2">苏标云平台协议</string>
+</resources>
