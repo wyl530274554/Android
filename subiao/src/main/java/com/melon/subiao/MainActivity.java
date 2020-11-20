@@ -2,17 +2,10 @@ package com.melon.subiao;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
+import com.google.android.material.tabs.TabLayout;
 import com.melon.subiao.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
