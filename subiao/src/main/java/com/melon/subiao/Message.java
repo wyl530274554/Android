@@ -30,8 +30,9 @@ public class Message {
             return "标识符的数量有误：" + countOf7e;
         }
 
-        if (checkCodeError(unescapedMsg)) {
-            return "校验码错误";
+        int checkCode = checkCodeError(unescapedMsg);
+        if (checkCode != 0) {
+            return "校验码错误: " + HexStringUtils.toHexString(new byte[]{(byte) checkCode});
         }
 
         StringBuilder sb = new StringBuilder();
@@ -46,10 +47,13 @@ public class Message {
         return sb.toString();
     }
 
-    private static boolean checkCodeError(byte[] contents) {
+    private static int checkCodeError(byte[] contents) {
         int checkCode = BitOperator.oneByteToInteger(contents[1]);
         int jCheckCode = BitOperator.oneByteToInteger(generateCheckCode(BitOperator.splitBytes(contents, 4, contents.length - 2)));
-        return checkCode != jCheckCode;
+        if (checkCode == jCheckCode) {
+            return 0;
+        }
+        return jCheckCode;
     }
 
     /**

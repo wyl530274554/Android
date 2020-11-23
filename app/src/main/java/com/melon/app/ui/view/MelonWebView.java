@@ -110,7 +110,7 @@ public class MelonWebView extends WebView implements View.OnLongClickListener {
                 LogUtils.d("fileName： " + fileName);
 
                 //弹出确认对话框
-                String finalFileName = fileName;
+                final String finalFileName = fileName;
                 DialogUtil.show((Activity) mContext, CommonUtil.formatDataSize(contentLength) + "\n确定下载吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

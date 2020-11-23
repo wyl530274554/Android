@@ -78,7 +78,7 @@ public class HomeFragment extends BaseFragment {
         getAppUpgradeInfo();
 
         //网址收藏sp
-        SharedPreferences sharedPreference = SpUtil.getSharedPreference(getContext(), SpUtil.COLLECT_WEB);
+        final SharedPreferences sharedPreference = SpUtil.getSharedPreference(getContext(), SpUtil.COLLECT_WEB);
 
         //添加ListView尾部
         TextView textView = new TextView(getContext());
@@ -88,9 +88,9 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 // 弹窗输入网址和标题
-                Dialog dialog = DialogUtil.getDown2UpDialog(getActivity(), R.layout.dialog_collect_web);
-                EditText etTitle = dialog.findViewById(R.id.et_dialog_collect_web_title);
-                EditText etUrl = dialog.findViewById(R.id.et_dialog_collect_web_url);
+                final Dialog dialog = DialogUtil.getDown2UpDialog(getActivity(), R.layout.dialog_collect_web);
+                final EditText etTitle = dialog.findViewById(R.id.et_dialog_collect_web_title);
+                final EditText etUrl = dialog.findViewById(R.id.et_dialog_collect_web_url);
                 Button btOk = dialog.findViewById(R.id.bt_dialog_collect_web_ok);
                 btOk.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,9 +111,9 @@ public class HomeFragment extends BaseFragment {
 
 
         //所有网址
-        Map<String, ?> allWebs = sharedPreference.getAll();
+        final Map<String, ?> allWebs = sharedPreference.getAll();
         Set<String> keySets = allWebs.keySet();
-        String[] keys = new String[keySets.size()];
+        final String[] keys = new String[keySets.size()];
         keySets.toArray(keys);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, keys);

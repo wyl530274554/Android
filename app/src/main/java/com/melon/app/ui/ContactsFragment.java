@@ -121,7 +121,7 @@ public class ContactsFragment extends BaseFragment {
         });
     }
 
-    private void uploadContacts(Contacts contacts, AlertDialog mDialog) {
+    private void uploadContacts(Contacts contacts, final AlertDialog mDialog) {
         Map<String, String> map = new HashMap<>();
         map.put("name", contacts.getName());
         map.put("phone", contacts.getPhone());
