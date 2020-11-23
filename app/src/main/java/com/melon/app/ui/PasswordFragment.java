@@ -71,8 +71,8 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
     @BindView(R.id.et_pwd_search)
     public EditText et_pwd_search;
 
-    private void getServerNotes() {
-        OkHttpUtils.get().url(ApiManager.API_PASSWORD).build().execute(new StringCallback() {
+    private void getServerNotes(String content) {
+        OkHttpUtils.get().url(ApiManager.API_PASSWORD + content).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 //刷新完成
@@ -88,7 +88,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                         // 获取本地并显示
                         initDataShow(serverNotes);
                         // 记录在本地
-                        SpUtil.setString(getContext(), "pwd", response);
+//                        SpUtil.setString(getContext(), "pwd", response);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -121,7 +121,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                 initDataShow(serverNotes);
             }
         } else {
-            getServerNotes();
+//            getServerNotes();
         }
     }
 
@@ -236,7 +236,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     mPasswords.add(0, password);
                     mAdapter.notifyDataSetChanged();
 
-                    getServerNotes();
+//                    getServerNotes();
                 } else {
                     ToastUtil.toast(getContext(), "添加失败: " + response);
                 }
@@ -336,7 +336,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
                     ToastUtil.toast(getContext(), "修改成功");
                     mDialog.dismiss();
 
-                    getServerNotes();
+//                    getServerNotes();
                 } else {
                     ToastUtil.toast(getContext(), "修改失败: " + response);
                 }
@@ -367,21 +367,23 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String content = s.toString().trim();
-                if (TextUtils.isEmpty(content)) {
-                    lv_password.clearTextFilter();
-                } else {
-                    lv_password.setFilterText(content);
-                }
-                LogUtils.e("onTextChanged: " + content);
+//                String content = s.toString().trim();
+//                if (TextUtils.isEmpty(content)) {
+//                    lv_password.clearTextFilter();
+//                } else {
+//                    lv_password.setFilterText(content);
+//                }
+//                LogUtils.e("onTextChanged: " + content);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 LogUtils.e("afterTextChanged: " + s.toString());
+
+                getServerNotes(s.toString().trim());
             }
         });
-        loadLocalData();
+//        loadLocalData();
 
         //刷新广播接收
         IntentFilter intentFilter = new IntentFilter("com.melon.refresh");
@@ -395,7 +397,7 @@ public class PasswordFragment extends BaseFragment implements AdapterView.OnItem
         @Override
         public void onReceive(Context context, Intent intent) {
             //刷新
-            getServerNotes();
+//            getServerNotes();
         }
     }
 
