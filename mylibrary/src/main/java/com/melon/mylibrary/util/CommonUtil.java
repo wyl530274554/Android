@@ -75,7 +75,7 @@ public class CommonUtil {
      */
     public static void enterBrowser(Context ctx, String url) {
         Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
+        intent.setAction("android.intent.accept.VIEW");
         Uri uri = Uri.parse(url);
         intent.setData(uri);
         ctx.startActivity(intent);

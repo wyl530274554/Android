@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by melon on 2017/8/7.
- * Email 530274554@qq.com
+ * 需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作"污染"这些对象的类，使用访问者模式将这些操作封装到类中
  */
 
 public class VisitorDemo {
@@ -18,7 +18,10 @@ public class VisitorDemo {
         os.add(new NodeB());
         //创建一个访问者
         Visitor visitor = new VisitorA();
-        os.action(visitor);
+        os.accept(visitor);
+        //创建另一个访问者
+        Visitor visitorB = new VisitorB();
+        os.accept(visitorB);
     }
 }
 
@@ -31,12 +34,24 @@ interface Visitor {
 class VisitorA implements Visitor {
     @Override
     public void visit(NodeA node) {
-        System.out.println(node.operationA());
+        System.out.println("VisitorA " + node.operationA());
     }
 
     @Override
     public void visit(NodeB node) {
-        System.out.println(node.operationB());
+        System.out.println("VisitorA " + node.operationB());
+    }
+}
+
+class VisitorB implements Visitor {
+    @Override
+    public void visit(NodeA node) {
+        System.out.println("VisitorB " + node.operationA());
+    }
+
+    @Override
+    public void visit(NodeB node) {
+        System.out.println("VisitorB " + node.operationB());
     }
 }
 
@@ -76,12 +91,10 @@ class ObjectStructure {
     /**
      * 执行方法操作
      */
-    public void action(Visitor visitor) {
-
+    public void accept(Visitor visitor) {
         for (Node node : nodes) {
             node.accept(visitor);
         }
-
     }
 
     /**
